@@ -1,0 +1,38 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title>
+            <a href="javascript:void(0)" (click)="goBack()">
+                <ion-icon name="chevron-back-outline"></ion-icon>
+            </a>
+            <a class="title-connect">Log in</a>
+        </ion-title>
+    </ion-navbar>
+</ion-header>
+<div class="spinner" *ngIf="spinnerService.visibility | async">
+    <ion-spinner></ion-spinner>
+</div>
+<ion-content class="login">
+    <div class="content-homepage">
+        <div class="to-center-vertical p-15">
+            <div class="w-90">
+                <img src="../../../../assets/images/logo_matipla.png" srcset="" width="150px" class="mb-2">
+                <div class="text-left">
+                    <form [formGroup]="loginForm" (ngSubmit)="login(form)" method="post">
+                        <div class="mb-14">
+                            <label>Username</label>
+                            <ion-input formControlName="username"></ion-input>
+                            <small class="form-text  red-color" *ngIf="isFieldInvalid(loginForm,'username')">This field is required</small>
+                        </div>
+                        <div class="mb-14">
+                            <label>Mot de passe</label>
+                            <ion-input type="password" formControlName="password"></ion-input>
+                            <small class="form-text  red-color" *ngIf="isFieldInvalid(loginForm,'password')">This field is required</small>
+                        </div>
+                        <ion-button type="submit" expand="full" color="danger" class="btn-register">Login</ion-button>
+                        <div class="password_lost">Mot de passe oublie</div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</ion-content>

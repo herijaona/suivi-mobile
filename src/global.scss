@@ -1,0 +1,193 @@
+/*
+ * App Global CSS
+ * ----------------------------------------------------------------------------
+ * Put style rules here that you want to apply globally. These styles are for
+ * the entire app and not just one component. Additionally, this file can be
+ * used as an entry point to import other CSS/Sass files to be included in the
+ * output CSS.
+ * For more information on global stylesheets, visit the documentation:
+ * https://ionicframework.com/docs/layout/global-stylesheets
+ */
+
+
+/* Core CSS required for Ionic components to work properly */
+
+@import "~@ionic/angular/css/core.css";
+
+/* Basic CSS for apps built with Ionic */
+
+@import "~@ionic/angular/css/normalize.css";
+@import "~@ionic/angular/css/structure.css";
+@import "~@ionic/angular/css/typography.css";
+@import '~@ionic/angular/css/display.css';
+
+/* Optional CSS utils that can be commented out */
+
+@import "~@ionic/angular/css/padding.css";
+@import "~@ionic/angular/css/float-elements.css";
+@import "~@ionic/angular/css/text-alignment.css";
+@import "~@ionic/angular/css/text-transformation.css";
+@import "~@ionic/angular/css/flex-utils.css";
+
+/* customize css */
+
+@import "./assets/css/fonts.css";
+@import "./assets/css/register_login.scss";
+
+/* Style global */
+
+.to-center-vertical {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    height: 100%;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.text-left {
+    text-align: left;
+}
+
+.p-15 {
+    padding: 15px;
+}
+
+input {
+    border: 1px solid #e6e6e6;
+    border-radius: 4px;
+    margin-top: 8px;
+    margin-bottom: 15px;
+}
+
+.w-100 {
+    width: 100%;
+}
+
+.w-90 {
+    width: 90%;
+}
+
+.mb-2 {
+    margin-bottom: 2rem;
+}
+
+.mb-14 {
+    margin-bottom: 14px;
+}
+
+label {
+    color: rgba(0, 0, 0, 0.74);
+    font-size: 14px;
+    font-family: roboto-medium;
+}
+
+small {
+    color: #F50307;
+}
+
+ion-list {
+    --background: #f3f3f3;
+    padding: 0;
+}
+
+.ion-color-gray {
+    background: rgba(193, 187, 190, 0.14);
+}
+
+.ion-color-white {
+    background: white;
+}
+
+ion-content {
+    --background: rgba(127, 172, 185, 0.09);
+}
+
+ion-searchbar {
+    .searchbar-input-container input {
+        text-align: left !important;
+        padding-left: 45px !important;
+        font-size: 13px !important;
+        box-shadow: 0px 0px 0px 0.5px rgba(128, 128, 128, 0.24)!important;
+        height: 38px !important;
+    }
+    .searchbar-search-icon.sc-ion-searchbar-md {
+        color: #d6d4d4;
+        margin-top: 7px;
+        margin-left: -4px;
+    }
+}
+
+.auto-height {
+    height: auto;
+}
+
+.spinner {
+    height: 100%;
+    background: rgba(80, 152, 78, 0.25);
+    z-index: 99999;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    ion-spinner {
+        position: absolute;
+        height: 100vh;
+        right: 45%;
+    }
+}
+
+.ion-item-eq-1 {
+    border-left: 4px solid #28c3af;
+}
+
+.ion-item-eq-2 {
+    border-left: 4px solid #c3c028;
+}
+
+.ion-item-eq-3 {
+    border-left: 4px solid #c3284a;
+}
+
+.ion-item-eq-4 {
+    border-left: 4px solid #218cb8;
+}
+
+.display-block {
+    display: block;
+}
+
+// List
+.list-item {
+    .icon-arrow-forward {
+        position: absolute;
+        right: 16px;
+        top: 19px;
+    }
+    h2 {
+        text-align: left;
+        font-family: roboto-medium;
+        font-size: 14px;
+        color: black;
+    }
+    h3 {
+        color: gray;
+        font-family: roboto-regular;
+        font-size: 11px;
+    }
+    div.p {
+        color: gray;
+        font-family: roboto-regular;
+        font-size: 11px;
+    }
+    svg {
+        position: absolute;
+        right: 17px;
+        top: 28px;
+        font-size: 22px;
+        width: 9px;
+    }
+}
+
+// List

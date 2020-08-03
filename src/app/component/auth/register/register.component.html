@@ -1,0 +1,85 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title>
+            <a href="javascript:void(0)" (click)="goBack()">
+                <ion-icon name="chevron-back-outline"></ion-icon>
+            </a>
+            <a class="title-connect">Register</a>
+        </ion-title>
+    </ion-navbar>
+</ion-header>
+<ion-content class="register">
+    <div class="content-homepage">
+        <div class="to-center-vertical auto-height p-15">
+            <div class="w-90">
+                <img src="../../../../assets/images/logo_matipla.png" srcset="" width="150px" class="mb-2">
+                <h1>S'inscrire</h1>
+                <div class="text-left">
+                    <form [formGroup]="registerForm" #form="ngForm" (ngSubmit)="register(form)" method="post">
+                        <div class="mb-14">
+                            <label>First name</label>
+                            <ion-input type="text" formControlName="first_name"></ion-input>
+                            <small class="form-text  red-color" *ngIf="isFieldInvalid(registerForm,'first_name')">This field is required</small>
+                        </div>
+                        <div class="mb-14">
+                            <label>Last name</label>
+                            <ion-input type="text" formControlName="last_name"></ion-input>
+                            <small class="form-text  red-color" *ngIf="isFieldInvalid(registerForm,'last_name')">This field is required</small>
+                        </div>
+                        <div class="mb-14">
+                            <label>Username</label>
+                            <ion-input type="text" formControlName="username"></ion-input>
+                            <small class="form-text  red-color" *ngIf="isFieldInvalid(registerForm,'username')">This field is required</small>
+                        </div>
+                        <div class="mb-14">
+                            <label>Date of birth</label>
+                            <ion-input type="date" formControlName="date_on_born"></ion-input>
+                            <small class="form-text  red-color" *ngIf="isFieldInvalid(registerForm,'date_on_born')">This field is required</small>
+                        </div>
+                        <div class="mb-14">
+                            <label>Adress</label>
+                            <ion-input type="text" formControlName="id_address"></ion-input>
+                            <small class="form-text  red-color" *ngIf="isFieldInvalid(registerForm,'id_address')">This field is required</small>
+                        </div>
+                        <div class="mb-14">
+                            <label>Telephone</label>
+                            <ion-input type="number" formControlName="telephone"></ion-input>
+                            <small class="form-text  red-color" *ngIf="isFieldInvalid(registerForm,'telephone')">This field is required</small>
+                        </div>
+                        <div class="mb-14">
+                            <label>roles</label>
+                            <ion-input type="text" formControlName="roles"></ion-input>
+                            <small class="form-text  red-color" *ngIf="isFieldInvalid(registerForm,'roles')">This field is required</small>
+                        </div>
+                        <!-- <select name="roles" id="">
+                            <option  value="ROLE_ADMIN">ROLE_ADMIN</option>
+                            <option  value="ROLE_PATIENT">ROLE_PATIENT</option>
+                        </select> -->
+                        <div class="mb-14">
+                            <label>email</label>
+                            <ion-input type="text" formControlName="email"></ion-input>
+                            <small class="form-text  red-color" *ngIf="isFieldInvalid(registerForm,'email')">This field is required</small>
+                        </div>
+                        <div class="mb-14">
+                            <label>Mot de passe</label>
+                            <ion-input type="password" formControlName="password"></ion-input>
+                            <small class="form-text  red-color" *ngIf="isFieldInvalid(registerForm,'password')">This field is required</small>
+                        </div>
+                        <div class="mb-14">
+                            <label>type_patient</label>
+                            <ion-input type="number" formControlName="type_patient"></ion-input>
+                            <small class="form-text  red-color" *ngIf="isFieldInvalid(registerForm,'type_patient')">This field is required</small>
+                        </div>
+                        <div class="mb-14">
+                            <label>Sexe</label>
+                            <ion-input type="text" formControlName="sexe"></ion-input>
+                            <small class="form-text  red-color" *ngIf="isFieldInvalid(registerForm,'sexe')">This field is required</small>
+                        </div>
+
+                        <ion-button type="submit" expand="full" color="danger" (click)="register()" class="btn-register">Register</ion-button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</ion-content>

@@ -1,0 +1,29 @@
+h2 {
+    text-align: center;
+    width: 100%;
+    align-items: stretch;
+    margin-top: 7vh;
+    margin-bottom: 7vh;
+    font-size: 22px;
+    font-family: marvel-bold;
+}
+
+ion-item {
+    --background: rgba(6, 207, 125, 0);
+    border-bottom: 1px solid white;
+    color: white;
+}
+
+ion-list {
+    height: 100%;
+    background: #06cf7dc7;
+}
+
+ion-content {
+    background: url('../../../assets/images/doctor.jpg') center center / cover;
+}
+
+ion-router-link {
+    color: white;
+    width: 100%;
+}

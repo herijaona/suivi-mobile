@@ -1,0 +1,73 @@
+.content-homepage {
+    background: url('../../../assets/images/doctor.jpg') center center / cover;
+    text-align: center;
+    height: 100%;
+}
+
+.after-content {
+    width: 100%;
+    position: absolute;
+    top: 0;
+    opacity: 0.7;
+    height: 100%;
+    background: #06CF7D;
+}
+
+a {
+    color: white;
+    text-decoration: none;
+}
+
+h1 {
+    font-family: marvel-bold;
+    color: white;
+    font-size: 33px;
+}
+
+p {
+    font-family: roboto-thin;
+    font-size: 13px;
+    color: white;
+    letter-spacing: 0.5px;
+    line-height: 17px;
+    max-width: 460px;
+}
+
+ion-button {
+    display: block;
+    width: 69%;
+    margin: 0 auto;
+    margin-bottom: 15px;
+    font-family: roboto-regular;
+    text-transform: capitalize;
+}
+
+.presentation-home {
+    z-index: 1;
+    img {
+        width: 161px;
+        margin-bottom: 44px;
+    }
+}
+
+.btn-connecter {
+    --color: white;
+    --background: transparent;
+    width: 200px;
+    padding: 0;
+    border: 2px solid white;
+    border-radius: .25rem;
+}
+
+.btn-register {
+    font-family: "roboto-medium";
+    border: 0;
+    --color: #F50307;
+    --background: #ffffff;
+    width: 200px;
+    padding: 0;
+    border-radius: .25rem;
+    a {
+        color: #F50307;
+    }
+}

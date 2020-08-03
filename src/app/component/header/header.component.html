@@ -1,0 +1,27 @@
+<ion-header>
+    <ion-toolbar>
+        <div class="icon-menu-prime">
+            <ion-icon name="menu-outline" (click)="openCustom(1)"></ion-icon>
+            <ion-title>
+                Blank
+            </ion-title>
+        </div>
+        <div class="icon-menu-right">
+            <ion-icon name="mail-outline"></ion-icon>
+            <ion-icon name="person-outline"></ion-icon>
+        </div>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-content-menu">
+    <div class="content-menu">
+        <ul>
+            <li class="icon-delete">
+                <ion-icon name="close" (click)="openCustom(2)"></ion-icon>
+            </li>
+            <li *ngFor="let page of navigate">
+                <ion-router-link routerLink="{{ page.url }}">{{ page.title }}</ion-router-link>
+            </li>
+        </ul>
+    </div>
+</ion-content>

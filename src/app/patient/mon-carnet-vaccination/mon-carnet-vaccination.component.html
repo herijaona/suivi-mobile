@@ -1,0 +1,22 @@
+<ion-content padding class="text-center list-item" *ngIf="show">
+    <ion-searchbar type="text" placeholder="Rechercher" debounce="500"></ion-searchbar>
+    <!-- <ion-spinner *ngIf="spinnerService.visibility | async"></ion-spinner> -->
+    <ion-list lines="none">
+        <ion-item [color]="even? 'gray' : 'white'" *ngFor="let item of listeVaccination; let even = even" no-lines>
+            <ion-label>
+                <h2>Date : {{item.datePriseInitiale | date:'short':'UTC'}}</h2>
+                <h3>Vaccin : {{getItemVaccin(item.vaccin)}}</h3>
+                <h3>Praticien prescipteur : {{getItemPraticien(item.intervationVaccination)}}</h3>
+                <div class="p">Etat :
+                    <span [ngStyle]="getStatusColor(item.etat)"> {{getItemEtat(item.etat)}}</span>
+                </div>
+                <div class="p">Rappel : {{item.rappelVaccin}}</div>
+            </ion-label>
+            <ion-router-link (click)="patientId()" href='/patient/carnet-vaccination/detail?id={{item.id}}'>
+                <ion-icon name="eye-outline"></ion-icon>
+            </ion-router-link>
+        </ion-item>
+    </ion-list>
+</ion-content>
+
+<app-details *ngIf="!show" account-id="4747" [somethingTestB]="tuto"></app-details>
