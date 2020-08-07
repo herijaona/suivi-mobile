@@ -1,12 +1,16 @@
 import { Injectable } from '@angular/core';
+import { Platform } from '@ionic/angular';
 import { BehaviorSubject, Observable } from 'rxjs';
 
-import { Api } from '../api';
 import { State } from '../../model/state';
 
 import { Plugins } from '@capacitor/core';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { tap } from 'rxjs/operators';
+
+import { environment } from '../../../environments/environment';
+import { DatePipe } from '@angular/common';
+import * as moment from 'moment'
 
 import { Users } from '../../model/user';
 
@@ -18,16 +22,24 @@ const { Storage } = Plugins;
 export class UtilsService {
   tok: any;
   token: any;
-  url:any = "http://localhost:8000/apip";
+  url:any = environment.url;
   private currentUserSubject: BehaviorSubject<UtilsService>;
   public currentUser: {'name','email'};
+  authenticationState = new BehaviorSubject(false);
 
-  constructor(private http: HttpClient) { 
+  constructor(private http: HttpClient, private plt: Platform,) { 
     this.currentUserSubject = new BehaviorSubject<UtilsService>(JSON.parse(localStorage.getItem('name')));
+    this.plt.ready().then(() => {
+      this.checkToken();
+    })
   }
 
   public get currentUserValue(): UtilsService{
     return this.currentUserSubject.value;
+  }
+
+  isAuthenticated() {
+    return this.authenticationState.value;
   }
 
   async isToken() : Promise<Users>{
@@ -39,10 +51,60 @@ export class UtilsService {
       return tok;
   }
 
+
+  async checkToken() {
+    const userToken = await this.getUserDetails();
+    let tokenS = {};
+    if(userToken && userToken.exp){
+      if(userToken.exp < Date.now() / 1000){
+        Storage.set({ key: 'name', value: '' });
+        console.log("#CHECKTOKEN  token expired ");
+
+        tokenS = {};
+      }else {
+        tokenS = userToken;
+        console.log("#CHECKTOKEN  token not expired ");
+        this.authenticationState.next(true);
+      }
+    }
+    return tokenS;
+  }
+
+  async getUserDetails(): Promise<Users> {
+    let payload;
+    const { value }  = await Storage.get({ key: 'name'});
+    this.tok = value;
+    if(this.tok){
+      const istoken = Object.keys(JSON.parse(this.tok ))
+        .map(k => JSON.parse(this.tok ));
+      const tok = istoken['0']['token'];
+      this.token = tok;
+        if (this.token) {
+          payload = this.token.split('.')[1];
+          payload = window.atob(payload);
+          return JSON.parse(payload);
+        } else {
+          return null;
+        }
+    }  
+  }
+
+  async getInfoCurrentUser(): Promise<any> {
+    this.token = await this.isToken();
+    const headers = new HttpHeaders({
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+      'Authorization': "Bearer" + " " + this.token });
+      
+      return this.http.get(this.url + 'current_user_check',  { headers: headers }).toPromise();
+  }
+
   state() {
     const headers = new HttpHeaders({
-      'Accept': 'application/json' });
-    return this.http.get<State>(this.url + '/api/states', { headers: headers })
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+      'Authorization': "Bearer" + " " + this.token  });
+    return this.http.get<State>(this.url + '/states', { headers: headers })
     .pipe(
       tap(user => {
         console.log('state',user);
@@ -57,7 +119,7 @@ export class UtilsService {
       'Accept': 'application/json',
       'Content-Type': 'application/json',
       'Authorization': "Bearer" + " " + this.token });
-    return this.http.get(this.url + '/ordo_vaccinations',  { headers: headers }).toPromise();
+    return this.http.get(this.url + 'ordo_vaccinations',  { headers: headers }).toPromise();
   }
 
   async getPatients(): Promise<any> {
@@ -66,13 +128,15 @@ export class UtilsService {
       'Accept': 'application/json',
       'Content-Type': 'application/json',
       'Authorization': "Bearer" + " " + this.token });
-    return this.http.get(this.url + '/patients',  { headers: headers }).toPromise();
+    return this.http.get(this.url + 'patients',  { headers: headers }).toPromise();
   }
 
   public ordoVaccinationId(id): Promise<any> {
     const headers = new HttpHeaders({
-      'Accept': 'application/json' });
-    return this.http.get(this.url + '/ordo_vaccinations/' + id +'',  { headers: headers }).toPromise();
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+      'Authorization': "Bearer" + " " + this.token  });
+    return this.http.get(this.url + 'ordo_vaccinations/' + id +'',  { headers: headers }).toPromise();
   }
 
   /** Centre de sante **/
@@ -82,7 +146,7 @@ export class UtilsService {
       'Accept': 'application/json',
       'Content-Type': 'application/json',
       'Authorization': "Bearer" + " " + this.token });
-    return this.http.get(this.url + '/centre_healths',  { headers: headers }).toPromise();
+    return this.http.get(this.url + 'centre_healths',  { headers: headers }).toPromise();
   }
 
   /** Centre de sante id **/
@@ -92,7 +156,7 @@ export class UtilsService {
       'Accept': 'application/json',
       'Content-Type': 'application/json',
       'Authorization': "Bearer" + " " + this.token });
-    return this.http.get(this.url + '/centre_healths/' + id + '',  { headers: headers }).toPromise();
+    return this.http.get(this.url + 'centre_healths/' + id + '',  { headers: headers }).toPromise();
   }
 
   /** Vaccin  **/
@@ -102,7 +166,7 @@ export class UtilsService {
       'Accept': 'application/json',
       'Content-Type': 'application/json',
       'Authorization': "Bearer" + " " + this.token });
-    return this.http.get(this.url + '/vaccins/',  { headers: headers }).toPromise();
+    return this.http.get(this.url + 'vaccins/',  { headers: headers }).toPromise();
   }
 
   /** Centre de sante id **/
@@ -112,7 +176,7 @@ export class UtilsService {
       'Accept': 'application/json',
       'Content-Type': 'application/json',
       'Authorization': "Bearer" + " " + this.token });
-    return this.http.get(this.url + '/vaccins/' + id + '',  { headers: headers }).toPromise();
+    return this.http.get(this.url + 'vaccins/' + id + '',  { headers: headers }).toPromise();
   }
 
   /** Carnet de vaccinnation  **/
@@ -122,17 +186,18 @@ export class UtilsService {
       'Accept': 'application/json',
       'Content-Type': 'application/json',
       'Authorization': "Bearer" + " " + this.token });
-    return this.http.get(this.url + '/carnet_vaccinations',  { headers: headers }).toPromise();
+    return this.http.get(this.url + 'carnet_vaccinations',  { headers: headers }).toPromise();
   }
 
   /** Carnet de vaccinnation id **/
   async getCarnetVaccinationId(id): Promise<any> {
-    this.token = await this.isToken();
+    this.token = await this.isToken(); 
+    let dateNow =  moment(new Date()).format('YYYY-MM-DD')
     const headers = new HttpHeaders({
       'Accept': 'application/json',
       'Content-Type': 'application/json',
       'Authorization': "Bearer" + " " + this.token });
-    return this.http.get(this.url + '/carnet_vaccinations' + id + '',  { headers: headers }).toPromise();
+    return this.http.get(this.url + 'carnet_vaccinations?patient=' + id + '&order[datePriseInitiale]=asc&datePriseInitiale[after]=' + dateNow,  { headers: headers }).toPromise();
   }
 
     /** Patient Carnet de vaccinnation  **/
@@ -142,7 +207,7 @@ export class UtilsService {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
         'Authorization': "Bearer" + " " + this.token });
-      return this.http.get(this.url + '/patient_carnet_vaccinations/',  { headers: headers }).toPromise();
+      return this.http.get(this.url + 'patient_carnet_vaccinations/',  { headers: headers }).toPromise();
     }
   
     /** Patient Carnet de vaccinnation id **/
@@ -152,7 +217,7 @@ export class UtilsService {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
         'Authorization': "Bearer" + " " + this.token });
-      return this.http.get(this.url + '/patient_carnet_vaccinations/' + id + '',  { headers: headers }).toPromise();
+      return this.http.get(this.url + 'patient_carnet_vaccinations/' + id + '',  { headers: headers }).toPromise();
     }
 
     /** Patient Carnet de vaccinnation  **/
@@ -162,7 +227,7 @@ export class UtilsService {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
         'Authorization': "Bearer" + " " + this.token });
-      return this.http.get(this.url + '/intervention_vaccinations/',  { headers: headers }).toPromise();
+      return this.http.get(this.url + 'intervention_vaccinations/',  { headers: headers }).toPromise();
     }
   
     /** Patient Carnet de vaccinnation id **/
@@ -172,7 +237,7 @@ export class UtilsService {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
         'Authorization': "Bearer" + " " + this.token });
-      return this.http.get(this.url + '/intervention_vaccinations/' + id + '',  { headers: headers }).toPromise();
+      return this.http.get(this.url + 'intervention_vaccinations/' + id + '',  { headers: headers }).toPromise();
     }
 
     /** Praticiens **/
@@ -182,7 +247,7 @@ export class UtilsService {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
         'Authorization': "Bearer" + " " + this.token });
-      return this.http.get(this.url + '/praticiens/',  { headers: headers }).toPromise();
+      return this.http.get(this.url + 'praticiens/',  { headers: headers }).toPromise();
     }
   
     /** Praticiens id **/
@@ -192,7 +257,7 @@ export class UtilsService {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
         'Authorization': "Bearer" + " " + this.token });
-      return this.http.get(this.url + '/praticiens/' + id + '',  { headers: headers }).toPromise();
+      return this.http.get(this.url + 'praticiens/' + id + '',  { headers: headers }).toPromise();
     }
 
     /** Group famille **/
@@ -202,7 +267,7 @@ export class UtilsService {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
         'Authorization': "Bearer" + " " + this.token });
-      return this.http.get(this.url + '/group_families/',  { headers: headers }).toPromise();
+      return this.http.get(this.url + 'group_families/',  { headers: headers }).toPromise();
     }
   
     /** Group famille id **/
@@ -212,7 +277,7 @@ export class UtilsService {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
         'Authorization': "Bearer" + " " + this.token });
-      return this.http.get(this.url + '/group_families/' + id + '',  { headers: headers }).toPromise();
+      return this.http.get(this.url + 'group_families/' + id + '',  { headers: headers }).toPromise();
     }
 
     /** famille **/
@@ -222,7 +287,7 @@ export class UtilsService {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
         'Authorization': "Bearer" + " " + this.token });
-      return this.http.get(this.url + '/families/',  { headers: headers }).toPromise();
+      return this.http.get(this.url + 'families/',  { headers: headers }).toPromise();
     }
   
     /** famille id **/
@@ -232,7 +297,7 @@ export class UtilsService {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
         'Authorization': "Bearer" + " " + this.token });
-      return this.http.get(this.url + '/families/' + id + '',  { headers: headers }).toPromise();
+      return this.http.get(this.url + 'families/' + id + '',  { headers: headers }).toPromise();
     }
 
 

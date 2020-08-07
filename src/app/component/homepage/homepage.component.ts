@@ -30,11 +30,7 @@ export class HomepageComponent implements OnInit {
     public auth: AuthService,
     public constant: ConstantService,
     public utilservice : UtilsService
-    ) {
-      
-  
-
-     }
+    ) {}
 
   async ngOnInit() {
 
@@ -69,31 +65,9 @@ export class HomepageComponent implements OnInit {
   //   console.log(err);
   // });
   
-  this.getGroupFamilles();
-
-  }
 
 
-  async vac(){
-    this.tak = await this.utilservice.getCarnetVaccination();
-    console.log(this.tak);
-    
-    return this.tak;
   }
-  async getCentreHealths(){
-    this.toke = await this.utilservice.getCentreHealh();
-    return this.toke; 
-  }
-  async getCentreHealthsId(){
-    let healTHiD = await this.utilservice.getCentreHealhId(3);
-    return healTHiD; 
-  }
-
-  async getGroupFamilles(){
-    let healTHiD = await this.utilservice.getGroupFamille();
-    return healTHiD; 
-  }
-
   
 
   

@@ -2,7 +2,10 @@ import { Component, OnInit, Input } from '@angular/core';
 import { UtilsService } from 'src/app/service/utils/utils.service';
 import { AuthService } from 'src/app/service/auth.service';
 import { SpinnerService } from 'src/app/service/spinner/spinner.service';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute, NavigationExtras } from '@angular/router';
+import { Plugins } from '@capacitor/core';
+import { NavController } from '@ionic/angular';
+const { Storage } = Plugins;
 
 @Component({
   selector: 'app-mon-carnet-vaccination',
@@ -24,24 +27,32 @@ export class MonCarnetVaccinationComponent implements OnInit {
   initialCount: number = 10;
   show: boolean = true;
   id: any;
-  constructor(private route: ActivatedRoute,public router: Router,public utilservice : UtilsService,public auth: AuthService,private spinnerService: SpinnerService) {
+  constructor(
+    private route: ActivatedRoute,
+    public router: Router,
+    public utilservice : UtilsService,
+    public auth: AuthService,
+    private spinnerService: SpinnerService,
+    private navCtrl: NavController
+    ) {
   
    }
 
-  async ngOnInit() {
+   async ngOnInit() {
     this.route.queryParams.subscribe(params => {
       this.id = params['id'];
+      
       if((this.id == undefined) || (this.id == '')){
         this.show = true;
       }else{
         this.show = false;
       }
     });
-    this.listVac = await this.ListeVaccin();
-     this.ListeCarnetVaccination();
-     this.ListeVaccin();
-     this.InterventionVaccination();
-     this.PraticienList();
+      //this.listVac = await this.ListeVaccin();
+      this.ListeCarnetVaccination();
+      //this.ListeVaccin();
+      //this.InterventionVaccination();
+      //this.PraticienList();
   }
 
   async ListeVaccin(){
@@ -51,7 +62,10 @@ export class MonCarnetVaccinationComponent implements OnInit {
 
   async ListeCarnetVaccination(){
     try{
-      this.listeVaccination = await this.utilservice.getCarnetVaccination();
+      const { value }  = await Storage.get({ key: 'userID'});
+      this.listeVaccination = await this.utilservice.getCarnetVaccinationId(value);
+      console.log("MonCarnetVaccinationComponent -> ListeCarnetVaccination -> listeVaccination", this.listeVaccination);
+     
     }catch(error){
       console.log(error); 
     }
@@ -99,7 +113,7 @@ export class MonCarnetVaccinationComponent implements OnInit {
   }
 
   getStatusColor(val){
-    if(val == 0){  
+    if(val == 0 || val == null){  
       return  { color: '#f5035c' } ;
     }else if(val = 1){ 
       return  { color: '#028e55' } ;
@@ -110,8 +124,13 @@ export class MonCarnetVaccinationComponent implements OnInit {
     this.router.navigate(["/patient/carnet-vaccination/detail/",val]);  
   }
 
-  patientId(){
+  patientId(item){
     this.show = !this.show;
+    let navigationExtras: NavigationExtras = {
+      state: item
+    };
+    //routerLink="/patient/carnet-vaccination/detail?id={{item.id}}" routerDirection="forward"
+    this.navCtrl.navigateForward('patient/carnet-vaccination/detail?id='+item.id, navigationExtras);
   }
 
   async ionViewWillEnter(){}

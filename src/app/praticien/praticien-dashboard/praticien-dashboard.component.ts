@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Plugins } from '@capacitor/core';
+import { UtilsService } from 'src/app/service/utils/utils.service';
+const { Storage } = Plugins;
 
 @Component({
   selector: 'app-praticien-dashboard',
@@ -7,8 +10,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PraticienDashboardComponent implements OnInit {
 
-  constructor() { }
+  constructor(public util: UtilsService) { }
 
-  ngOnInit() {}
+  async ngOnInit() {
+    let userInfo = await this.util.getInfoCurrentUser();
+    if(userInfo && userInfo.status == "OK"){
+      const userID = JSON.stringify(userInfo.data);
+        Storage.set({
+          key: 'userID',
+          value: userID
+        });
+    }
+  }
 
 }

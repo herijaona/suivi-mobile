@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
+import { AuthGuardService } from '../auth/auth-guard.service';
 import { PatientPage } from './patient.page';
 import { PatientDashboardComponent } from './patient-dashboard/patient-dashboard.component';
 import { MonRendezVousComponent } from './mon-rendez-vous/mon-rendez-vous.component';

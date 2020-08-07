@@ -7,6 +7,7 @@ import { ProfileService } from 'src/app/service/profile/profile.service';
 import { Api } from 'src/app/service/api';
 import { Location } from '@angular/common';
 import { SpinnerService } from 'src/app/service/spinner/spinner.service';
+import { UtilsService } from 'src/app/service/utils/utils.service';
 
 @Component({
   selector: 'app-login',
@@ -28,20 +29,23 @@ export class LoginComponent implements OnInit {
     public profile: ProfileService,
     public api: Api,
     public location: Location,
-    private spinnerService: SpinnerService
+    private spinnerService: SpinnerService,
+    private utilsService: UtilsService,
   ) {
 
    }
   
 
   ngOnInit() {
-
-    new Promise((resolve, reject) => {
+    let utils = this.utilsService.isAuthenticated();
+    if(utils){
+      this.navCtrl.navigateRoot('check-roles');
+    }
+    /*new Promise((resolve, reject) => {
       this.auth
         .isToken()
         .then(
           (res: any) => {
-            console.log('test',res);
               if(res){
                 this.navCtrl.navigateRoot('home');
               }
@@ -50,16 +54,7 @@ export class LoginComponent implements OnInit {
            console.log('Error');
           }
         );
-    });
-
-    this.profile.getDatas().subscribe(
-      data=>{ 
-        this.data = data;
-        console.log(this.data);
-      },
-      (err) => {
-      console.log(err);
-    });
+    });*/
 
     this.loginForm = new FormGroup({
       username: new FormControl('', [Validators.required]),
@@ -82,8 +77,7 @@ export class LoginComponent implements OnInit {
       this.auth.login(this.loginForm.value.username,this.loginForm.value.password).subscribe(
         data => {
           //this.alertService.presentToast("Logged In");
-          this.navCtrl.navigateRoot('home');
-          console.log("logger 1");
+          location.reload(); 
         },
         error => {
           console.log(error);
@@ -91,7 +85,7 @@ export class LoginComponent implements OnInit {
         () => {
           //this.dismissLogin();
           //this.navCtrl.navigateRoot('auth/register');
-          console.log("logger 2");
+          location.reload(); 
         }
       );
     }

@@ -26,9 +26,11 @@ export class DetailsComponent implements OnInit {
 
   ngOnInit() {
     this.route.queryParams.subscribe(params => {
+    console.log("DetailsComponent -> ngOnInit -> params", params)
       this.id = params['id'];
+      //let navParams = this.route.getCurrentNavigation().extras.state;
     });
-    this.IntervationtVaccinationId(this.id);
+    //this.IntervationtVaccinationId(this.id);
   }
 
   async IntervationtVaccinationId(id){

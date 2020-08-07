@@ -3,6 +3,7 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import {HttpHeaders} from '@angular/common/http';
+import { environment } from '../../environments/environment';
 /**
  * Api is a generic REST Api handler. Set your API url first.
  */
@@ -11,7 +12,7 @@ import {HttpHeaders} from '@angular/common/http';
 export class Api {
     
     //url: string = 'http://localhost/php-login-registration-api/';
-    url : string = "http://localhost:8000/api";
+    url : any = environment.url_auth;
 
     constructor(private http: HttpClient) {}
 
@@ -23,25 +24,25 @@ export class Api {
 
             });
         }
-        return this.http.get(this.url + '/' + endpoint,{headers:header});
+        return this.http.get(this.url  + endpoint,{headers:header});
     }
 
     post(endpoint: string, data_params: { [key: string]: any } = {}, reqOpts?: any) {
         let _data: any;
         _data = data_params;
-        return this.http.post(this.url + '/' + endpoint, data_params, reqOpts);
+        return this.http.post(this.url  + endpoint, data_params, reqOpts);
     }
 
     put(endpoint: string, body: any, reqOpts?: any) {
-        return this.http.put(this.url + '/' + endpoint, body, reqOpts);
+        return this.http.put(this.url  + endpoint, body, reqOpts);
     }
 
     delete(endpoint: string, reqOpts?: any) {
-        return this.http.delete(this.url + '/' + endpoint, reqOpts);
+        return this.http.delete(this.url  + endpoint, reqOpts);
     }
 
     patch(endpoint: string, body: any, reqOpts?: any) {
-        return this.http.patch(this.url + '/' + endpoint, body, reqOpts);
+        return this.http.patch(this.url  + endpoint, body, reqOpts);
     }
 
     request(method: string, route: string, data?: any) {

@@ -1,4 +1,5 @@
 import { Component, OnInit, ElementRef } from '@angular/core';
+import { UtilsService } from '../../service/utils/utils.service';
 
 @Component({
   selector: 'header',
@@ -6,9 +7,12 @@ import { Component, OnInit, ElementRef } from '@angular/core';
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent implements OnInit {
-  navigate: { title: string; url: string; icon: string; }[];
 
-  constructor(private elementRef: ElementRef) { }
+  navigate: { title: string; url: string; icon: string; }[];
+  ROLE_PRATICIEN: any = "ROLE_PRATICIEN";
+  ROLE_PATIENT: any = "ROLE_PATIENT";
+
+  constructor(private elementRef: ElementRef, private utils: UtilsService) { }
 
   ngOnInit() {
     this.sideMenu();
@@ -26,13 +30,24 @@ export class HeaderComponent implements OnInit {
     }
 }
 
-sideMenu(){
-  return this.navigate =
-    [
-      { title : "Home", url   : "/home", icon  : "home"},
-      { title : "Chat", url   : "/chat", icon  : "chatboxes"},
-      { title : "Contacts", url   : "/contacts", icon  : "contacts"},
-    ]
+async sideMenu(){
+  let user = await this.utils.getUserDetails();
+  if(user.roles[0] == this.ROLE_PRATICIEN){
+    return this.navigate =
+      [
+        { title : "Dashboard", url   : "/praticien/praticien-dashboard", icon  : "home"},
+        { title : "Chat", url   : "/praticien/praticien-dashboard", icon  : "chatboxes"},
+        { title : "Contacts", url   : "/praticien/praticien-dashboard", icon  : "contacts"},
+      ]
+  }else if(user.roles[0] == this.ROLE_PATIENT){
+    return this.navigate =
+      [
+        { title : "Dash", url   : "/patient/patient-dashboard", icon  : "home"},
+        { title : "Chat", url   : "/chat", icon  : "chatboxes"},
+        { title : "Contacts", url   : "/contacts", icon  : "contacts"},
+      ]
+  }
+  
   }
 
 }

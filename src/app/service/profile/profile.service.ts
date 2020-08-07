@@ -25,7 +25,7 @@ export class ProfileService {
   constructor(public api: Api,private http: HttpClient) {}
 
   getDatas(){
-    return this.http.get('http://localhost:8000/apip/users' ,{headers:this.header});
+    return this.http.get('http://localhost:9000/api/users' ,{headers:this.header});
   }
 
 

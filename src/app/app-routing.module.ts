@@ -5,6 +5,7 @@ import { LoginComponent } from './component/auth/login/login.component';
 import { RegisterComponent } from './component/auth/register/register.component';
 import { ProfileComponent } from './component/profile/profile.component';
 import { AgendaComponent } from './component/agenda/agenda.component';
+import { AuthGuardService } from './auth/auth-guard.service';
 
 const routes: Routes = [
   {
@@ -34,16 +35,25 @@ const routes: Routes = [
   },
   {
     path: 'patient',
-    loadChildren: () => import('./patient/patient.module').then( m => m.PatientPageModule)
+    loadChildren: () => import('./patient/patient.module').then( m => m.PatientPageModule),
+    canActivate: [AuthGuardService]
   },
   {
     path: 'praticien',
-    loadChildren: () => import('./praticien/praticien.module').then( m => m.PraticienPageModule)
+    loadChildren: () => import('./praticien/praticien.module').then( m => m.PraticienPageModule),
+    canActivate: [AuthGuardService]
   },
   {
     path: 'admin',
-    loadChildren: () => import('./admin/admin.module').then( m => m.AdminPageModule)
+    loadChildren: () => import('./admin/admin.module').then( m => m.AdminPageModule),
+    canActivate: [AuthGuardService]
   },
+  {
+    path: 'check-roles',
+    loadChildren: () => import('./check-roles/check-roles.module').then( m => m.CheckRolesPageModule),
+    canActivate: [AuthGuardService]
+  },
+
 ];
 
 @NgModule({

@@ -3,12 +3,13 @@ import { BehaviorSubject, Observable } from 'rxjs';
 
 import { Api } from './api';
 
+//import { JwtHelperService } from '@auth0/angular-jwt';
 import { Users } from '../model/user';
-
-import { Plugins } from '@capacitor/core';
+import { environment } from '../../environments/environment';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { tap } from 'rxjs/operators';
 
+import { Plugins } from '@capacitor/core';
 const { Storage } = Plugins;
 
 /**
@@ -17,6 +18,7 @@ const { Storage } = Plugins;
 @Injectable()
 export class AuthService {
   _user: any;
+  url = environment.url_auth;
 
   
   private currentUserSubject: BehaviorSubject<AuthService>;
@@ -29,11 +31,34 @@ export class AuthService {
 
   constructor(public api: Api,private http: HttpClient) {
     this.currentUserSubject = new BehaviorSubject<AuthService>(JSON.parse(localStorage.getItem('name')));
-   }
+    this.checkToken();
+  }
 
   public get currentUserValue(): AuthService{
     return this.currentUserSubject.value;
   }
+
+  async checkToken() {
+    const userToken = await this.getUserDetails();
+    console.log("AuthService -> checkToken -> userToken", userToken)
+    
+    if(userToken && userToken.exp){
+      if(userToken.exp < Date.now() / 1000){
+        Storage.set({ key: 'name', value: '' });
+      }else {
+
+      }
+    }
+        /*if (!isExpired) {
+          this.user = decoded;
+          //this.authenticationState.next(true);
+        } else {
+          //this.storage.remove(TOKEN_KEY);
+        }*/
+    //exp < Date.now() / 1000
+  }
+
+  
 
   /**
    * Send a POST request to our login endpoint with the data
@@ -73,7 +98,7 @@ export class AuthService {
     const headers = new HttpHeaders({
       'Accept': 'application/json',
       'Authorization': "Bearer" + " " + this.token });
-    return this.http.get<Users>('http://localhost:8000/apip/users', { headers: headers })
+    return this.http.get<Users>(this.url+'users', { headers: headers })
     .pipe(
       tap(user => {
         return user;
