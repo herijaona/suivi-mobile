@@ -1,4 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { UtilsService } from 'src/app/service/utils/utils.service';
+import { AuthService } from 'src/app/service/auth.service';
+import { SpinnerService } from 'src/app/service/spinner/spinner.service';
+import { NavController } from '@ionic/angular';
+import { Plugins } from '@capacitor/core';
+const { Storage } = Plugins;
 
 @Component({
   selector: 'app-mon-consultation',
@@ -7,8 +14,59 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MonConsultationComponent implements OnInit {
 
-  constructor() { }
+  initialCount: number = 10;
+  show: boolean = true;
+  id: any;
+  listeConsultation: [];
 
-  ngOnInit() {}
+  constructor(private route: ActivatedRoute,
+    public router: Router,
+    public utilservice : UtilsService,
+    public auth: AuthService,
+    private spinnerService: SpinnerService,
+    private navCtrl: NavController) { }
+
+  ngOnInit() {
+    this.route.queryParams.subscribe(params => {
+      this.id = params['id'];
+      
+      if((this.id == undefined) || (this.id == '')){
+        this.show = true;
+      }else{
+        this.show = false;
+      }
+      this.ListeConsultation();
+    })
+  }
+
+  async ListeConsultation(){
+    try{
+      const { value }  = await Storage.get({ key: 'userID'});
+      this.listeConsultation = await this.utilservice.getConsultationById(value);
+      console.log("MonConsultationComponent -> ListeConsultation -> this.listeConsultation", this.listeConsultation)
+    }catch(error){
+      console.log(error); 
+    }
+  }
+
+  getItemEtat(value1){
+    if(value1 == true){
+      return 'Activé';
+    }else{
+      return 'Non activé';
+    }
+  }
+
+  getStatusColor(val){
+    if(val == 0 || val == null){  
+      return  { color: '#f5035c' } ;
+    }else if(val = 1){ 
+      return  { color: '#028e55' } ;
+    }
+  }
+
+  details(item){
+    
+  }
 
 }

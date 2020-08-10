@@ -1,3 +1,6 @@
+<div class="spinner" *ngIf="spinnerService.visibility | async">
+    <ion-spinner></ion-spinner>
+</div>
 <ion-content padding class="text-center list-item" *ngIf="!showParent">
     <ion-button expand="block" class="btn-proposition" (click)="link('proposition')">
         Proposer un rendez-vous

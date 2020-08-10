@@ -15,6 +15,7 @@ export class DetailGroupFamilleComponent implements OnInit {
   GroupFamille: any;
   members: any = [];
   id: any;
+  id_group: any;
   firstName: any;
   lastName: any;
 
@@ -22,9 +23,12 @@ export class DetailGroupFamilleComponent implements OnInit {
 
   async ngOnInit() {
     this.id = this.route.snapshot.params.id;
-    this.patient_ =  await this.utilservice.getPatients();
-    this.getGroupFamilles();
-    this.getFamilles(this.id); 
+    this.route.queryParams.subscribe(params => {
+      this.id = params['id'];
+      this.id_group = params['id_group'];
+    });
+    this.members =  await this.utilservice.getListMembresByGroup(this.id_group);
+    
   }
 
   async getFamilles(param){
@@ -41,15 +45,15 @@ export class DetailGroupFamilleComponent implements OnInit {
     }
   }
 
-  groupFirstName(params){
-    let k = params.split("/").slice(-1).pop();
+  /*groupFirstName(params){
+    let k = params;
     for(const patient of this.patient_){
       if(k == patient.id){
         this.firstName = patient.firstName;
         this.lastName = patient.lastName;
       }
     }
-  }
+  }*/
 
   async getGroupFamilles(){
     this.GroupFamille = await this.utilservice.getFamille();

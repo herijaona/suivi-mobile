@@ -89,6 +89,30 @@ export class UtilsService {
     }  
   }
 
+  
+  /** Carnet de vaccinnation id **/
+  async getCarnetVaccinationId(id): Promise<any> {
+    this.token = await this.isToken(); 
+    let dateNow =  moment(new Date()).format('YYYY-MM-DD')
+    const headers = new HttpHeaders({
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+      'Authorization': "Bearer" + " " + this.token });
+    return this.http.get(this.url + 'carnet_vaccinations?patient=' + id + '&order[datePriseInitiale]=asc&datePriseInitiale[after]=' + dateNow,  { headers: headers }).toPromise();
+  }
+
+
+  /** Consultation id **/
+  async getConsultationById(id): Promise<any> {
+    this.token = await this.isToken(); 
+    let dateNow =  moment(new Date()).format('YYYY-MM-DD')
+    const headers = new HttpHeaders({
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+      'Authorization': "Bearer" + " " + this.token });
+    return this.http.get(this.url + 'intervation_consultations?patient=' + id + '&order[dateConsultation]=asc&dateConsultation[after]=' + dateNow,  { headers: headers }).toPromise();
+  }
+
   async getInfoCurrentUser(): Promise<any> {
     this.token = await this.isToken();
     const headers = new HttpHeaders({
@@ -97,6 +121,36 @@ export class UtilsService {
       'Authorization': "Bearer" + " " + this.token });
       
       return this.http.get(this.url + 'current_user_check',  { headers: headers }).toPromise();
+  }
+
+  /** Group famille List **/
+  async getGroupFamilleListByPatient(id): Promise<any> {
+    this.token = await this.isToken();
+    const headers = new HttpHeaders({
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+      'Authorization': "Bearer" + " " + this.token });
+    return this.http.get(this.url + 'families?patientChild=' + id ,  { headers: headers }).toPromise();
+  }
+
+  /** Group famille **/
+  async getListMembresByGroup(id): Promise<any> {
+    this.token = await this.isToken();
+    const headers = new HttpHeaders({
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+      'Authorization': "Bearer" + " " + this.token });
+    return this.http.get(this.url + 'families?groupFamily=' + id ,  { headers: headers }).toPromise();
+  }
+
+  /** Group famille **/
+  async getGroupFamille(id): Promise<any> {
+    this.token = await this.isToken();
+    const headers = new HttpHeaders({
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+      'Authorization': "Bearer" + " " + this.token });
+    return this.http.get(this.url + 'group_families?patient=' + id ,  { headers: headers }).toPromise();
   }
 
   state() {
@@ -189,17 +243,6 @@ export class UtilsService {
     return this.http.get(this.url + 'carnet_vaccinations',  { headers: headers }).toPromise();
   }
 
-  /** Carnet de vaccinnation id **/
-  async getCarnetVaccinationId(id): Promise<any> {
-    this.token = await this.isToken(); 
-    let dateNow =  moment(new Date()).format('YYYY-MM-DD')
-    const headers = new HttpHeaders({
-      'Accept': 'application/json',
-      'Content-Type': 'application/json',
-      'Authorization': "Bearer" + " " + this.token });
-    return this.http.get(this.url + 'carnet_vaccinations?patient=' + id + '&order[datePriseInitiale]=asc&datePriseInitiale[after]=' + dateNow,  { headers: headers }).toPromise();
-  }
-
     /** Patient Carnet de vaccinnation  **/
     async getPatientCarnetVaccination(): Promise<any> {
       this.token = await this.isToken();
@@ -260,15 +303,7 @@ export class UtilsService {
       return this.http.get(this.url + 'praticiens/' + id + '',  { headers: headers }).toPromise();
     }
 
-    /** Group famille **/
-    async getGroupFamille(): Promise<any> {
-      this.token = await this.isToken();
-      const headers = new HttpHeaders({
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-        'Authorization': "Bearer" + " " + this.token });
-      return this.http.get(this.url + 'group_families/',  { headers: headers }).toPromise();
-    }
+    
   
     /** Group famille id **/
     async getGroupFamilleId(id): Promise<any> {

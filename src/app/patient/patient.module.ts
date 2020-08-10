@@ -15,6 +15,7 @@ import { DetailsComponent } from './mon-carnet-vaccination/details/details.compo
 import { MonGroupeFamilleComponent } from './mon-groupe-famille/mon-groupe-famille.component';
 import { ListeGroupFamilleComponent } from './mon-groupe-famille/liste-group-famille/liste-group-famille.component';
 import { DetailGroupFamilleComponent } from './mon-groupe-famille/detail-group-famille/detail-group-famille.component';
+import { MonConsultationComponent } from './mon-consultation/mon-consultation.component';
 
 @NgModule({
   imports: [
@@ -32,6 +33,8 @@ import { DetailGroupFamilleComponent } from './mon-groupe-famille/detail-group-f
     DetailsComponent,
     MonGroupeFamilleComponent,
     ListeGroupFamilleComponent,
-    DetailGroupFamilleComponent]
+    DetailGroupFamilleComponent,
+    MonConsultationComponent
+  ]
 })
 export class PatientPageModule {}

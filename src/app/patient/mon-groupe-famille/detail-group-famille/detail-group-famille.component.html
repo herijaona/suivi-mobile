@@ -1,12 +1,14 @@
+<div class="spinner" *ngIf="spinnerService.visibility | async">
+    <ion-spinner></ion-spinner>
+</div>
 <ion-content padding class="text-center list-item">
     <h4>Membres du groupe</h4>
     <ion-searchbar type="text" placeholder="Rechercher" debounce="500"></ion-searchbar>
     <ion-list lines="none">
         <ion-item [color]="even? 'gray' : 'white'" *ngFor="let item of members; let even = even" no-lines>
             <ion-label>
-                <input type="hidden" value="{{groupFirstName(item.p)}}">
-                <h2>Nom : {{firstName}}</h2>
-                <h3>Prenom : {{lastName}}</h3>
+                <h2>Nom : {{item.patientChild.firstName}}</h2>
+                <h3>Prenom : {{ item.patientChild.lastName }}</h3>
             </ion-label>
             <ion-router-link>
                 <ion-icon name="eye-outline"></ion-icon>

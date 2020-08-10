@@ -1,3 +1,6 @@
+<div class="spinner" *ngIf="spinnerService.visibility | async">
+    <ion-spinner></ion-spinner>
+</div>
 <ng-template [ngIf]="allOrdoVaccin">
     <ion-content padding class="text-center list-item">
         <ion-searchbar type="text" placeholder="Rechercher" debounce="500"></ion-searchbar>

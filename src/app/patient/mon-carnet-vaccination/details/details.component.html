@@ -1,10 +1,10 @@
+<div class="spinner" *ngIf="spinnerService.visibility | async">
+    <ion-spinner></ion-spinner>
+</div>
 <h3>Details de la vaccination</h3>
 <ul>
     <li>
         <span>Date d'intervention : </span> {{interventionDate}}
-    </li>
-    <li>
-        <span>Executant : </span> {{firstName}}
     </li>
     <li>
         <span>Executant :</span> {{lastName}}
@@ -17,5 +17,8 @@
     </li>
     <li>
         <span>Vaccin :</span> {{vaccinName}}
+    </li>
+    <li>
+        <span>Etat : </span> {{ etat }}
     </li>
 </ul>

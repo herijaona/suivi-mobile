@@ -11,6 +11,7 @@ import { DetailsComponent } from './mon-carnet-vaccination/details/details.compo
 import { MonGroupeFamilleComponent } from './mon-groupe-famille/mon-groupe-famille.component';
 import { ListeGroupFamilleComponent } from './mon-groupe-famille/liste-group-famille/liste-group-famille.component';
 import { DetailGroupFamilleComponent } from './mon-groupe-famille/detail-group-famille/detail-group-famille.component';
+import { MonConsultationComponent } from './mon-consultation/mon-consultation.component';
 
 const routes: Routes = [
   {
@@ -29,6 +30,16 @@ const routes: Routes = [
             path: ':id',
             component: MonCarnetVaccinationComponent,
           },
+          {
+            path: 'detail/:id',
+            component: DetailsComponent,
+          },
+        ]
+      },
+      {
+        path: 'consultation',
+        component: MonConsultationComponent,
+        children: [
           {
             path: 'detail/:id',
             component: DetailsComponent,

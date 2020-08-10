@@ -7,13 +7,13 @@
     <ion-list lines="none">
         <ion-item [color]="even? 'gray' : 'white'" *ngFor="let item of listeVaccination; let even = even" no-lines>
             <ion-label>
-                <h2>Date : {{item.datePriseInitiale | date:'dd/MM/yy'}}</h2>
+                <h2>Date : {{item.datePriseInitiale | date:'dd/MM/yy HH:mm a'}}</h2>
                 <h3>Vaccin : {{item.vaccin.vaccinName}}</h3>
                 <h3>Praticien prescipteur : {{ item.intervationVaccination.praticienPrescripteur.lastName +' '+ item.intervationVaccination.praticienPrescripteur.firstName  }}</h3>
                 <div class="p">Etat :
                     <span [ngStyle]="getStatusColor(item.etat)"> {{ item.etat }}</span>
                 </div>
-                <div class="p">Rappel : {{ item.rappelVaccin }}</div>
+                <div class="p">Rappel : {{ item.rappelVaccin | date:'dd/MM/yy HH:mm a' }}</div>
             </ion-label>
             <ion-router-link (click)="patientId(item)" >
                 <ion-icon name="eye-outline"></ion-icon>

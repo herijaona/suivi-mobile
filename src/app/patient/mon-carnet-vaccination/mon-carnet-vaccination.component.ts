@@ -125,12 +125,22 @@ export class MonCarnetVaccinationComponent implements OnInit {
   }
 
   patientId(item){
+    console.log("MonCarnetVaccinationComponent -> patientId -> item", item)
     this.show = !this.show;
+    
     let navigationExtras: NavigationExtras = {
-      state: item
+      queryParams: {
+        "id": item.id,
+        "prescripteur": item.intervationVaccination.praticienPrescripteur.lastName +' '+ item.intervationVaccination.praticienPrescripteur.firstName, 
+        "executant": item.intervationVaccination.praticienExecutant.lastName +' '+ item.intervationVaccination.praticienExecutant.firstName,
+        "vaccin": item.vaccin.vaccinName,
+        "date": item.datePriseInitiale,
+        "etat": item.etat,
+        "phone": item.intervationVaccination.praticienExecutant.phoneProfessional
+      }
     };
     //routerLink="/patient/carnet-vaccination/detail?id={{item.id}}" routerDirection="forward"
-    this.navCtrl.navigateForward('patient/carnet-vaccination/detail?id='+item.id, navigationExtras);
+    this.router.navigate(['patient/carnet-vaccination/detail?id='+item.id],  navigationExtras);
   }
 
   async ionViewWillEnter(){}

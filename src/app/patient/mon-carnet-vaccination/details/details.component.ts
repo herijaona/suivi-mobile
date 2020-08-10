@@ -15,50 +15,28 @@ export class DetailsComponent implements OnInit {
   interventionDate: any;
   @Input() somethingTestB;
   praticien: any = [];
-  firstName: any;
+  etat: any;
   lastName: any;
   phoneProfessional: any;
   praticienExecutant: any;
   firstNamePrescripteur: any;
   listeVaccin_: any = [];
   vaccinName: any;
-  constructor(private route: ActivatedRoute,public utilservice : UtilsService,public auth: AuthService,private spinnerService: SpinnerService) { }
+  carnetVaccin: any;
+
+  constructor(private route: ActivatedRoute,private router: Router,  public utilservice : UtilsService,public auth: AuthService,private spinnerService: SpinnerService) { }
 
   ngOnInit() {
     this.route.queryParams.subscribe(params => {
-    console.log("DetailsComponent -> ngOnInit -> params", params)
       this.id = params['id'];
-      //let navParams = this.route.getCurrentNavigation().extras.state;
+      this.firstNamePrescripteur = params['prescripteur'];
+      this.lastName = params['executant'];
+      this.interventionDate = params['date'];
+      this.etat = params['etat'];
+      this.vaccinName = params['vaccin'];
+      this.phoneProfessional = params['phone'];
     });
+  
     //this.IntervationtVaccinationId(this.id);
   }
-
-  async IntervationtVaccinationId(id){
-    this.praticien = await this.utilservice.getPraticiens();
-    this.listeVaccin_ = await this.utilservice.getVaccin();
-    if(id){
-      this.intervention = await this.utilservice.getIntervationtVaccinationId(id);
-      let k = this.intervention.praticienExecutant.split("/").slice(-1).pop();
-      let k2 = this.intervention.praticienPrescripteur.split("/").slice(-1).pop();
-      for(const prat of this.praticien){
-        if(k == prat.id){
-         this.firstName = prat.firstName;
-         this.lastName = prat.lastName;
-         this.phoneProfessional = prat.phoneProfessional;
-        }
-        if(k2 == prat.id){
-          this.firstNamePrescripteur = prat.firstName;
-        }
-      }
-      let k3 = this.intervention.vaccin.split("/").slice(-1).pop();
-      for(const vac of this.listeVaccin_){
-        if(vac.id == k3){
-          this.vaccinName = vac.vaccinName;
-        }
-      }
-      this.interventionDate = this.intervention.datePriseVaccin; 
-    } 
-  }
-
-
 }
