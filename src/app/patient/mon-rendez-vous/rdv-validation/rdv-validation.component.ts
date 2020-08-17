@@ -28,12 +28,12 @@ export class RdvValidationComponent implements OnInit {
    }
 
   async ngOnInit() {
-    this.user = await this.auth.userOne();
-    this.usernam_ = this.user.username;
-    this.patient_ =  await this.utilservice.getPatients();
+    //this.user = await this.auth.userOne();
+    //this.usernam_ = this.user.username;
+    //this.patient_ =  await this.utilservice.getPatients();
 
-    this.getAlUsers();
-    this.getPersm();
+    //this.getAlUsers();
+    //this.getPersm();
   }
 
   /** Test user to getUsers and patients  **/

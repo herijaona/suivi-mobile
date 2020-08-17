@@ -113,6 +113,29 @@ export class UtilsService {
     return this.http.get(this.url + 'intervation_consultations?patient=' + id + '&order[dateConsultation]=asc&dateConsultation[after]=' + dateNow,  { headers: headers }).toPromise();
   }
 
+   /** Consultation rejected **/
+   async getConsultationRejectByID(): Promise<any> {
+    this.token = await this.isToken(); 
+    let dateNow =  moment(new Date()).format('YYYY-MM-DD')
+    const headers = new HttpHeaders({
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+      'Authorization': "Bearer" + " " + this.token });
+    return this.http.get(this.url + 'ordoconsultation_rejected',  { headers: headers }).toPromise();
+  }
+
+  /** Consultation Progress **/
+  async getConsultationProgressByID(): Promise<any> {
+    this.token = await this.isToken(); 
+    let dateNow =  moment(new Date()).format('YYYY-MM-DD')
+    const headers = new HttpHeaders({
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+      'Authorization': "Bearer" + " " + this.token });
+    return this.http.get(this.url + 'ordoconsultation_in_progress',  { headers: headers }).toPromise();
+  }
+
+
   async getInfoCurrentUser(): Promise<any> {
     this.token = await this.isToken();
     const headers = new HttpHeaders({

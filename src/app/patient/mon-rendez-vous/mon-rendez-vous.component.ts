@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router,ActivatedRoute } from '@angular/router';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-mon-rendez-vous',
@@ -10,7 +11,7 @@ export class MonRendezVousComponent implements OnInit {
   show: boolean = true;
   line: any = [];
   showParent: boolean = true;
-  constructor(public router: Router,private route: ActivatedRoute) { }
+  constructor(public router: Router,private route: ActivatedRoute, public navCtrl: NavController) { }
 
   data: any;
   ngOnInit() {
@@ -20,7 +21,7 @@ export class MonRendezVousComponent implements OnInit {
     }
   }
 
-  link(l){
+  /*link(l){
       this.showParent = !this.showParent;
       if("proposition" == l){
         this.router.navigate(['/proposition']);          
@@ -29,6 +30,16 @@ export class MonRendezVousComponent implements OnInit {
       } else if("annule" == l){
         this.router.navigate(['/annule']);  
       }      
+  }*/
+
+  goToInProgress(){
+    this.showParent = !this.showParent;
+    this.navCtrl.navigateForward('patient/patient-rendez-vous/proposition');
+  }
+
+  goToInRejected(){
+    this.showParent = !this.showParent;
+    this.navCtrl.navigateForward('patient/patient-rendez-vous/annule');
   }
   
 

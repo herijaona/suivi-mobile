@@ -43,7 +43,6 @@ export class MonConsultationComponent implements OnInit {
     try{
       const { value }  = await Storage.get({ key: 'userID'});
       this.listeConsultation = await this.utilservice.getConsultationById(value);
-      console.log("MonConsultationComponent -> ListeConsultation -> this.listeConsultation", this.listeConsultation)
     }catch(error){
       console.log(error); 
     }

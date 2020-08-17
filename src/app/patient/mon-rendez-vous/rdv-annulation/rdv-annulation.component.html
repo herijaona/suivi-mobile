@@ -1,3 +1,13 @@
-<p>
-  rdv-annulation works!
-</p>
+ion-content padding class="text-center list-item">
+  <h4>Consultation Annuler</h4>
+  <ion-searchbar type="text" placeholder="Rechercher" debounce="500"></ion-searchbar>
+  <ion-list lines="none">
+      <ion-item [color]="even? 'gray' : 'white'" *ngFor="let item of consultationRejected; let even = even" no-lines>
+        <ion-label>
+          <h2>Date : {{item.dateRdv | date:'dd/MM/yy HH:mm a'}}</h2>
+          <h3>Description : {{item.objetConsultation }}</h3>
+          <h3>Praticien prescipteur : {{ item.referencePraticientExecutant.lastName +' '+ item.referencePraticientExecutant.firstName  }}</h3>
+      </ion-label>
+      </ion-item>
+  </ion-list>
+</ion-content>

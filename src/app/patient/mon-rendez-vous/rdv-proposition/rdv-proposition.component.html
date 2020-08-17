@@ -1,3 +1,18 @@
-<p>
-  rdv-proposition works!
-</p>
+
+<ion-content padding class="text-center list-item">
+  <h4>Consultation En cours</h4>
+  <ion-searchbar type="text" placeholder="Rechercher" debounce="500"></ion-searchbar>
+  <ion-list lines="none">
+      <ion-item [color]="even? 'gray' : 'white'" *ngFor="let item of consultationProgress; let even = even" no-lines>
+        <ion-label>
+          <h2>Date : {{item.dateRdv | date:'dd/MM/yy HH:mm a'}}</h2>
+          <h3>Description : {{item.objetConsultation }}</h3>
+          <h3>Praticien prescipteur : {{ item.referencePraticientExecutant.lastName +' '+ item.referencePraticientExecutant.firstName  }}</h3>
+          <div class="p">Etat :
+              <span *ngIf="!item.statusConsultation " [ngStyle]="getStatusColor(item.statusConsultation)"> En attente </span>
+              <span *ngIf="item.statusConsultation" [ngStyle]="getStatusColor(item.statusConsultation)"> Réalisé </span>
+          </div>
+      </ion-label>
+      </ion-item>
+  </ion-list>
+</ion-content>

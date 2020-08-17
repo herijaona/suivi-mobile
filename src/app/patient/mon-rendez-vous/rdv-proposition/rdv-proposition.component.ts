@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { UtilsService } from 'src/app/service/utils/utils.service';
+import { SpinnerService } from 'src/app/service/spinner/spinner.service';
 
 @Component({
   selector: 'app-rdv-proposition',
@@ -7,8 +9,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RdvPropositionComponent implements OnInit {
 
-  constructor() { }
+  consultationProgress: any = [];
+  constructor(public utilservice : UtilsService, private spinnerService: SpinnerService) { }
 
-  ngOnInit() {}
+  async ngOnInit() {
+    console.log('RdvPropositionComponent started')
+    this.consultationProgress = await this.utilservice.getConsultationProgressByID();
+    console.log("RdvPropositionComponent -> ngOnInit -> this.consultationProgress", this.consultationProgress)
+  }
+
+  getStatusColor(val){
+    if(val == 0 || val == null){  
+      return  { color: '#f5035c' } ;
+    }else if(val = 1){ 
+      return  { color: '#028e55' } ;
+    }
+  }
 
 }

@@ -6,6 +6,8 @@ import { PatientPage } from './patient.page';
 import { PatientDashboardComponent } from './patient-dashboard/patient-dashboard.component';
 import { MonRendezVousComponent } from './mon-rendez-vous/mon-rendez-vous.component';
 import { RdvValidationComponent } from './mon-rendez-vous/rdv-validation/rdv-validation.component';
+import { RdvAnnulationComponent } from './mon-rendez-vous/rdv-annulation/rdv-annulation.component';
+import { RdvPropositionComponent } from './mon-rendez-vous/rdv-proposition/rdv-proposition.component';
 import { MonCarnetVaccinationComponent } from './mon-carnet-vaccination/mon-carnet-vaccination.component';
 import { DetailsComponent } from './mon-carnet-vaccination/details/details.component';
 import { MonGroupeFamilleComponent } from './mon-groupe-famille/mon-groupe-famille.component';
@@ -54,7 +56,15 @@ const routes: Routes = [
             path: 'validation',
             component: RdvValidationComponent,
           },
-          { path: '', redirectTo:'overview', pathMatch:"full" }
+          {
+            path: 'proposition',
+            component: RdvPropositionComponent,
+          },
+          {
+            path: 'annule',
+            component: RdvAnnulationComponent,
+          },
+          // { path: '', redirectTo:'overview', pathMatch:"full" }
         ]
       },
       {
