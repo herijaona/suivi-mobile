@@ -19,6 +19,8 @@ export class RdvPropositionComponent implements OnInit {
   }
 
   getStatusColor(val){
+  console.log("RdvPropositionComponent -> getStatusColor -> val", val)
+    
     if(val == 0 || val == null){  
       return  { color: '#f5035c' } ;
     }else if(val = 1){ 

@@ -51,21 +51,18 @@ const routes: Routes = [
       {
         path: 'patient-rendez-vous',
         component: MonRendezVousComponent,
-        children: [
-          {
-            path: 'validation',
-            component: RdvValidationComponent,
-          },
-          {
-            path: 'proposition',
-            component: RdvPropositionComponent,
-          },
-          {
-            path: 'annule',
-            component: RdvAnnulationComponent,
-          },
-          // { path: '', redirectTo:'overview', pathMatch:"full" }
-        ]
+      },
+      {
+        path: 'patient-rendez-vous/validation',
+        component: RdvValidationComponent,
+      },
+      {
+        path: 'patient-rendez-vous/proposition',
+        component: RdvPropositionComponent,
+      },
+      {
+        path: 'patient-rendez-vous/annule',
+        component: RdvAnnulationComponent,
       },
       {
         path: 'groupe-famille',

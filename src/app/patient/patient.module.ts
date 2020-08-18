@@ -16,6 +16,8 @@ import { MonGroupeFamilleComponent } from './mon-groupe-famille/mon-groupe-famil
 import { ListeGroupFamilleComponent } from './mon-groupe-famille/liste-group-famille/liste-group-famille.component';
 import { DetailGroupFamilleComponent } from './mon-groupe-famille/detail-group-famille/detail-group-famille.component';
 import { MonConsultationComponent } from './mon-consultation/mon-consultation.component';
+import { RdvPropositionComponent } from './mon-rendez-vous/rdv-proposition/rdv-proposition.component';
+import { RdvAnnulationComponent } from './mon-rendez-vous/rdv-annulation/rdv-annulation.component';
 
 @NgModule({
   imports: [
@@ -34,7 +36,9 @@ import { MonConsultationComponent } from './mon-consultation/mon-consultation.co
     MonGroupeFamilleComponent,
     ListeGroupFamilleComponent,
     DetailGroupFamilleComponent,
-    MonConsultationComponent
+    MonConsultationComponent,
+    RdvPropositionComponent, 
+    RdvAnnulationComponent
   ]
 })
 export class PatientPageModule {}
