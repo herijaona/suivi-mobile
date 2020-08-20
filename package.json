@@ -30,6 +30,7 @@
         "cordova-plugin-qrscanner": "^3.0.1",
         "cordova-res": "^0.15.0",
         "intl": "^1.2.5",
+        "ion-datepicker": "^2.8.2",
         "ionic2-calendar": "^0.6.4",
         "moment": "^2.27.0",
         "ng4-loading-spinner": "^1.2.3",

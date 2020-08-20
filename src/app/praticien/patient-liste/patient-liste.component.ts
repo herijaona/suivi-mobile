@@ -10,80 +10,80 @@ import { SpinnerService } from 'src/app/service/spinner/spinner.service';
   styleUrls: ['./patient-liste.component.scss'],
 })
 export class PatientListeComponent implements OnInit {
-  items:any = [];
-  isItemAvailable = false; 
+  items: any = [];
+  isItemAvailable = false;
   data: any = [];
   linkProfile: any;
   showSpinner: boolean;
-  
-  constructor(public router: Router, public profile: ProfileService,private spinnerService: SpinnerService) {
-  
-   if(this.items.length==0){
-    this.initializaJSONData();
-   }
+
+  constructor(public router: Router, public profile: ProfileService, private spinnerService: SpinnerService) {
+
+    if (this.items.length == 0) {
+      this.initializaJSONData();
+    }
   }
-  
-ngOnInit() {}
 
-initializeItems(){}
+  ngOnInit() { }
 
-jml(){
-  return this.items.length;
-}
+  initializeItems() { }
 
-ionViewWillEnter(){
-  this.initializaJSONData();
-}
+  jml() {
+    return this.items.length;
+  }
 
-initializaJSONData(){
-  this.profile.getDatas().subscribe(
-    data=>{ 
-      this.items = data;
-    },
-    (err) => {
-    console.log(err);
-  });
-}
+  ionViewWillEnter() {
+    this.initializaJSONData();
+  }
 
-async getItems(ev: any) {
-  const val = ev.target.value;
+  initializaJSONData() {
+    this.profile.getDatas().subscribe(
+      data => {
+        this.items = data;
+      },
+      (err) => {
+        console.log(err);
+      });
+  }
+
+  async getItems(ev: any) {
+    const val = ev.target.value;
     if (val && val.trim() != '') {
-          this.items = this.items.filter((item) => {
-            this.isItemAvailable = true;
-        return (item.firstName.toLowerCase().indexOf(val.toLowerCase()) > -1 );
-    
+      this.items = this.items.filter((item) => {
+        this.isItemAvailable = true;
+        return (item.firstName.toLowerCase().indexOf(val.toLowerCase()) > -1);
+
       })
-    
-  }else{
-    this.initializaJSONData();
+
+    } else {
+      this.initializaJSONData();
+    }
   }
-}
 
 
-profileDetails(){
-  this.profile.getDatas().subscribe(
-    data=>{ 
-      this.data = data;
-    },
-    (err) => {
-    console.log(err);
-  });
-}
+  profileDetails() {
+    this.profile.getDatas().subscribe(
+      data => {
+        this.data = data;
+      },
+      (err) => {
+        console.log(err);
+      });
+  }
 
-toProfile(val){
-  this.profile.getDatas().subscribe(
-    data=>{ 
-      this.data = data;
-      for(let itt of this.data){
-        if(itt.id == val){
-         this.router.navigate(['/profile',itt.id]);          
+  toProfile(val) {
+    this.profile.getDatas().subscribe(
+      data => {
+        this.data = data;
+        for (let itt of this.data) {
+          if (itt.id == val) {
+            this.router.navigate(['/profile', itt.id]);
+          }
         }
-      }
-    },
-    (err) => {
-    console.log(err);
-  });
-}
+      },
+      (err) => {
+        console.log(err);
+      });
+  }
 
 
 }
