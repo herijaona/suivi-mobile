@@ -1,0 +1,7 @@
+{
+  "name": "suivi-via-mobile",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
