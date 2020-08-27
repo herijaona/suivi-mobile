@@ -1,0 +1,47 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      <a href="javascript:void(0)" (click)="goBack()">
+        <ion-icon name="chevron-back-outline"></ion-icon>
+      </a>
+      <a class="title-connect">Log in</a>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="container">
+    <div class="to-center-vertical p-15">
+      <div class="w-90">
+        <img
+          src="../../../../assets/images/logo_matipla.png"
+          srcset=""
+          width="150px"
+          class="mb-2"
+        />
+        <div class="text-left">
+          <form>
+            <div class="mb-14">
+              <label>Username</label>
+              <ion-input></ion-input>
+              <small class="form-text red-color">This field is required</small>
+            </div>
+            <div class="mb-14">
+              <label>Mot de passe</label>
+              <ion-input type="password"></ion-input>
+              <small class="form-text red-color">This field is required</small>
+            </div>
+            <ion-button
+              type="submit"
+              expand="full"
+              color="sgreen"
+              class="btn-white-border"
+              >Login</ion-button
+            >
+            <div class="password_lost">Mot de passe oublie</div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</ion-content>
