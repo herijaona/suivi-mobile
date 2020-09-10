@@ -1,0 +1,68 @@
+.menu-praticien {
+  height: 200px;
+  width: 400px;
+  background: var(--ion-color-sgreen);
+  transform: rotate(-15deg);
+  background: linear-gradient(
+    90deg,
+    var(--ion-color-sgreen) 0%,
+    var(--ion-color-sgreen) 100%
+  );
+  box-shadow: 0px 1px 10px rgba(98, 145, 255, 0.5);
+  border-radius: 10px 10px 10px 50px;
+  margin-top: -50px;
+  margin-bottom: 60px;
+}
+
+.header-content {
+  position: absolute;
+  top: 30px;
+  left: 15px;
+  display: flex;
+  align-items: center;
+  img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    border: 1px solid #1b9b3d;
+    margin-right: 10px;
+  }
+
+  h2 {
+    font-weight: 300;
+    color: white;
+  }
+
+  p {
+    font-size: 12px;
+    color: white;
+    font-weight: 100;
+  }
+}
+
+.menu-items {
+  margin: 0px;
+
+  ion-menu-toggle {
+    ion-icon {
+      margin-right: 20px;
+      color: #999999;
+    }
+    ion-item {
+      padding-left: 20px;
+      margin-bottom: 10px;
+    }
+  }
+}
+
+.active-item {
+  margin-left: -25px;
+  color: var(--ion-color-sgreen);
+}
+
+.logout {
+  display: flex;
+  justify-content: center;
+  justify-items: center;
+  border-radius: 7px;
+}

@@ -1,7 +1,6 @@
 ion-header {
   box-shadow: 2px 2px 10px 3px rgba(0, 0, 0, 0.17);
   background: white;
-  z-index: 0;
   height: 40px;
 }
 
@@ -15,7 +14,6 @@ ion-icon {
   text-align: center;
   color: rgba(0, 0, 0, 0.35);
   font-size: 13px;
-  font-family: roboto-medium;
   margin-top: 15px;
   text-decoration: underline;
 }
@@ -32,4 +30,14 @@ ion-content {
   align-items: center;
   position: relative;
   justify-content: center;
+
+  .border-input {
+    border: 0.3px solid var(--ion-color-sgreen);
+    border-radius: 10px;
+    text-align: start;
+  }
+}
+
+ion-card {
+  box-shadow: none !important;
 }

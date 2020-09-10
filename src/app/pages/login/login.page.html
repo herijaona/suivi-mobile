@@ -1,10 +1,9 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>
-      <a href="javascript:void(0)" (click)="goBack()">
+      <a (click)="goBack()">
         <ion-icon name="chevron-back-outline"></ion-icon>
       </a>
-      <a class="title-connect">Log in</a>
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -12,36 +11,66 @@
 <ion-content>
   <div class="container">
     <div class="to-center-vertical p-15">
-      <div class="w-90">
-        <img
-          src="../../../../assets/images/logo_matipla.png"
-          srcset=""
-          width="150px"
-          class="mb-2"
-        />
-        <div class="text-left">
-          <form>
-            <div class="mb-14">
-              <label>Username</label>
-              <ion-input></ion-input>
-              <small class="form-text red-color">This field is required</small>
-            </div>
-            <div class="mb-14">
-              <label>Mot de passe</label>
-              <ion-input type="password"></ion-input>
-              <small class="form-text red-color">This field is required</small>
-            </div>
-            <ion-button
-              type="submit"
-              expand="full"
-              color="sgreen"
-              class="btn-white-border"
-              >Login</ion-button
-            >
-            <div class="password_lost">Mot de passe oublie</div>
-          </form>
-        </div>
-      </div>
+      <form [formGroup]="credentialsForm" (ngSubmit)="onSubmit()">
+        <ion-grid fixed>
+          <ion-row>
+            <ion-col size-md="6" offset-md="3">
+              <ion-card>
+                <ion-card-header>
+                  <ion-card-title>
+                    <img
+                      src="../../../../assets/images/logo_matipla.png"
+                      srcset=""
+                      width="150px"
+                      class="mb-2"
+                    />
+                  </ion-card-title>
+                </ion-card-header>
+                <ion-card-content>
+                  <div>
+                    <div class="ion-padding">
+                      <ion-label>Identifiant</ion-label>
+                      <ion-input
+                        type="text"
+                        required
+                        formControlName="username"
+                        class="border-input"
+                      ></ion-input>
+                    </div>
+
+                    <div class="ion-padding">
+                      <ion-label>Mot de passe</ion-label>
+                      <ion-input
+                        type="password"
+                        required
+                        formControlName="password"
+                        class="border-input"
+                      ></ion-input>
+                    </div>
+
+                    <ion-row>
+                      <ion-col>
+                        <ion-button
+                          color="success"
+                          expand="block"
+                          type="submit"
+                          [disabled]="!credentialsForm.valid"
+                        >
+                          Login
+                        </ion-button>
+                      </ion-col>
+                    </ion-row>
+
+                    <a [routerLink]="['#']" class="small-text"
+                      >Mot de passe oublié ?</a
+                    >
+                  </div>
+                </ion-card-content>
+              </ion-card>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </form>
     </div>
   </div>
 </ion-content>

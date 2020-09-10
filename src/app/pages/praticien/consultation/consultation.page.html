@@ -1,0 +1,156 @@
+<ion-header translucent="true">
+  <ion-toolbar>
+    <ion-buttons *ngIf="!ios && !showSearchbar" slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-menu-button *ngIf="ios"></ion-menu-button>
+
+    <ion-segment *ngIf="ios" [(ngModel)]="segment" (ionChange)="showAccepted()">
+      <ion-segment-button value="all" color="sgreen"> All </ion-segment-button>
+      <ion-segment-button value="favorites" color="sgreen">
+        Accepté
+      </ion-segment-button>
+    </ion-segment>
+    <ion-title *ngIf="!ios && !showSearchbar">Consultation</ion-title>
+    <ion-searchbar
+      *ngIf="showSearchbar"
+      showCancelButton="always"
+      [(ngModel)]="queryText"
+      (ionChange)="getConsultation()"
+      (ionCancel)="showSearchbar = false"
+      placeholder="Rechercher"
+    ></ion-searchbar>
+    <ion-buttons slot="end">
+      <ion-button *ngIf="!ios && !showSearchbar" (click)="showSearchbar = true">
+        <ion-icon slot="icon-only" name="search"></ion-icon>
+      </ion-button>
+      <!-- <ion-button *ngIf="!showSearchbar" (click)="filterItems($event)">
+        <span *ngIf="ios">Filter</span>
+        <span *ngIf="!ios">
+          <ion-icon slot="icon-only" name="options"></ion-icon>
+        </span>
+      </ion-button> -->
+    </ion-buttons>
+  </ion-toolbar>
+  <ion-toolbar *ngIf="!ios">
+    <ion-segment [(ngModel)]="segment" (ionChange)="showAccepted()">
+      <ion-segment-button value="all"> Tout </ion-segment-button>
+      <ion-segment-button value="accepted"> Accépté </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Consultation</ion-title>
+    </ion-toolbar>
+    <ion-toolbar>
+      <ion-searchbar
+        [(ngModel)]="queryText"
+        (ionChange)="filterItems($event)"
+        placeholder="Search"
+      ></ion-searchbar>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-list #scheduleList [hidden]="shownSessions === 0">
+    <ion-item-group *ngFor="let consult of filteredConsultation">
+      <ion-item-divider sticky>
+        <ion-label class="ion-text-center"> {{ consult.date}} </ion-label>
+      </ion-item-divider>
+
+      <ion-item-sliding
+        *ngFor="let eachConsultation of consult.groups"
+        #slidingItem
+        [attr.track]="eachConsultation.type | lowercase"
+      >
+        <ion-item>
+          <ion-grid>
+            <ion-row (click)="alert()">
+              <ion-col size="7">
+                <ion-label class="information">
+                  <h2>{{eachConsultation.patient}}</h2>
+                  <p>{{eachConsultation.consultationDate}}</p>
+                  <p>{{eachConsultation.type}}</p>
+                </ion-label>
+              </ion-col>
+              <ion-col class="middle" size="3">
+                <ion-button
+                  *ngIf="eachConsultation.consultationStatus === OKSTATUS"
+                  class="status"
+                  color="sgreen"
+                  expand="block"
+                  fill="outline"
+                >
+                  Accepted
+                </ion-button>
+
+                <ion-button
+                  *ngIf="eachConsultation.consultationStatus === NOPSTATUS"
+                  class="status"
+                  color="sred"
+                  expand="block"
+                  fill="outline"
+                >
+                  Refused
+                </ion-button>
+
+                <ion-button
+                  *ngIf="eachConsultation.consultationStatus === PENDSTATUS"
+                  class="status"
+                  color="sorange"
+                  expand="block"
+                  fill="outline"
+                >
+                  Pending
+                </ion-button>
+              </ion-col>
+            </ion-row>
+
+            <ion-row *ngIf="eachConsultation.consultationStatus === PENDSTATUS">
+              <ion-col class="btn-cnfrm">
+                <ion-button (click)="alert()" expand="block" color="sgreen">
+                  <ion-icon
+                    slot="start"
+                    name="checkmark-circle-outline"
+                  ></ion-icon>
+                  <ion-label>Accept</ion-label>
+                </ion-button>
+
+                <ion-button (click)="alert()" expand="block" color="sred">
+                  <ion-icon name="close-circle-outline" slot="start"></ion-icon>
+                  <ion-label>Decline</ion-label>
+                </ion-button>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-item>
+      </ion-item-sliding>
+    </ion-item-group>
+  </ion-list>
+
+  <ion-list-header [hidden]="consultShow.size != 0">
+    No Sessions Found
+  </ion-list-header>
+
+  <ion-fab slot="fixed" vertical="bottom" horizontal="end" #fab>
+    <ion-fab-button color="primary">
+      <ion-icon name="share-social"></ion-icon>
+    </ion-fab-button>
+    <ion-fab-list side="top">
+      <ion-fab-button color="primary" (click)="openSocial('Vimeo', fab)">
+        <ion-icon name="logo-vimeo"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-button color="primary" (click)="openSocial('Instagram', fab)">
+        <ion-icon name="logo-instagram"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-button color="primary" (click)="openSocial('Twitter', fab)">
+        <ion-icon name="logo-twitter"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-button color="primary" (click)="openSocial('Facebook', fab)">
+        <ion-icon name="logo-facebook"></ion-icon>
+      </ion-fab-button>
+    </ion-fab-list>
+  </ion-fab>
+</ion-content>

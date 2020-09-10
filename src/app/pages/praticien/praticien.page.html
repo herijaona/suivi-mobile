@@ -1,9 +1,64 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>praticien</ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-split-pane contentId="contents" when="xs" [disabled]="true">
+  <ion-menu side="start" type="overlay" menuId="first" contentId="contents">
+    <!--  <ion-header>
+      <ion-toolbar>
+        <ion-title text-wrap>Menu</ion-title>
+      </ion-toolbar>
+    </ion-header> -->
+    <ion-content>
+      <div class="menu-praticien"></div>
+      <div class="header-content">
+        <ion-label>
+          <img src="../../../assets/images/praticien.jpg" />
+        </ion-label>
+        <ion-label>
+          <h2>Dr. {{name}}</h2>
+          <p>{{fonction}}</p>
+        </ion-label>
+      </div>
 
-<ion-content>
+      <ion-list lines="none" class="menu-items">
+        <ion-menu-toggle auto-hide="false" *ngFor="let p of pages">
+          <ion-item
+            text-wrap
+            routerLink="{{p.url}}"
+            routerDirection="root"
+            [class.active-item]="selectedPath === p.url"
+          >
+            <ion-icon
+              *ngIf="selectedPath === p.url"
+              slot="start"
+              name="caret-forward-outline"
+              color="sgreen"
+            >
+            </ion-icon>
+            <ion-label>{{p.title}}</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+        <ion-menu-toggle> </ion-menu-toggle>
+      </ion-list>
+    </ion-content>
+    <ion-footer>
+      <ion-button
+        class="logout"
+        color="sred"
+        (click)="logout()"
+        [routerLink]="['/login']"
+      >
+        <ion-icon slot="start" name="exit-outline"> </ion-icon>
 
-</ion-content>
+        <ion-label>Logout</ion-label>
+      </ion-button>
+    </ion-footer>
+  </ion-menu>
+  <ion-router-outlet id="contents"></ion-router-outlet>
+</ion-split-pane>
+
+<!-- <ion-header>
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-menu-button (click)="openFirst()"></ion-menu-button>
+      </ion-buttons>
+      <ion-title>Praticien Area</ion-title>
+    </ion-toolbar>
+  </ion-header> -->

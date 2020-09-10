@@ -1,13 +1,26 @@
-import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { NgModule } from "@angular/core";
+import { Routes, RouterModule } from "@angular/router";
 
-import { PatientPage } from './patient.page';
+import { PatientPage } from "./patient.page";
 
 const routes: Routes = [
   {
-    path: '',
-    component: PatientPage
-  }
+    path: "",
+    component: PatientPage,
+    children: [
+      {
+        path: "rendez-vous",
+        loadChildren: () =>
+          import("./rendez-vous/rendez-vous.module").then(
+            (m) => m.RendezVousPageModule
+          ),
+      },
+    ],
+  },
+  /* {
+    path: "",
+    redirectTo: "",
+  }, */
 ];
 
 @NgModule({
