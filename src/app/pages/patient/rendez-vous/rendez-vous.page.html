@@ -1,9 +1,145 @@
-<ion-header>
+<ion-header translucent="true">
   <ion-toolbar>
-    <ion-title>rendez-vous</ion-title>
+    <ion-buttons *ngIf="!ios && !showSearchbar" slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-menu-button *ngIf="ios"></ion-menu-button>
+
+    <ion-segment *ngIf="ios" [(ngModel)]="segment" (ionChange)="showAccepted()">
+      <ion-segment-button value="all" color="sgreen"> All </ion-segment-button>
+      <ion-segment-button value="favorites" color="sgreen">
+        Accepté
+      </ion-segment-button>
+    </ion-segment>
+    <ion-title *ngIf="!ios && !showSearchbar">Rendez-vous</ion-title>
+    <ion-searchbar
+      *ngIf="showSearchbar"
+      showCancelButton="always"
+      [(ngModel)]="queryText"
+      (ionChange)="updateRdvList()"
+      (ionCancel)="showSearchbar = false"
+      placeholder="Rechercher"
+    ></ion-searchbar>
+    <ion-buttons slot="end">
+      <ion-button *ngIf="!ios && !showSearchbar" (click)="showSearchbar = true">
+        <ion-icon slot="icon-only" name="search"></ion-icon>
+      </ion-button>
+      <ion-button *ngIf="!showSearchbar" (click)="presentFilter()">
+        <span *ngIf="ios">Filtrer</span>
+        <span *ngIf="!ios">
+          <ion-icon slot="icon-only" name="options"></ion-icon>
+        </span>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+  <ion-toolbar *ngIf="!ios">
+    <ion-segment [(ngModel)]="segment" (ionChange)="showAccepted()">
+      <ion-segment-button value="all"> Tout </ion-segment-button>
+      <ion-segment-button value="accepted"> Accépté </ion-segment-button>
+    </ion-segment>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content fullscreen="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Rendez-vous</ion-title>
+    </ion-toolbar>
+    <ion-toolbar>
+      <ion-searchbar
+        [(ngModel)]="queryText"
+        (ionChange)="filterItems($event)"
+        placeholder="Search"
+      ></ion-searchbar>
+    </ion-toolbar>
+  </ion-header>
 
+  <ion-list #scheduleList [hidden]="shownSessions === 0">
+    <ion-item-group *ngFor="let rdv of rdvFiltered">
+      <ion-item-divider sticky>
+        <ion-label class="ion-text-center"> {{ rdv.date}} </ion-label>
+      </ion-item-divider>
+
+      <ion-item-sliding
+        *ngFor="let eachRdv of rdv.groups"
+        #slidingItem
+        [attr.track]="eachRdv.type | lowercase"
+      >
+        <ion-item *ngIf="eachRdv.show === true">
+          <ion-grid>
+            <ion-row (click)="alert()">
+              <ion-col size="7">
+                <ion-label class="information">
+                  <h2>
+                    {{eachRdv.praticien.firstName + " " +
+                    eachRdv.praticien.lastName}}
+                  </h2>
+                  <p>{{eachRdv.date}}</p>
+                  <p>{{eachRdv.type}}</p>
+                </ion-label>
+              </ion-col>
+              <ion-col class="middle" size="3">
+                <ion-button
+                  *ngIf="eachRdv.status === OKSTATUS"
+                  class="status"
+                  color="sgreen"
+                  expand="block"
+                  fill="outline"
+                >
+                  Accepted
+                </ion-button>
+
+                <ion-button
+                  *ngIf="eachRdv.status === NOPSTATUS"
+                  class="status"
+                  color="sred"
+                  expand="block"
+                  fill="outline"
+                >
+                  Refused
+                </ion-button>
+
+                <ion-button
+                  *ngIf="eachRdv.status === PENDSTATUS"
+                  class="status"
+                  color="sorange"
+                  expand="block"
+                  fill="outline"
+                >
+                  Pending
+                </ion-button>
+              </ion-col>
+            </ion-row>
+
+            <ion-row *ngIf="eachRdv.status === PENDSTATUS">
+              <ion-col class="btn-cnfrm">
+                <ion-button (click)="alert()" expand="block" color="sgreen">
+                  <ion-icon
+                    slot="start"
+                    name="checkmark-circle-outline"
+                  ></ion-icon>
+                  <ion-label>Accept</ion-label>
+                </ion-button>
+
+                <ion-button (click)="alert()" expand="block" color="sred">
+                  <ion-icon name="close-circle-outline" slot="start"></ion-icon>
+                  <ion-label>Decline</ion-label>
+                </ion-button>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-item>
+      </ion-item-sliding>
+    </ion-item-group>
+  </ion-list>
+
+  <ion-list-header [hidden]="rdvShow.size != 0">
+    No Sessions Found
+  </ion-list-header>
+
+  <ion-fab slot="fixed" vertical="bottom" horizontal="end" #fab>
+    <ion-fab-button color="sgreen" (click)="openNewRdvModal()">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
 </ion-content>

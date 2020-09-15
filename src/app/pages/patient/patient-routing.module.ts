@@ -6,6 +6,10 @@ import { PatientPage } from "./patient.page";
 const routes: Routes = [
   {
     path: "",
+    redirectTo: "rendez-vous",
+  },
+  {
+    path: "",
     component: PatientPage,
     children: [
       {

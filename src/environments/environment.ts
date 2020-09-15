@@ -6,6 +6,7 @@ export const environment = {
   production: false,
   url: "http://localhost:9000",
   url_dev: "http://localhost:9000/apip/",
+  url_dev_api: "http://localhost:9000/api/",
   TOKEN_KEY: "access_token",
 };
 

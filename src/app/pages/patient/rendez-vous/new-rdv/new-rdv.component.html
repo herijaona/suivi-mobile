@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Proposition de rendez-vous</ion-title>
+    <ion-title>Nouveau rendez-vous</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -18,28 +18,43 @@
             method="post"
           >
             <div class="mb-14">
-              <label>choisi un patient</label>
+              <label>Choisir praticien</label>
               <ion-select
                 placeholder="Select"
-                formControlName="patient"
+                formControlName="praticien"
                 required
               >
                 <ion-select-option
-                  *ngFor="let item of patients"
+                  *ngFor="let item of praticiens"
                   [value]="item.id"
                   >{{
                     item.firstName.toString() + " " + item.lastName.toString()
                   }}</ion-select-option
                 >
-                <!-- <ion-select-option></ion-select-option> -->
               </ion-select>
-              <!-- <small
-                class="form-text red-color"
-                *ngIf="isFieldInvalid(propositionForm, 'patient')"
-                >This field is required</small
-              > -->
             </div>
-
+            <div class="mb-14">
+              <label>Type de rendez-vous</label>
+              <ion-select formControlName="typeRdv" required>
+                <ion-select-option value="vaccination"
+                  >Vaccination</ion-select-option
+                >
+                <ion-select-option value="consultation"
+                  >Consultation</ion-select-option
+                >
+                <ion-select-option value="intervention"
+                  >Intervention</ion-select-option
+                >
+              </ion-select>
+            </div>
+            <div class="mb-14">
+              <label>Description </label>
+              <ion-input
+                type="text"
+                required
+                formControlName="description"
+              ></ion-input>
+            </div>
             <div class="mb-14">
               <label>Propose une date </label>
               <ion-datetime
@@ -47,11 +62,6 @@
                 formControlName="dateRdv"
                 required
               ></ion-datetime>
-              <!-- <small
-                class="form-text red-color"
-                *ngIf="isFieldInvalid(propositionForm, 'dateRdv')"
-                >This field is required</small
-              > -->
             </div>
 
             <div class="mb-14">
@@ -62,25 +72,6 @@
                 formControlName="heureRdv"
                 required
               ></ion-datetime>
-              <!-- <small
-                class="form-text red-color"
-                *ngIf="isFieldInvalid(propositionForm, 'heureRdv')"
-                >This field is required</small
-              > -->
-            </div>
-
-            <div class="mb-14">
-              <label>Description du rendez-vous</label>
-              <ion-input
-                type="text"
-                required
-                formControlName="description"
-              ></ion-input
-              ><!-- <small
-                class="form-text red-color"
-                *ngIf="isFieldInvalid(propositionForm, 'description')"
-                >This field is required</small
-              > -->
             </div>
 
             <ion-row>

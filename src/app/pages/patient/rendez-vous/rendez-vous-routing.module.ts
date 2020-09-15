@@ -6,12 +6,7 @@ import { RendezVousPage } from "./rendez-vous.page";
 const routes: Routes = [
   {
     path: "",
-    redirectTo: "nouveau",
-  },
-  {
-    path: "nouveau",
-    loadChildren: () =>
-      import("./nouveau/nouveau.module").then((m) => m.NouveauPageModule),
+    component: RendezVousPage,
   },
 ];
 

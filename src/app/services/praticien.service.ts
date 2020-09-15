@@ -26,6 +26,7 @@ import { AuthService } from "./auth.service";
 })
 export class PraticienService {
   private url = environment.url_dev;
+  private url_api = environment.url_dev_api;
   private userID;
   private praticien: any = {};
   constructor(
@@ -169,5 +170,13 @@ export class PraticienService {
         return data.mockIntervention;
       })
     );
+  }
+
+  getAllPraticien(): Observable<IUserPraticien[]> {
+    const data = this.http.get<IUserPraticien[]>(this.url + "praticiens");
+    data.subscribe((data) => {
+      console.log("PraticienService -> regroupDataByDate -> data", data);
+    });
+    return data;
   }
 }

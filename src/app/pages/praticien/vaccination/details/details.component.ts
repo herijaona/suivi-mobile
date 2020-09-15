@@ -1,5 +1,7 @@
-import { Component, OnInit } from "@angular/core";
-import { ModalController } from "@ionic/angular";
+import { Component, OnInit, Input } from "@angular/core";
+import { ModalController, NavParams } from "@ionic/angular";
+import { IVaccination } from "src/app/Interfaces/praticien.interface";
+import { CommonModule } from "@angular/common";
 
 @Component({
   selector: "app-details",
@@ -7,7 +9,12 @@ import { ModalController } from "@ionic/angular";
   styleUrls: ["./details.component.scss"],
 })
 export class DetailsComponent implements OnInit {
-  constructor(private modalCtrl: ModalController) {}
+  @Input() vaccinations: IVaccination[];
+
+  constructor(private modalCtrl: ModalController, private navParms: NavParams) {
+    this.vaccinations = this.navParms.get("data");
+    console.log(this.vaccinations);
+  }
 
   ngOnInit() {}
 

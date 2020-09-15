@@ -76,20 +76,28 @@ export class VaccinationPage implements OnInit {
     fab.close();
   }
 
-  async openDetailModal() {
+  async openDetailModal(id) {
+    console.log(id);
     const newRdvModal = await this.modalCtrl.create({
       component: DetailsComponent,
       cssClass: "test-class",
       swipeToClose: true,
       componentProps: {
         // test: "test",
-        data: "data",
+        data: this.findVaccinationRelated(id).res,
       },
     });
     newRdvModal.onDidDismiss().then(() => {
       // this.initializeItems(); //event on dismiss
     });
     return await newRdvModal.present();
+  }
+
+  //TODO : change on patient ID
+  findVaccinationRelated(patientName) {
+    const data = [...this.vaccinations];
+    const res = data.filter((element) => element.patient === patientName);
+    return { data, res };
   }
 
   showAccepted() {

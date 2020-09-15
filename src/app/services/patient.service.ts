@@ -13,6 +13,7 @@ import { environment } from "src/environments/environment";
 })
 export class PatientService {
   private url = environment.url_dev;
+  private rdvData;
   constructor(public http: HttpClient) {}
 
   // TODO Get Patients
@@ -23,5 +24,23 @@ export class PatientService {
     //     return data.mockPatient;
     //   })
     // );
+  }
+
+  getAllRdv() {
+    return this.http.get(CONSTANT.MOCK_DATA_JSON).pipe(
+      map((data: any) => {
+        return data.mockRdvListPatient;
+      })
+    );
+  }
+
+  // TODO: mettre en hide pour plus de performance
+  getTracksRdv(excludeTracks?) {
+    return this.http.get(CONSTANT.MOCK_DATA_JSON).pipe(
+      map((data: any) => {
+        console.log("PatientService -> getTracksRdv -> data", excludeTracks);
+        return data;
+      })
+    );
   }
 }

@@ -32,7 +32,8 @@ export class AppComponent {
       this.authService.authenticationState.subscribe((state) => {
         if (state) {
           if (this.authService.getRole() == CONSTANT.ROLE_PATIENT) {
-            this.router.navigate(["patient"]);
+            // this.router.navigate(["patient"]);
+            this.router.navigate(["/patient/rendez-vous"]);
           } else if (this.authService.getRole() == CONSTANT.ROLE_PRATICIEN) {
             // this.router.navigate(["praticien"]);
             // this.router.navigate(["/praticien/proposition-rdv"]);
