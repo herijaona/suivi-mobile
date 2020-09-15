@@ -113,7 +113,11 @@
 
             <ion-row *ngIf="eachRdv.status === PENDSTATUS">
               <ion-col class="btn-cnfrm">
-                <ion-button (click)="alert()" expand="block" color="sgreen">
+                <ion-button
+                  (click)="alertAcceptRdv(eachRdv.id)"
+                  expand="block"
+                  color="sgreen"
+                >
                   <ion-icon
                     slot="start"
                     name="checkmark-circle-outline"
@@ -121,7 +125,11 @@
                   <ion-label>Accept</ion-label>
                 </ion-button>
 
-                <ion-button (click)="alert()" expand="block" color="sred">
+                <ion-button
+                  (click)="alertRemoveRdv(eachRdv.id)"
+                  expand="block"
+                  color="sred"
+                >
                   <ion-icon name="close-circle-outline" slot="start"></ion-icon>
                   <ion-label>Decline</ion-label>
                 </ion-button>

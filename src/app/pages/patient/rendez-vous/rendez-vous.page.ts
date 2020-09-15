@@ -16,6 +16,7 @@ import { PatientService } from "src/app/services/patient.service";
 import { NewRdvComponent } from "./new-rdv/new-rdv.component";
 import { DataTransformerService } from "src/app/services/data-transformer.service";
 import { IRdvPatient } from "src/app/Interfaces/patient.interface";
+import { GlobalElementInjectionService } from "src/app/services/global-element-injection.service";
 
 @Component({
   selector: "app-rendez-vous",
@@ -52,13 +53,11 @@ export class RendezVousPage implements OnInit {
     public toastCtrl: ToastController,
     public praticientSrvc: PraticienService,
     public config: Config,
-    private dataTransformer: DataTransformerService
-  ) {
-    console.log("...................; rdv ");
-  }
+    private dataTransformer: DataTransformerService,
+    private globaleEl: GlobalElementInjectionService
+  ) {}
 
   ngOnInit() {
-    console.log("................... rdv ");
     this.getAllData();
     this.ios = this.config.get("mode") === "ios";
     this.getPraticiens();
@@ -91,8 +90,7 @@ export class RendezVousPage implements OnInit {
 
   getAllData() {
     this.patientSrvc.getAllRdv().subscribe((data: any) => {
-      this.rdvs = data; // Data from DB
-      // this.rdvShow = this.regroupData(data); // Transformed data
+      this.rdvs = data; // TODO: Data from DB
       const result = this.dataTransformer.allData(data);
       this.allBrute = result;
       this.rdvShow = result.data;
@@ -101,11 +99,9 @@ export class RendezVousPage implements OnInit {
   }
 
   updateRdvList() {
-    // Close any open sliding items when the  updates
     if (this.List) {
       this.List.closeSlidingItems();
     }
-    //TODO: get timeline
   }
 
   // TODO : exclude on filter
@@ -170,8 +166,15 @@ export class RendezVousPage implements OnInit {
 
   getPraticiens() {
     this.praticientSrvc.getAllPraticien().subscribe((data) => {
-      console.log("RendezVousPage -> getPraticiens -> data", data);
       this.praticiens = data;
     });
+  }
+
+  alertAcceptRdv(id) {
+    this.globaleEl.alertAccept(id, this.rdvs, "status", this.OKSTATUS);
+  }
+
+  alertRemoveRdv(id) {
+    this.globaleEl.alertRemove(id, this.rdvs, "status", this.NOPSTATUS);
   }
 }
