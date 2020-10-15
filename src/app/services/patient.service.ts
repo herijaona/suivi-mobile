@@ -34,12 +34,35 @@ export class PatientService {
     );
   }
 
-  // TODO: mettre en hide pour plus de performance
   getTracksRdv(excludeTracks?) {
     return this.http.get(CONSTANT.MOCK_DATA_JSON).pipe(
       map((data: any) => {
         console.log("PatientService -> getTracksRdv -> data", excludeTracks);
         return data;
+      })
+    );
+  }
+
+  //TODO : Get Vaccin by patient
+  getVaccinByPatient() {
+    return this.http.get(CONSTANT.MOCK_DATA_JSON).pipe(
+      map((data: any) => {
+        return data.mockVaccinPatient;
+      })
+    );
+  }
+
+  registerPatient(data) {
+    Object.keys(data).forEach((element) => {
+      console.log("PatientService -> registerPatient -> element", element);
+      console.log("register => ", data[element]);
+    });
+  }
+
+  getProfile() {
+    return this.http.get(CONSTANT.MOCK_DATA_JSON).pipe(
+      map((data: any) => {
+        return data.mockPatientProfile;
       })
     );
   }

@@ -6,7 +6,7 @@ import { PatientPage } from "./patient.page";
 const routes: Routes = [
   {
     path: "",
-    redirectTo: "rendez-vous",
+    redirectTo: "vaccination",
   },
   {
     path: "",
@@ -19,12 +19,25 @@ const routes: Routes = [
             (m) => m.RendezVousPageModule
           ),
       },
+      {
+        path: "vaccination",
+        loadChildren: () =>
+          import("./vaccination/vaccination.module").then(
+            (m) => m.VaccinationPageModule
+          ),
+      },
+      {
+        path: "familly",
+        loadChildren: () =>
+          import("./familly/familly.module").then((m) => m.FamillyPageModule),
+      },
+      {
+        path: "profile",
+        loadChildren: () =>
+          import("./profile/profile.module").then((m) => m.ProfilePageModule),
+      },
     ],
   },
-  /* {
-    path: "",
-    redirectTo: "",
-  }, */
 ];
 
 @NgModule({

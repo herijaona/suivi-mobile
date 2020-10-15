@@ -51,7 +51,8 @@ export class DataTransformerService {
     segment: String = "all",
     dataToFilter: any = [],
     subKeyParent = null,
-    subkeysOnFilter?: any
+    subkeysOnFilter?: any,
+    OkStatus: string = "Accepted"
   ) {
     const newData = [...dataToFilter];
     newData.forEach((item) => {
@@ -88,7 +89,7 @@ export class DataTransformerService {
             }
           }
         } else {
-          if (res[`${keysStatus}`] === "Accepted") {
+          if (res[`${keysStatus}`] === OkStatus) {
             if (subKeyParent) {
               for (let element of subkeysOnFilter) {
                 if (
@@ -118,6 +119,7 @@ export class DataTransformerService {
         }
       });
     });
+    console.log("newData", newData);
     return newData;
   }
 

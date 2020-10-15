@@ -1,0 +1,154 @@
+<ion-header translucent="true">
+  <ion-toolbar>
+    <ion-buttons *ngIf="!ios" slot="start">
+      <ion-menu-button></ion-menu-button>
+      <ion-title slot="start">Profile</ion-title>
+    </ion-buttons>
+
+    <ion-menu-button *ngIf="ios"></ion-menu-button>
+
+    <ion-title slot="end" color="tertiary" class="identifiant" *ngIf="profile"
+      >{{profile.username}}</ion-title
+    >
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <div class="card">
+    <div class="header">
+      <div class="avatar">
+        <img src="./../../../../assets/images/praticien.jpg" alt="" />
+      </div>
+    </div>
+  </div>
+
+  <div class="card-body" *ngIf="profile">
+    <div class="user-meta ion-text-center">
+      <h3 class="playername">
+        {{profile.first_name}} {{profile.last_name}} ({{type_patient}})
+      </h3>
+      <h6 class="ranking">
+        Date de création:
+        <ion-chip>
+          <ion-label>{{profile.created_at}}</ion-label>
+        </ion-chip>
+      </h6>
+    </div>
+    <div>
+      <form [formGroup]="patientRegisterForm">
+        <ion-item lines="full" disabled>
+          <ion-label position="stacked">Date de naissance</ion-label>
+          <ion-datetime
+            display-format="MMM DD, YYYY"
+            picker-format="MMM DD, YYYY"
+            [ngModel]="profile.date_on_born"
+            formControlName="birthday"
+            required
+          ></ion-datetime>
+        </ion-item>
+        <ion-item lines="full">
+          <ion-label position="stacked">Pays</ion-label>
+          <ion-select
+            placeholder="Select"
+            formControlName="country"
+            [(ngModel)]="profile.state"
+            [compareWith]="compareFn"
+            required
+          >
+            <ion-select-option value="1">Madagascar</ion-select-option>
+            <ion-select-option value="196">France</ion-select-option>
+          </ion-select>
+        </ion-item>
+
+        <ion-item lines="full">
+          <ion-label position="stacked">Ville</ion-label>
+          <ion-select
+            placeholder="Select"
+            formControlName="city"
+            required
+            [(ngModel)]="profile.city"
+            [compareWith]="compareFn"
+          >
+            <ion-select-option value="196"> Madagascar</ion-select-option>
+            <ion-select-option value="1">France</ion-select-option>
+          </ion-select>
+        </ion-item>
+
+        <ion-item lines="full" disabled>
+          <ion-label position="stacked">Sexe</ion-label>
+          <ion-select
+            placeholder="Select"
+            formControlName="gender"
+            required
+            [ngModel]="profile.sexe"
+          >
+            <ion-select-option>Masculin</ion-select-option>
+            <ion-select-option>Feminin</ion-select-option>
+          </ion-select>
+        </ion-item>
+
+        <ion-item lines="full">
+          <ion-label position="stacked">Adresse</ion-label>
+          <ion-textarea
+            required
+            formControlName="address"
+            [ngModel]="profile.address"
+          ></ion-textarea>
+        </ion-item>
+
+        <ion-item lines="full">
+          <ion-label position="stacked">Email</ion-label>
+          <ion-input
+            type="text"
+            required
+            formControlName="email"
+            [ngModel]="profile.email"
+          ></ion-input>
+          <!-- <div
+            style="color: red; padding-top: 0.2rem"
+            *ngIf="patientRegisterForm.hasError('required', 'email')"
+          ></div> -->
+          <!-- <div
+            *ngIf="!patientRegisterForm.controls.email.valid &&
+            patientRegisterForm.controls.email.dirty"
+            class="validator-error"
+          >
+            Please enter a valid email.
+          </div> -->
+        </ion-item>
+
+        <ion-item lines="full" *ngIf="profile.father_name">
+          <ion-label position="stacked"
+            >Nom du père{{profile.father_name}}</ion-label
+          >
+          <ion-input
+            type="text"
+            required
+            formControlName="father_name"
+            [ngModel]="this.profile.father_name"
+          ></ion-input>
+        </ion-item>
+        <ion-item lines="full" *ngIf="profile.mother_name">
+          <ion-label position="stacked">Nom de la mère</ion-label>
+          <ion-input
+            type="text"
+            required
+            formControlName="mother_name"
+            [ngModel]="this.profile.mother_name"
+          ></ion-input>
+        </ion-item>
+
+        <ion-row>
+          <ion-col>
+            <ion-button
+              type="submit"
+              color="sgreen "
+              expand="full"
+              (click)="update()"
+              >Modifier</ion-button
+            >
+          </ion-col>
+        </ion-row>
+      </form>
+    </div>
+  </div>
+</ion-content>

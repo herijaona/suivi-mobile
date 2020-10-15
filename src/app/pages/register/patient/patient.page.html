@@ -1,0 +1,220 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title slot="end" color="tertiary" class="identifiant"
+      >{{_id}}</ion-title
+    >
+  </ion-toolbar>
+</ion-header>
+<div class="topContent">
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title class="ion-text-center">
+        <img
+          src="../../../../assets/images/logo_matipla.png"
+          srcset=""
+          width="150px"
+          class="mb-2"
+        />
+      </ion-card-title>
+    </ion-card-header>
+  </ion-card>
+</div>
+
+<ion-content>
+  <ion-card>
+    <ion-card-content>
+      <form [formGroup]="patientRegisterForm">
+        <ion-item lines="full">
+          <ion-label position="stacked">Nom</ion-label>
+          <ion-input
+            type="text"
+            required
+            formControlName="last_name"
+          ></ion-input>
+        </ion-item>
+        <div class="validation-errors">
+          <ng-container *ngFor="let validation of validation_msg.last_name">
+            <div
+              class="error-message"
+              *ngIf="patientRegisterForm.get('last_name').hasError(validation.type)"
+            >
+              {{ validation.message }}
+            </div>
+          </ng-container>
+        </div>
+
+        <ion-item lines="full">
+          <ion-label position="stacked">Prénom</ion-label>
+          <ion-input
+            type="text"
+            required
+            formControlName="first_name"
+          ></ion-input>
+        </ion-item>
+        <div class="validation-errors">
+          <ng-container *ngFor="let validation of validation_msg.first_name">
+            <div
+              class="error-message"
+              *ngIf="patientRegisterForm.get('first_name').hasError(validation.type)"
+            >
+              {{ validation.message }}
+            </div>
+          </ng-container>
+        </div>
+
+        <ion-item lines="full">
+          <ion-label position="stacked">Date de naissance</ion-label>
+          <ion-datetime
+            display-format="MMM DD, YYYY"
+            formControlName="date_on_born"
+            required
+          ></ion-datetime>
+        </ion-item>
+        <div class="validation-errors">
+          <ng-container *ngFor="let validation of validation_msg.date_on_born">
+            <div
+              class="error-message"
+              *ngIf="patientRegisterForm.get('date_on_born').hasError(validation.type)"
+            >
+              {{ validation.message }}
+            </div>
+          </ng-container>
+        </div>
+
+        <ion-item lines="full">
+          <ion-label position="stacked">Pays</ion-label>
+          <ion-select placeholder="Select" formControlName="state" required>
+            <ion-select-option>Madagascar</ion-select-option>
+            <ion-select-option>France</ion-select-option>
+          </ion-select>
+        </ion-item>
+        <div class="validation-errors">
+          <ng-container *ngFor="let validation of validation_msg.state">
+            <div
+              class="error-message"
+              *ngIf="patientRegisterForm.get('state').hasError(validation.type)"
+            >
+              {{ validation.message }}
+            </div>
+          </ng-container>
+        </div>
+
+        <ion-item lines="full">
+          <ion-label position="stacked">Ville</ion-label>
+          <ion-select placeholder="Select" formControlName="city" required>
+            <ion-select-option>Madagascar</ion-select-option>
+            <ion-select-option>France</ion-select-option>
+          </ion-select>
+        </ion-item>
+        <div class="validation-errors">
+          <ng-container *ngFor="let validation of validation_msg.city">
+            <div
+              class="error-message"
+              *ngIf="patientRegisterForm.get('city').hasError(validation.type)"
+            >
+              {{ validation.message }}
+            </div>
+          </ng-container>
+        </div>
+
+        <ion-item lines="full">
+          <ion-label position="stacked">Télephone</ion-label>
+          <ion-select placeholder="Select" formControlName="phone" required>
+            <ion-select-option>Madagascar</ion-select-option>
+            <ion-select-option>France</ion-select-option>
+          </ion-select>
+        </ion-item>
+        <div class="validation-errors">
+          <ng-container *ngFor="let validation of validation_msg.phone">
+            <div
+              class="error-message"
+              *ngIf="patientRegisterForm.get('phone').hasError(validation.type)"
+            >
+              {{ validation.message }}
+            </div>
+          </ng-container>
+        </div>
+
+        <ion-item lines="full">
+          <ion-label position="stacked">Sexe</ion-label>
+          <ion-select placeholder="Select" formControlName="sexe" required>
+            <ion-select-option>Masculin</ion-select-option>
+            <ion-select-option>Feminin</ion-select-option>
+          </ion-select>
+        </ion-item>
+        <div class="validation-errors">
+          <ng-container *ngFor="let validation of validation_msg.sexe">
+            <div
+              class="error-message"
+              *ngIf="patientRegisterForm.get('sexe').hasError(validation.type)"
+            >
+              {{ validation.message }}
+            </div>
+          </ng-container>
+        </div>
+
+        <ion-item lines="full">
+          <ion-label position="stacked">Adresse</ion-label>
+          <ion-textarea required formControlName="address"></ion-textarea>
+        </ion-item>
+        <div class="validation-errors">
+          <ng-container *ngFor="let validation of validation_msg.address">
+            <div
+              class="error-message"
+              *ngIf="patientRegisterForm.get('address').hasError(validation.type)"
+            >
+              {{ validation.message }}
+            </div>
+          </ng-container>
+        </div>
+
+        <ion-item lines="full">
+          <ion-label position="stacked">Email</ion-label>
+          <ion-input type="text" required formControlName="email"></ion-input>
+        </ion-item>
+        <div class="validation-errors">
+          <ng-container *ngFor="let validation of validation_msg.email">
+            <div
+              class="error-message"
+              *ngIf="patientRegisterForm.get('email').hasError(validation.type)"
+            >
+              {{ validation.message }}
+            </div>
+          </ng-container>
+        </div>
+
+        <ion-item lines="full">
+          <ion-label position="stacked">Password</ion-label>
+          <ion-input
+            type="password"
+            required
+            formControlName="password"
+          ></ion-input>
+        </ion-item>
+        <div class="validation-errors">
+          <ng-container *ngFor="let validation of validation_msg.password">
+            <div
+              class="error-message"
+              *ngIf="patientRegisterForm.get('password').hasError(validation.type)"
+            >
+              {{ validation.message }}
+            </div>
+          </ng-container>
+        </div>
+
+        <ion-row>
+          <ion-col>
+            <ion-button
+              type="submit"
+              color="sgreen "
+              expand="block"
+              (click)="register()"
+              [disabled]="!patientRegisterForm.valid"
+              >Sign Up</ion-button
+            >
+          </ion-col>
+        </ion-row>
+      </form>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

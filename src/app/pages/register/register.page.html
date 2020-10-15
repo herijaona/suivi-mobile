@@ -1,9 +1,18 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>register</ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-tabs>
+  <ion-tab-bar slot="bottom">
+    <ion-tab-button tab="patient">
+      <ion-icon name="person-circle"></ion-icon>
+      <ion-label>Patient</ion-label>
+    </ion-tab-button>
 
-<ion-content>
+    <ion-tab-button tab="praticien">
+      <ion-icon name="git-network-outline"></ion-icon>
+      <ion-label>Praticien</ion-label>
+    </ion-tab-button>
 
-</ion-content>
+    <ion-tab-button [routerLink]="['/login']">
+      <ion-icon name="log-in-outline"></ion-icon>
+      <ion-label>Connexion</ion-label>
+    </ion-tab-button>
+  </ion-tab-bar>
+</ion-tabs>

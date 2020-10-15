@@ -39,11 +39,35 @@ export class LoginPage implements OnInit {
   }
 
   onSubmit() {
-    this.authService.login(this.credentialsForm.value).subscribe();
+    this.presentLoading();
+    // à decmoenté - juste pour test apk
+    // this.authService
+    //   .login(this.credentialsForm.value, this.loadingCtrl)
+    //   .subscribe((data) => {
+    //     this.loadingCtrl.dismiss();
+    //   });
+
+    // TODO: APK à suprimé - juste pour test apk
+    this.authService
+      .login(this.credentialsForm.value, this.loadingCtrl)
+      .subscribe((data) => {
+        this.loadingCtrl.dismiss();
+      });
   }
 
   goBack() {
     //this.location.back();
     this.navCtrl.navigateRoot("/home");
+  }
+
+  async presentLoading() {
+    const loading = await this.loadingCtrl.create({
+      cssClass: "my-loading-class",
+      spinner: "bubbles",
+      translucent: true,
+      // duration: 7000,
+    });
+
+    // await loading.present();
   }
 }

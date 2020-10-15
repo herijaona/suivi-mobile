@@ -33,7 +33,8 @@ export class AppComponent {
         if (state) {
           if (this.authService.getRole() == CONSTANT.ROLE_PATIENT) {
             // this.router.navigate(["patient"]);
-            this.router.navigate(["/patient/rendez-vous"]);
+            // this.router.navigate(["/patient/rendez-vous"]);
+            this.router.navigate(["/patient/vaccination"]);
           } else if (this.authService.getRole() == CONSTANT.ROLE_PRATICIEN) {
             // this.router.navigate(["praticien"]);
             // this.router.navigate(["/praticien/proposition-rdv"]);
@@ -42,7 +43,10 @@ export class AppComponent {
             this.router.navigate(["/praticien/vaccination"]);
           }
         } else {
-          this.router.navigate(["login"]);
+          // this.router.navigate(["login"]);
+          // this.router.navigate(["register/patient"]);
+          // this.router.navigate(["/patient/profile"]);
+          this.router.navigate(["/praticien/dashboard"]);
         }
       });
     });

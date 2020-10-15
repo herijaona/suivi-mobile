@@ -43,6 +43,7 @@ export class PraticienService {
 
   getInfoUserID() {
     const res = this.http.get<any>(this.url + "current_user_check");
+    console.log("PraticienService -> getInfoUserID -> res", res);
     return res;
   }
 

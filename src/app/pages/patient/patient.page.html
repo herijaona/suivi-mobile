@@ -1,104 +1,19 @@
-<!-- <ion-split-pane contentId="contents" when="xs" [disabled]="true">
-  <ion-menu side="start" type="overlay" menuId="first" contentId="contents">
-    <ion-content>
-      <div class="menu-praticien"></div>
-      <div class="header-content">
-        <ion-label>
-          <img src="../../../assets/images/praticien.jpg" />
-        </ion-label>
-        <ion-label>
-          <h2>Patient</h2>
-        </ion-label>
-      </div>
-
-      <ion-list lines="none" class="menu-items" *ngFor="let p of pages">
-        <div>
-          <ion-menu-toggle auto-hide="false">
-            <ion-item
-              text-wrap
-              routerLink="{{p.url}}"
-              routerDirection="root"
-              [class.active-item]="selectedPath === p.url"
-              *ngIf="p.subPages == null"
-            >
-              <ion-icon
-                *ngIf="selectedPath === p.url"
-                slot="start"
-                name="caret-forward-outline"
-                color="sgreen"
-              >
-              </ion-icon>
-              <ion-label>{{p.title}}</ion-label>
-            </ion-item>
-          </ion-menu-toggle>
-          <ion-item
-            text-wrap
-            button
-            *ngIf="p.subPages?.length> 0"
-            (click)="p.open = !p.open"
-            [class.active-parent]="p.open"
-            [class.active-item]="selectedPath === p.url"
-            detail="false"
-            class="containSubpage"
-          >
-            <ion-icon
-              slot="end"
-              name="arrow-forward"
-              *ngIf="!p.open"
-            ></ion-icon>
-            <ion-icon slot="end" name="arrow-down" *ngIf="p.open"></ion-icon>
-            <ion-label>{{p.title}}</ion-label>
-          </ion-item>
-          <ion-list *ngIf="p.open">
-            <ion-menu-toggle *ngIf="p.url">
-              <ion-item
-                text-wrap
-                *ngFor="let sub of p.subPages"
-                routerLink="{{sub.url}}"
-                routerDirection="root"
-                [class.active-item-subpages]="selectedPath === sub.url"
-              >
-                <ion-icon
-                  *ngIf="selectedPath === p.url"
-                  slot="start"
-                  name="caret-forward-outline"
-                  color="sgreen"
-                >
-                </ion-icon>
-                <ion-label>{{sub.title}}</ion-label>
-              </ion-item>
-            </ion-menu-toggle>
-          </ion-list>
-        </div>
-      </ion-list>
-    </ion-content>
-    <ion-footer>
-      <ion-button
-        class="logout"
-        color="sred"
-        (click)="logout()"
-        [routerLink]="['/login']"
-      >
-        <ion-icon slot="start" name="exit-outline"> </ion-icon>
-
-        <ion-label>Logout</ion-label>
-      </ion-button>
-    </ion-footer>
-  </ion-menu>
-  <ion-router-outlet id="contents" main></ion-router-outlet>
-</ion-split-pane> -->
-
 <ion-split-pane contentId="contents" when="xs" [disabled]="true">
   <ion-menu side="start" type="overlay" menuId="first" contentId="contents">
     <ion-content>
       <div class="menu-praticien"></div>
       <div class="header-content">
-        <ion-label>
-          <img src="../../../assets/images/praticien.jpg" />
-        </ion-label>
-        <ion-label>
-          <h2>Patient</h2>
-        </ion-label>
+        <ion-menu-toggle auto-hide="false">
+          <ion-label>
+            <img
+              src="../../../assets/images/praticien.jpg"
+              (click)="redirect('/patient/profile')"
+            />
+          </ion-label>
+          <ion-label>
+            <h2>{{name}}</h2>
+          </ion-label>
+        </ion-menu-toggle>
       </div>
 
       <ion-list lines="none" class="menu-items" *ngFor="let p of pages">

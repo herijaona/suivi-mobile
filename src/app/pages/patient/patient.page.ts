@@ -1,7 +1,9 @@
 import { Component, OnInit } from "@angular/core";
-import { MenuController, Platform } from "@ionic/angular";
+import { MenuController, NavController, Platform } from "@ionic/angular";
 import { Router, RouterEvent } from "@angular/router";
 import { AuthService } from "src/app/services/auth.service";
+import { PraticienService } from "src/app/services/praticien.service";
+import { Storage } from "@ionic/storage";
 
 @Component({
   selector: "app-patient",
@@ -42,15 +44,19 @@ export class PatientPage implements OnInit {
     },
     {
       title: "Famille",
-      url: "/patient/famille",
+      url: "/patient/familly",
     },
   ];
   selectedPath = "";
+  name;
+  fonction;
   constructor(
     public menuCtrl: MenuController,
     private router: Router,
     private plt: Platform,
-    private authSrvc: AuthService
+    private authSrvc: AuthService,
+    private storage: Storage,
+    public navCtrl: NavController
   ) {
     this.router.events.subscribe((event: RouterEvent) => {
       this.selectedPath = event.url;
@@ -59,7 +65,7 @@ export class PatientPage implements OnInit {
   }
   async ngOnInit() {
     this.selectedPath = "/patient/rendez-vous";
-
+    this.initialize();
     //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
     //Add 'implements OnInit' to the class.
   }
@@ -79,5 +85,19 @@ export class PatientPage implements OnInit {
   }
   logout() {
     this.authSrvc.logout();
+  }
+
+  initialize() {
+    const { roles, username } = this.authSrvc.user;
+    console.log("PatientPage -> initialize -> username", username);
+    console.log("PatientPage -> initialize -> roles", roles);
+    this.name = `${username}`;
+    this.fonction = "patient";
+  }
+
+  async redirect(link) {
+    console.log("PatientPage -> redirect -> link", link);
+
+    this.navCtrl.navigateForward(link);
   }
 }

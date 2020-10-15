@@ -36,7 +36,7 @@ export class PraticienPage implements OnInit {
       url: "/praticien/intervention",
     },
     {
-      title: "Proposition rendez-vous",
+      title: "Rendez-vous",
       url: "/praticien/proposition-rdv",
     },
   ];

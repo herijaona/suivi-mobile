@@ -165,9 +165,10 @@ export class RendezVousPage implements OnInit {
   }
 
   getPraticiens() {
-    this.praticientSrvc.getAllPraticien().subscribe((data) => {
-      this.praticiens = data;
-    });
+    // TODO APK: à decommenter
+    // this.praticientSrvc.getAllPraticien().subscribe((data) => {
+    //   this.praticiens = data;
+    // });
   }
 
   alertAcceptRdv(id) {

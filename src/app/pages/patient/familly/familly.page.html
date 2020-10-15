@@ -1,0 +1,40 @@
+<!-- <ion-header translucent="true">
+  <ion-toolbar>
+    <ion-buttons *ngIf="!ios && !showSearchbar" slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-menu-button *ngIf="ios"></ion-menu-button>
+
+    <ion-segment *ngIf="ios" [(ngModel)]="segment" (ionChange)="showAccepted()">
+      <ion-segment-button value="all" color="sgreen"> All </ion-segment-button>
+    </ion-segment>
+    <ion-title *ngIf="!ios && !showSearchbar">Famille</ion-title>
+    <ion-searchbar
+      *ngIf="showSearchbar"
+      showCancelButton="always"
+      [(ngModel)]="queryText"
+      (ionChange)="updateRdvList()"
+      (ionCancel)="showSearchbar = false"
+      placeholder="Rechercher"
+    ></ion-searchbar>
+    <ion-buttons slot="end">
+      <ion-button *ngIf="!ios && !showSearchbar" (click)="showSearchbar = true">
+        <ion-icon slot="icon-only" name="search"></ion-icon>
+      </ion-button>
+      <ion-button *ngIf="!showSearchbar" (click)="presentFilter()">
+        <span *ngIf="ios">Filtrer</span>
+        <span *ngIf="!ios">
+          <ion-icon slot="icon-only" name="options"></ion-icon>
+        </span>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+  <ion-toolbar *ngIf="!ios">
+    <ion-segment [(ngModel)]="segment" (ionChange)="showAccepted()">
+      <ion-segment-button value="all"> Tout </ion-segment-button>
+      <ion-segment-button value="accepted"> Accépté </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content> </ion-content> -->
