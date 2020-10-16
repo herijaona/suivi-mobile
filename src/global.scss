@@ -121,4 +121,7 @@ ion-loading.my-loading-class {
       --ion-color-base: var(--ion-color-sgreen) !important;
     }
   }
+  ion-tab-button {
+    --color-selected: var(--ion-color-sgreen) !important;
+  }
 }

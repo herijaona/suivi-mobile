@@ -44,9 +44,10 @@ export class AppComponent {
           }
         } else {
           // this.router.navigate(["login"]);
-          // this.router.navigate(["register/patient"]);
+          this.router.navigate(["register/patient"]);
           // this.router.navigate(["/patient/profile"]);
-          this.router.navigate(["/praticien/dashboard"]);
+          // this.router.navigate(["/praticien/dashboard"]);
+          // this.router.navigate(["/praticien/vaccination"]);
         }
       });
     });

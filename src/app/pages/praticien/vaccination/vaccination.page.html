@@ -145,10 +145,10 @@
   </ion-list-header>
 
   <ion-fab slot="fixed" vertical="bottom" horizontal="end" #fab>
-    <ion-fab-button color="primary">
-      <ion-icon name="share-social"></ion-icon>
+    <ion-fab-button color="primary" (click)="alert()">
+      <ion-icon name="add-outline"></ion-icon>
     </ion-fab-button>
-    <ion-fab-list side="top">
+    <!-- <ion-fab-list side="top">
       <ion-fab-button color="primary" (click)="openSocial('Vimeo', fab)">
         <ion-icon name="logo-vimeo"></ion-icon>
       </ion-fab-button>
@@ -161,6 +161,6 @@
       <ion-fab-button color="primary" (click)="openSocial('Facebook', fab)">
         <ion-icon name="logo-facebook"></ion-icon>
       </ion-fab-button>
-    </ion-fab-list>
+    </ion-fab-list> -->
   </ion-fab>
 </ion-content>

@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
-import { IPatient } from "../Interfaces/patient.interface";
+import { IPatient, IRegisterPatient } from "../Interfaces/patient.interface";
 
 import { from } from "rxjs";
 import { CONSTANT } from "src/constant";
@@ -13,6 +13,7 @@ import { environment } from "src/environments/environment";
 })
 export class PatientService {
   private url = environment.url_dev;
+  private url_api = environment.url_dev_api;
   private rdvData;
   constructor(public http: HttpClient) {}
 
@@ -52,7 +53,8 @@ export class PatientService {
     );
   }
 
-  registerPatient(data) {
+  registerPatient(data: IRegisterPatient) {
+    this.http.post<IRegisterPatient>(this.url_api, data);
     Object.keys(data).forEach((element) => {
       console.log("PatientService -> registerPatient -> element", element);
       console.log("register => ", data[element]);
