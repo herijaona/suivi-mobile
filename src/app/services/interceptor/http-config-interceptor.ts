@@ -27,7 +27,7 @@ export class HttpConfigInterceptorService implements HttpInterceptor {
     private alerCtrl: AlertController,
     private storage: Storage,
     private authSvc: AuthService
-  ) {}
+  ) { }
   // intercept(
   //   req: HttpRequest<any>,
   //   next: HttpHandler
@@ -118,8 +118,16 @@ export class HttpConfigInterceptorService implements HttpInterceptor {
         },
       });
       return clone;
+    } else {
+      let clone: HttpRequest<any>;
+      clone = request.clone({
+        setHeaders: {
+          Accept: "application/json",
+          "Content-type": "application/json",
+        },
+      });
+      return clone;
     }
-    return request;
   }
 
   async presentAlert(status, reason) {

@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
+import { NavController } from '@ionic/angular';
 import { IRegisterPatient } from 'src/app/Interfaces/patient.interface';
 import { GlobalDataService } from 'src/app/services/global-data.service';
 import { PatientService } from "src/app/services/patient.service";
@@ -15,8 +16,8 @@ export class PatientPage implements OnInit {
   public _id = this.IDENTIFIANT;
   public country;
   public city;
-  validRegister = false;
-  validation_msg = {
+  public validRegister = false;
+  public validation_msg = {
     first_name: [{ type: "required", message: "Prénom obligatoire" }],
     last_name: [{ type: "required", message: "Nom obligatoire" }],
     date_on_born: [
@@ -33,9 +34,14 @@ export class PatientPage implements OnInit {
     mother_name: [{ type: "required", message: "Nom de la mère obligatoire" }],
   };
 
-  constructor(private patientSrvc: PatientService, private globalSrvc: GlobalDataService) {}
+  constructor(private patientSrvc: PatientService, private globalSrvc: GlobalDataService, private navCtrl: NavController) { }
 
   ngOnInit() {
+    this.createForm();
+    this.globalSrvc.getCountry().subscribe((data) => this.country = data);
+  }
+
+  createForm() {
     this.patientRegisterForm = new FormGroup({
       first_name: new FormControl("", Validators.required),
       last_name: new FormControl("", Validators.required),
@@ -51,7 +57,6 @@ export class PatientPage implements OnInit {
       father_name: new FormControl(""),
       mother_name: new FormControl(""),
     });
-    this.globalSrvc.getCountry().subscribe((data) => this.country = data);
   }
 
   async register() {
@@ -76,26 +81,30 @@ export class PatientPage implements OnInit {
         father_name: this.patientRegisterForm.value['father_name'] == undefined ? '' : this.patientRegisterForm.value['father_name'],
         mother_name: this.patientRegisterForm.value['mother_name'] == undefined ? '' : this.patientRegisterForm.value['mother_name'],
       }
-      this.patientSrvc.registerPatient(dataRegister);
+      this.patientSrvc.registerPatient(dataRegister).subscribe(data => {
+        if (data) {
+          this.navCtrl.navigateRoot('/login');
+        }
+      });
     } else {
       console.log("NOT valid", this.patientRegisterForm);
     }
   }
 
-   getRndInt(min=10000, max=100000){
-    return Math.floor(Math.random() * (max-min +1)) + min;
+  getRndInt(min = 10000, max = 100000) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
   }
 
-  myUserName(){
-    if(!this.patientRegisterForm.valid || this._id != this.IDENTIFIANT){
+  myUserName() {
+    if (!this.patientRegisterForm.valid || this._id != this.IDENTIFIANT) {
       return;
     }
-    if(this.patientRegisterForm.value['date_on_born'] != '' && this.patientRegisterForm.value['sexe'] != ''){
+    if (this.patientRegisterForm.value['date_on_born'] != '' && this.patientRegisterForm.value['sexe'] != '') {
       this._id = this.createUsername(this.patientRegisterForm.value['date_on_born'], this.patientRegisterForm.value['sexe'])
     }
   }
 
-  createUsername(birth: Date, gender: String){
+  createUsername(birth: Date, gender: String) {
     const birthday = new Date(birth);
     console.log("PatientPage -> createUsername -> birthday", birthday)
     const sexe = gender.substring(0, 1);
@@ -103,22 +112,21 @@ export class PatientPage implements OnInit {
     let jour = "00";
     let annee = "0000";
 
-      let datChoice = birthday.toString().split("/");
-      mois = birthday.getMonth().toString().substring(0,1);
-      // console.log("PatientPage -> createUsername -> mois", mois)
-      annee = birthday.getFullYear().toString().substring(1,2);
-      // annee = birthday.getFullYear()[2];
-      // console.log("PatientPage -> createUsername -> annee", annee)
-      jour = birthday.getDay().toString().substring(0,1);
-      // jour = birthday.getDay()[0]
-      // console.log("PatientPage -> createUsername -> jour", jour)
-    const username = sexe+annee+mois+jour+this.getRndInt();
+    let datChoice = birthday.toString().split("/");
+    mois = birthday.getMonth().toString().substring(0, 1);
+    // console.log("PatientPage -> createUsername -> mois", mois)
+    annee = birthday.getFullYear().toString().substring(1, 2);
+    // annee = birthday.getFullYear()[2];
+    // console.log("PatientPage -> createUsername -> annee", annee)
+    jour = birthday.getDay().toString().substring(0, 1);
+    // jour = birthday.getDay()[0]
+    // console.log("PatientPage -> createUsername -> jour", jour)
+    const username = sexe + annee + mois + jour + this.getRndInt();
     console.log("PatientPage -> createUsername -> username", username)
     return username;
   }
 
-  getCityByCountry(id){
-    console.log("PatientPage -> getCityByCountry -> id", id)
+  getCityByCountry(id) {
     this.globalSrvc.getCity(id).subscribe((data) => this.city = data);
   }
 }

@@ -28,7 +28,7 @@ export class LoginPage implements OnInit {
     private storage: Storage,
     private formBuilder: FormBuilder,
     private authService: AuthService
-  ) {}
+  ) { }
 
   // TODO: loading rehefa login
   ngOnInit() {
@@ -65,9 +65,9 @@ export class LoginPage implements OnInit {
       cssClass: "my-loading-class",
       spinner: "bubbles",
       translucent: true,
-      // duration: 7000,
+      duration: 10000,
     });
 
-    // await loading.present();
+    await loading.present();
   }
 }

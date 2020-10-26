@@ -21,14 +21,17 @@ export interface IVaccinPatient {
   status: string;
 }
 
-export interface IProfilePatient {
-  first_name: String;
-  last_name: String;
-  type_patient: 1;
+
+
+export class IProfilePatient {
+  firstName: String;
+  lastName: String;
+  typePatient: Number;
   sexe: String;
-  date_on_born: Date;
-  city: 196;
-  state: 1;
+  dateOnBorn: any;
+  nameCity: Number;
+  nameState: Number;
+  namestate: Number;
   phone: String;
   roles: String;
   username: String;
@@ -37,10 +40,10 @@ export interface IProfilePatient {
   email: String;
   father_name: String;
   mother_name: String;
-  city_on_born: 125;
-  country_onborn: 1;
-  created_at: String;
-  updated_at: String;
+  cityBorn: Number;
+  countryBorn: Number;
+  createdAt: any;
+  updatedAt: String;
 }
 
 export interface IRegisterPatient {

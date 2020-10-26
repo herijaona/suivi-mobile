@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
-import { IPatient, IRegisterPatient } from "../Interfaces/patient.interface";
+import { IPatient, IProfilePatient, IRegisterPatient } from "../Interfaces/patient.interface";
 
 import { from } from "rxjs";
 import { CONSTANT } from "src/constant";
@@ -14,8 +14,9 @@ import { environment } from "src/environments/environment";
 export class PatientService {
   private url = environment.url_dev;
   private url_api = environment.url_dev_api;
+  private url_apip = environment.url_dev;
   private rdvData;
-  constructor(public http: HttpClient) {}
+  constructor(public http: HttpClient) { }
 
   // TODO Get Patients
   getPatients(): Observable<IPatient[]> {
@@ -54,7 +55,7 @@ export class PatientService {
   }
 
   registerPatient(data: IRegisterPatient) {
-    this.http.post<IRegisterPatient>(this.url_api, data);
+    return this.http.post<IRegisterPatient>(`${this.url_api}users`, data);
     Object.keys(data).forEach((element) => {
       console.log("PatientService -> registerPatient -> element", element);
       console.log("register => ", data[element]);
@@ -62,10 +63,11 @@ export class PatientService {
   }
 
   getProfile() {
-    return this.http.get(CONSTANT.MOCK_DATA_JSON).pipe(
-      map((data: any) => {
-        return data.mockPatientProfile;
-      })
-    );
+    // return this.http.get(CONSTANT.MOCK_DATA_JSON).pipe(
+    //   map((data: any) => {
+    //     return data.mockPatientProfile;
+    //   })
+    // );
+    return this.http.get<IProfilePatient[]>(`${this.url_apip}patient/profile`);
   }
 }

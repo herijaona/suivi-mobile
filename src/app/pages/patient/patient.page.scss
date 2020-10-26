@@ -82,3 +82,12 @@ ion-item,
   justify-items: center;
   border-radius: 7px;
 }
+
+.profile_redirect {
+  display: flex;
+  .name {
+    text-align: center;
+    margin-top: revert;
+    margin-bottom: auto;
+  }
+}

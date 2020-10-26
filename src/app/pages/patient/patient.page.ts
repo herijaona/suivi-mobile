@@ -4,6 +4,8 @@ import { Router, RouterEvent } from "@angular/router";
 import { AuthService } from "src/app/services/auth.service";
 import { PraticienService } from "src/app/services/praticien.service";
 import { Storage } from "@ionic/storage";
+import { PatientService } from 'src/app/services/patient.service';
+import { IProfilePatient } from 'src/app/Interfaces/patient.interface';
 
 @Component({
   selector: "app-patient",
@@ -56,7 +58,8 @@ export class PatientPage implements OnInit {
     private plt: Platform,
     private authSrvc: AuthService,
     private storage: Storage,
-    public navCtrl: NavController
+    public navCtrl: NavController,
+    public patienSrv: PatientService
   ) {
     this.router.events.subscribe((event: RouterEvent) => {
       this.selectedPath = event.url;
@@ -91,7 +94,11 @@ export class PatientPage implements OnInit {
     const { roles, username } = this.authSrvc.user;
     console.log("PatientPage -> initialize -> username", username);
     console.log("PatientPage -> initialize -> roles", roles);
-    this.name = `${username}`;
+    // this.name = `${username}`;
+    this.patienSrv.getProfile().subscribe((data: IProfilePatient[]) => {
+      const type = data[0].typePatient == 1 ? "Adult" : "Enfant";
+      this.name = `${data[0].firstName}  ${data[0].lastName} (${type})`;
+    });
     this.fonction = "patient";
   }
 

@@ -25,7 +25,7 @@ export class AuthService {
     private plt: Platform
   ) {
     this.plt.ready().then(() => {
-      // this.checkToken(); // TODO: à decommenter
+      this.checkToken(); // TODO: à decommenter
     });
   }
 
@@ -97,8 +97,8 @@ export class AuthService {
         })
       );
     return res;
-    
-// TODO: à commenter pour Just pour les mock login 
+
+    // TODO: à commenter pour Just pour les mock login 
     // let testToken;
     // if (credentials.username === "pat") {
     //   testToken = {

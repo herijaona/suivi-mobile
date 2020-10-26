@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { IProfilePatient } from "src/app/Interfaces/patient.interface";
+import { GlobalDataService } from 'src/app/services/global-data.service';
 import { PatientService } from "src/app/services/patient.service";
 
 @Component({
@@ -14,13 +15,36 @@ export class ProfilePage implements OnInit {
   public patientRegisterForm: FormGroup;
   public _id = "Identifiant";
   public profile: IProfilePatient;
-  validation_msg = {};
+
   public type_patient;
-  constructor(private patienSrvc: PatientService) {
-    this.getProfile();
+  public countries;
+  public cities;
+  public validation_msg = {
+    first_name: [{ type: "required", message: "Prénom obligatoire" }],
+    last_name: [{ type: "required", message: "Nom obligatoire" }],
+    date_on_born: [
+      { type: "required", message: "Date de naissance obligatoire" },
+    ],
+    state: [{ type: "required", message: "Pays obligatoire" }],
+    city: [{ type: "required", message: "Selectionner un pays , Ville obligatoire" }],
+    sexe: [{ type: "required", message: "Sexe obligatoire" }],
+    address: [{ type: "required", message: "Adresse obligatoire" }],
+    email: [{ type: "required", message: "Email obligatoire" }],
+    password: [{ type: "required", message: "Mot de passe obligatoire" }],
+    phone: [{ type: "required", message: "Phone obligatoire" }],
+    father_name: [{ type: "required", message: "Nom du père obligatoire" }],
+    mother_name: [{ type: "required", message: "Nom de la mère obligatoire" }],
+  };
+  constructor(private patienSrvc: PatientService, private globalSrvc: GlobalDataService) {
+    this.globalSrvc.getCountry().subscribe((result) => {
+      this.countries = result;
+      this.getProfile();
+    });
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+
+  }
 
   buildForm(data: IProfilePatient) {
     this.patientRegisterForm = new FormGroup({
@@ -28,7 +52,7 @@ export class ProfilePage implements OnInit {
       // firstName: new FormControl("", [Validators.required]),
       birthday: new FormControl("", [Validators.required]),
       // description: new FormControl("", [Validators.required]),
-      country: new FormControl("", [Validators.required]),
+      state: new FormControl("", [Validators.required]),
       city: new FormControl("", [Validators.required]),
       gender: new FormControl("", [Validators.required]),
       function: new FormControl("", [Validators.required]),
@@ -37,7 +61,7 @@ export class ProfilePage implements OnInit {
       // password: new FormControl("", [Validators.required]),
     });
 
-    if (data.type_patient == 1) {
+    if (data.typePatient == 1) {
       this.patientRegisterForm.addControl(
         "father_name",
         new FormControl("", [Validators.required])
@@ -66,14 +90,39 @@ export class ProfilePage implements OnInit {
   compareFn(e1: any, e2: any): boolean {
     return e1 && e2 ? e1.id == e2.id : e1 == e2;
   }
+  compareFnInv(e1: any, e2: any): boolean {
+    return e1 && e2 ? e1 == e2 : e1.id == e2.id;
+  }
 
   getProfile() {
-    this.patienSrvc.getProfile().subscribe((data: IProfilePatient) => {
+
+    this.patienSrvc.getProfile().subscribe(async (data: IProfilePatient[]) => {
       console.log(data);
-      this.profile = data;
+      this.profile = data[0];
+
+      this.profile.nameState = data[0].namestate;
+      this.globalSrvc.getCity(this.profile.nameState).subscribe(data2 => {
+        this.cities = data2;
+        this.profile.nameCity = data[0].nameCity;
+      })
+      this.profile.dateOnBorn = data[0].dateOnBorn.date;
+      this.profile.createdAt = data[0].createdAt.date;
+
+
+
       // this.profile.date_on_born = new Date(data.date_on_born);
-      this.buildForm(data);
-      this.type_patient = data.type_patient == 1 ? "Enfant" : "Adult";
+      this.buildForm(data[0]);
+      this.type_patient = data[0].typePatient == 1 ? "Adult" : "Enfant";
+
     });
+  }
+
+  getKeyByValue(object, value) {
+    return Object.keys(object).find(key => object[key] === value);
+  }
+
+
+  async getCityByCountry(id) {
+    this.globalSrvc.getCity(id).subscribe((data) => this.cities = data);
   }
 }
