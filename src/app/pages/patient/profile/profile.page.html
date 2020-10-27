@@ -35,6 +35,7 @@
     </div>
     <div>
       <form [formGroup]="patientRegisterForm">
+        <!-- Date de naissance -->
         <ion-item lines="full" disabled>
           <ion-label position="stacked">Date de naissance</ion-label>
           <ion-datetime
@@ -45,7 +46,7 @@
             required
           ></ion-datetime>
         </ion-item>
-        <!-- {{this.profile.nameState}} -->
+        <!-- Pays -->
         <ion-item
           lines="full"
           [disabled]="!this.profile.nameState &&!this.countries "
@@ -75,7 +76,7 @@
             </div>
           </ng-container>
         </div>
-
+        <!-- Ville -->
         <ion-item
           lines="full"
           [disabled]="!this.profile.nameCity"
@@ -95,7 +96,57 @@
             </ng-container>
           </ion-select>
         </ion-item>
-
+        <!-- Pays de naissance -->
+        <ion-item
+          lines="full"
+          [disabled]="!this.profile.countryBorn &&!this.countries "
+        >
+          <ion-label position="stacked">Pays de naissance</ion-label>
+          <ion-select
+            formControlName="stateBorn"
+            required
+            (ionChange)="getCityByCountry(this.patientRegisterForm.value['stateBorn'])"
+            [compareWith]="compareFnInv"
+            [ngModel]="profile.countryBorn"
+          >
+            <ng-container *ngFor="let item of this.countries">
+              <ion-select-option value="{{item.id}}"
+                >{{item.nameState}}</ion-select-option
+              >
+            </ng-container>
+          </ion-select>
+        </ion-item>
+        <div class="validation-errors">
+          <ng-container *ngFor="let validation of validation_msg.state">
+            <div
+              class="error-message"
+              *ngIf="patientRegisterForm.get('state').hasError(validation.type)"
+            >
+              {{ validation.message }}
+            </div>
+          </ng-container>
+        </div>
+        <!-- Ville de naissance -->
+        <ion-item
+          lines="full"
+          [disabled]="!this.profile.cityBorn"
+          *ngIf="this.citiesBorn"
+        >
+          <ion-label position="stacked">Ville de naissance</ion-label>
+          <ion-select
+            formControlName="cityBorn"
+            required
+            [(ngModel)]="profile.cityBorn"
+            [compareWith]="compareFnInv"
+          >
+            <ng-container *ngFor="let item of this.citiesBorn">
+              <ion-select-option value="{{item.id}}"
+                >{{item.nameCity}}</ion-select-option
+              >
+            </ng-container>
+          </ion-select>
+        </ion-item>
+        <!-- Sexe -->
         <ion-item lines="full" disabled>
           <ion-label position="stacked">Sexe</ion-label>
           <ion-select
@@ -108,7 +159,7 @@
             <ion-select-option>Feminin</ion-select-option>
           </ion-select>
         </ion-item>
-
+        <!-- Adresse -->
         <ion-item lines="full">
           <ion-label position="stacked">Adresse</ion-label>
           <ion-textarea
@@ -117,7 +168,7 @@
             [ngModel]="profile.address"
           ></ion-textarea>
         </ion-item>
-
+        <!-- Email -->
         <ion-item lines="full">
           <ion-label position="stacked">Email</ion-label>
           <ion-input
@@ -138,8 +189,8 @@
             Please enter a valid email.
           </div> -->
         </ion-item>
-
-        <ion-item lines="full" *ngIf="profile.father_name">
+        <!-- Nom du père -->
+        <ion-item lines="full" *ngIf="profile.fatherName">
           <ion-label position="stacked"
             >Nom du père{{profile.father_name}}</ion-label
           >
@@ -150,7 +201,8 @@
             [ngModel]="this.profile.father_name"
           ></ion-input>
         </ion-item>
-        <ion-item lines="full" *ngIf="profile.mother_name">
+        <!-- Nom de la mère -->
+        <ion-item lines="full" *ngIf="profile.motherName">
           <ion-label position="stacked">Nom de la mère</ion-label>
           <ion-input
             type="text"

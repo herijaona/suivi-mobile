@@ -19,6 +19,7 @@ export class ProfilePage implements OnInit {
   public type_patient;
   public countries;
   public cities;
+  public citiesBorn;
   public validation_msg = {
     first_name: [{ type: "required", message: "Prénom obligatoire" }],
     last_name: [{ type: "required", message: "Nom obligatoire" }],
@@ -53,15 +54,16 @@ export class ProfilePage implements OnInit {
       birthday: new FormControl("", [Validators.required]),
       // description: new FormControl("", [Validators.required]),
       state: new FormControl("", [Validators.required]),
+      stateBorn: new FormControl("", [Validators.required]),
       city: new FormControl("", [Validators.required]),
+      cityBorn: new FormControl("", [Validators.required]),
       gender: new FormControl("", [Validators.required]),
-      function: new FormControl("", [Validators.required]),
       address: new FormControl("", [Validators.required]),
       email: new FormControl("", [Validators.required]),
       // password: new FormControl("", [Validators.required]),
     });
 
-    if (data.typePatient == 1) {
+    if (data.typePatient != 1) {
       this.patientRegisterForm.addControl(
         "father_name",
         new FormControl("", [Validators.required])
@@ -105,11 +107,13 @@ export class ProfilePage implements OnInit {
         this.cities = data2;
         this.profile.nameCity = data[0].nameCity;
       })
+      this.profile.countryBorn = data[0].countryBorn;
+      this.globalSrvc.getCity(this.profile.countryBorn).subscribe(data3 => {
+        this.citiesBorn = data3;
+        this.profile.cityBorn = data[0].cityBorn;
+      })
       this.profile.dateOnBorn = data[0].dateOnBorn.date;
       this.profile.createdAt = data[0].createdAt.date;
-
-
-
       // this.profile.date_on_born = new Date(data.date_on_born);
       this.buildForm(data[0]);
       this.type_patient = data[0].typePatient == 1 ? "Adult" : "Enfant";

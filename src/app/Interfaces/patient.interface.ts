@@ -38,8 +38,8 @@ export class IProfilePatient {
   address: String;
   password: String;
   email: String;
-  father_name: String;
-  mother_name: String;
+  fatherName: String;
+  motherName: String;
   cityBorn: Number;
   countryBorn: Number;
   createdAt: any;
