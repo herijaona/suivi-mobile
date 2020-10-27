@@ -4,13 +4,13 @@
 
 export const environment = {
   production: false,
-  url: "http://localhost:9000",
-  url_dev: "http://localhost:9000/apip/",
-  url_dev_api: "http://localhost:9000/api/",
+  // url: "http://localhost:9000",
+  // url_dev: "http://localhost:9000/apip/",
+  // url_dev_api: "http://localhost:9000/api/",
 
-  // url: "http://suivie-patient.neitic.com",
-  // url_dev: "http://suivie-patient.neitic.com/apip/",
-  // url_dev_api: "http://suivie-patient.neitic.com/api/",
+  url: "http://suivie-patient.neitic.com",
+  url_dev: "http://suivie-patient.neitic.com/apip/",
+  url_dev_api: "http://suivie-patient.neitic.com/api/",
 
 
   TOKEN_KEY: "access_token",

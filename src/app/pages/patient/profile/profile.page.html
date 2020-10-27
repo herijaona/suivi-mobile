@@ -191,14 +191,12 @@
         </ion-item>
         <!-- Nom du père -->
         <ion-item lines="full" *ngIf="profile.fatherName">
-          <ion-label position="stacked"
-            >Nom du père{{profile.father_name}}</ion-label
-          >
+          <ion-label position="stacked">Nom du père</ion-label>
           <ion-input
             type="text"
             required
             formControlName="father_name"
-            [ngModel]="this.profile.father_name"
+            [ngModel]="this.profile.fatherName"
           ></ion-input>
         </ion-item>
         <!-- Nom de la mère -->
@@ -208,7 +206,7 @@
             type="text"
             required
             formControlName="mother_name"
-            [ngModel]="this.profile.mother_name"
+            [ngModel]="this.profile.motherName"
           ></ion-input>
         </ion-item>
 
