@@ -33,7 +33,7 @@ export class PraticienService {
     private http: HttpClient,
     private storage: Storage,
     private authSrvc: AuthService
-  ) {}
+  ) { }
 
   loadMockData() {
     return this.http
@@ -90,10 +90,10 @@ export class PraticienService {
     let dateNow = moment(new Date()).format("YYYY-MM-DD");
     const res = this.http.get<IPraticienPropRdv[]>(
       this.url +
-        "proposition_rdvs?praticien=" +
-        id +
-        "&order[dateProposition]=asc&dateProposition[after]" +
-        dateNow
+      "proposition_rdvs?praticien=" +
+      id +
+      "&order[dateProposition]=asc&dateProposition[after]" +
+      dateNow
     );
     return from(res);
 
@@ -179,5 +179,9 @@ export class PraticienService {
       console.log("PraticienService -> regroupDataByDate -> data", data);
     });
     return data;
+  }
+
+  getPraticienFunctions() {
+    return this.http.get(this.url_api + 'fonctions');
   }
 }
