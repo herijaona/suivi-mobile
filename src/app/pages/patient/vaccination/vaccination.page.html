@@ -14,10 +14,10 @@
       type="text"
       showCancelButton="always"
       *ngIf="showSearchbar"
-      (ionCancel)="showSearchbar = false"
+      (ionCancel)="showSearchbar= false"
     ></ion-searchbar>
     <ion-buttons slot="end">
-      <ion-button *ngIf="!ios && !showSearchbar" (click)="showSearchbar = true">
+      <ion-button *ngIf="!ios && !showSearchbar" (click)="showSearchbar= true">
         <ion-icon slot="icon-only" name="search"></ion-icon>
       </ion-button>
     </ion-buttons>
@@ -28,67 +28,146 @@
       debounce="500"
       placeholder="Rechercher"
       type="text"
-      (ionCancel)="showSearchbar = false"
+      (ionCancel)="showSearchbar= false"
     ></ion-searchbar>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
   <ion-list #VaccinList>
-    <ion-item-group *ngFor="let consult of vaccinsFiltered">
+    <ion-item-group *ngFor="let vacc of vaccinsFiltered">
       <ion-item-divider sticky>
-        <ion-label slot="start"> {{ consult.date}} </ion-label>
+        <ion-label slot="start">
+          {{ vacc.date | date:"MMM dd, yyyy"}}
+        </ion-label>
       </ion-item-divider>
 
       <ion-item-sliding
-        *ngFor="let eachVaccination of consult.groups"
-        [attr.track]="eachVaccination.status | lowercase"
+        *ngFor="let eachVaccination of vacc.groups"
+        [attr.track]="this.checkStatus(eachVaccination.status,
+                  eachVaccination.etat) | lowercase"
         #slidingItem
       >
         <ion-item *ngIf="eachVaccination.show === true">
           <ion-grid>
             <ion-row>
-              <ion-col size="7">
+              <ion-col size="12">
                 <ion-label class="information">
                   <ion-row>
-                    <ion-col size="12">
+                    <ion-col size="7">
                       <h2 class="makeBoldAndLarge">
-                        {{eachVaccination.vaccin}}
+                        {{eachVaccination.vaccinName}}
                       </h2>
-                      <h3>{{eachVaccination.date}}</h3>
+                      <!-- <h3>
+                        {{eachVaccination.date_prise.date | date:"MMM dd yyyy"}}
+                      </h3> -->
+                      <h3 *ngIf="eachVaccination.Lot == null">
+                        Lot :
+                        <span> Lot {{eachVaccination.Lot}}</span>
+                      </h3>
+                    </ion-col>
+                    <ion-col class="middle" size="2" offset-md="2">
+                      <ion-button
+                        *ngIf="this.checkStatus(eachVaccination.status,
+                  eachVaccination.etat) === this.OKSTATUS"
+                        class="status"
+                        color="sgreen"
+                        expand="block"
+                        fill="outline"
+                      >
+                        REALISE
+                      </ion-button>
+
+                      <ion-button
+                        *ngIf="this.checkStatus(eachVaccination.status,
+                  eachVaccination.etat) === this.PENDINGSTATUS"
+                        class="status"
+                        color="sorange"
+                        expand="block"
+                        fill="outline"
+                      >
+                        EN ATTENTE
+                      </ion-button>
+
+                      <ion-button
+                        *ngIf="this.checkStatus(eachVaccination.status,
+                  eachVaccination.etat) === this.PLANIFIED"
+                        class="status"
+                        color="tertiary"
+                        expand="block"
+                        fill="outline"
+                      >
+                        PLANIFIER
+                      </ion-button>
+                    </ion-col>
+                  </ion-row>
+                  <!-- Vaccinateur -->
+                  <ion-row
+                    *ngIf="eachVaccination.vaccinateur_nom == null && eachVaccination.vaccinateur_prenom == null"
+                  >
+                    <br />
+
+                    <ion-col size="12">
+                      Vaccinateur :
+                      <p>
+                        Nom
+                        <span class="vaccinateur">
+                          {{eachVaccination.vaccinateur_nom}} nom
+                        </span>
+                      </p>
+                      <p>
+                        Prenom :
+                        <span class="vaccinateur">
+                          {{eachVaccination.vaccinateur_prenom}} prenom</span
+                        >
+                      </p>
+
+                      <p>
+                        Numero proféssionnel :
+                        <span class="vaccinateur">
+                          {{eachVaccination.NumeroProfessionnel}}
+                          +33030039289</span
+                        >
+                      </p>
                     </ion-col>
                   </ion-row>
                   <ion-row>
                     <ion-col size="12">
+                      <p *ngIf="eachVaccination.identification == null">
+                        Type de vaccin :
+                        <span>
+                          {{eachVaccination.identification}}eachVaccination.identification</span
+                        >
+                      </p>
+                      <p *ngIf="eachVaccination.identifiant_vaccin== null">
+                        Identifiant vaccin :
+                        <span>
+                          {{eachVaccination.identifiant_vaccin}}eachVaccination.identifiant_vaccin</span
+                        >
+                      </p>
                       <p>
-                        Rappel :
+                        Date de prise :
                         <span class="dateRapelle">
-                          {{eachVaccination.dateRapelle}}</span
+                          {{eachVaccination.date_prise.date|date:"MMM-dd-yyyy"
+                          }}</span
                         >
                       </p>
                     </ion-col>
                   </ion-row>
                 </ion-label>
               </ion-col>
-              <ion-col class="middle" size="2" offset-md="2">
-                <ion-button
-                  *ngIf="eachVaccination.status.toString() === OKSTATUS"
-                  class="status"
-                  color="sgreen"
-                  expand="block"
-                  fill="outline"
-                >
-                  Realised
-                </ion-button>
-
-                <ion-button
-                  *ngIf="eachVaccination.status.toString() === PENDSTATUS"
-                  class="status"
-                  color="sorange"
-                  expand="block"
-                  fill="outline"
-                >
-                  Pending
+            </ion-row>
+            <ion-row
+              *ngIf="this.checkStatus(eachVaccination.status,
+                  eachVaccination.etat) ===this.PENDINGSTATUS"
+            >
+              <ion-col class="btn-cnfrm">
+                <ion-button expand="block" color="sgreen">
+                  <ion-icon
+                    slot="start"
+                    name="checkmark-circle-outline"
+                  ></ion-icon>
+                  <ion-label>INTERVENTION</ion-label>
                 </ion-button>
               </ion-col>
             </ion-row>

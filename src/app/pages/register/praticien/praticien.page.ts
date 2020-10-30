@@ -71,7 +71,35 @@ export class PraticienPage implements OnInit {
     });
   }
   register() {
-
+    // if (this.praticienRegisterForm.valid) {
+    //   Object.keys(this.praticienRegisterForm.value).forEach((key) => {
+    //     console.log("valid", this.praticienRegisterForm.value[key]);
+    //   });
+    //   const dataRegister: IRegisterPatient = {
+    //     first_name: this.praticienRegisterForm.value['first_name'],
+    //     last_name: this.praticienRegisterForm.value['last_name'],
+    //     date_on_born: this.praticienRegisterForm.value['date_on_born'],
+    //     state: this.praticienRegisterForm.value['state'],
+    //     city: this.praticienRegisterForm.value['city'],
+    //     sexe: this.praticienRegisterForm.value['sexe'],
+    //     address: this.praticienRegisterForm.value['address'],
+    //     email: this.praticienRegisterForm.value['email'],
+    //     password: this.praticienRegisterForm.value['password'],
+    //     phone: this.praticienRegisterForm.value['phone'],
+    //     roles: "ROLE_PATIENT",
+    //     username: this._id,
+    //     type_patient: this.praticienRegisterForm.value['type_patient'],
+    //     father_name: this.praticienRegisterForm.value['father_name'] == undefined ? '' : this.praticienRegisterForm.value['father_name'],
+    //     mother_name: this.praticienRegisterForm.value['mother_name'] == undefined ? '' : this.praticienRegisterForm.value['mother_name'],
+    //   }
+    //   this.praticienSrv.registerPatient(dataRegister).subscribe(data => {
+    //     if (data) {
+    //       this.navCtrl.navigateRoot('/login');
+    //     }
+    //   });
+    // } else {
+    //   console.log("NOT valid", this.praticienRegisterForm);
+    // }
   }
 
   getRndInt(min = 10000, max = 100000) {

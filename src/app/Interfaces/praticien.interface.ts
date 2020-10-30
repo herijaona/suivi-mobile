@@ -41,3 +41,20 @@ export interface IIntervention {
   type: String;
   vaccine: String;
 }
+
+export interface IRegisterPraticien {
+  first_name: String;
+  last_name: String;
+  sexe: String;
+  date_on_born: Date;
+  city: Number;
+  state: Number;
+  phone: String;
+  roles: String;
+  username: String; // Generer automatiquement
+  address: String;
+  password: String;
+  email: String;
+  father_name: String;
+  mother_name: String;
+}

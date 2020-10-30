@@ -30,14 +30,29 @@ export class VaccinationPage implements OnInit {
   showSearchbar: boolean;
   vaccinsFiltered: any = [];
   praticiens: IUserPraticien[];
-  public OKSTATUS = "Done";
-  public PENDSTATUS = "Pending";
+  public OKSTATUS = "REALISED";
+  public PENDINGSTATUS = "PENDING";
+  public PLANIFIED = "PLANIFIED";
+  private STRING_DATE = "date_prise";
 
+  public STATUS;
   constructor(
     private patientSrv: PatientService,
     private dataTransformer: DataTransformerService,
     private loadingCtrl: LoadingController
-  ) {}
+  ) { }
+
+  checkStatus(status, etat) {
+    if (status == 1) {
+      return this.OKSTATUS;
+    } else {
+      if (etat == false) {
+        return this.PENDINGSTATUS;
+      } else {
+        return this.PLANIFIED;
+      }
+    }
+  }
 
   ngOnInit() {
     console.log("VaccinationPage -> ngOnInit -> ngOnInit");
@@ -69,9 +84,10 @@ export class VaccinationPage implements OnInit {
 
   getAllVaccin() {
     this.patientSrv.getVaccinByPatient().subscribe((data) => {
+      console.log("VaccinationPage -> getAllVaccin -> data", data)
       this.vaccins = data;
-      this.vaccinsShow = this.dataTransformer.allData(data).data;
-      this.vaccinsFiltered = this.dataTransformer.allData(data).dataByDate;
+      this.vaccinsShow = this.dataTransformer.allData(data, this.STRING_DATE).data;
+      this.vaccinsFiltered = this.dataTransformer.allData(data, this.STRING_DATE).dataByDate;
       this.loadingCtrl.dismiss();
     });
   }

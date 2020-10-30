@@ -15,15 +15,30 @@ export interface IRdvPatient {
 
 export interface IVaccinPatient {
   id: number;
-  date: Date;
-  dateRapel: Date;
-  vaccin: string;
-  status: string;
+  vaccin: String;
+  date_prise: any;
+  etat: boolean; // 0 : Waiting ; 1 : Planifié 
+  /*{
+    0 : Waiting (Affichage)=> Intervention (Bouton) 
+    1 : Planifier (Affichage)
+  }*/
+  vaccinName: String;
+  identification: String; // Rappel, Prise Unique, Prise initial
+  identifiant_vaccin: String;
+  Lot: String;
+  vaccinateur_nom: String;
+  vaccinateur_prenom: String;
+  NumeroProfessionnel: String;
+  status: Number; // null: Rien ; 0: Rien; 1: Réalisé
+  /*{
+    null: Rien ne se passe
+    0: Rien ne se passe
+    1: Rien ne se passe 'Réalisé' => état : Réalisé (Affichage)
+  }*/
 }
 
-
-
 export class IProfilePatient {
+  id: Number;
   firstName: String;
   lastName: String;
   typePatient: Number;

@@ -12,6 +12,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 import { Storage, IonicStorageModule } from "@ionic/storage";
 import { JwtModule, JWT_OPTIONS } from "@auth0/angular-jwt";
 import { HttpConfigInterceptorService } from "./services/interceptor/http-config-interceptor";
+import { GlobalComponent } from './components/global/global.component';
 const TOKEN_KEY = "access_token";
 
 export function jwtOptionsFactory(storage) {
@@ -52,4 +53,4 @@ export function jwtOptionsFactory(storage) {
   ],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }

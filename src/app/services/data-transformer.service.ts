@@ -6,15 +6,15 @@ import { from, Observable } from "rxjs";
   providedIn: "root",
 })
 export class DataTransformerService {
-  constructor() {}
+  constructor() { }
 
-  allData(list): { data: any[]; dataByDate: { date: string; groups: any }[] } {
+  allData(list, string_date = "date"): { data: any[]; dataByDate: { date: string; groups: any }[] } {
     let dataShow: any[] = [];
     list.forEach((element) => {
       const dataToPush = Object.assign(element, { show: true });
       dataShow.push(dataToPush);
     });
-    const listByDate = this.regroupDataByDate([...dataShow]);
+    const listByDate = this.regroupDataByDate([...dataShow], string_date);
     const res = {
       data: dataShow,
       dataByDate: listByDate,
@@ -22,9 +22,12 @@ export class DataTransformerService {
     return res;
   }
   // Regrouper les données en fonction de la date
-  regroupDataByDate(data) {
+  regroupDataByDate(data, string_date) {
     const groups = data.reduce((groups, eachData) => {
-      const date = eachData.date.split("T")[0];
+      console.log("regroupDataByDate -> eachData", eachData)
+      // const date = eachData.date_prise.split("T")[0];
+      const date = eachData[string_date].date;
+      // const date = eachData.date;
       if (!groups[date]) {
         groups[date] = [];
       }

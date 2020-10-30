@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
-import { IPatient, IProfilePatient, IRegisterPatient } from "../Interfaces/patient.interface";
+import { IPatient, IProfilePatient, IRegisterPatient, IVaccinPatient } from "../Interfaces/patient.interface";
 
 import { from } from "rxjs";
 import { CONSTANT } from "src/constant";
@@ -47,11 +47,13 @@ export class PatientService {
 
   //TODO : Get Vaccin by patient
   getVaccinByPatient() {
-    return this.http.get(CONSTANT.MOCK_DATA_JSON).pipe(
-      map((data: any) => {
-        return data.mockVaccinPatient;
-      })
-    );
+    return this.http.get<IVaccinPatient[]>(`${this.url_apip}patients/vaccination`);
+
+    // return this.http.get(CONSTANT.MOCK_DATA_JSON).pipe(
+    //   map((data: any) => {
+    //     return data.mockVaccinPatient;
+    //   })
+    // );
   }
 
   registerPatient(data: IRegisterPatient) {
@@ -63,11 +65,16 @@ export class PatientService {
   }
 
   getProfile() {
+    return this.http.get<IProfilePatient[]>(`${this.url_apip}patient/profile`);
+
     // return this.http.get(CONSTANT.MOCK_DATA_JSON).pipe(
     //   map((data: any) => {
     //     return data.mockPatientProfile;
     //   })
     // );
-    return this.http.get<IProfilePatient[]>(`${this.url_apip}patient/profile`);
+  }
+
+  updateProfile(data) {
+    return this.http.post(`${this.url_apip}patient/profile/edit`, data);
   }
 }

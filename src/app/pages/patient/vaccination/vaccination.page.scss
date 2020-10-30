@@ -15,8 +15,8 @@ ion-fab-button {
 }
 
 $categories: (
-  ionic: var(--ion-color-primary),
-  done: #8e8d93,
+  realised: var(--ion-color-primary),
+  planified: #8e8d93,
   pending: #6600cc,
 );
 
@@ -31,7 +31,7 @@ $categories: (
 
 .status {
   text-align: right;
-  width: 90px;
+  width: 120px;
 }
 
 .middle {
@@ -46,4 +46,8 @@ $categories: (
 
 .dateRapelle {
   color: var(--ion-color-sred);
+}
+
+.vaccinateur {
+  color: var(--ion-color-sgreen);
 }

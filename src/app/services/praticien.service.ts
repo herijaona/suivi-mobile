@@ -182,6 +182,6 @@ export class PraticienService {
   }
 
   getPraticienFunctions() {
-    return this.http.get(this.url_api + 'fonctions');
+    return this.http.get(this.url_api + 'fonction');
   }
 }

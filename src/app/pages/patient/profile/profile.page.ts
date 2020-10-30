@@ -1,8 +1,10 @@
 import { Component, OnInit } from "@angular/core";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
+import { LoadingController, ToastController } from '@ionic/angular';
 import { IProfilePatient } from "src/app/Interfaces/patient.interface";
 import { GlobalDataService } from 'src/app/services/global-data.service';
 import { PatientService } from "src/app/services/patient.service";
+import { GlobalInteraction } from '../../global.interaction';
 
 @Component({
   selector: "app-profile",
@@ -15,11 +17,12 @@ export class ProfilePage implements OnInit {
   public patientRegisterForm: FormGroup;
   public _id = "Identifiant";
   public profile: IProfilePatient;
-
+  private OK = "ok";
   public type_patient;
   public countries;
   public cities;
   public citiesBorn;
+  isLoading = false;
   public validation_msg = {
     first_name: [{ type: "required", message: "Prénom obligatoire" }],
     last_name: [{ type: "required", message: "Nom obligatoire" }],
@@ -36,7 +39,7 @@ export class ProfilePage implements OnInit {
     father_name: [{ type: "required", message: "Nom du père obligatoire" }],
     mother_name: [{ type: "required", message: "Nom de la mère obligatoire" }],
   };
-  constructor(private patienSrvc: PatientService, private globalSrvc: GlobalDataService) {
+  constructor(private patienSrvc: PatientService, private globalSrvc: GlobalDataService, private globalInteract: GlobalInteraction, private loadingController: LoadingController) {
     this.globalSrvc.getCountry().subscribe((result) => {
       this.countries = result;
       this.getProfile();
@@ -44,6 +47,7 @@ export class ProfilePage implements OnInit {
   }
 
   ngOnInit() {
+    this.globalInteract.presentLoading();
 
   }
 
@@ -54,12 +58,13 @@ export class ProfilePage implements OnInit {
       birthday: new FormControl("", [Validators.required]),
       // description: new FormControl("", [Validators.required]),
       state: new FormControl("", [Validators.required]),
-      stateBorn: new FormControl("", [Validators.required]),
+      countryBorn: new FormControl("", [Validators.required]),
       city: new FormControl("", [Validators.required]),
       cityBorn: new FormControl("", [Validators.required]),
       gender: new FormControl("", [Validators.required]),
       address: new FormControl("", [Validators.required]),
       email: new FormControl("", [Validators.required]),
+      phone: new FormControl("", [Validators.required]),
       // password: new FormControl("", [Validators.required]),
     });
 
@@ -77,8 +82,32 @@ export class ProfilePage implements OnInit {
 
   async update() {
     if (this.patientRegisterForm.valid) {
+      this.globalInteract.presentLoading();
+
       Object.keys(this.patientRegisterForm.value).forEach((key) => {
         console.log("valid", this.patientRegisterForm.value[key]);
+        const data_updated = {
+          address: this.patientRegisterForm.value["address"],
+          cityBorn: this.patientRegisterForm.value["cityBorn"],
+          countryBorn: this.patientRegisterForm.value["countryBorn"],
+          email: this.patientRegisterForm.value["email"],
+          fatherName: this.patientRegisterForm.value['father_name'] == undefined ? '' : this.patientRegisterForm.value['father_name'],
+          id: this.profile.id,
+          motherName: this.patientRegisterForm.value['father_name'] == undefined ? '' : this.patientRegisterForm.value['mother_name'],
+          nameCity: this.patientRegisterForm.value["city"],
+          nameState: this.patientRegisterForm.value["state"],
+          phone: this.patientRegisterForm.value["phone"],
+        }
+
+        this.patienSrvc.updateProfile(data_updated).subscribe((data) => {
+
+          if (data == this.OK) {
+            this.globalInteract.dismissLoading();
+            this.globalInteract.presentToast('Profile mis à jour');
+          } else {
+            this.globalInteract.presentToast('Profile non mis à jour !!!')
+          }
+        });
       });
     } else {
       console.log("NOT valid", this.patientRegisterForm);
@@ -111,6 +140,7 @@ export class ProfilePage implements OnInit {
       this.globalSrvc.getCity(this.profile.countryBorn).subscribe(data3 => {
         this.citiesBorn = data3;
         this.profile.cityBorn = data[0].cityBorn;
+        this.globalInteract.dismissLoading()
       })
       this.profile.dateOnBorn = data[0].dateOnBorn.date;
       this.profile.createdAt = data[0].createdAt.date;
@@ -125,8 +155,10 @@ export class ProfilePage implements OnInit {
     return Object.keys(object).find(key => object[key] === value);
   }
 
-
-  async getCityByCountry(id) {
+  getCityByCountry(id) {
     this.globalSrvc.getCity(id).subscribe((data) => this.cities = data);
+  }
+  getCityByCountryBorn(id) {
+    this.globalSrvc.getCity(id).subscribe((data) => this.citiesBorn = data);
   }
 }

@@ -76,6 +76,27 @@
             </div>
           </ng-container>
         </div>
+
+        <!-- Téléphone -->
+        <ion-item lines="full">
+          <ion-label position="stacked">Phone</ion-label>
+          <ion-input
+            type="text"
+            required
+            formControlName="phone"
+            [ngModel]="profile.phone"
+          ></ion-input>
+        </ion-item>
+        <div class="validation-errors">
+          <ng-container *ngFor="let validation of validation_msg.phone">
+            <div
+              class="error-message"
+              *ngIf="patientRegisterForm.get('phone').hasError(validation.type)"
+            >
+              {{ validation.message }}
+            </div>
+          </ng-container>
+        </div>
         <!-- Ville -->
         <ion-item
           lines="full"
@@ -103,9 +124,9 @@
         >
           <ion-label position="stacked">Pays de naissance</ion-label>
           <ion-select
-            formControlName="stateBorn"
+            formControlName="countryBorn"
             required
-            (ionChange)="getCityByCountry(this.patientRegisterForm.value['stateBorn'])"
+            (ionChange)="getCityByCountryBorn(this.patientRegisterForm.value['countryBorn'])"
             [compareWith]="compareFnInv"
             [ngModel]="profile.countryBorn"
           >
