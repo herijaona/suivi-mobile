@@ -45,6 +45,10 @@ export class PatientPage implements OnInit {
       // ],
     },
     {
+      title: "My Praticiens",
+      url: "/patient/assoc-praticiens",
+    },
+    {
       title: "Famille",
       url: "/patient/familly",
     },

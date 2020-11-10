@@ -27,7 +27,7 @@ const routes: Routes = [
           ),
       },
       {
-        path: "familly",
+        path: "family",
         loadChildren: () =>
           import("./familly/familly.module").then((m) => m.FamillyPageModule),
       },
@@ -36,12 +36,17 @@ const routes: Routes = [
         loadChildren: () =>
           import("./profile/profile.module").then((m) => m.ProfilePageModule),
       },
+      {
+        path: 'assoc-praticiens',
+        loadChildren: () => import('./assoc-praticiens/assoc-praticiens.module').then(m => m.AssocPraticiensPageModule)
+      },
     ],
   },
+
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class PatientPageRoutingModule {}
+export class PatientPageRoutingModule { }

@@ -5,19 +5,33 @@ export interface IPatient {
 }
 
 export interface IRdvPatient {
+  id: Number;
+
   description: String;
   praticien: String;
-  dateRdv: Date;
-  typeRdv: Date;
-  heureRdv: Date;
-  id: Number;
+  dateRdv: {
+    date: Date;
+    timezone_type: Number;
+    timezone: String;
+  };
+  dateConsultation: {
+    date: Date;
+    timezone_type: Number;
+    timezone: String;
+  }
+  objetConsultation: String;
+  etat: Number; // 0: statusCOnsultation : 1 => Scheduled ; 1: statusConsultation : 1 => Realesed
+  statusConsultation: Number; // 0: Waiting; 1: if Rdv Etat = 0 => Scheduled; 2: Canceled 
+  /*{ 
+   statusConsultation : 0 || ( statusConltation : 1 && etat : 0 ) => bouton cancel  
+  }*/
 }
 
 export interface IVaccinPatient {
   id: number;
   vaccin: String;
   date_prise: any;
-  etat: boolean; // 0 : Waiting ; 1 : Planifié 
+  etat: boolean; // 0 : Waiting ; 1 : Planifié
   /*{
     0 : Waiting (Affichage)=> Intervention (Bouton) 
     1 : Planifier (Affichage)
@@ -77,4 +91,8 @@ export interface IRegisterPatient {
   email: String;
   father_name: String;
   mother_name: String;
+}
+
+export interface IPatientFamily {
+
 }

@@ -5,8 +5,10 @@ import {
   IRdvPatient,
   IVaccinPatient,
 } from "src/app/Interfaces/patient.interface";
-import { IonList, LoadingController } from "@ionic/angular";
+import { IonList, LoadingController, ModalController } from "@ionic/angular";
 import { DataTransformerService } from "src/app/services/data-transformer.service";
+import { InterventionComponent } from './intervention/intervention.component';
+import { PraticienService } from 'src/app/services/praticien.service';
 
 @Component({
   selector: "app-vaccination",
@@ -39,8 +41,13 @@ export class VaccinationPage implements OnInit {
   constructor(
     private patientSrv: PatientService,
     private dataTransformer: DataTransformerService,
-    private loadingCtrl: LoadingController
-  ) { }
+    private loadingCtrl: LoadingController,
+    private modalCtrl: ModalController,
+    private praticienSrv: PraticienService
+  ) {
+    console.log("VaccinationPage -> constructor");
+    this.initializeItems();
+  }
 
   checkStatus(status, etat) {
     if (status == 1) {
@@ -57,8 +64,6 @@ export class VaccinationPage implements OnInit {
   ngOnInit() {
     console.log("VaccinationPage -> ngOnInit -> ngOnInit");
     this.presentLoading();
-
-    this.initializeItems();
   }
   filterItems(ev) {
     const query = ev.target.value.toLowerCase();
@@ -80,11 +85,16 @@ export class VaccinationPage implements OnInit {
   initializeItems() {
     // this.patientSrv.getCarnetVaccinationId(3);
     this.getAllVaccin();
+    this.praticienSrv.getAllPraticien().subscribe(data => {
+      console.log("VaccinationPage -> initializeItems -> data", data)
+      this.praticiens = data;
+    });
+
   }
 
   getAllVaccin() {
     this.patientSrv.getVaccinByPatient().subscribe((data) => {
-      console.log("VaccinationPage -> getAllVaccin -> data", data)
+      console.log("VaccinationPage -> getAllVaccin -> data", data);
       this.vaccins = data;
       this.vaccinsShow = this.dataTransformer.allData(data, this.STRING_DATE).data;
       this.vaccinsFiltered = this.dataTransformer.allData(data, this.STRING_DATE).dataByDate;
@@ -101,5 +111,22 @@ export class VaccinationPage implements OnInit {
     });
 
     await loading.present();
+  }
+
+  async openNewRdvModal(nom_vaccin) {
+    console.log("VaccinationPage -> openNewRdvModal -> nom_vaccin", nom_vaccin)
+    const newRdvModal = await this.modalCtrl.create({
+      component: InterventionComponent,
+      cssClass: "test-class",
+      swipeToClose: true,
+      componentProps: {
+        praticiens: this.praticiens,
+        nomVaccin: nom_vaccin,
+      },
+    });
+    newRdvModal.onDidDismiss().then(() => {
+      this.initializeItems();
+    });
+    return await newRdvModal.present();
   }
 }

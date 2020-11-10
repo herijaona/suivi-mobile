@@ -40,6 +40,20 @@ export class AuthService {
     });
   }
 
+  checkEtat(credentials) {
+    const header = new HttpHeaders({
+      "Content-Type": "application/json",
+      Accept: "application/json",
+    });
+
+    // TODO APK: à decommenter
+    const res = this.http
+      .post(`${this.url}/api/check-etat`, credentials, {
+        headers: header,
+      })
+    return res;
+  }
+
   checkToken() {
     this.storage.get(TOKEN_KEY).then((token) => {
       if (token) {
@@ -139,5 +153,17 @@ export class AuthService {
     if (this.user) {
       return this.user["roles"];
     }
+  }
+
+  activateAccount(data) {
+    const header = new HttpHeaders({
+      "Content-Type": "application/json",
+      Accept: "application/json",
+    });
+    const res = this.http
+      .post(`${this.url}/api/register/activate`, { code: data }, {
+        headers: header,
+      })
+    return res;
   }
 }

@@ -47,12 +47,20 @@ export class LoginPage implements OnInit {
     //     this.loadingCtrl.dismiss();
     //   });
 
-    // TODO: APK à suprimé - juste pour test apk
-    this.authService
-      .login(this.credentialsForm.value, this.loadingCtrl)
-      .subscribe((data) => {
+
+    this.authService.checkEtat(this.credentialsForm.value).subscribe((data) => {
+      if (data[0] == 1) {
+        this.authService
+          .login(this.credentialsForm.value, this.loadingCtrl)
+          .subscribe((data) => {
+            this.loadingCtrl.dismiss();
+          });
+      } else {
+        this.navCtrl.navigateRoot("/account-activation");
         this.loadingCtrl.dismiss();
-      });
+      }
+    });
+
   }
 
   goBack() {

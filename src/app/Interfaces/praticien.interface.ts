@@ -22,7 +22,10 @@ export interface IUserPraticien {
   lastName: String;
   fonction: String;
   phoneProfessional: String;
+  state: String;
+  city: String;
 }
+
 
 export interface IPraticienPropRdv {
   patient: {
@@ -46,15 +49,15 @@ export interface IRegisterPraticien {
   first_name: String;
   last_name: String;
   sexe: String;
-  date_on_born: Date;
+  date_born: Date;
   city: Number;
   state: Number;
+  fonction: String;
   phone: String;
   roles: String;
   username: String; // Generer automatiquement
   address: String;
   password: String;
   email: String;
-  father_name: String;
-  mother_name: String;
 }
+

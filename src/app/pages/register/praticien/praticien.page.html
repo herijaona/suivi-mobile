@@ -1,5 +1,6 @@
 <ion-header>
   <ion-toolbar>
+    <span *ngIf="praticienRegisterForm.valid; then myUserName()"></span>
     <ion-title slot="start">Praticien</ion-title>
     <ion-title slot="end" color="tertiary" class="identifiant"
       >{{_id}}</ion-title
@@ -63,17 +64,6 @@
             </div>
           </ng-container>
         </div>
-        <ion-item lines="full">
-          <ion-label position="stacked">Adult / Enfant</ion-label>
-          <ion-select
-            placeholder="Type de patient"
-            formControlName="type_patient"
-            required
-          >
-            <ion-select-option value="1">Adult</ion-select-option>
-            <ion-select-option value="2">Enfant</ion-select-option>
-          </ion-select>
-        </ion-item>
 
         <ion-item lines="full">
           <ion-label position="stacked">Date de naissance</ion-label>
@@ -88,6 +78,45 @@
             <div
               class="error-message"
               *ngIf="praticienRegisterForm.get('date_on_born').hasError(validation.type)"
+            >
+              {{ validation.message }}
+            </div>
+          </ng-container>
+        </div>
+
+        <ion-item lines="full">
+          <ion-label position="stacked">Sexe</ion-label>
+          <ion-select placeholder="Select" formControlName="sexe" required>
+            <ion-select-option>Masculin</ion-select-option>
+            <ion-select-option>Feminin</ion-select-option>
+          </ion-select>
+        </ion-item>
+        <div class="validation-errors">
+          <ng-container *ngFor="let validation of validation_msg.sexe">
+            <div
+              class="error-message"
+              *ngIf="praticienRegisterForm.get('sexe').hasError(validation.type)"
+            >
+              {{ validation.message }}
+            </div>
+          </ng-container>
+        </div>
+
+        <ion-item lines="full" [disabled]="!this.functions">
+          <ion-label position="stacked">Function</ion-label>
+          <ion-select placeholder="Select" formControlName="function" required>
+            <ng-container *ngFor="let item of this.functions">
+              <ion-select-option value="{{item.id}}"
+                >{{item.NomFonction}}</ion-select-option
+              >
+            </ng-container>
+          </ion-select>
+        </ion-item>
+        <div class="validation-errors">
+          <ng-container *ngFor="let validation of validation_msg.function">
+            <div
+              class="error-message"
+              *ngIf="praticienRegisterForm.get('function').hasError(validation.type)"
             >
               {{ validation.message }}
             </div>
@@ -141,54 +170,15 @@
           </ng-container>
         </div>
 
-        <ion-item lines="full" [disabled]="!this.functions">
-          <ion-label position="stacked">Function</ion-label>
-          <ion-select placeholder="Select" formControlName="function" required>
-            <ng-container *ngFor="let item of this.functions">
-              <ion-select-option value="{{item.id}}"
-                >{{item.NomFonction}}</ion-select-option
-              >
-            </ng-container>
-          </ion-select>
-        </ion-item>
-        <div class="validation-errors">
-          <ng-container *ngFor="let validation of validation_msg.function">
-            <div
-              class="error-message"
-              *ngIf="praticienRegisterForm.get('function').hasError(validation.type)"
-            >
-              {{ validation.message }}
-            </div>
-          </ng-container>
-        </div>
-
         <ion-item lines="full">
-          <ion-label position="stacked">Télephone</ion-label>
-          <ion-input type="text" required formControlName="phone"></ion-input>
+          <ion-label position="stacked">Email</ion-label>
+          <ion-input type="text" required formControlName="email"></ion-input>
         </ion-item>
         <div class="validation-errors">
-          <ng-container *ngFor="let validation of validation_msg.phone">
+          <ng-container *ngFor="let validation of validation_msg.email">
             <div
               class="error-message"
-              *ngIf="praticienRegisterForm.get('phone').hasError(validation.type)"
-            >
-              {{ validation.message }}
-            </div>
-          </ng-container>
-        </div>
-
-        <ion-item lines="full">
-          <ion-label position="stacked">Sexe</ion-label>
-          <ion-select placeholder="Select" formControlName="sexe" required>
-            <ion-select-option>Masculin</ion-select-option>
-            <ion-select-option>Feminin</ion-select-option>
-          </ion-select>
-        </ion-item>
-        <div class="validation-errors">
-          <ng-container *ngFor="let validation of validation_msg.sexe">
-            <div
-              class="error-message"
-              *ngIf="praticienRegisterForm.get('sexe').hasError(validation.type)"
+              *ngIf="praticienRegisterForm.get('email').hasError(validation.type)"
             >
               {{ validation.message }}
             </div>
@@ -210,57 +200,15 @@
           </ng-container>
         </div>
 
-        <ion-item
-          lines="full"
-          *ngIf="this.praticienRegisterForm.value['type_patient'] == 2"
-        >
-          <ion-label position="stacked">Nom du père</ion-label>
-          <ion-input type="text" formControlName="father_name"></ion-input>
-        </ion-item>
-        <div
-          class="validation-errors"
-          *ngIf="this.praticienRegisterForm.value['type_patient'] == 2"
-        >
-          <ng-container *ngFor="let validation of validation_msg.father_name">
-            <div
-              class="error-message"
-              *ngIf="praticienRegisterForm.get('father_name').hasError(validation.type)"
-            >
-              {{ validation.message }}
-            </div>
-          </ng-container>
-        </div>
-
-        <ion-item
-          lines="full"
-          *ngIf="this.praticienRegisterForm.value['type_patient'] == 2"
-        >
-          <ion-label position="stacked">Nom de la mère</ion-label>
-          <ion-input type="text" formControlName="mother_name"></ion-input>
-        </ion-item>
-        <div
-          class="validation-errors"
-          *ngIf="this.praticienRegisterForm.value['type_patient'] == 2"
-        >
-          <ng-container *ngFor="let validation of validation_msg.mother_name">
-            <div
-              class="error-message"
-              *ngIf="praticienRegisterForm.get('mother_name').hasError(validation.type)"
-            >
-              {{ validation.message }}
-            </div>
-          </ng-container>
-        </div>
-
         <ion-item lines="full">
-          <ion-label position="stacked">Email</ion-label>
-          <ion-input type="text" required formControlName="email"></ion-input>
+          <ion-label position="stacked">Télephone</ion-label>
+          <ion-input type="text" required formControlName="phone"></ion-input>
         </ion-item>
         <div class="validation-errors">
-          <ng-container *ngFor="let validation of validation_msg.email">
+          <ng-container *ngFor="let validation of validation_msg.phone">
             <div
               class="error-message"
-              *ngIf="praticienRegisterForm.get('email').hasError(validation.type)"
+              *ngIf="praticienRegisterForm.get('phone').hasError(validation.type)"
             >
               {{ validation.message }}
             </div>

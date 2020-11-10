@@ -39,7 +39,7 @@
       </ion-card-content>
     </ion-card>
 
-    <ion-card>
+    <ion-card *ngIf="this.trackStatsMock.length != 0">
       <ion-card-title>States</ion-card-title>
       <ion-card-content>
         <ion-item

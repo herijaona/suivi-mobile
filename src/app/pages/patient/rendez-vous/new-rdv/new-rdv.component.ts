@@ -23,7 +23,7 @@ export class NewRdvComponent implements OnInit {
     private navParms: NavParams,
     private modalCtrl: ModalController,
     private storage: Storage
-  ) {}
+  ) { }
 
   async ngOnInit() {
     this.propositionForm = new FormGroup({
@@ -48,22 +48,22 @@ export class NewRdvComponent implements OnInit {
   }
 
   async propose() {
-    const prop: IRdvPatient = {
-      description: this.propositionForm.value.description,
-      praticien: this.propositionForm.value.praticien,
-      typeRdv: this.propositionForm.value.typeRdv,
-      dateRdv: this.propositionForm.value.dateRdv,
-      heureRdv: this.propositionForm.value.heureRdv,
-      // id: await this.praticienSrvc.getUserIDByStorage(),
-      id: 0,
-    };
+    // const prop: IRdvPatient = {
+    //   description: this.propositionForm.value.description,
+    //   praticien: this.propositionForm.value.praticien,
+    //   // typeRdv: this.propositionForm.value.typeRdv,
+    //   // dateRdv: this.propositionForm.value.dateRdv,
+    //   // heureRdv: this.propositionForm.value.heureRdv,
+    //   // id: await this.praticienSrvc.getUserIDByStorage(),
+    //   id: 0,
+    // };
 
     console.log(
       this.propositionForm.value.patient,
       this.propositionForm.value.dateRdv,
       this.propositionForm.value.description,
       this.propositionForm.value.heureRdv,
-      prop.id
+      // prop.id
     );
     if (this.propositionForm.valid) {
       console.log(" proposition envoyé ");

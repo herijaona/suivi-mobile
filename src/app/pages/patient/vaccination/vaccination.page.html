@@ -136,13 +136,13 @@
                       <p *ngIf="eachVaccination.identification == null">
                         Type de vaccin :
                         <span>
-                          {{eachVaccination.identification}}eachVaccination.identification</span
+                          {{eachVaccination.identification}}IDENTIFICATION</span
                         >
                       </p>
                       <p *ngIf="eachVaccination.identifiant_vaccin== null">
                         Identifiant vaccin :
                         <span>
-                          {{eachVaccination.identifiant_vaccin}}eachVaccination.identifiant_vaccin</span
+                          {{eachVaccination.identifiant_vaccin}}VACC_TYPE</span
                         >
                       </p>
                       <p>
@@ -162,7 +162,11 @@
                   eachVaccination.etat) ===this.PENDINGSTATUS"
             >
               <ion-col class="btn-cnfrm">
-                <ion-button expand="block" color="sgreen">
+                <ion-button
+                  expand="block"
+                  color="sgreen"
+                  (click)="openNewRdvModal(eachVaccination.vaccinName)"
+                >
                   <ion-icon
                     slot="start"
                     name="checkmark-circle-outline"

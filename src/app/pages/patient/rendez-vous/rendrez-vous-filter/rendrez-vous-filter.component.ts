@@ -11,21 +11,21 @@ export class RendrezVousFilterComponent {
   ios: boolean;
 
   trackStatsMock: { name: string; icon: string; isChecked: boolean }[] = [
-    {
-      name: "Accepted",
-      icon: "",
-      isChecked: true,
-    },
-    {
-      name: "Refused",
-      icon: "",
-      isChecked: true,
-    },
-    {
-      name: "Pending",
-      icon: "",
-      isChecked: true,
-    },
+    // {
+    //   name: "ANNULE",
+    //   icon: "",
+    //   isChecked: true,
+    // },
+    // {
+    //   name: "EN ATTENTE",
+    //   icon: "",
+    //   isChecked: true,
+    // },
+    // {
+    //   name: "REALiSE",
+    //   icon: "",
+    //   isChecked: true,
+    // },
   ];
 
   trackTypeMock: { name: string; icon: string; isChecked: boolean }[] = [
@@ -39,11 +39,11 @@ export class RendrezVousFilterComponent {
       icon: "",
       isChecked: true,
     },
-    {
-      name: "Vaccination",
-      icon: "",
-      isChecked: true,
-    },
+    // {
+    //   name: "Vaccination",
+    //   icon: "",
+    //   isChecked: true,
+    // },
   ];
 
   public tracksStates: {
@@ -58,7 +58,7 @@ export class RendrezVousFilterComponent {
     private config: Config,
     public modalCtrl: ModalController,
     public navParams: NavParams
-  ) {}
+  ) { }
 
   ionViewWillEnter() {
     this.ios = this.config.get("mode") === `ios`;

@@ -1,12 +1,13 @@
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
-import { IPatient, IProfilePatient, IRegisterPatient, IVaccinPatient } from "../Interfaces/patient.interface";
+import { IPatient, IRegisterPatient, IVaccinPatient, IProfilePatient } from "../Interfaces/patient.interface";
 
 import { from } from "rxjs";
 import { CONSTANT } from "src/constant";
 import { HttpClient } from "@angular/common/http";
 import { map } from "rxjs/operators";
 import { environment } from "src/environments/environment";
+import { IUserPraticien } from '../Interfaces/praticien.interface';
 
 @Injectable({
   providedIn: "root",
@@ -29,11 +30,12 @@ export class PatientService {
   }
 
   getAllRdv() {
-    return this.http.get(CONSTANT.MOCK_DATA_JSON).pipe(
-      map((data: any) => {
-        return data.mockRdvListPatient;
-      })
-    );
+    return this.http.get(`${this.url_apip}patients/rdv`);
+    // return this.http.get(CONSTANT.MOCK_DATA_JSON).pipe(
+    //   map((data: any) => {
+    //     return data.mockRdvListPatient;
+    //   })
+    // );
   }
 
   getTracksRdv(excludeTracks?) {
@@ -76,5 +78,19 @@ export class PatientService {
 
   updateProfile(data) {
     return this.http.post(`${this.url_apip}patient/profile/edit`, data);
+  }
+
+  getAssociatedPraticians(): Observable<IUserPraticien[]> {
+    const res = this.http.get<IUserPraticien[]>(`${this.url_apip}patients/praticien`);
+    res.subscribe(data => {
+      console.log("PatientService -> constructor -> res", data);
+    })
+    return res;
+  }
+
+  getFamily() {
+    const res = this.http.get(`${this.url_apip}patients/family`);
+    console.log("PatientService -> getFamily -> res", res)
+    return res;
   }
 }

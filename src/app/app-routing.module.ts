@@ -38,6 +38,10 @@ const routes: Routes = [
         (m) => m.PraticienPageModule
       ),
   },
+  {
+    path: 'account-activation',
+    loadChildren: () => import('./pages/account-activation/account-activation.module').then( m => m.AccountActivationPageModule)
+  },
 ];
 
 @NgModule({

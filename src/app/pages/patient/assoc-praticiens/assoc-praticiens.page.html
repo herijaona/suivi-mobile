@@ -4,7 +4,7 @@
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
     <ion-menu-button *ngIf="ios"></ion-menu-button>
-    <ion-title *ngIf="!ios && !showSearchbar">Famille</ion-title>
+    <ion-title *ngIf="!ios && !showSearchbar">My Praticians </ion-title>
     <ion-searchbar
       *ngIf="showSearchbar"
       showCancelButton="always"
@@ -21,38 +21,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content *ngIf="!HAVE_A_MEMBER">
-  <ion-button
-    (click)="showAddGroup()"
-    expand="block"
-    fill="clear"
-    color="primary"
-    class="ion-text-center"
-  >
-    <ion-icon name="chevron-down-outline" *ngIf="!ADD_GROUP"></ion-icon>
-    <ion-icon name="chevron-up-outline" *ngIf="ADD_GROUP"></ion-icon>
-    <ion-label>
-      &nbsp;&nbsp; Créer un groupe de famille &nbsp;&nbsp;
-    </ion-label>
-    <ion-icon name="chevron-down-outline" *ngIf="!ADD_GROUP"></ion-icon>
-    <ion-icon name="chevron-up-outline" *ngIf="ADD_GROUP"></ion-icon>
-  </ion-button>
-
-  <ion-card *ngIf="ADD_GROUP">
-    <div class="ion-padding">
-      <ion-label>Nom du groupe</ion-label>
-      <ion-input type="text" required class="border-input"></ion-input>
-    </div>
-    <ion-button color="success" expand="full" (click)="createGroup()">
-      validé
-    </ion-button>
-    <ion-button color="sred" expand="block" (click)="showAddGroup()">
-      Annulé
-    </ion-button>
-  </ion-card>
-</ion-content>
-
-<ion-content *ngIf="HAVE_A_MEMBER">
+<ion-content>
   <ion-list #scheduleList>
     <ion-item-group>
       <ion-item-sliding #slidingItem>

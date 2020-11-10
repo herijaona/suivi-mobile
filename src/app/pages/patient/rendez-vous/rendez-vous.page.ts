@@ -40,9 +40,12 @@ export class RendezVousPage implements OnInit {
   showSearchbar: boolean;
   rdvFiltered: any = [];
   praticiens: IUserPraticien[];
-  public OKSTATUS = "Accepted";
-  public NOPSTATUS = "Refused";
-  public PENDSTATUS = "Pending";
+  public REALIZED = "REALISE";
+  public CANCELED = "ANNULE";
+  public SCHEDULED = "PLANIFIER";
+  public PENDING = "EN ATTENTE";
+  STRING_DATE = "dateRdv";
+  STRING2_DATE = "dateConsultation";
   constructor(
     public alertCtrl: AlertController,
     public patientSrvc: PatientService, // TODO : list of data
@@ -55,7 +58,7 @@ export class RendezVousPage implements OnInit {
     public config: Config,
     private dataTransformer: DataTransformerService,
     private globaleEl: GlobalElementInjectionService
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.getAllData();
@@ -67,7 +70,7 @@ export class RendezVousPage implements OnInit {
     this.rdvFiltered = this.dataTransformer.onlyAccepted(
       this.rdvFiltered,
       "status",
-      this.OKSTATUS,
+      this.REALIZED,
       this.segment
     );
   }
@@ -90,8 +93,9 @@ export class RendezVousPage implements OnInit {
 
   getAllData() {
     this.patientSrvc.getAllRdv().subscribe((data: any) => {
-      this.rdvs = data; // TODO: Data from DB
-      const result = this.dataTransformer.allData(data);
+      console.log("RendezVousPage -> getAllData -> data", data)
+      this.rdvs = data;
+      const result = this.allData(data, this.STRING_DATE, this.STRING2_DATE);
       this.allBrute = result;
       this.rdvShow = result.data;
       this.rdvFiltered = result.dataByDate;
@@ -147,7 +151,7 @@ export class RendezVousPage implements OnInit {
       this.excludeTracksTypes = data.types;
       this.rdvFiltered = this.dataTransformer.hideOnexclude(
         data.fuseData,
-        ["type", "status"],
+        ["type"],
         this.segment,
         this.rdvFiltered
       );
@@ -172,10 +176,66 @@ export class RendezVousPage implements OnInit {
   }
 
   alertAcceptRdv(id) {
-    this.globaleEl.alertAccept(id, this.rdvs, "status", this.OKSTATUS);
+    this.globaleEl.alertAccept(id, this.rdvs, "status", this.REALIZED);
   }
 
   alertRemoveRdv(id) {
-    this.globaleEl.alertRemove(id, this.rdvs, "status", this.NOPSTATUS);
+    this.globaleEl.alertRemove(id, this.rdvs, "status", this.CANCELED);
+  }
+
+  allData(list, string_date = "date", string2_date = "date"): { data: any[]; dataByDate: { date: string; groups: any }[] } {
+    let dataShow: any[] = [];
+    list.forEach((element) => {
+      const dataToPush = Object.assign(element, { show: true });
+      dataShow.push(dataToPush);
+    });
+    const listByDate = this.regroupDataByDate([...dataShow], string_date, string2_date);
+    const res = {
+      data: dataShow,
+      dataByDate: listByDate,
+    };
+    return res;
+  }
+  // Regrouper les données en fonction de la date
+  regroupDataByDate(data, string_date, string2_date) {
+    console.log("regroupDataByDate -> string_date **** ", string_date)
+    const groups = data.reduce((groups, eachData) => {
+      console.log("regroupDataByDate -> eachData", eachData)
+      const true_date = eachData[string_date] !== undefined ? eachData[string_date].date : eachData[string2_date].date;
+      const type_rdv = eachData[string_date] !== undefined ? "intervention" : "consultation";
+      const result = Object.assign(eachData, { type: type_rdv });
+      const date = true_date;
+      if (!groups[date]) {
+        groups[date] = [];
+      }
+      groups[date].push(result);
+      return groups;
+    }, {});
+
+    const groupArrays = Object.keys(groups).map((date) => {
+      return {
+        date,
+        groups: groups[date],
+      };
+    });
+    const sortedActivities = groupArrays.slice().sort(function (a, b) {
+      return new Date(a.date).getTime() - new Date(b.date).getTime();
+    });
+    console.log("regroupDataByDate -> sortedActivities", sortedActivities)
+    return sortedActivities;
+  }
+
+  checkStatus(statusConsultation, etat) {
+    if (statusConsultation == 0) {
+      return this.PENDING;
+    } else if (statusConsultation == 1) {
+      if (etat == 0) {
+        return this.SCHEDULED; // Bouton cancel
+      } else {
+        return this.REALIZED;
+      }
+    } else {
+      return this.CANCELED;
+    }
   }
 }

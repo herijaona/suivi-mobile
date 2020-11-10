@@ -1,0 +1,45 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title slot="start" color="tertiary" class="identifiant"
+      >Activé votre compte</ion-title
+    >
+  </ion-toolbar>
+</ion-header>
+<div class="topContent">
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title class="ion-text-center">
+        <img
+          src="../../../../assets/images/logo_matipla.png"
+          srcset=""
+          width="150px"
+          class="mb-2"
+        />
+      </ion-card-title>
+    </ion-card-header>
+  </ion-card>
+</div>
+
+<ion-content>
+  <ion-card>
+    <ion-card-content>
+      <div class="ion-padding">
+        <ion-label>Code d'activation</ion-label>
+        <ion-input
+          type="text"
+          required
+          class="border-input"
+          [(ngModel)]="code"
+        ></ion-input>
+      </div>
+
+      <ion-button color="success" expand="block" (click)="activateAccount()">
+        Activé
+      </ion-button>
+      <ion-button [routerLink]="['/login']" color="primary" expand="block">
+        Connexion
+      </ion-button>
+      <a [routerLink]="['/register']" class="small-text">inscription</a>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

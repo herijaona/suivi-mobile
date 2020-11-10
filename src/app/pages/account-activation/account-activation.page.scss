@@ -1,20 +1,13 @@
 ion-card {
-  flex-basis: 100%;
   box-shadow: none !important;
 }
-
-.profile_famille {
-  width: 50%;
-  height: 50%;
+.identifiant {
+  font-style: italic;
+  font-size: medium;
+  color: var(--ion-color-sred);
+  padding-right: 30px;
+  font-size: 18px;
 }
-
-.fonction {
-  color: var(--ion-color-primary);
-}
-.name {
-  font-weight: bold;
-}
-
 .topContent {
   background-color: white;
 }

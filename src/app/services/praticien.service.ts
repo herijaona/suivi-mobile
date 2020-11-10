@@ -7,6 +7,7 @@ import {
 import {
   IPraticienPropRdv,
   IIntervention,
+  IRegisterPraticien,
 } from "../Interfaces/praticien.interface";
 
 import { IUserPraticien } from "../Interfaces/praticien.interface";
@@ -174,7 +175,7 @@ export class PraticienService {
   }
 
   getAllPraticien(): Observable<IUserPraticien[]> {
-    const data = this.http.get<IUserPraticien[]>(this.url + "praticiens");
+    const data = this.http.get<IUserPraticien[]>(this.url_api + "praticiens");
     data.subscribe((data) => {
       console.log("PraticienService -> regroupDataByDate -> data", data);
     });
@@ -183,5 +184,9 @@ export class PraticienService {
 
   getPraticienFunctions() {
     return this.http.get(this.url_api + 'fonction');
+  }
+
+  registerPraticien(data) {
+    return this.http.post<IRegisterPraticien>(`${this.url_api}users`, data);
   }
 }

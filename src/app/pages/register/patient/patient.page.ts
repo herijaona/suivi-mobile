@@ -4,6 +4,7 @@ import { NavController } from '@ionic/angular';
 import { IRegisterPatient } from 'src/app/Interfaces/patient.interface';
 import { GlobalDataService } from 'src/app/services/global-data.service';
 import { PatientService } from "src/app/services/patient.service";
+import { GlobalInteraction } from '../../global.interaction';
 
 @Component({
   selector: "app-patient",
@@ -14,6 +15,7 @@ export class PatientPage implements OnInit {
   public patientRegisterForm: FormGroup;
   private IDENTIFIANT = "Identifiant";
   public _id = this.IDENTIFIANT;
+  public ROLE = "ROLE_PATIENT";
   public country;
   public city;
   public validRegister = false;
@@ -34,7 +36,7 @@ export class PatientPage implements OnInit {
     mother_name: [{ type: "required", message: "Nom de la mère obligatoire" }],
   };
 
-  constructor(private patientSrvc: PatientService, private globalSrvc: GlobalDataService, private navCtrl: NavController) { }
+  constructor(private patientSrvc: PatientService, private globalSrvc: GlobalDataService, private navCtrl: NavController, private globalEl: GlobalInteraction) { }
 
   ngOnInit() {
     this.createForm();
@@ -60,6 +62,7 @@ export class PatientPage implements OnInit {
   }
 
   async register() {
+    this.globalEl.presentLoading();
     if (this.patientRegisterForm.valid) {
       Object.keys(this.patientRegisterForm.value).forEach((key) => {
         console.log("valid", this.patientRegisterForm.value[key]);
@@ -75,7 +78,7 @@ export class PatientPage implements OnInit {
         email: this.patientRegisterForm.value['email'],
         password: this.patientRegisterForm.value['password'],
         phone: this.patientRegisterForm.value['phone'],
-        roles: "ROLE_PATIENT",
+        roles: this.ROLE,
         username: this._id,
         type_patient: this.patientRegisterForm.value['type_patient'],
         father_name: this.patientRegisterForm.value['father_name'] == undefined ? '' : this.patientRegisterForm.value['father_name'],
@@ -84,6 +87,8 @@ export class PatientPage implements OnInit {
       this.patientSrvc.registerPatient(dataRegister).subscribe(data => {
         if (data) {
           this.navCtrl.navigateRoot('/login');
+
+          this.globalEl.dismissLoading();
         }
       });
     } else {
