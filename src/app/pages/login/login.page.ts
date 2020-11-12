@@ -73,7 +73,7 @@ export class LoginPage implements OnInit {
       cssClass: "my-loading-class",
       spinner: "bubbles",
       translucent: true,
-      duration: 10000,
+      duration: 100000,
     });
 
     await loading.present();

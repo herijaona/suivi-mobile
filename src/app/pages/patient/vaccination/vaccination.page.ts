@@ -46,7 +46,6 @@ export class VaccinationPage implements OnInit {
     private praticienSrv: PraticienService
   ) {
     console.log("VaccinationPage -> constructor");
-    this.initializeItems();
   }
 
   checkStatus(status, etat) {
@@ -63,7 +62,8 @@ export class VaccinationPage implements OnInit {
 
   ngOnInit() {
     console.log("VaccinationPage -> ngOnInit -> ngOnInit");
-    this.presentLoading();
+    this.initializeItems();
+
   }
   filterItems(ev) {
     const query = ev.target.value.toLowerCase();
@@ -84,6 +84,8 @@ export class VaccinationPage implements OnInit {
 
   initializeItems() {
     // this.patientSrv.getCarnetVaccinationId(3);
+    this.presentLoading();
+
     this.getAllVaccin();
     this.praticienSrv.getAllPraticien().subscribe(data => {
       console.log("VaccinationPage -> initializeItems -> data", data)
@@ -113,15 +115,15 @@ export class VaccinationPage implements OnInit {
     await loading.present();
   }
 
-  async openNewRdvModal(nom_vaccin) {
-    console.log("VaccinationPage -> openNewRdvModal -> nom_vaccin", nom_vaccin)
+  async openNewRdvModal(vaccin) {
+    console.warn("VaccinationPage -> openNewRdvModal -> nom_vaccin", vaccin, "/")
     const newRdvModal = await this.modalCtrl.create({
       component: InterventionComponent,
       cssClass: "test-class",
       swipeToClose: true,
       componentProps: {
         praticiens: this.praticiens,
-        nomVaccin: nom_vaccin,
+        vaccin: vaccin,
       },
     });
     newRdvModal.onDidDismiss().then(() => {

@@ -91,7 +91,9 @@ export class PraticienPage implements OnInit {
 
     this.praticienSrvc.getInfoUserID().subscribe((data) => {
       this.storage.set("_id", data.data);
-      this.praticienSrvc.getLocalUserInfo().subscribe((el) => {
+      this.praticienSrvc.getLocalUserInfo().subscribe((data: any) => {
+        const el = data.profile[0];
+        console.log("LL: PraticienPage -> initializeApp -> el", data)
         const { roles, username } = this.authSrvc.user;
         const praticien = {
           firstName: el.firstName,

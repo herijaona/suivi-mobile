@@ -78,7 +78,7 @@
                     </ion-col>
                     <ion-col class="middle" size="2" offset-md="2">
                       <ion-button
-                        *ngIf="this.checkStatus(eachRdv.statusConsultation, eachRdv.etat) === this.REALIZED"
+                        *ngIf="this.checkStatus(eachRdv._status, eachRdv.etat) === this.REALIZED"
                         class="status"
                         color="sgreen"
                         expand="block"
@@ -88,7 +88,7 @@
                       </ion-button>
 
                       <ion-button
-                        *ngIf="this.checkStatus(eachRdv.statusConsultation, eachRdv.etat) === this.CANCELED"
+                        *ngIf="this.checkStatus(eachRdv._status, eachRdv.etat) === this.CANCELED"
                         class="status"
                         color="sred"
                         expand="block"
@@ -98,13 +98,23 @@
                       </ion-button>
 
                       <ion-button
-                        *ngIf="this.checkStatus(eachRdv.statusConsultation, eachRdv.etat) === this.SCHEDULED"
+                        *ngIf="this.checkStatus(eachRdv._status, eachRdv.etat) === this.SCHEDULED"
+                        class="status"
+                        color="primary"
+                        expand="block"
+                        fill="outline"
+                      >
+                        PLANIFIER
+                      </ion-button>
+
+                      <ion-button
+                        *ngIf="this.checkStatus(eachRdv._status, eachRdv.etat) === this.PENDING"
                         class="status"
                         color="sorange"
                         expand="block"
                         fill="outline"
                       >
-                        PLANIFIER
+                        EN ATTENTE
                       </ion-button>
                     </ion-col>
                   </ion-row>
@@ -116,11 +126,11 @@
               </ion-col>
             </ion-row>
             <ion-row
-              *ngIf="this.checkStatus(eachRdv.statusConsultation, eachRdv.etat) === this.SCHEDULED"
+              *ngIf="this.checkStatus(eachRdv._status, eachRdv.etat) === this.SCHEDULED || this.checkStatus(eachRdv._status, eachRdv.etat) === this.PENDING"
             >
               <ion-col class="btn-cnfrm">
                 <ion-button
-                  (click)="alertRemoveRdv(eachRdv.id)"
+                  (click)="alertRemoveRdv(eachRdv.id, eachRdv.type)"
                   expand="block"
                   color="sred"
                 >

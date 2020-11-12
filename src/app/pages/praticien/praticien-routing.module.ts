@@ -42,12 +42,17 @@ const routes: Routes = [
             (m) => m.InterventionPageModule
           ),
       },
+      {
+        path: 'profile',
+        loadChildren: () => import('./profile/profile.module').then(m => m.ProfilePageModule)
+      },
     ],
   },
+
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class PraticienPageRoutingModule {}
+export class PraticienPageRoutingModule { }

@@ -29,7 +29,7 @@ export interface IRdvPatient {
 
 export interface IVaccinPatient {
   id: number;
-  vaccin: String;
+  vaccin: Number;
   date_prise: any;
   etat: boolean; // 0 : Waiting ; 1 : Planifié
   /*{
@@ -94,5 +94,18 @@ export interface IRegisterPatient {
 }
 
 export interface IPatientFamily {
+  id: Number,
+  lastName: String,
+  firstName: String,
+  username: String,
+  Referent: boolean,
+  patient: Number
+}
 
+export interface IPatientFamilyGroup {
+  groupe_info: {
+    id: Number;
+    Name: String;
+  };
+  groupeMember: IPatientFamily[];
 }

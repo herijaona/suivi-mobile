@@ -1,6 +1,8 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Intervention pour le vaccin {{ this.nomVaccin }}</ion-title>
+    <ion-title
+      >Intervention pour le vaccin {{ this.carnet.nomVaccin }}</ion-title
+    >
   </ion-toolbar>
 </ion-header>
 
@@ -9,26 +11,30 @@
     <ion-col size-md="6" offset-md="3">
       <ion-card>
         <ion-card-header>
-          <ion-card-title> </ion-card-title>
+          <ion-card-title
+            ><ion-text color="sred">
+              {{ this.carnet.date_prise.date | date: 'MMM dd, yyyy' }}
+            </ion-text>
+          </ion-card-title>
         </ion-card-header>
         <ion-card-content>
           <form
             [formGroup]="propositionForm"
-            (ngSubmit)="closeModal()"
+            (ngSubmit)="intervention(this.propositionForm.value['praticien'])"
             method="post"
           >
             <div class="mb-14">
               <label>choisi un praticien</label>
               <ion-select
                 placeholder="Select"
-                formControlName="patient"
+                formControlName="praticien"
                 required
               >
                 <ion-select-option
                   *ngFor="let item of praticiens"
                   [value]="item.id"
                   >{{
-                    item.firstName.toString() + " " + item.lastName.toString()
+                    item.firstName.toString() + ' ' + item.lastName.toString()
                   }}</ion-select-option
                 >
               </ion-select>

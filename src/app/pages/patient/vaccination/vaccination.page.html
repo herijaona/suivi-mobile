@@ -45,7 +45,7 @@
       <ion-item-sliding
         *ngFor="let eachVaccination of vacc.groups"
         [attr.track]="this.checkStatus(eachVaccination.status,
-                  eachVaccination.etat) | lowercase"
+        eachVaccination.etat) | lowercase"
         #slidingItem
       >
         <ion-item *ngIf="eachVaccination.show === true">
@@ -69,7 +69,7 @@
                     <ion-col class="middle" size="2" offset-md="2">
                       <ion-button
                         *ngIf="this.checkStatus(eachVaccination.status,
-                  eachVaccination.etat) === this.OKSTATUS"
+                        eachVaccination.etat) === this.OKSTATUS"
                         class="status"
                         color="sgreen"
                         expand="block"
@@ -80,7 +80,7 @@
 
                       <ion-button
                         *ngIf="this.checkStatus(eachVaccination.status,
-                  eachVaccination.etat) === this.PENDINGSTATUS"
+                        eachVaccination.etat) === this.PENDINGSTATUS"
                         class="status"
                         color="sorange"
                         expand="block"
@@ -91,7 +91,7 @@
 
                       <ion-button
                         *ngIf="this.checkStatus(eachVaccination.status,
-                  eachVaccination.etat) === this.PLANIFIED"
+                        eachVaccination.etat) === this.PLANIFIED"
                         class="status"
                         color="tertiary"
                         expand="block"
@@ -103,7 +103,8 @@
                   </ion-row>
                   <!-- Vaccinateur -->
                   <ion-row
-                    *ngIf="eachVaccination.vaccinateur_nom == null && eachVaccination.vaccinateur_prenom == null"
+                    *ngIf="eachVaccination.vaccinateur_nom == null &&
+                    eachVaccination.vaccinateur_prenom == null"
                   >
                     <br />
 
@@ -159,13 +160,13 @@
             </ion-row>
             <ion-row
               *ngIf="this.checkStatus(eachVaccination.status,
-                  eachVaccination.etat) ===this.PENDINGSTATUS"
+              eachVaccination.etat) ===this.PENDINGSTATUS"
             >
               <ion-col class="btn-cnfrm">
                 <ion-button
                   expand="block"
                   color="sgreen"
-                  (click)="openNewRdvModal(eachVaccination.vaccinName)"
+                  (click)="openNewRdvModal(eachVaccination)"
                 >
                   <ion-icon
                     slot="start"

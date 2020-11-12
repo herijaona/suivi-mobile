@@ -96,6 +96,7 @@ export class HttpConfigInterceptorService implements HttpInterceptor {
         return next.handle(cloneReq).pipe(
           catchError((error) => {
             const status = error.status;
+            console.warn("LL: HttpConfigInterceptorService -> error", error.message)
             const reason =
               error && error.error.reason ? error.error.reason : "";
 

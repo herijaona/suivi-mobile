@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { IonList } from '@ionic/angular';
 import { IUserPraticien } from 'src/app/Interfaces/praticien.interface';
 import { PatientService } from 'src/app/services/patient.service';
+import { GlobalInteraction } from '../../global.interaction';
 
 @Component({
   selector: 'app-assoc-praticiens',
@@ -14,9 +15,10 @@ export class AssocPraticiensPage implements OnInit {
   ios: boolean;
   showSearchbar: boolean;
   assoc_praticiens: IUserPraticien[] = [];
-  constructor(public patientSrvc: PatientService) { }
+  constructor(public patientSrvc: PatientService, private globalItem: GlobalInteraction) { }
 
   ngOnInit() {
+    this.globalItem.presentLoading();
     this.getAllMyPraticians();
   }
   updateRdvList() {
@@ -27,9 +29,8 @@ export class AssocPraticiensPage implements OnInit {
 
   getAllMyPraticians() {
     this.patientSrvc.getAssociatedPraticians().subscribe(data => {
-      for (let i = 0; i < 4; i++) {
-        this.assoc_praticiens.push(data[0]);
-      };
+      this.assoc_praticiens = data;
+      this.globalItem.dismissLoading();
     })
   }
 }

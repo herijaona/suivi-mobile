@@ -1,42 +1,68 @@
-import { Component, Input, OnInit } from "@angular/core";
-import { FormControl, FormGroup, Validators } from "@angular/forms";
-import { ModalController, NavController, NavParams } from "@ionic/angular";
-import { Storage } from "@ionic/storage";
-import { IPatient, IRdvPatient } from "src/app/Interfaces/patient.interface";
-import { IUserPraticien } from "src/app/Interfaces/praticien.interface";
-import { PraticienService } from "src/app/services/praticien.service";
+import { Component, Input, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { ModalController, NavController, NavParams } from '@ionic/angular';
+import { Storage } from '@ionic/storage';
+import { IPatient, IRdvPatient } from 'src/app/Interfaces/patient.interface';
+import { IUserPraticien } from 'src/app/Interfaces/praticien.interface';
+import { GlobalInteraction } from 'src/app/pages/global.interaction';
+import { GlobalDataService } from 'src/app/services/global-data.service';
+import { PatientService } from 'src/app/services/patient.service';
+import { PraticienService } from 'src/app/services/praticien.service';
 
 @Component({
-  selector: "app-new-rdv",
-  templateUrl: "./new-rdv.component.html",
-  styleUrls: ["./new-rdv.component.scss"],
+  selector: 'app-new-rdv',
+  templateUrl: './new-rdv.component.html',
+  styleUrls: ['./new-rdv.component.scss'],
 })
 export class NewRdvComponent implements OnInit {
   @Input() test: String;
-  @Input() praticiens: IUserPraticien[];
+  @Input() functions;
 
+  public countries;
+  public cities;
+  praticiens: IUserPraticien[];
   public propositionForm: FormGroup;
+  showCheckBoxAssoc = false;
+  after_praticien_choice = false;
+
   selected: any;
   constructor(
-    private praticienSrvc: PraticienService,
+    private praticienSrv: PraticienService,
+    private patientServc: PatientService,
     private navCtrl: NavController,
     private navParms: NavParams,
     private modalCtrl: ModalController,
-    private storage: Storage
+    private storage: Storage,
+    private globalDataSrvc: GlobalDataService,
+    private globalInt: GlobalInteraction
   ) { }
 
   async ngOnInit() {
-    this.propositionForm = new FormGroup({
-      praticien: new FormControl("", [Validators.required]),
-      typeRdv: new FormControl("", [Validators.required]),
-      dateRdv: new FormControl("", [Validators.required]),
-      heureRdv: new FormControl("", [Validators.required]),
-      description: new FormControl("", [Validators.required]),
-    });
+    this.after_praticien_choice = false;
 
-    this.praticiens = this.navParms.get("praticiens");
-    this.praticiens.forEach((element) => {
-      console.log("NewRdvComponent -> patients", element.firstName);
+    // this.praticiens = this.navParms.get('praticiens');
+    this.navParms.get('functions') != undefined
+      ? (this.functions = this.navParms.get('functions'))
+      : this.getAllfonction();
+
+    this.propositionForm = new FormGroup({
+      praticien: new FormControl({ value: this.praticiens, disabled: false }, [
+        Validators.required,
+      ]),
+      fonction: new FormControl({ value: this.functions, disabled: false }, [
+        Validators.required,
+      ]),
+      country: new FormControl({ value: this.countries, disabled: false }, [
+        Validators.required,
+      ]),
+      city: new FormControl({ value: this.cities, disabled: false }, [
+        Validators.required,
+      ]),
+      typeRdv: new FormControl('', [Validators.required]),
+      // dateRdv: new FormControl('', [Validators.required]),
+      // heureRdv: new FormControl('', [Validators.required]),
+      description: new FormControl(),
+      chekcboxAssoc: new FormControl(),
     });
   }
 
@@ -46,7 +72,91 @@ export class NewRdvComponent implements OnInit {
       (dataFormStep.get(field).untouched && !dataFormStep.get(field).valid)
     );
   }
+  getAllfonction() {
+    this.after_praticien_choice = false;
+    this.praticienSrv.getPraticienFunctions().subscribe((data) => {
+      this.functions = data;
+    });
+  }
 
+  getCountryByFunction(_idFunction) {
+    this.globalDataSrvc
+      .getCountryByPratictitionerFunction(_idFunction)
+      .subscribe((data: []) => {
+        console.log(
+          'LL: NewRdvComponent -> getCountryByFunction -> data',
+          data
+        );
+        if (data.length == 0) {
+          const VIDE = "Il n'y a pas de praticien présent dans ce pays";
+          console.warn(
+            'LL: NewRdvComponent -> getCountryByFunction -> VIDE',
+            VIDE
+          );
+          this.globalInt.presentToast(VIDE);
+        }
+        this.countries = data;
+      });
+  }
+
+  getCityByFunctionAndCountry(_idFunction, _idCountry) {
+    this.after_praticien_choice = false;
+    this.globalDataSrvc
+      .getCityByPractitionerFunctionAndCountry(_idFunction, _idCountry)
+      .subscribe((data: []) => {
+        console.log(
+          'LL: NewRdvComponent -> getCityByFunctionAndCountry -> data',
+          data
+        );
+
+        if (data.length == 0) {
+          const VIDE = "Il n'y a pas de praticien présent dans ce pays";
+          console.warn(
+            'LL: NewRdvComponent -> getCityByFunctionAndCountry -> VIDE',
+            VIDE
+          );
+          this.globalInt.presentToast(VIDE);
+        }
+        this.cities = data;
+      });
+  }
+
+  getPractitionerByFunctionCountryAndCity(_idFunction, _idCountry, _idCity) {
+    this.after_praticien_choice = false;
+    this.globalDataSrvc
+      .getPractitionerByFunctionCountryAndCity(_idFunction, _idCountry, _idCity)
+      .subscribe((data: []) => {
+        console.log(
+          'LL: NewRdvComponent -> getPractitionerByFunctionCountryAndCity -> data',
+          data
+        );
+
+        if (data.length == 0) {
+          const VIDE = "Il n'y a pas de praticien présent dans ce pays";
+          console.warn(
+            'LL: NewRdvComponent -> getPractitionerByFunctionCountryAndCity -> VIDE',
+            VIDE
+          );
+          this.globalInt.presentToast(VIDE);
+        }
+        this.praticiens = data;
+      });
+  }
+
+  chekcPractitionerAssocOrNot(_idPraticien) {
+    const OK = 'OK';
+    this.patientServc
+      .chekIfPractitionerIsAssociated(_idPraticien)
+      .subscribe((isOK: { status }) => {
+        console.log("LL: NewRdvComponent -> chekcPractitionerAssocOrNot -> isOK", isOK)
+        if (isOK.status === OK) {
+          this.showCheckBoxAssoc = true;
+        } else {
+          this.showCheckBoxAssoc = false;
+        }
+        this.after_praticien_choice = true;
+      });
+  }
   async propose() {
     // const prop: IRdvPatient = {
     //   description: this.propositionForm.value.description,
@@ -58,30 +168,41 @@ export class NewRdvComponent implements OnInit {
     //   id: 0,
     // };
 
-    console.log(
-      this.propositionForm.value.patient,
-      this.propositionForm.value.dateRdv,
-      this.propositionForm.value.description,
-      this.propositionForm.value.heureRdv,
-      // prop.id
-    );
     if (this.propositionForm.valid) {
-      console.log(" proposition envoyé ");
+      let data_to_send;
+      if (this.propositionForm.value['chekcboxAssoc'] == true) {
 
-      // this.praticienSrvc.proposeRdv(prop); //TODO: post proposition
-      this.backToList();
+        data_to_send = {
+          praticien: this.propositionForm.value['praticien'],
+          typeRdv: this.propositionForm.value['typeRdv'],
+          objet: this.propositionForm.value['description'],
+          Associer: 1,
+        };
+      } else {
+        data_to_send = {
+          praticien: this.propositionForm.value['praticien'],
+          typeRdv: this.propositionForm.value['typeRdv'],
+          objet: this.propositionForm.value['description'],
+        };
+      }
+      console.error("###################=>  LL: NewRdvComponent -> propose -> data_to_send", data_to_send)
+      this.patientServc.proposeRdv(data_to_send).subscribe((dataV) => {
+        console.log("###################=> LL: NewRdvComponent -> propose -> data", dataV)
+        this.backToList();
+      })
     } else {
-      console.log(" not valid ");
+      console.log(' not valid ');
+      this.globalInt.presentToast('completé les champs !!');
     }
   }
 
   backToList() {
-    this.navCtrl.navigateRoot("/praticien/proposition-rdv");
     this.dismiss();
+    this.navCtrl.navigateRoot('/patient/rendez-vous');
   }
 
   async cancel() {
-    console.log(" cancel ");
+    console.log(' cancel ');
     this.backToList();
   }
 

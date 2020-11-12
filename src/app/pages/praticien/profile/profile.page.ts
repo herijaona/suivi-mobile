@@ -4,6 +4,7 @@ import { LoadingController, ToastController } from '@ionic/angular';
 import { IProfilePatient } from "src/app/Interfaces/patient.interface";
 import { GlobalDataService } from 'src/app/services/global-data.service';
 import { PatientService } from "src/app/services/patient.service";
+import { PraticienService } from 'src/app/services/praticien.service';
 import { GlobalInteraction } from '../../global.interaction';
 
 @Component({
@@ -14,11 +15,11 @@ import { GlobalInteraction } from '../../global.interaction';
 export class ProfilePage implements OnInit {
   ios: boolean;
   showSearchbar: boolean;
-  public patientRegisterForm: FormGroup;
+  public praticienFormGroup: FormGroup;
   public _id = "Identifiant";
-  public profile: IProfilePatient;
+  public profile;
   private OK = "ok";
-  public type_patient;
+  public centre_name;
   public countries;
   public cities;
   public citiesBorn;
@@ -39,7 +40,7 @@ export class ProfilePage implements OnInit {
     father_name: [{ type: "required", message: "Nom du père obligatoire" }],
     mother_name: [{ type: "required", message: "Nom de la mère obligatoire" }],
   };
-  constructor(private patienSrvc: PatientService, private globalSrvc: GlobalDataService, private globalInteract: GlobalInteraction, private loadingController: LoadingController) {
+  constructor(private praticienSrvc: PraticienService, private globalSrvc: GlobalDataService, private globalInteract: GlobalInteraction, private loadingController: LoadingController) {
     this.globalSrvc.getCountry().subscribe((result) => {
       this.countries = result;
       this.getProfile();
@@ -52,7 +53,7 @@ export class ProfilePage implements OnInit {
   }
 
   buildForm(data: IProfilePatient) {
-    this.patientRegisterForm = new FormGroup({
+    this.praticienFormGroup = new FormGroup({
       // lastName: new FormControl("", [Validators.required]),
       // firstName: new FormControl("", [Validators.required]),
       birthday: new FormControl("", [Validators.required]),
@@ -68,52 +69,33 @@ export class ProfilePage implements OnInit {
       // password: new FormControl("", [Validators.required]),
     });
 
-    if (data.typePatient != 1) {
-      this.patientRegisterForm.addControl(
-        "father_name",
-        new FormControl("", [Validators.required])
-      );
-      this.patientRegisterForm.addControl(
-        "mother_name",
-        new FormControl("", [Validators.required])
-      );
-    }
+
   }
 
   async update() {
-    if (this.patientRegisterForm.valid) {
+    if (this.praticienFormGroup.valid) {
       this.globalInteract.presentLoading();
 
-      Object.keys(this.patientRegisterForm.value).forEach((key) => {
-        console.log("valid", this.patientRegisterForm.value[key]);
+      Object.keys(this.praticienFormGroup.value).forEach((key) => {
+        console.log("valid", this.praticienFormGroup.value[key]);
         const data_updated = {
-          address: this.patientRegisterForm.value["address"],
-          cityBorn: this.patientRegisterForm.value["cityBorn"],
-          countryBorn: this.patientRegisterForm.value["countryBorn"],
-          email: this.patientRegisterForm.value["email"],
-          fatherName: this.patientRegisterForm.value['father_name'] == undefined ? '' : this.patientRegisterForm.value['father_name'],
+          address: this.praticienFormGroup.value["address"],
+          cityBorn: this.praticienFormGroup.value["cityBorn"],
+          countryBorn: this.praticienFormGroup.value["countryBorn"],
+          email: this.praticienFormGroup.value["email"],
+          fatherName: this.praticienFormGroup.value['father_name'] == undefined ? '' : this.praticienFormGroup.value['father_name'],
           id: this.profile.id,
-          motherName: this.patientRegisterForm.value['father_name'] == undefined ? '' : this.patientRegisterForm.value['mother_name'],
-          nameCity: this.patientRegisterForm.value["city"],
-          nameState: this.patientRegisterForm.value["state"],
-          phone: this.patientRegisterForm.value["phone"],
+          motherName: this.praticienFormGroup.value['father_name'] == undefined ? '' : this.praticienFormGroup.value['mother_name'],
+          nameCity: this.praticienFormGroup.value["city"],
+          nameState: this.praticienFormGroup.value["state"],
+          phone: this.praticienFormGroup.value["phone"],
         }
-
-        this.patienSrvc.updateProfile(data_updated).subscribe((data) => {
-
-          if (data == this.OK) {
-            this.globalInteract.dismissLoading();
-            this.globalInteract.presentToast('Profile mis à jour');
-          } else {
-            this.globalInteract.presentToast('Profile non mis à jour !!!')
-          }
-        });
       });
     } else {
-      console.log("NOT valid", this.patientRegisterForm);
+      console.log("NOT valid", this.praticienFormGroup);
 
-      Object.keys(this.patientRegisterForm.value).forEach((key) => {
-        console.log("NOT valid", this.patientRegisterForm.value[key]);
+      Object.keys(this.praticienFormGroup.value).forEach((key) => {
+        console.log("NOT valid", this.praticienFormGroup.value[key]);
       });
     }
   }
@@ -127,27 +109,29 @@ export class ProfilePage implements OnInit {
 
   getProfile() {
 
-    this.patienSrvc.getProfile().subscribe(async (data: IProfilePatient[]) => {
+    this.praticienSrvc.getProfile().subscribe(async (response: any) => {
+      const data = response.profile;
+      this.centre_name = response.profile[1].centreName;
       console.log(data);
       this.profile = data[0];
 
-      this.profile.nameState = data[0].namestate;
+      this.profile.nameState = data[0].countryFonction;
       this.globalSrvc.getCity(this.profile.nameState).subscribe(data2 => {
         this.cities = data2;
-        this.profile.nameCity = data[0].nameCity;
+        this.profile.nameCity = data[0].CityFonction;
       })
-      data[0].countryBorn == null ? this.profile.countryBorn = data[0].namestate : this.profile.countryBorn = data[0].countryBorn;
+      data[0].countryBorn == null ? this.profile.countryBorn = data[0].countryFonction : this.profile.countryBorn = data[0].countryBorn;
       this.globalSrvc.getCity(this.profile.countryBorn).subscribe(data3 => {
         this.citiesBorn = data3;
-        data[0].cityBorn == null ? this.profile.cityBorn = data[0].nameCity : this.profile.cityBorn = data[0].cityBorn;
+        data[0].cityBorn == null ? this.profile.cityBorn = data[0].CityFonction : this.profile.cityBorn = data[0].cityBorn;
         this.globalInteract.dismissLoading()
       })
 
-      this.profile.dateOnBorn = data[0].dateOnBorn.date;
+      this.profile.dateOnBorn = data[0].dateBorn.date;
       this.profile.createdAt = data[0].createdAt.date;
       // this.profile.date_on_born = new Date(data.date_on_born);
       this.buildForm(data[0]);
-      this.type_patient = data[0].typePatient == 1 ? "Adult" : "Enfant";
+      // this.type_patient = data[0].typePatient == 1 ? "Adult" : "Enfant";
 
     });
   }

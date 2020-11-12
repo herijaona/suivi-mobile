@@ -29,5 +29,19 @@ export class GlobalDataService {
     return res;
   }
 
+  getCountryByPratictitionerFunction(_idPractitionerFunction) {
+    const res = this.http.post(`${this.url_api}country/fonction`, { id_fonction: _idPractitionerFunction });
+    return res;
+  }
+
+  getCityByPractitionerFunctionAndCountry(_idPractitionerFunction, _idCountry) {
+    const res = this.http.post(`${this.url_api}city/fonction`, { id_fonction: _idPractitionerFunction, id_country: _idCountry });
+    return res;
+  }
+
+  getPractitionerByFunctionCountryAndCity(_idPractitionerFunction, _idCountry, _idCity) {
+    const res = this.http.post(`${this.url_api}praticien/fonction`, { id_fonction: _idPractitionerFunction, id_country: _idCountry, id_city: _idCity });
+    return res;
+  }
 
 }

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NavController } from '@ionic/angular';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
@@ -8,7 +9,7 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class AccountActivationPage implements OnInit {
   public code;
-  constructor(private authSrvc: AuthService) { }
+  constructor(private authSrvc: AuthService, private navCtrl: NavController) { }
 
   ngOnInit() {
   }
@@ -17,6 +18,9 @@ export class AccountActivationPage implements OnInit {
     console.log("code: ", this.code);
     this.authSrvc.activateAccount(this.code).subscribe((response) => {
       console.log("AccountActivationPage -> activateAccount -> response", response)
+      if (response) {
+        this.navCtrl.navigateRoot('/login');
+      }
     });
   }
 }

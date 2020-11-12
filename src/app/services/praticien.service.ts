@@ -48,8 +48,15 @@ export class PraticienService {
     return res;
   }
 
-  getLocalUserInfo(): Observable<IUserPraticien> {
-    return this.http.get<IUserPraticien>(this.url + `getPraticienInfo`);
+  getProfile() {
+    const res = this.http.get<IUserPraticien>(this.url + `praticien/profile`);
+    return res;
+  }
+
+  getLocalUserInfo() {
+    // return this.http.get<IUserPraticien>(this.url + `getPraticienInfo`);
+    return this.http.get<IUserPraticien>(this.url + `praticien/profile`);
+
   }
 
   getUserIDByStorage() {
@@ -189,4 +196,5 @@ export class PraticienService {
   registerPraticien(data) {
     return this.http.post<IRegisterPraticien>(`${this.url_api}users`, data);
   }
+
 }

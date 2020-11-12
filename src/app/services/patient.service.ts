@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
-import { IPatient, IRegisterPatient, IVaccinPatient, IProfilePatient } from "../Interfaces/patient.interface";
+import { IPatient, IRegisterPatient, IVaccinPatient, IProfilePatient, IPatientFamilyGroup } from "../Interfaces/patient.interface";
 
 import { from } from "rxjs";
 import { CONSTANT } from "src/constant";
@@ -90,7 +90,48 @@ export class PatientService {
 
   getFamily() {
     const res = this.http.get(`${this.url_apip}patients/family`);
-    console.log("PatientService -> getFamily -> res", res)
+    res.subscribe(data => console.log("PatientService -> getFamily -> res", data))
+    return res;
+  }
+
+  addGroupFamily(nomGroupe) {
+    const data = {
+      designation: nomGroupe,
+    }
+    console.log("LL: PatientService -> addGroupFamily -> data", data)
+    const res = this.http.post(`${this.url_apip}register/group`, data);
+    return res;
+  }
+
+  addGroupFamilyMember(data) {
+    console.log("PatientService -> addGroupFamilyMember -> data", data)
+    const res = this.http.post(`${this.url_api}add/membres`, data);
+    return res;
+  }
+
+  deleteFamilyMember(_idFamily) {
+    const res = this.http.delete(`${this.url_api}family/${_idFamily}`);
+    return res;
+  }
+
+  interventionPraticien(data) {
+    console.log("####################LL: PatientService -> interventionPraticien -> data", data)
+    const res = this.http.post(`${this.url_api}intervention`, data);
+    return res;
+  }
+
+  chekIfPractitionerIsAssociated(_idPraticien) {
+    const res = this.http.get(`${this.url_apip}patients/check-association/${_idPraticien}`);
+    return res;
+  }
+
+  proposeRdv(data) {
+    const res = this.http.post(`${this.url_apip}add/rdv`, data);
+    return res;
+  }
+
+  cancelRdvProposition(data) {
+    const res = this.http.post(`${this.url_api}cancel/rdv`, data);
     return res;
   }
 }

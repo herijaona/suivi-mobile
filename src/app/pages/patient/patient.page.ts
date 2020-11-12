@@ -50,7 +50,7 @@ export class PatientPage implements OnInit {
     },
     {
       title: "Famille",
-      url: "/patient/familly",
+      url: "/patient/family",
     },
   ];
   selectedPath = "";
