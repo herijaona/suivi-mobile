@@ -317,7 +317,11 @@ const routes = [
     },
     {
         path: "praticien",
-        loadChildren: () => Promise.all(/*! import() | pages-praticien-praticien-module */[__webpack_require__.e("default~pages-praticien-praticien-module~rendez-vous-rendez-vous-module~vaccination-vaccination-module"), __webpack_require__.e("pages-praticien-praticien-module")]).then(__webpack_require__.bind(null, /*! ./pages/praticien/praticien.module */ "./src/app/pages/praticien/praticien.module.ts")).then((m) => m.PraticienPageModule),
+        loadChildren: () => Promise.all(/*! import() | pages-praticien-praticien-module */[__webpack_require__.e("default~pages-praticien-praticien-module~praticien-praticien-module~profile-profile-module~rendez-vo~80279bf7"), __webpack_require__.e("pages-praticien-praticien-module")]).then(__webpack_require__.bind(null, /*! ./pages/praticien/praticien.module */ "./src/app/pages/praticien/praticien.module.ts")).then((m) => m.PraticienPageModule),
+    },
+    {
+        path: 'account-activation',
+        loadChildren: () => __webpack_require__.e(/*! import() | pages-account-activation-account-activation-module */ "pages-account-activation-account-activation-module").then(__webpack_require__.bind(null, /*! ./pages/account-activation/account-activation.module */ "./src/app/pages/account-activation/account-activation.module.ts")).then(m => m.AccountActivationPageModule)
     },
 ];
 let AppRoutingModule = class AppRoutingModule {
@@ -390,9 +394,11 @@ let AppComponent = class AppComponent {
             this.authService.authenticationState.subscribe((state) => {
                 if (state) {
                     if (this.authService.getRole() == src_constant__WEBPACK_IMPORTED_MODULE_7__["CONSTANT"].ROLE_PATIENT) {
-                        // this.router.navigate(["patient"]);
+                        // this.router.navigate(["patient/profile"]);
                         // this.router.navigate(["/patient/rendez-vous"]);
+                        // this.router.navigate(["/patient/assoc-praticiens"]);
                         this.router.navigate(["/patient/vaccination"]);
+                        // this.router.navigate(["/patient/family"]);
                     }
                     else if (this.authService.getRole() == src_constant__WEBPACK_IMPORTED_MODULE_7__["CONSTANT"].ROLE_PRATICIEN) {
                         // this.router.navigate(["praticien"]);
@@ -400,14 +406,19 @@ let AppComponent = class AppComponent {
                         // this.router.navigate(["/praticien/intervention"]);
                         // this.router.navigate(["/praticien/consultation"]);
                         this.router.navigate(["/praticien/vaccination"]);
+                        // this.router.navigate(["/praticien/assoc-patients"]);
+                        // this.router.navigate(["/praticien/profile"]);
+                        // this.router.navigate(["/praticien/rendez-vous"]);
                     }
                 }
                 else {
-                    // this.router.navigate(["login"]);
-                    this.router.navigate(["register/patient"]);
+                    this.router.navigate(["login"]);
+                    // this.router.navigate(["register/patient"]);
+                    // this.router.navigate(["register/praticien"]);
                     // this.router.navigate(["/patient/profile"]);
                     // this.router.navigate(["/praticien/dashboard"]);
                     // this.router.navigate(["/praticien/vaccination"]);
+                    // this.router.navigate(["/account-activation"]);
                 }
             });
         });
@@ -597,7 +608,7 @@ let AuthService = class AuthService {
         this.user = null;
         this.authenticationState = new rxjs__WEBPACK_IMPORTED_MODULE_3__["BehaviorSubject"](false);
         this.plt.ready().then(() => {
-            // this.checkToken(); // TODO: à decommenter
+            this.checkToken(); // TODO: à decommenter
         });
     }
     getToken() {
@@ -610,6 +621,18 @@ let AuthService = class AuthService {
                 // throw new Error("token doesn't exist yet");
             }
         });
+    }
+    checkEtat(credentials) {
+        const header = new _angular_common_http__WEBPACK_IMPORTED_MODULE_5__["HttpHeaders"]({
+            "Content-Type": "application/json",
+            Accept: "application/json",
+        });
+        // TODO APK: à decommenter
+        const res = this.http
+            .post(`${this.url}/api/check-etat`, credentials, {
+            headers: header,
+        });
+        return res;
     }
     checkToken() {
         this.storage.get(TOKEN_KEY).then((token) => {
@@ -693,6 +716,17 @@ let AuthService = class AuthService {
         if (this.user) {
             return this.user["roles"];
         }
+    }
+    activateAccount(data) {
+        const header = new _angular_common_http__WEBPACK_IMPORTED_MODULE_5__["HttpHeaders"]({
+            "Content-Type": "application/json",
+            Accept: "application/json",
+        });
+        const res = this.http
+            .post(`${this.url}/api/register/activate`, { code: data }, {
+            headers: header,
+        });
+        return res;
     }
 };
 AuthService.ctorParameters = () => [
@@ -803,6 +837,7 @@ let HttpConfigInterceptorService = class HttpConfigInterceptorService {
             let cloneReq = this.addToken(request, token);
             return next.handle(cloneReq).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_7__["catchError"])((error) => {
                 const status = error.status;
+                console.warn("LL: HttpConfigInterceptorService -> error", error.message);
                 const reason = error && error.error.reason ? error.error.reason : "";
                 this.presentAlert(status, reason);
                 return Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["throwError"])(error);
@@ -821,7 +856,16 @@ let HttpConfigInterceptorService = class HttpConfigInterceptorService {
             });
             return clone;
         }
-        return request;
+        else {
+            let clone;
+            clone = request.clone({
+                setHeaders: {
+                    Accept: "application/json",
+                    "Content-type": "application/json",
+                },
+            });
+            return clone;
+        }
     }
     presentAlert(status, reason) {
         return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
@@ -938,9 +982,12 @@ const environment = {
     // url: "http://localhost:9000",
     // url_dev: "http://localhost:9000/apip/",
     // url_dev_api: "http://localhost:9000/api/",
-    url: "http://suivie-patient.neitic.com",
-    url_dev: "http://suivie-patient.neitic.com/apip/",
-    url_dev_api: "http://suivie-patient.neitic.com/api/",
+    // url: "http://suivie-patient.neitic.com",
+    // url_dev: "http://suivie-patient.neitic.com/apip/",
+    // url_dev_api: "http://suivie-patient.neitic.com/api/",
+    url: "http://matipla.com",
+    url_dev: "http://matipla.com/apip/",
+    url_dev_api: "http://matipla.com/api/",
     TOKEN_KEY: "access_token",
 };
 /*

@@ -9,9 +9,14 @@ export interface IConsultation {
 
 export interface IVaccination {
   id: Number;
-  status: String;
-  date: Date;
-  patient: String;
+  statusVaccin: String;
+  firstName: String;
+  lastName: String;
+  patient: Number;
+  praticien: Number;
+  operation?: String;
+  _status?: String;
+  _action?: String;
 }
 
 export interface IUserPraticien {
@@ -26,6 +31,14 @@ export interface IUserPraticien {
   city: String;
 }
 
+export interface IUserPatient {
+  id: Number;
+  state: String;
+  city: String;
+  firstName: String;
+  lastName: String;
+  address: String
+}
 
 export interface IPraticienPropRdv {
   patient: {

@@ -80,9 +80,9 @@
         children: [{
           path: "patient",
           loadChildren: function loadChildren() {
-            return Promise.all(
+            return __webpack_require__.e(
             /*! import() | patient-patient-module */
-            [__webpack_require__.e("common"), __webpack_require__.e("patient-patient-module")]).then(__webpack_require__.bind(null,
+            "patient-patient-module").then(__webpack_require__.bind(null,
             /*! ./patient/patient.module */
             "./src/app/pages/register/patient/patient.module.ts")).then(function (m) {
               return m.PatientPageModule;
@@ -91,9 +91,9 @@
         }, {
           path: "praticien",
           loadChildren: function loadChildren() {
-            return __webpack_require__.e(
+            return Promise.all(
             /*! import() | praticien-praticien-module */
-            "praticien-praticien-module").then(__webpack_require__.bind(null,
+            [__webpack_require__.e("default~pages-praticien-praticien-module~praticien-praticien-module~profile-profile-module~rendez-vo~80279bf7"), __webpack_require__.e("praticien-praticien-module")]).then(__webpack_require__.bind(null,
             /*! ./praticien/praticien.module */
             "./src/app/pages/register/praticien/praticien.module.ts")).then(function (m) {
               return m.PraticienPageModule;

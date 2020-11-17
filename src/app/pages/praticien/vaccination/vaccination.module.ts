@@ -1,6 +1,6 @@
 import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
-import { FormsModule } from "@angular/forms";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 
 import { IonicModule } from "@ionic/angular";
 
@@ -9,6 +9,7 @@ import { VaccinationPageRoutingModule } from "./vaccination-routing.module";
 import { VaccinationPage } from "./vaccination.page";
 import { BrowserModule } from "@angular/platform-browser";
 import { DetailsComponent } from "./details/details.component";
+import { OrganizeComponent } from './organize/organize.component';
 
 @NgModule({
   imports: [
@@ -16,7 +17,8 @@ import { DetailsComponent } from "./details/details.component";
     FormsModule,
     IonicModule,
     VaccinationPageRoutingModule,
+    ReactiveFormsModule
   ],
-  declarations: [VaccinationPage, DetailsComponent],
+  declarations: [VaccinationPage, DetailsComponent, OrganizeComponent],
 })
-export class VaccinationPageModule {}
+export class VaccinationPageModule { }

@@ -9,14 +9,15 @@ import { CommonModule } from "@angular/common";
   styleUrls: ["./details.component.scss"],
 })
 export class DetailsComponent implements OnInit {
-  @Input() vaccinations: IVaccination[];
-
+  @Input() vaccinations: { date_prise: { date }, firstName, lastName, vaccinName, id, identifiant_vaccin, identification, datePriseVaccin: { date } }[];
+  @Input() isWithNoteBook;
   constructor(private modalCtrl: ModalController, private navParms: NavParams) {
     this.vaccinations = this.navParms.get("data");
+    this.isWithNoteBook = this.navParms.get("isWithNoteBook");
     console.log(this.vaccinations);
   }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
   dismiss() {
     this.modalCtrl.dismiss({

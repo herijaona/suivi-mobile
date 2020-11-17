@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { ToastController } from '@ionic/angular';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { IUserPraticien } from '../Interfaces/praticien.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -41,6 +42,16 @@ export class GlobalDataService {
 
   getPractitionerByFunctionCountryAndCity(_idPractitionerFunction, _idCountry, _idCity) {
     const res = this.http.post(`${this.url_api}praticien/fonction`, { id_fonction: _idPractitionerFunction, id_country: _idCountry, id_city: _idCity });
+    return res;
+  }
+
+  getCenterHealthByCity(_idCity) {
+    const res = this.http.post(`${this.url_api}praticien/centre`, { id: _idCity });
+    return res;
+  }
+
+  getPraticienByCenter(_idCenter) {
+    const res = this.http.post(`${this.url_api}centre/praticien`, { id: _idCenter });
     return res;
   }
 

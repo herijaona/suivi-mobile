@@ -22,7 +22,7 @@
       /* harmony default export */
 
 
-      __webpack_exports__["default"] = "<ion-header>\n  <ion-toolbar>\n    <ion-title>\n      <a (click)=\"goBack()\">\n        <ion-icon name=\"chevron-back-outline\"></ion-icon>\n      </a>\n    </ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content>\n  <div class=\"container\">\n    <div class=\"to-center-vertical p-15\">\n      <form [formGroup]=\"credentialsForm\" (ngSubmit)=\"onSubmit()\">\n        <ion-grid fixed>\n          <ion-row>\n            <ion-col size-md=\"6\" offset-md=\"3\">\n              <ion-card>\n                <ion-card-header>\n                  <ion-card-title>\n                    <img\n                      src=\"../../../../assets/images/logo_matipla.png\"\n                      srcset=\"\"\n                      width=\"150px\"\n                      class=\"mb-2\"\n                    />\n                  </ion-card-title>\n                </ion-card-header>\n                <ion-card-content>\n                  <div>\n                    <div class=\"ion-padding\">\n                      <ion-label>Identifiant</ion-label>\n                      <ion-input\n                        type=\"text\"\n                        required\n                        formControlName=\"username\"\n                        class=\"border-input\"\n                      ></ion-input>\n                    </div>\n\n                    <div class=\"ion-padding\">\n                      <ion-label>Mot de passe</ion-label>\n                      <ion-input\n                        type=\"password\"\n                        required\n                        formControlName=\"password\"\n                        class=\"border-input\"\n                      ></ion-input>\n                    </div>\n\n                    <ion-row>\n                      <ion-col>\n                        <ion-button\n                          color=\"success\"\n                          expand=\"block\"\n                          type=\"submit\"\n                          [disabled]=\"!credentialsForm.valid\"\n                        >\n                          Login\n                        </ion-button>\n                      </ion-col>\n                    </ion-row>\n\n                    <!-- <a [routerLink]=\"['#']\" class=\"small-text\"\n                      >Mot de passe oublié ?</a\n                    > -->\n                  </div>\n                </ion-card-content>\n              </ion-card>\n            </ion-col>\n          </ion-row>\n        </ion-grid>\n      </form>\n    </div>\n  </div>\n</ion-content>\n";
+      __webpack_exports__["default"] = "<ion-header>\n  <ion-toolbar>\n    <ion-title>\n      <a (click)=\"goBack()\">\n        <ion-icon name=\"chevron-back-outline\"></ion-icon>\n      </a>\n    </ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content>\n  <div class=\"container\">\n    <div class=\"to-center-vertical p-15\">\n      <form [formGroup]=\"credentialsForm\" (ngSubmit)=\"onSubmit()\">\n        <ion-grid fixed>\n          <ion-row>\n            <ion-col size-md=\"6\" offset-md=\"3\">\n              <ion-card>\n                <ion-card-header>\n                  <ion-card-title>\n                    <img\n                      src=\"../../../../assets/images/logo_matipla.png\"\n                      srcset=\"\"\n                      width=\"150px\"\n                      class=\"mb-2\"\n                    />\n                  </ion-card-title>\n                </ion-card-header>\n                <ion-card-content>\n                  <div>\n                    <div class=\"ion-padding\">\n                      <ion-label>Identifiant</ion-label>\n                      <ion-input\n                        type=\"text\"\n                        required\n                        formControlName=\"username\"\n                        class=\"border-input\"\n                      ></ion-input>\n                    </div>\n\n                    <div class=\"ion-padding\">\n                      <ion-label>Mot de passe</ion-label>\n                      <ion-input\n                        type=\"password\"\n                        required\n                        formControlName=\"password\"\n                        class=\"border-input\"\n                      ></ion-input>\n                    </div>\n\n                    <ion-row>\n                      <ion-col>\n                        <ion-button\n                          color=\"success\"\n                          expand=\"block\"\n                          type=\"submit\"\n                          [disabled]=\"!credentialsForm.valid\"\n                        >\n                          Login\n                        </ion-button>\n                      </ion-col>\n                    </ion-row>\n\n                    <!-- <a [routerLink]=\"['#']\" class=\"small-text\"\n                      >Mot de passe oublié ?</a\n                    ><br /> -->\n                    <a [routerLink]=\"['/account-activation']\" class=\"small-text\"\n                      >activé compte ?</a\n                    >\n                  </div>\n                </ion-card-content>\n              </ion-card>\n            </ion-col>\n          </ion-row>\n        </ion-grid>\n      </form>\n    </div>\n  </div>\n</ion-content>\n";
       /***/
     },
 
@@ -283,10 +283,17 @@
             //   .subscribe((data) => {
             //     this.loadingCtrl.dismiss();
             //   });
-            // TODO: APK à suprimé - juste pour test apk
 
-            this.authService.login(this.credentialsForm.value, this.loadingCtrl).subscribe(function (data) {
-              _this.loadingCtrl.dismiss();
+            this.authService.checkEtat(this.credentialsForm.value).subscribe(function (data) {
+              if (data[0] == 1) {
+                _this.authService.login(_this.credentialsForm.value, _this.loadingCtrl).subscribe(function (data) {
+                  _this.loadingCtrl.dismiss();
+                });
+              } else {
+                _this.navCtrl.navigateRoot("/account-activation");
+
+                _this.loadingCtrl.dismiss();
+              }
             });
           }
         }, {
@@ -308,13 +315,16 @@
                       return this.loadingCtrl.create({
                         cssClass: "my-loading-class",
                         spinner: "bubbles",
-                        translucent: true
+                        translucent: true,
+                        duration: 100000
                       });
 
                     case 2:
                       loading = _context.sent;
+                      _context.next = 5;
+                      return loading.present();
 
-                    case 3:
+                    case 5:
                     case "end":
                       return _context.stop();
                   }

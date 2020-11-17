@@ -46,8 +46,22 @@ const routes: Routes = [
         path: 'profile',
         loadChildren: () => import('./profile/profile.module').then(m => m.ProfilePageModule)
       },
+      {
+        path: 'rendez-vous',
+        loadChildren: () => import('./rendez-vous/rendez-vous.module').then(m => m.RendezVousPageModule)
+      },
+      {
+        path: 'assoc-patients',
+        loadChildren: () => import('./assoc-patients/assoc-patients.module').then(m => m.AssocPatientsPageModule)
+      },
+
     ],
   },
+  {
+    path: 'my-patients',
+    loadChildren: () => import('./my-patients/my-patients.module').then(m => m.MyPatientsPageModule)
+
+  }
 
 ];
 

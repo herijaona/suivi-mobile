@@ -1,0 +1,166 @@
+<ion-header translucent="true">
+  <ion-toolbar>
+    <ion-buttons *ngIf="!ios && !showSearchbar" slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-menu-button *ngIf="ios"></ion-menu-button>
+    <ion-title *ngIf="!ios && !showSearchbar">Rendez-vous</ion-title>
+    <ion-searchbar
+      *ngIf="showSearchbar"
+      showCancelButton="always"
+      [(ngModel)]="queryText"
+      (ionChange)="updateRdvList()"
+      (ionCancel)="showSearchbar = false"
+      placeholder="Rechercher"
+    ></ion-searchbar>
+    <ion-buttons slot="end">
+      <ion-button *ngIf="!ios && !showSearchbar" (click)="showSearchbar = true">
+        <ion-icon slot="end" name="search"></ion-icon>
+      </ion-button>
+      <ion-button *ngIf="!showSearchbar" (click)="presentFilter()">
+        <span *ngIf="ios">Filtrer</span>
+        <span *ngIf="!ios">
+          <ion-icon slot="icon-only" name="options"></ion-icon>
+        </span>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Rendez-vous</ion-title>
+    </ion-toolbar>
+    <ion-toolbar>
+      <ion-searchbar
+        [(ngModel)]="queryText"
+        (ionChange)="filterItems($event)"
+        placeholder="Search"
+      ></ion-searchbar>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-list #scheduleList [hidden]="shownSessions === 0">
+    <ion-item-group *ngFor="let rdv of rdvFiltered">
+      <ion-item-divider sticky>
+        <ion-label class="ion-text-center">
+          {{ rdv.date | date:"MMM dd, yyyy"}}
+        </ion-label>
+      </ion-item-divider>
+
+      <ion-item-sliding
+        *ngFor="let eachRdv of rdv.groups"
+        #slidingItem
+        [attr.track]="eachRdv.type | lowercase"
+      >
+        <ion-item *ngIf="eachRdv.show === true">
+          <ion-grid>
+            <ion-row (click)="alert()">
+              <ion-col size="12">
+                <ion-label class="information">
+                  <ion-row>
+                    <ion-col size="7">
+                      <h2 class="makeBoldAndLarge">{{eachRdv.type}}</h2>
+                    </ion-col>
+                    <ion-col class="middle" size="2" offset-md="2">
+                      <ion-button
+                        *ngIf="this.checkStatus(eachRdv._status, eachRdv.etat) === this.REALIZED"
+                        class="status"
+                        color="sgreen"
+                        expand="block"
+                        fill="outline"
+                      >
+                        réalisé
+                      </ion-button>
+
+                      <ion-button
+                        *ngIf="this.checkStatus(eachRdv._status, eachRdv.etat) === this.CANCELED"
+                        class="status"
+                        color="sred"
+                        expand="block"
+                        fill="outline"
+                      >
+                        annulé
+                      </ion-button>
+
+                      <ion-button
+                        *ngIf="this.checkStatus(eachRdv._status, eachRdv.etat) === this.SCHEDULED"
+                        class="status"
+                        color="primary"
+                        expand="block"
+                        fill="outline"
+                      >
+                        planifié
+                      </ion-button>
+
+                      <ion-button
+                        *ngIf="this.checkStatus(eachRdv._status, eachRdv.etat) === this.PENDING"
+                        class="status"
+                        color="sorange"
+                        expand="block"
+                        fill="outline"
+                      >
+                        en attente
+                      </ion-button>
+                    </ion-col>
+                  </ion-row>
+                  <ion-row>
+                    <p>{{eachRdv.firstName + " " + eachRdv.lastName}}</p>
+                    <p>{{eachRdv.centreName}}</p>
+                  </ion-row>
+                </ion-label>
+              </ion-col>
+            </ion-row>
+            <ion-row
+              *ngIf="this.checkStatus(eachRdv._status, eachRdv.etat) === this.PENDING"
+            >
+              <ion-col class="btn-cnfrm">
+                <ion-button
+                  (click)="alertRemoveRdv(eachRdv.id, eachRdv.type)"
+                  expand="block"
+                  color="primary"
+                >
+                  <ion-icon name="close-circle-outline" slot="start"></ion-icon>
+                  <ion-label>organisé</ion-label>
+                </ion-button>
+                <ion-button
+                  (click)="alertRemoveRdv(eachRdv.id, eachRdv.type)"
+                  expand="block"
+                  color="sred"
+                >
+                  <ion-icon name="close-circle-outline" slot="start"></ion-icon>
+                  <ion-label>annulé</ion-label>
+                </ion-button>
+              </ion-col>
+            </ion-row>
+            <ion-row
+              *ngIf="this.checkStatus(eachRdv._status, eachRdv.etat) === this.SCHEDULED "
+            >
+              <ion-col class="btn-cnfrm">
+                <ion-button
+                  (click)="alertRemoveRdv(eachRdv.id, eachRdv.type)"
+                  expand="block"
+                  color="sgreen"
+                >
+                  <ion-icon name="close-circle-outline" slot="start"></ion-icon>
+                  <ion-label>réalisé</ion-label>
+                </ion-button>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-item>
+      </ion-item-sliding>
+    </ion-item-group>
+  </ion-list>
+
+  <ion-list-header [hidden]="rdvShow.size != 0">
+    No Sessions Found
+  </ion-list-header>
+
+  <ion-fab slot="fixed" vertical="bottom" horizontal="end" #fab>
+    <ion-fab-button color="sgreen" (click)="openNewRdvModal()">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>

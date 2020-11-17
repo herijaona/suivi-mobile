@@ -34,6 +34,17 @@
 </ion-header>
 
 <ion-content>
+  <div *ngIf="vaccinsFiltered.length==0">
+    <ion-button
+      (click)="openGenerateVaccModal()"
+      expand="block"
+      fill="clear"
+      shape="round"
+    >
+      Generate Carnet
+    </ion-button>
+  </div>
+
   <ion-list #VaccinList>
     <ion-item-group *ngFor="let vacc of vaccinsFiltered">
       <ion-item-divider sticky>

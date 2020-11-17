@@ -1,0 +1,59 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Intervention</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-grid fixed>
+  <ion-row>
+    <ion-col size-md="6" offset-md="3">
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title><ion-text color="sred"> </ion-text> </ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <form
+            [formGroup]="organizeForm"
+            method="post"
+            (ngSubmit)="organise()"
+          >
+            <div class="mb-14" *ngIf="this.dateT">
+              <label>Propose une date </label>
+              <ion-datetime
+                display-format="MMM DD, YYYY"
+                formControlName="dateRdv"
+                required
+                [(ngModel)]="this.dateT"
+              ></ion-datetime>
+            </div>
+
+            <div class="mb-14">
+              <label>Propose un horaire</label>
+              <ion-datetime
+                display-format="h:mm A"
+                picker-format="h:mm A"
+                formControlName="heureRdv"
+                required
+                [(ngModel)]="this.hoursT"
+              ></ion-datetime>
+            </div>
+            {{ this.hoursT }}
+            <ion-row>
+              <ion-col>
+                <ion-button color="sred" expand="block">
+                  <ion-icon slot="start" name=""> x </ion-icon
+                  >Cancel</ion-button
+                >
+                <legend class="ion-text-center"></legend>
+                <ion-button type="submit" color="sgreen" expand="block"
+                  ><ion-icon slot="start" name="save-outline"></ion-icon>
+                  Save
+                </ion-button>
+              </ion-col>
+            </ion-row>
+          </form>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+  </ion-row>
+</ion-grid>

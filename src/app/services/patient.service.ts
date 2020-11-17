@@ -116,7 +116,7 @@ export class PatientService {
 
   interventionPraticien(data) {
     console.log("####################LL: PatientService -> interventionPraticien -> data", data)
-    const res = this.http.post(`${this.url_api}intervention`, data);
+    const res = this.http.post(`${this.url_apip}intervention`, data);
     return res;
   }
 
@@ -134,4 +134,10 @@ export class PatientService {
     const res = this.http.post(`${this.url_api}cancel/rdv`, data);
     return res;
   }
+
+  postVaccinGeneration(_idPraticien) {
+    const res = this.http.post(`${this.url_apip}patient/generation`, { praticien: _idPraticien });
+    return res;
+  }
+
 }

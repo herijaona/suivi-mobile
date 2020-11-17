@@ -5,7 +5,7 @@
 
   function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
-  (window["webpackJsonp"] = window["webpackJsonp"] || []).push([["default~pages-praticien-praticien-module~rendez-vous-rendez-vous-module~vaccination-vaccination-module"], {
+  (window["webpackJsonp"] = window["webpackJsonp"] || []).push([["default~pages-praticien-praticien-module~praticien-praticien-module~profile-profile-module~rendez-vo~80279bf7"], {
     /***/
     "./node_modules/moment/locale sync recursive ^\\.\\/.*$":
     /*!**************************************************!*\
@@ -20178,6 +20178,7 @@
           this.storage = storage;
           this.authSrvc = authSrvc;
           this.url = src_environments_environment__WEBPACK_IMPORTED_MODULE_6__["environment"].url_dev;
+          this.url_apip = src_environments_environment__WEBPACK_IMPORTED_MODULE_6__["environment"].url_dev;
           this.url_api = src_environments_environment__WEBPACK_IMPORTED_MODULE_6__["environment"].url_dev_api;
           this.praticien = {};
         }
@@ -20195,9 +20196,16 @@
             return res;
           }
         }, {
+          key: "getProfile",
+          value: function getProfile() {
+            var res = this.http.get(this.url + "praticien/profile");
+            return res;
+          }
+        }, {
           key: "getLocalUserInfo",
           value: function getLocalUserInfo() {
-            return this.http.get(this.url + "getPraticienInfo");
+            // return this.http.get<IUserPraticien>(this.url + `getPraticienInfo`);
+            return this.http.get(this.url + "praticien/profile");
           }
         }, {
           key: "getUserIDByStorage",
@@ -20279,9 +20287,15 @@
         }, {
           key: "getListsVaccinations",
           value: function getListsVaccinations() {
-            return this.loadMockData().pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["map"])(function (data) {
-              return data.mockVaccination;
-            }));
+            var res = this.http.get("".concat(this.url_apip, "praticien/vaccination"));
+            res.subscribe(function (data) {
+              console.log("LL: res", data);
+            });
+            return res; // return this.loadMockData().pipe(
+            //   map((data: any) => {
+            //     return data.mockVaccination;
+            //   })
+            // );
           }
         }, {
           key: "getListsVaccinationsByDate",
@@ -20314,6 +20328,33 @@
             return sortedActivities;
           }
         }, {
+          key: "regroupDataByPatient",
+          value: function regroupDataByPatient(data) {
+            var groups = data.reduce(function (groups, eachData) {
+              var key = eachData.patient;
+
+              if (!groups[key]) {
+                groups[key] = [];
+              }
+
+              groups[key].push(eachData);
+              console.log("LL: regroupDataByPatient -> groups", groups, Object.keys(groups));
+              return groups;
+            }, {});
+            var groupArrays = Object.keys(groups).map(function (patient) {
+              return {
+                patient: patient,
+                nomPatient: groups[patient][0].firstName + " " + groups[patient][0].lastName,
+                groups: groups[patient]
+              };
+            });
+            console.log("LL: regroupDataByPatient -> groupArrays", groupArrays);
+            return groupArrays; // const sortedActivities = groupArrays.slice().sort(function (a, b) {
+            //   return b.patient - a.patient;
+            // });
+            // return sortedActivities;
+          }
+        }, {
           key: "deletePropositionRdv",
           value: function deletePropositionRdv(id) {
             return this.http["delete"](this.url + "praticien_remove_proposition/".concat(id));
@@ -20328,11 +20369,91 @@
         }, {
           key: "getAllPraticien",
           value: function getAllPraticien() {
-            var data = this.http.get(this.url + "praticiens");
+            var data = this.http.get(this.url_api + "praticiens");
             data.subscribe(function (data) {
               console.log("PraticienService -> regroupDataByDate -> data", data);
             });
             return data;
+          }
+        }, {
+          key: "getPraticienFunctions",
+          value: function getPraticienFunctions() {
+            return this.http.get(this.url_api + 'fonction');
+          }
+        }, {
+          key: "registerPraticien",
+          value: function registerPraticien(data) {
+            return this.http.post("".concat(this.url_api, "users"), data);
+          }
+        }, {
+          key: "getAllRdv",
+          value: function getAllRdv() {
+            var res = this.http.get("".concat(this.url_apip, "praticien/rdv/in"));
+            return res;
+          }
+        }, {
+          key: "getAssociatedPatient",
+          value: function getAssociatedPatient() {
+            var res = this.http.get("".concat(this.url_apip, "patient/associer"));
+            return res;
+          }
+        }, {
+          key: "watchVaccin",
+          value: function watchVaccin(_idPatient) {
+            var res = this.http.get("".concat(this.url_api, "see/calendar/").concat(_idPatient));
+            return res;
+          }
+        }, {
+          key: "generateVaccin",
+          value: function generateVaccin(_id, _idPatient) {
+            var res = this.http.post("".concat(this.url_apip, "generate/vaccination"), {
+              id: _id,
+              patient: _idPatient
+            });
+            return res;
+          }
+        }, {
+          key: "rejectVaccin",
+          value: function rejectVaccin(_id) {
+            var res = this.http.post("".concat(this.url_api, "cancel/generation"), {
+              id: _id
+            });
+            return res;
+          }
+        }, {
+          key: "watchVaccinWithNotebook",
+          value: function watchVaccinWithNotebook(_idCarnet) {
+            var res = this.http.get("".concat(this.url_api, "see/intervention/").concat(_idCarnet));
+            return res;
+          }
+        }, {
+          key: "rejectVaccinithNotebook",
+          value: function rejectVaccinithNotebook(_id) {
+            var res = this.http.post("".concat(this.url_api, "cancel/intervention"), {
+              id: _id
+            });
+            return res;
+          }
+        }, {
+          key: "organiseVaccin",
+          value: function organiseVaccin(data) {
+            var res = this.http.post("".concat(this.url_api, "organize/vaccination"), {
+              id: data.id,
+              date: data.date,
+              heure: data.heure,
+              carnet: data.carnet
+            });
+            return res;
+          }
+        }, {
+          key: "realizeVaccin",
+          value: function realizeVaccin(data) {
+            var res = this.http.post("".concat(this.url_apip, "realize/vaccination"), {
+              id: data.id,
+              lot: data.lot,
+              carnet: data.carnet
+            });
+            return res;
           }
         }]);
 
@@ -20356,4 +20477,4 @@
     }
   }]);
 })();
-//# sourceMappingURL=default~pages-praticien-praticien-module~rendez-vous-rendez-vous-module~vaccination-vaccination-module-es5.js.map
+//# sourceMappingURL=default~pages-praticien-praticien-module~praticien-praticien-module~profile-profile-module~rendez-vo~80279bf7-es5.js.map

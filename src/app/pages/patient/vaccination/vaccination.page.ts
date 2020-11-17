@@ -9,6 +9,8 @@ import { IonList, LoadingController, ModalController } from "@ionic/angular";
 import { DataTransformerService } from "src/app/services/data-transformer.service";
 import { InterventionComponent } from './intervention/intervention.component';
 import { PraticienService } from 'src/app/services/praticien.service';
+import { GenerateComponent } from './generate/generate.component';
+import { GlobalDataService } from 'src/app/services/global-data.service';
 
 @Component({
   selector: "app-vaccination",
@@ -43,7 +45,8 @@ export class VaccinationPage implements OnInit {
     private dataTransformer: DataTransformerService,
     private loadingCtrl: LoadingController,
     private modalCtrl: ModalController,
-    private praticienSrv: PraticienService
+    private praticienSrv: PraticienService,
+    private globalSrvc: GlobalDataService
   ) {
     console.log("VaccinationPage -> constructor");
   }
@@ -91,13 +94,13 @@ export class VaccinationPage implements OnInit {
       console.log("VaccinationPage -> initializeItems -> data", data)
       this.praticiens = data;
     });
-
   }
 
   getAllVaccin() {
     this.patientSrv.getVaccinByPatient().subscribe((data) => {
       console.log("VaccinationPage -> getAllVaccin -> data", data);
       this.vaccins = data;
+      console.log(" ");
       this.vaccinsShow = this.dataTransformer.allData(data, this.STRING_DATE).data;
       this.vaccinsFiltered = this.dataTransformer.allData(data, this.STRING_DATE).dataByDate;
       this.loadingCtrl.dismiss();
@@ -130,5 +133,27 @@ export class VaccinationPage implements OnInit {
       this.initializeItems();
     });
     return await newRdvModal.present();
+  }
+
+  async openGenerateVaccModal(vaccin) {
+    console.warn("VaccinationPage -> openNewRdvModal -> nom_vaccin", vaccin, "/")
+    const newRdvModal = await this.modalCtrl.create({
+      component: GenerateComponent,
+      cssClass: "test-class",
+      swipeToClose: true,
+      componentProps: {
+        praticiens: this.praticiens,
+        countries: this.countries,
+        vaccin: vaccin,
+      },
+    });
+    newRdvModal.onDidDismiss().then(() => {
+      this.initializeItems();
+    });
+    return await newRdvModal.present();
+  }
+  countries;
+  getAllCountries() {
+    this.countries = this.globalSrvc.getCountry().subscribe((data) => { return data; })
   }
 }

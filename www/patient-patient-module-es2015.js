@@ -9,7 +9,113 @@
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<ion-header>\n  <ion-toolbar>\n    <span *ngIf=\"patientRegisterForm.valid; then myUserName()\"></span>\n    <ion-title slot=\"end\" color=\"tertiary\" class=\"identifiant\"\n      >{{this._id}}</ion-title\n    >\n  </ion-toolbar>\n</ion-header>\n<div class=\"topContent\">\n  <ion-card>\n    <ion-card-header>\n      <ion-card-title class=\"ion-text-center\">\n        <img\n          src=\"../../../../assets/images/logo_matipla.png\"\n          srcset=\"\"\n          width=\"150px\"\n          class=\"mb-2\"\n        />\n      </ion-card-title>\n    </ion-card-header>\n  </ion-card>\n</div>\n\n<ion-content>\n  <ion-card>\n    <ion-card-content>\n      <form [formGroup]=\"patientRegisterForm\">\n        <ion-item lines=\"full\">\n          <ion-label position=\"stacked\">Nom</ion-label>\n          <ion-input\n            type=\"text\"\n            required\n            formControlName=\"last_name\"\n          ></ion-input>\n        </ion-item>\n        <div class=\"validation-errors\">\n          <ng-container *ngFor=\"let validation of validation_msg.last_name\">\n            <div\n              class=\"error-message\"\n              *ngIf=\"patientRegisterForm.get('last_name').hasError(validation.type)\"\n            >\n              {{ validation.message }}\n            </div>\n          </ng-container>\n        </div>\n\n        <ion-item lines=\"full\">\n          <ion-label position=\"stacked\">Prénom</ion-label>\n          <ion-input\n            type=\"text\"\n            required\n            formControlName=\"first_name\"\n          ></ion-input>\n        </ion-item>\n        <div class=\"validation-errors\">\n          <ng-container *ngFor=\"let validation of validation_msg.first_name\">\n            <div\n              class=\"error-message\"\n              *ngIf=\"patientRegisterForm.get('first_name').hasError(validation.type)\"\n            >\n              {{ validation.message }}\n            </div>\n          </ng-container>\n        </div>\n        <ion-item lines=\"full\">\n          <ion-label position=\"stacked\">Adult / Enfant</ion-label>\n          <ion-select\n            placeholder=\"Type de patient\"\n            formControlName=\"type_patient\"\n            required\n          >\n            <ion-select-option value=\"1\">Adult</ion-select-option>\n            <ion-select-option value=\"2\">Enfant</ion-select-option>\n          </ion-select>\n        </ion-item>\n\n        <ion-item lines=\"full\">\n          <ion-label position=\"stacked\">Date de naissance</ion-label>\n          <ion-datetime\n            display-format=\"MMM DD, YYYY\"\n            formControlName=\"date_on_born\"\n            required\n          ></ion-datetime>\n        </ion-item>\n        <div class=\"validation-errors\">\n          <ng-container *ngFor=\"let validation of validation_msg.date_on_born\">\n            <div\n              class=\"error-message\"\n              *ngIf=\"patientRegisterForm.get('date_on_born').hasError(validation.type)\"\n            >\n              {{ validation.message }}\n            </div>\n          </ng-container>\n        </div>\n\n        <ion-item lines=\"full\" [disabled]=\"!this.country\">\n          <ion-label position=\"stacked\">Pays</ion-label>\n          <ion-select\n            placeholder=\"Select\"\n            formControlName=\"state\"\n            required\n            (ionChange)=\"getCityByCountry(this.patientRegisterForm.value['state'])\"\n          >\n            <ng-container *ngFor=\"let item of country\">\n              <ion-select-option value=\"{{item.id}}\"\n                >{{item.nameState}}</ion-select-option\n              >\n            </ng-container>\n          </ion-select>\n        </ion-item>\n        <div class=\"validation-errors\">\n          <ng-container *ngFor=\"let validation of validation_msg.state\">\n            <div\n              class=\"error-message\"\n              *ngIf=\"patientRegisterForm.get('state').hasError(validation.type)\"\n            >\n              {{ validation.message }}\n            </div>\n          </ng-container>\n        </div>\n\n        <ion-item lines=\"full\" [disabled]=\"!this.city\">\n          <ion-label position=\"stacked\">Ville</ion-label>\n          <ion-select placeholder=\"Select\" formControlName=\"city\" required>\n            <ng-container *ngFor=\"let item of this.city\">\n              <ion-select-option value=\"{{item.id}}\"\n                >{{item.nameCity}}</ion-select-option\n              >\n            </ng-container>\n          </ion-select>\n        </ion-item>\n        <div class=\"validation-errors\">\n          <ng-container *ngFor=\"let validation of validation_msg.city\">\n            <div\n              class=\"error-message\"\n              *ngIf=\"patientRegisterForm.get('city').hasError(validation.type)\"\n            >\n              {{ validation.message }}\n            </div>\n          </ng-container>\n        </div>\n\n        <ion-item lines=\"full\">\n          <ion-label position=\"stacked\">Télephone</ion-label>\n          <ion-input type=\"text\" required formControlName=\"phone\"></ion-input>\n        </ion-item>\n        <div class=\"validation-errors\">\n          <ng-container *ngFor=\"let validation of validation_msg.phone\">\n            <div\n              class=\"error-message\"\n              *ngIf=\"patientRegisterForm.get('phone').hasError(validation.type)\"\n            >\n              {{ validation.message }}\n            </div>\n          </ng-container>\n        </div>\n\n        <ion-item lines=\"full\">\n          <ion-label position=\"stacked\">Sexe</ion-label>\n          <ion-select placeholder=\"Select\" formControlName=\"sexe\" required>\n            <ion-select-option>Masculin</ion-select-option>\n            <ion-select-option>Feminin</ion-select-option>\n          </ion-select>\n        </ion-item>\n        <div class=\"validation-errors\">\n          <ng-container *ngFor=\"let validation of validation_msg.sexe\">\n            <div\n              class=\"error-message\"\n              *ngIf=\"patientRegisterForm.get('sexe').hasError(validation.type)\"\n            >\n              {{ validation.message }}\n            </div>\n          </ng-container>\n        </div>\n\n        <ion-item lines=\"full\">\n          <ion-label position=\"stacked\">Adresse</ion-label>\n          <ion-textarea required formControlName=\"address\"></ion-textarea>\n        </ion-item>\n        <div class=\"validation-errors\">\n          <ng-container *ngFor=\"let validation of validation_msg.address\">\n            <div\n              class=\"error-message\"\n              *ngIf=\"patientRegisterForm.get('address').hasError(validation.type)\"\n            >\n              {{ validation.message }}\n            </div>\n          </ng-container>\n        </div>\n\n        <ion-item\n          lines=\"full\"\n          *ngIf=\"this.patientRegisterForm.value['type_patient'] == 2\"\n        >\n          <ion-label position=\"stacked\">Nom du père</ion-label>\n          <ion-input type=\"text\" formControlName=\"father_name\"></ion-input>\n        </ion-item>\n        <div\n          class=\"validation-errors\"\n          *ngIf=\"this.patientRegisterForm.value['type_patient'] == 2\"\n        >\n          <ng-container *ngFor=\"let validation of validation_msg.father_name\">\n            <div\n              class=\"error-message\"\n              *ngIf=\"patientRegisterForm.get('father_name').hasError(validation.type)\"\n            >\n              {{ validation.message }}\n            </div>\n          </ng-container>\n        </div>\n\n        <ion-item\n          lines=\"full\"\n          *ngIf=\"this.patientRegisterForm.value['type_patient'] == 2\"\n        >\n          <ion-label position=\"stacked\">Nom de la mère</ion-label>\n          <ion-input type=\"text\" formControlName=\"mother_name\"></ion-input>\n        </ion-item>\n        <div\n          class=\"validation-errors\"\n          *ngIf=\"this.patientRegisterForm.value['type_patient'] == 2\"\n        >\n          <ng-container *ngFor=\"let validation of validation_msg.mother_name\">\n            <div\n              class=\"error-message\"\n              *ngIf=\"patientRegisterForm.get('mother_name').hasError(validation.type)\"\n            >\n              {{ validation.message }}\n            </div>\n          </ng-container>\n        </div>\n\n        <ion-item lines=\"full\">\n          <ion-label position=\"stacked\">Email</ion-label>\n          <ion-input type=\"text\" required formControlName=\"email\"></ion-input>\n        </ion-item>\n        <div class=\"validation-errors\">\n          <ng-container *ngFor=\"let validation of validation_msg.email\">\n            <div\n              class=\"error-message\"\n              *ngIf=\"patientRegisterForm.get('email').hasError(validation.type)\"\n            >\n              {{ validation.message }}\n            </div>\n          </ng-container>\n        </div>\n\n        <ion-item lines=\"full\">\n          <ion-label position=\"stacked\">Password</ion-label>\n          <ion-input\n            type=\"password\"\n            required\n            formControlName=\"password\"\n          ></ion-input>\n        </ion-item>\n        <div class=\"validation-errors\">\n          <ng-container *ngFor=\"let validation of validation_msg.password\">\n            <div\n              class=\"error-message\"\n              *ngIf=\"patientRegisterForm.get('password').hasError(validation.type)\"\n            >\n              {{ validation.message }}\n            </div>\n          </ng-container>\n        </div>\n\n        <ion-row>\n          <ion-col>\n            <ion-button\n              type=\"submit\"\n              color=\"sgreen \"\n              expand=\"block\"\n              (click)=\"register()\"\n              [disabled]=\"!patientRegisterForm.valid\"\n              >Sign Up</ion-button\n            >\n          </ion-col>\n        </ion-row>\n      </form>\n    </ion-card-content>\n  </ion-card>\n</ion-content>\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<ion-header>\n  <ion-toolbar>\n    <span *ngIf=\"patientRegisterForm.valid; then myUserName()\"></span>\n    <ion-title slot=\"end\" color=\"tertiary\" class=\"identifiant\"\n      >{{this._id}}</ion-title\n    >\n    <ion-title slot=\"start\">Patient</ion-title>\n  </ion-toolbar>\n</ion-header>\n<div class=\"topContent\">\n  <ion-card>\n    <ion-card-header>\n      <ion-card-title class=\"ion-text-center\">\n        <img\n          src=\"../../../../assets/images/logo_matipla.png\"\n          srcset=\"\"\n          width=\"150px\"\n          class=\"mb-2\"\n        />\n      </ion-card-title>\n    </ion-card-header>\n  </ion-card>\n</div>\n\n<ion-content>\n  <ion-card>\n    <ion-card-content>\n      <form [formGroup]=\"patientRegisterForm\">\n        <ion-item lines=\"full\">\n          <ion-label position=\"stacked\">Nom</ion-label>\n          <ion-input\n            type=\"text\"\n            required\n            formControlName=\"last_name\"\n          ></ion-input>\n        </ion-item>\n        <div class=\"validation-errors\">\n          <ng-container *ngFor=\"let validation of validation_msg.last_name\">\n            <div\n              class=\"error-message\"\n              *ngIf=\"patientRegisterForm.get('last_name').hasError(validation.type)\"\n            >\n              {{ validation.message }}\n            </div>\n          </ng-container>\n        </div>\n\n        <ion-item lines=\"full\">\n          <ion-label position=\"stacked\">Prénom</ion-label>\n          <ion-input\n            type=\"text\"\n            required\n            formControlName=\"first_name\"\n          ></ion-input>\n        </ion-item>\n        <div class=\"validation-errors\">\n          <ng-container *ngFor=\"let validation of validation_msg.first_name\">\n            <div\n              class=\"error-message\"\n              *ngIf=\"patientRegisterForm.get('first_name').hasError(validation.type)\"\n            >\n              {{ validation.message }}\n            </div>\n          </ng-container>\n        </div>\n        <ion-item lines=\"full\">\n          <ion-label position=\"stacked\">Adult / Enfant</ion-label>\n          <ion-select\n            placeholder=\"Type de patient\"\n            formControlName=\"type_patient\"\n            required\n          >\n            <ion-select-option value=\"1\">Adult</ion-select-option>\n            <ion-select-option value=\"2\">Enfant</ion-select-option>\n          </ion-select>\n        </ion-item>\n\n        <ion-item lines=\"full\">\n          <ion-label position=\"stacked\">Date de naissance</ion-label>\n          <ion-datetime\n            display-format=\"MMM DD, YYYY\"\n            formControlName=\"date_on_born\"\n            required\n          ></ion-datetime>\n        </ion-item>\n        <div class=\"validation-errors\">\n          <ng-container *ngFor=\"let validation of validation_msg.date_on_born\">\n            <div\n              class=\"error-message\"\n              *ngIf=\"patientRegisterForm.get('date_on_born').hasError(validation.type)\"\n            >\n              {{ validation.message }}\n            </div>\n          </ng-container>\n        </div>\n\n        <ion-item lines=\"full\" [disabled]=\"!this.country\">\n          <ion-label position=\"stacked\">Pays</ion-label>\n          <ion-select\n            placeholder=\"Select\"\n            formControlName=\"state\"\n            required\n            (ionChange)=\"getCityByCountry(this.patientRegisterForm.value['state'])\"\n          >\n            <ng-container *ngFor=\"let item of country\">\n              <ion-select-option value=\"{{item.id}}\"\n                >{{item.nameState}}</ion-select-option\n              >\n            </ng-container>\n          </ion-select>\n        </ion-item>\n        <div class=\"validation-errors\">\n          <ng-container *ngFor=\"let validation of validation_msg.state\">\n            <div\n              class=\"error-message\"\n              *ngIf=\"patientRegisterForm.get('state').hasError(validation.type)\"\n            >\n              {{ validation.message }}\n            </div>\n          </ng-container>\n        </div>\n\n        <ion-item lines=\"full\" [disabled]=\"!this.city\">\n          <ion-label position=\"stacked\">Ville</ion-label>\n          <ion-select placeholder=\"Select\" formControlName=\"city\" required>\n            <ng-container *ngFor=\"let item of this.city\">\n              <ion-select-option value=\"{{item.id}}\"\n                >{{item.nameCity}}</ion-select-option\n              >\n            </ng-container>\n          </ion-select>\n        </ion-item>\n        <div class=\"validation-errors\">\n          <ng-container *ngFor=\"let validation of validation_msg.city\">\n            <div\n              class=\"error-message\"\n              *ngIf=\"patientRegisterForm.get('city').hasError(validation.type)\"\n            >\n              {{ validation.message }}\n            </div>\n          </ng-container>\n        </div>\n\n        <ion-item lines=\"full\">\n          <ion-label position=\"stacked\">Télephone</ion-label>\n          <ion-input type=\"text\" required formControlName=\"phone\"></ion-input>\n        </ion-item>\n        <div class=\"validation-errors\">\n          <ng-container *ngFor=\"let validation of validation_msg.phone\">\n            <div\n              class=\"error-message\"\n              *ngIf=\"patientRegisterForm.get('phone').hasError(validation.type)\"\n            >\n              {{ validation.message }}\n            </div>\n          </ng-container>\n        </div>\n\n        <ion-item lines=\"full\">\n          <ion-label position=\"stacked\">Sexe</ion-label>\n          <ion-select placeholder=\"Select\" formControlName=\"sexe\" required>\n            <ion-select-option>Masculin</ion-select-option>\n            <ion-select-option>Feminin</ion-select-option>\n          </ion-select>\n        </ion-item>\n        <div class=\"validation-errors\">\n          <ng-container *ngFor=\"let validation of validation_msg.sexe\">\n            <div\n              class=\"error-message\"\n              *ngIf=\"patientRegisterForm.get('sexe').hasError(validation.type)\"\n            >\n              {{ validation.message }}\n            </div>\n          </ng-container>\n        </div>\n\n        <ion-item lines=\"full\">\n          <ion-label position=\"stacked\">Adresse</ion-label>\n          <ion-textarea required formControlName=\"address\"></ion-textarea>\n        </ion-item>\n        <div class=\"validation-errors\">\n          <ng-container *ngFor=\"let validation of validation_msg.address\">\n            <div\n              class=\"error-message\"\n              *ngIf=\"patientRegisterForm.get('address').hasError(validation.type)\"\n            >\n              {{ validation.message }}\n            </div>\n          </ng-container>\n        </div>\n\n        <ion-item\n          lines=\"full\"\n          *ngIf=\"this.patientRegisterForm.value['type_patient'] == 2\"\n        >\n          <ion-label position=\"stacked\">Nom du père</ion-label>\n          <ion-input type=\"text\" formControlName=\"father_name\"></ion-input>\n        </ion-item>\n        <div\n          class=\"validation-errors\"\n          *ngIf=\"this.patientRegisterForm.value['type_patient'] == 2\"\n        >\n          <ng-container *ngFor=\"let validation of validation_msg.father_name\">\n            <div\n              class=\"error-message\"\n              *ngIf=\"patientRegisterForm.get('father_name').hasError(validation.type)\"\n            >\n              {{ validation.message }}\n            </div>\n          </ng-container>\n        </div>\n\n        <ion-item\n          lines=\"full\"\n          *ngIf=\"this.patientRegisterForm.value['type_patient'] == 2\"\n        >\n          <ion-label position=\"stacked\">Nom de la mère</ion-label>\n          <ion-input type=\"text\" formControlName=\"mother_name\"></ion-input>\n        </ion-item>\n        <div\n          class=\"validation-errors\"\n          *ngIf=\"this.patientRegisterForm.value['type_patient'] == 2\"\n        >\n          <ng-container *ngFor=\"let validation of validation_msg.mother_name\">\n            <div\n              class=\"error-message\"\n              *ngIf=\"patientRegisterForm.get('mother_name').hasError(validation.type)\"\n            >\n              {{ validation.message }}\n            </div>\n          </ng-container>\n        </div>\n\n        <ion-item lines=\"full\">\n          <ion-label position=\"stacked\">Email</ion-label>\n          <ion-input type=\"text\" required formControlName=\"email\"></ion-input>\n        </ion-item>\n        <div class=\"validation-errors\">\n          <ng-container *ngFor=\"let validation of validation_msg.email\">\n            <div\n              class=\"error-message\"\n              *ngIf=\"patientRegisterForm.get('email').hasError(validation.type)\"\n            >\n              {{ validation.message }}\n            </div>\n          </ng-container>\n        </div>\n\n        <ion-item lines=\"full\">\n          <ion-label position=\"stacked\">Password</ion-label>\n          <ion-input\n            type=\"password\"\n            required\n            formControlName=\"password\"\n          ></ion-input>\n        </ion-item>\n        <div class=\"validation-errors\">\n          <ng-container *ngFor=\"let validation of validation_msg.password\">\n            <div\n              class=\"error-message\"\n              *ngIf=\"patientRegisterForm.get('password').hasError(validation.type)\"\n            >\n              {{ validation.message }}\n            </div>\n          </ng-container>\n        </div>\n\n        <ion-row>\n          <ion-col>\n            <ion-button\n              type=\"submit\"\n              color=\"sgreen \"\n              expand=\"block\"\n              (click)=\"register()\"\n              [disabled]=\"!patientRegisterForm.valid\"\n              >Sign Up</ion-button\n            >\n          </ion-col>\n        </ion-row>\n      </form>\n    </ion-card-content>\n  </ion-card>\n</ion-content>\n");
+
+/***/ }),
+
+/***/ "./src/app/pages/global.interaction.ts":
+/*!*********************************************!*\
+  !*** ./src/app/pages/global.interaction.ts ***!
+  \*********************************************/
+/*! exports provided: GlobalInteraction */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GlobalInteraction", function() { return GlobalInteraction; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/__ivy_ngcc__/fesm2015/ionic-angular.js");
+
+
+
+let GlobalInteraction = class GlobalInteraction {
+    constructor(toastCtrl, loadingCtrl, alertCtrl) {
+        this.toastCtrl = toastCtrl;
+        this.loadingCtrl = loadingCtrl;
+        this.alertCtrl = alertCtrl;
+        this.isLoading = false;
+    }
+    presentToast(msg) {
+        return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
+            const toast = yield this.toastCtrl.create({
+                message: msg,
+                duration: 1800,
+                position: "top",
+            });
+            toast.present();
+        });
+    }
+    presentLoading() {
+        return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
+            this.isLoading = true;
+            return yield this.loadingCtrl.create({
+                cssClass: "my-loading-class",
+                spinner: "bubbles",
+                translucent: true,
+                duration: 100000,
+            }).then(a => {
+                a.present().then(() => {
+                    if (!this.isLoading) {
+                        a.dismiss();
+                    }
+                });
+            });
+        });
+    }
+    dismissLoading() {
+        return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
+            if (this.isLoading) {
+                this.isLoading = false;
+                return yield this.loadingCtrl.dismiss();
+            }
+            return null;
+        });
+    }
+    alertDelete(id, parent, msg = "Tu veux vraiment supprimé cette element ? ", callback = this.defaultCallback, _header = "Suppression", array = []) {
+        return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
+            const alert = yield this.alertCtrl.create({
+                cssClass: "my-custom-class",
+                header: _header,
+                message: msg,
+                buttons: [
+                    {
+                        text: "Cancel",
+                        role: "cancel",
+                        cssClass: "secondary",
+                        handler: () => {
+                            console.log("Confirm Cancel: blah");
+                        },
+                    },
+                    {
+                        text: "OK",
+                        handler: () => {
+                            console.warn("data deleted " + id);
+                            // this.remove(id, array, keyStatus, RefuseStatus);
+                            callback(id, parent);
+                        },
+                    },
+                ],
+            });
+            yield alert.present();
+        });
+    }
+    defaultCallback(id, parent) {
+        this.presentToast(`this is a default callback ${id} `);
+    }
+};
+GlobalInteraction.ctorParameters = () => [
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["ToastController"] },
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["LoadingController"] },
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["AlertController"] }
+];
+GlobalInteraction = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
+        providedIn: 'root'
+    })
+], GlobalInteraction);
+
+
 
 /***/ }),
 
@@ -119,19 +225,26 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
 /* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
-/* harmony import */ var src_app_services_global_data_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! src/app/services/global-data.service */ "./src/app/services/global-data.service.ts");
-/* harmony import */ var src_app_services_patient_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! src/app/services/patient.service */ "./src/app/services/patient.service.ts");
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/__ivy_ngcc__/fesm2015/ionic-angular.js");
+/* harmony import */ var src_app_services_global_data_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! src/app/services/global-data.service */ "./src/app/services/global-data.service.ts");
+/* harmony import */ var src_app_services_patient_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! src/app/services/patient.service */ "./src/app/services/patient.service.ts");
+/* harmony import */ var _global_interaction__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../global.interaction */ "./src/app/pages/global.interaction.ts");
+
+
 
 
 
 
 
 let PatientPage = class PatientPage {
-    constructor(patientSrvc, globalSrvc) {
+    constructor(patientSrvc, globalSrvc, navCtrl, globalEl) {
         this.patientSrvc = patientSrvc;
         this.globalSrvc = globalSrvc;
+        this.navCtrl = navCtrl;
+        this.globalEl = globalEl;
         this.IDENTIFIANT = "Identifiant";
         this._id = this.IDENTIFIANT;
+        this.ROLE = "ROLE_PATIENT";
         this.validRegister = false;
         this.validation_msg = {
             first_name: [{ type: "required", message: "Prénom obligatoire" }],
@@ -173,6 +286,7 @@ let PatientPage = class PatientPage {
     }
     register() {
         return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
+            this.globalEl.presentLoading();
             if (this.patientRegisterForm.valid) {
                 Object.keys(this.patientRegisterForm.value).forEach((key) => {
                     console.log("valid", this.patientRegisterForm.value[key]);
@@ -188,13 +302,18 @@ let PatientPage = class PatientPage {
                     email: this.patientRegisterForm.value['email'],
                     password: this.patientRegisterForm.value['password'],
                     phone: this.patientRegisterForm.value['phone'],
-                    roles: "ROLE_PATIENT",
+                    roles: this.ROLE,
                     username: this._id,
                     type_patient: this.patientRegisterForm.value['type_patient'],
                     father_name: this.patientRegisterForm.value['father_name'] == undefined ? '' : this.patientRegisterForm.value['father_name'],
                     mother_name: this.patientRegisterForm.value['mother_name'] == undefined ? '' : this.patientRegisterForm.value['mother_name'],
                 };
-                this.patientSrvc.registerPatient(dataRegister);
+                this.patientSrvc.registerPatient(dataRegister).subscribe(data => {
+                    if (data) {
+                        this.navCtrl.navigateRoot('/login');
+                        this.globalEl.dismissLoading();
+                    }
+                });
             }
             else {
                 console.log("NOT valid", this.patientRegisterForm);
@@ -237,8 +356,10 @@ let PatientPage = class PatientPage {
     }
 };
 PatientPage.ctorParameters = () => [
-    { type: src_app_services_patient_service__WEBPACK_IMPORTED_MODULE_4__["PatientService"] },
-    { type: src_app_services_global_data_service__WEBPACK_IMPORTED_MODULE_3__["GlobalDataService"] }
+    { type: src_app_services_patient_service__WEBPACK_IMPORTED_MODULE_5__["PatientService"] },
+    { type: src_app_services_global_data_service__WEBPACK_IMPORTED_MODULE_4__["GlobalDataService"] },
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["NavController"] },
+    { type: _global_interaction__WEBPACK_IMPORTED_MODULE_6__["GlobalInteraction"] }
 ];
 PatientPage = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
@@ -291,6 +412,26 @@ let GlobalDataService = class GlobalDataService {
         });
         return res;
     }
+    getCountryByPratictitionerFunction(_idPractitionerFunction) {
+        const res = this.http.post(`${this.url_api}country/fonction`, { id_fonction: _idPractitionerFunction });
+        return res;
+    }
+    getCityByPractitionerFunctionAndCountry(_idPractitionerFunction, _idCountry) {
+        const res = this.http.post(`${this.url_api}city/fonction`, { id_fonction: _idPractitionerFunction, id_country: _idCountry });
+        return res;
+    }
+    getPractitionerByFunctionCountryAndCity(_idPractitionerFunction, _idCountry, _idCity) {
+        const res = this.http.post(`${this.url_api}praticien/fonction`, { id_fonction: _idPractitionerFunction, id_country: _idCountry, id_city: _idCity });
+        return res;
+    }
+    getCenterHealthByCity(_idCity) {
+        const res = this.http.post(`${this.url_api}praticien/centre`, { id: _idCity });
+        return res;
+    }
+    getPraticienByCenter(_idCenter) {
+        const res = this.http.post(`${this.url_api}centre/praticien`, { id: _idCenter });
+        return res;
+    }
 };
 GlobalDataService.ctorParameters = () => [
     { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpClient"] }
@@ -300,6 +441,149 @@ GlobalDataService = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
         providedIn: 'root'
     })
 ], GlobalDataService);
+
+
+
+/***/ }),
+
+/***/ "./src/app/services/patient.service.ts":
+/*!*********************************************!*\
+  !*** ./src/app/services/patient.service.ts ***!
+  \*********************************************/
+/*! exports provided: PatientService */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PatientService", function() { return PatientService; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+/* harmony import */ var src_constant__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! src/constant */ "./src/constant.ts");
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/http.js");
+/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm2015/operators/index.js");
+/* harmony import */ var src_environments_environment__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! src/environments/environment */ "./src/environments/environment.ts");
+
+
+
+
+
+
+let PatientService = class PatientService {
+    constructor(http) {
+        this.http = http;
+        this.url = src_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].url_dev;
+        this.url_api = src_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].url_dev_api;
+        this.url_apip = src_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].url_dev;
+    }
+    // TODO Get Patients
+    getPatients() {
+        return this.http.get(this.url + "patients");
+        // return this.http.get(CONSTANT.MOCK_DATA_JSON).pipe(
+        //   map((data: any) => {
+        //     return data.mockPatient;
+        //   })
+        // );
+    }
+    getAllRdv() {
+        return this.http.get(`${this.url_apip}patients/rdv`);
+        // return this.http.get(CONSTANT.MOCK_DATA_JSON).pipe(
+        //   map((data: any) => {
+        //     return data.mockRdvListPatient;
+        //   })
+        // );
+    }
+    getTracksRdv(excludeTracks) {
+        return this.http.get(src_constant__WEBPACK_IMPORTED_MODULE_2__["CONSTANT"].MOCK_DATA_JSON).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["map"])((data) => {
+            console.log("PatientService -> getTracksRdv -> data", excludeTracks);
+            return data;
+        }));
+    }
+    //TODO : Get Vaccin by patient
+    getVaccinByPatient() {
+        return this.http.get(`${this.url_apip}patients/vaccination`);
+        // return this.http.get(CONSTANT.MOCK_DATA_JSON).pipe(
+        //   map((data: any) => {
+        //     return data.mockVaccinPatient;
+        //   })
+        // );
+    }
+    registerPatient(data) {
+        return this.http.post(`${this.url_api}users`, data);
+        Object.keys(data).forEach((element) => {
+            console.log("PatientService -> registerPatient -> element", element);
+            console.log("register => ", data[element]);
+        });
+    }
+    getProfile() {
+        return this.http.get(`${this.url_apip}patient/profile`);
+        // return this.http.get(CONSTANT.MOCK_DATA_JSON).pipe(
+        //   map((data: any) => {
+        //     return data.mockPatientProfile;
+        //   })
+        // );
+    }
+    updateProfile(data) {
+        return this.http.post(`${this.url_apip}patient/profile/edit`, data);
+    }
+    getAssociatedPraticians() {
+        const res = this.http.get(`${this.url_apip}patients/praticien`);
+        res.subscribe(data => {
+            console.log("PatientService -> constructor -> res", data);
+        });
+        return res;
+    }
+    getFamily() {
+        const res = this.http.get(`${this.url_apip}patients/family`);
+        res.subscribe(data => console.log("PatientService -> getFamily -> res", data));
+        return res;
+    }
+    addGroupFamily(nomGroupe) {
+        const data = {
+            designation: nomGroupe,
+        };
+        console.log("LL: PatientService -> addGroupFamily -> data", data);
+        const res = this.http.post(`${this.url_apip}register/group`, data);
+        return res;
+    }
+    addGroupFamilyMember(data) {
+        console.log("PatientService -> addGroupFamilyMember -> data", data);
+        const res = this.http.post(`${this.url_api}add/membres`, data);
+        return res;
+    }
+    deleteFamilyMember(_idFamily) {
+        const res = this.http.delete(`${this.url_api}family/${_idFamily}`);
+        return res;
+    }
+    interventionPraticien(data) {
+        console.log("####################LL: PatientService -> interventionPraticien -> data", data);
+        const res = this.http.post(`${this.url_apip}intervention`, data);
+        return res;
+    }
+    chekIfPractitionerIsAssociated(_idPraticien) {
+        const res = this.http.get(`${this.url_apip}patients/check-association/${_idPraticien}`);
+        return res;
+    }
+    proposeRdv(data) {
+        const res = this.http.post(`${this.url_apip}add/rdv`, data);
+        return res;
+    }
+    cancelRdvProposition(data) {
+        const res = this.http.post(`${this.url_api}cancel/rdv`, data);
+        return res;
+    }
+    postVaccinGeneration(_idPraticien) {
+        const res = this.http.post(`${this.url_apip}patient/generation`, { praticien: _idPraticien });
+        return res;
+    }
+};
+PatientService.ctorParameters = () => [
+    { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_3__["HttpClient"] }
+];
+PatientService = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
+        providedIn: "root",
+    })
+], PatientService);
 
 
 

@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ModalController, NavParams } from '@ionic/angular';
 import { IUserPraticien } from 'src/app/Interfaces/praticien.interface';
+import { GlobalInteraction } from 'src/app/pages/global.interaction';
 import { PatientService } from 'src/app/services/patient.service';
 import { PraticienService } from 'src/app/services/praticien.service';
 
@@ -15,7 +16,7 @@ export class InterventionComponent implements OnInit {
   public propositionForm: FormGroup;
   @Input() praticiens: IUserPraticien[];
   @Input() dateVaccin: any;
-  constructor(private navParms: NavParams, private modalCtrl: ModalController, private patientSrvc: PatientService, private praticienSrv: PraticienService) { }
+  constructor(private globalItem: GlobalInteraction, private navParms: NavParams, private modalCtrl: ModalController, private patientSrvc: PatientService, private praticienSrv: PraticienService) { }
 
   ngOnInit() {
     // TODO: reserche bar
@@ -40,7 +41,11 @@ export class InterventionComponent implements OnInit {
       id_carnet: this.carnet.id,
     }
     console.error("***************************LL: InterventionComponent -> ngOnInit -> vaccin", data_send);
-    this.patientSrvc.interventionPraticien(data_send).subscribe(() => this.closeModal());
+    this.patientSrvc.interventionPraticien(data_send).subscribe((data) => {
+      console.log("LL: InterventionComponent -> intervention -> data", data);
+      this.globalItem.presentToast(data);
+      this.closeModal()
+    });
 
 
   }

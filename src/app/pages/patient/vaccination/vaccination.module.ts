@@ -8,6 +8,8 @@ import { VaccinationPageRoutingModule } from './vaccination-routing.module';
 
 import { VaccinationPage } from './vaccination.page';
 import { InterventionComponent } from './intervention/intervention.component';
+import { GenerateComponent } from './generate/generate.component';
+import { RealizeComponent } from '../../praticien/vaccination/realize/realize.component';
 
 @NgModule({
   imports: [
@@ -17,6 +19,6 @@ import { InterventionComponent } from './intervention/intervention.component';
     VaccinationPageRoutingModule,
     ReactiveFormsModule
   ],
-  declarations: [VaccinationPage, InterventionComponent]
+  declarations: [VaccinationPage, InterventionComponent, GenerateComponent, RealizeComponent]
 })
 export class VaccinationPageModule { }

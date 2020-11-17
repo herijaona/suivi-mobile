@@ -27,6 +27,7 @@ import { AuthService } from "./auth.service";
 })
 export class PraticienService {
   private url = environment.url_dev;
+  private url_apip = environment.url_dev;
   private url_api = environment.url_dev_api;
   private userID;
   private praticien: any = {};
@@ -135,11 +136,14 @@ export class PraticienService {
   }
 
   getListsVaccinations(): Observable<IVaccination[]> {
-    return this.loadMockData().pipe(
-      map((data: any) => {
-        return data.mockVaccination;
-      })
-    );
+    const res = this.http.get<IVaccination[]>(`${this.url_apip}praticien/vaccination`);
+    res.subscribe(data => { console.log("LL: res", data) });
+    return res;
+    // return this.loadMockData().pipe(
+    //   map((data: any) => {
+    //     return data.mockVaccination;
+    //   })
+    // );
   }
 
   getListsVaccinationsByDate() {
@@ -167,6 +171,34 @@ export class PraticienService {
       return new Date(a.date).getTime() - new Date(b.date).getTime();
     });
     return sortedActivities;
+  }
+
+  regroupDataByPatient(data) {
+    const groups = data.reduce((groups, eachData) => {
+      const key = eachData.patient;
+      if (!groups[key]) {
+        groups[key] = [];
+      }
+      groups[key].push(eachData);
+      console.log("LL: regroupDataByPatient -> groups", groups, Object.keys(groups))
+      return groups;
+    }, {});
+
+    const groupArrays = Object.keys(groups).map((patient) => {
+      return {
+        patient,
+        nomPatient: groups[patient][0].firstName + " " + groups[patient][0].lastName,
+        groups: groups[patient],
+      };
+    });
+    console.log("LL: regroupDataByPatient -> groupArrays", groupArrays)
+    return groupArrays;
+
+
+    // const sortedActivities = groupArrays.slice().sort(function (a, b) {
+    //   return b.patient - a.patient;
+    // });
+    // return sortedActivities;
   }
 
   deletePropositionRdv(id) {
@@ -197,4 +229,49 @@ export class PraticienService {
     return this.http.post<IRegisterPraticien>(`${this.url_api}users`, data);
   }
 
+  getAllRdv() {
+    const res = this.http.get(`${this.url_apip}praticien/rdv/in`);
+    return res;
+  }
+
+  getAssociatedPatient() {
+    const res = this.http.get(`${this.url_apip}patient/associer`);
+    return res;
+  }
+
+  watchVaccin(_idPatient) {
+    const res = this.http.get(`${this.url_api}see/calendar/${_idPatient}`);
+    return res;
+  }
+
+  generateVaccin(_id, _idPatient) {
+    const res = this.http.post(`${this.url_apip}generate/vaccination`, { id: _id, patient: _idPatient });
+    return res;
+  }
+
+  rejectVaccin(_id) {
+    const res = this.http.post(`${this.url_api}cancel/generation`, { id: _id });
+    return res;
+  }
+
+
+
+  watchVaccinWithNotebook(_idCarnet) {
+    const res = this.http.get(`${this.url_api}see/intervention/${_idCarnet}`)
+    return res;
+  }
+
+  rejectVaccinithNotebook(_id) {
+    const res = this.http.post(`${this.url_api}cancel/intervention`, { id: _id });
+    return res;
+  }
+  organiseVaccin(data) {
+    const res = this.http.post(`${this.url_api}organize/vaccination`, { id: data.id, date: data.date, heure: data.heure, carnet: data.carnet });
+    return res;
+  }
+
+  realizeVaccin(data) {
+    const res = this.http.post(`${this.url_apip}realize/vaccination`, { id: data.id, lot: data.lot, carnet: data.carnet });
+    return res;
+  }
 }

@@ -9,7 +9,7 @@
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<ion-split-pane contentId=\"contents\" when=\"xs\" [disabled]=\"true\">\n  <ion-menu side=\"start\" type=\"overlay\" menuId=\"first\" contentId=\"contents\">\n    <!--  <ion-header>\n      <ion-toolbar>\n        <ion-title text-wrap>Menu</ion-title>\n      </ion-toolbar>\n    </ion-header> -->\n    <ion-content>\n      <div class=\"menu-praticien\"></div>\n      <div class=\"header-content\">\n        <ion-label>\n          <img src=\"../../../assets/images/praticien.jpg\" />\n        </ion-label>\n        <ion-label>\n          <h2>Dr. {{name}}</h2>\n          <p>{{fonction}}</p>\n        </ion-label>\n      </div>\n\n      <ion-list lines=\"none\" class=\"menu-items\">\n        <ion-menu-toggle auto-hide=\"false\" *ngFor=\"let p of pages\">\n          <ion-item\n            text-wrap\n            routerLink=\"{{p.url}}\"\n            routerDirection=\"root\"\n            [class.active-item]=\"selectedPath === p.url\"\n          >\n            <ion-icon\n              *ngIf=\"selectedPath === p.url\"\n              slot=\"start\"\n              name=\"caret-forward-outline\"\n              color=\"sgreen\"\n            >\n            </ion-icon>\n            <ion-label>{{p.title}}</ion-label>\n          </ion-item>\n        </ion-menu-toggle>\n        <ion-menu-toggle> </ion-menu-toggle>\n      </ion-list>\n    </ion-content>\n    <ion-footer>\n      <ion-button\n        class=\"logout\"\n        color=\"sred\"\n        (click)=\"logout()\"\n        [routerLink]=\"['/login']\"\n      >\n        <ion-icon slot=\"start\" name=\"exit-outline\"> </ion-icon>\n\n        <ion-label>Logout</ion-label>\n      </ion-button>\n    </ion-footer>\n  </ion-menu>\n  <ion-router-outlet id=\"contents\"></ion-router-outlet>\n</ion-split-pane>\n\n<!-- <ion-header>\n    <ion-toolbar>\n      <ion-buttons slot=\"start\">\n        <ion-menu-button (click)=\"openFirst()\"></ion-menu-button>\n      </ion-buttons>\n      <ion-title>Praticien Area</ion-title>\n    </ion-toolbar>\n  </ion-header> -->\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<ion-split-pane contentId=\"contents\" when=\"xs\" [disabled]=\"true\">\n  <ion-menu side=\"start\" type=\"overlay\" menuId=\"first\" contentId=\"contents\">\n    <!--  <ion-header>\n      <ion-toolbar>\n        <ion-title text-wrap>Menu</ion-title>\n      </ion-toolbar>\n    </ion-header> -->\n    <ion-content>\n      <div class=\"menu-praticien\"></div>\n      <div class=\"header-content\">\n        <ion-label>\n          <img\n            src=\"../../../assets/images/praticien.jpg\"\n            routerLink=\"/praticien/profile\"\n          />\n        </ion-label>\n        <ion-label>\n          <h2>Dr. {{name}}</h2>\n          <!-- <p>{{fonction}}</p> -->\n        </ion-label>\n      </div>\n\n      <ion-list lines=\"none\" class=\"menu-items\">\n        <ion-menu-toggle auto-hide=\"false\" *ngFor=\"let p of pages\">\n          <ion-item\n            text-wrap\n            routerLink=\"{{p.url}}\"\n            routerDirection=\"root\"\n            [class.active-item]=\"selectedPath === p.url\"\n          >\n            <ion-icon\n              *ngIf=\"selectedPath === p.url\"\n              slot=\"start\"\n              name=\"caret-forward-outline\"\n              color=\"sgreen\"\n            >\n            </ion-icon>\n            <ion-label>{{p.title}}</ion-label>\n          </ion-item>\n        </ion-menu-toggle>\n        <ion-menu-toggle> </ion-menu-toggle>\n      </ion-list>\n    </ion-content>\n    <ion-footer>\n      <ion-button\n        class=\"logout\"\n        color=\"sred\"\n        (click)=\"logout()\"\n        [routerLink]=\"['/login']\"\n      >\n        <ion-icon slot=\"start\" name=\"exit-outline\"> </ion-icon>\n\n        <ion-label>Logout</ion-label>\n      </ion-button>\n    </ion-footer>\n  </ion-menu>\n  <ion-router-outlet id=\"contents\"></ion-router-outlet>\n</ion-split-pane>\n\n<!-- <ion-header>\n    <ion-toolbar>\n      <ion-buttons slot=\"start\">\n        <ion-menu-button (click)=\"openFirst()\"></ion-menu-button>\n      </ion-buttons>\n      <ion-title>Praticien Area</ion-title>\n    </ion-toolbar>\n  </ion-header> -->\n");
 
 /***/ }),
 
@@ -38,7 +38,7 @@ const routes = [
         children: [
             {
                 path: "proposition-rdv",
-                loadChildren: () => Promise.all(/*! import() | proposition-rdv-proposition-rdv-module */[__webpack_require__.e("common"), __webpack_require__.e("proposition-rdv-proposition-rdv-module")]).then(__webpack_require__.bind(null, /*! ./proposition-rdv/proposition-rdv.module */ "./src/app/pages/praticien/proposition-rdv/proposition-rdv.module.ts")).then((m) => m.PropositionRdvPageModule),
+                loadChildren: () => __webpack_require__.e(/*! import() | proposition-rdv-proposition-rdv-module */ "proposition-rdv-proposition-rdv-module").then(__webpack_require__.bind(null, /*! ./proposition-rdv/proposition-rdv.module */ "./src/app/pages/praticien/proposition-rdv/proposition-rdv.module.ts")).then((m) => m.PropositionRdvPageModule),
             },
             {
                 path: "dashboard",
@@ -50,14 +50,30 @@ const routes = [
             },
             {
                 path: "vaccination",
-                loadChildren: () => Promise.all(/*! import() | vaccination-vaccination-module */[__webpack_require__.e("default~pages-praticien-praticien-module~rendez-vous-rendez-vous-module~vaccination-vaccination-module"), __webpack_require__.e("common"), __webpack_require__.e("vaccination-vaccination-module")]).then(__webpack_require__.bind(null, /*! ./vaccination/vaccination.module */ "./src/app/pages/praticien/vaccination/vaccination.module.ts")).then((m) => m.VaccinationPageModule),
+                loadChildren: () => Promise.all(/*! import() | vaccination-vaccination-module */[__webpack_require__.e("default~pages-praticien-praticien-module~praticien-praticien-module~profile-profile-module~rendez-vo~80279bf7"), __webpack_require__.e("default~rendez-vous-rendez-vous-module~vaccination-vaccination-module"), __webpack_require__.e("vaccination-vaccination-module")]).then(__webpack_require__.bind(null, /*! ./vaccination/vaccination.module */ "./src/app/pages/praticien/vaccination/vaccination.module.ts")).then((m) => m.VaccinationPageModule),
             },
             {
                 path: "intervention",
                 loadChildren: () => __webpack_require__.e(/*! import() | intervention-intervention-module */ "intervention-intervention-module").then(__webpack_require__.bind(null, /*! ./intervention/intervention.module */ "./src/app/pages/praticien/intervention/intervention.module.ts")).then((m) => m.InterventionPageModule),
             },
+            {
+                path: 'profile',
+                loadChildren: () => Promise.all(/*! import() | profile-profile-module */[__webpack_require__.e("default~pages-praticien-praticien-module~praticien-praticien-module~profile-profile-module~rendez-vo~80279bf7"), __webpack_require__.e("profile-profile-module")]).then(__webpack_require__.bind(null, /*! ./profile/profile.module */ "./src/app/pages/praticien/profile/profile.module.ts")).then(m => m.ProfilePageModule)
+            },
+            {
+                path: 'rendez-vous',
+                loadChildren: () => Promise.all(/*! import() | rendez-vous-rendez-vous-module */[__webpack_require__.e("default~pages-praticien-praticien-module~praticien-praticien-module~profile-profile-module~rendez-vo~80279bf7"), __webpack_require__.e("default~rendez-vous-rendez-vous-module~vaccination-vaccination-module"), __webpack_require__.e("rendez-vous-rendez-vous-module")]).then(__webpack_require__.bind(null, /*! ./rendez-vous/rendez-vous.module */ "./src/app/pages/praticien/rendez-vous/rendez-vous.module.ts")).then(m => m.RendezVousPageModule)
+            },
+            {
+                path: 'assoc-patients',
+                loadChildren: () => __webpack_require__.e(/*! import() | assoc-patients-assoc-patients-module */ "assoc-patients-assoc-patients-module").then(__webpack_require__.bind(null, /*! ./assoc-patients/assoc-patients.module */ "./src/app/pages/praticien/assoc-patients/assoc-patients.module.ts")).then(m => m.AssocPatientsPageModule)
+            },
         ],
     },
+    {
+        path: 'my-patients',
+        loadChildren: () => __webpack_require__.e(/*! import() | my-patients-my-patients-module */ "my-patients-my-patients-module").then(__webpack_require__.bind(null, /*! ./my-patients/my-patients.module */ "./src/app/pages/praticien/my-patients/my-patients.module.ts")).then(m => m.MyPatientsPageModule)
+    }
 ];
 let PraticienPageRoutingModule = class PraticienPageRoutingModule {
 };
@@ -186,7 +202,7 @@ let PraticienPage = class PraticienPage {
             },
             {
                 title: "Rendez-vous",
-                url: "/praticien/proposition-rdv",
+                url: "/praticien/rendez-vous",
             },
         ];
         this.selectedPath = "";
@@ -229,7 +245,9 @@ let PraticienPage = class PraticienPage {
         });
         this.praticienSrvc.getInfoUserID().subscribe((data) => {
             this.storage.set("_id", data.data);
-            this.praticienSrvc.getLocalUserInfo().subscribe((el) => {
+            this.praticienSrvc.getLocalUserInfo().subscribe((data) => {
+                const el = data.profile[0];
+                console.log("LL: PraticienPage -> initializeApp -> el", data);
                 const { roles, username } = this.authSrvc.user;
                 const praticien = {
                     firstName: el.firstName,
@@ -239,7 +257,7 @@ let PraticienPage = class PraticienPage {
                     fonction: el.fonction,
                 };
                 this.storage.set("praticien_info", praticien);
-                this.name = `${praticien.firstName} ${praticien.lastName} ( ${praticien.anotherData.username} ) `;
+                this.name = `${praticien.firstName} ${praticien.lastName}`;
                 this.fonction = praticien.fonction;
             });
         });

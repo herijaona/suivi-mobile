@@ -1,0 +1,178 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Planification de vaccination</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-grid fixed>
+  <ion-row>
+    <ion-col size-md="6" offset-md="3">
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title> </ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <form
+            [formGroup]="propositionForm"
+            method="post"
+            (ngSubmit)="
+              postVaccinGeneration(this.propositionForm.value['praticien'])
+            "
+          >
+            <div class="mb-14">
+              <label>Choisir pays</label>
+              <ion-select
+                placeholder="Select"
+                formControlName="country"
+                required
+                [disabled]="!this.countries"
+                (ionChange)="
+                  getCityByCountry(this.propositionForm.value['country'])
+                "
+              >
+                <ion-select-option
+                  *ngFor="let item of countries"
+                  [value]="item.id"
+                  >{{ item.nameState }}</ion-select-option
+                >
+              </ion-select>
+            </div>
+
+            <div class="mb-14">
+              <label>Choisir ville</label>
+              <ion-select
+                placeholder="Select"
+                formControlName="city"
+                required
+                [disabled]="!this.cities"
+                (ionChange)="
+                  getCenterByCity(this.propositionForm.value['city'])
+                "
+              >
+                <ion-select-option
+                  *ngFor="let item of cities"
+                  [value]="item.id"
+                  >{{ item.nameCity }}</ion-select-option
+                >
+              </ion-select>
+            </div>
+
+            <div class="mb-14">
+              <label>Centre</label>
+              <ion-select
+                placeholder="Select"
+                formControlName="center_health"
+                required
+                (ionChange)="
+                  getPraticienByCenter(
+                    this.propositionForm.value['center_health']
+                  )
+                "
+              >
+                <ion-select-option
+                  *ngFor="let item of center_health"
+                  [value]="item.id"
+                  >{{ item.centreName }}</ion-select-option
+                >
+              </ion-select>
+            </div>
+
+            <div class="mb-14">
+              <label>Choisir praticien</label>
+              <ion-select
+                placeholder="Select"
+                formControlName="praticien"
+                [disabled]="!this.praticiens"
+                required
+              >
+                <ion-select-option
+                  *ngFor="let item of praticiens"
+                  [value]="item.id"
+                  >{{
+                    item.firstName.toString() + ' ' + item.lastName.toString()
+                  }}</ion-select-option
+                >
+              </ion-select>
+            </div>
+            <!-- <div class="mb-14">
+              <label>Type de rendez-vous</label>
+              <ion-select formControlName="typeRdv" required>
+                <ion-select-option value="consultation"
+                  >Consultation</ion-select-option
+                >
+                <ion-select-option value="intervention"
+                  >Intervention</ion-select-option
+                >
+              </ion-select>
+            </div>
+            <div class="mb-14">
+              <label>Objet </label>
+              <ion-input
+                type="text"
+                required
+                formControlName="description"
+              ></ion-input>
+            </div> -->
+            <!-- <div *ngIf="after_praticien_choice" class="checkBox"> -->
+            <div *ngIf="after_praticien_choice" class="checkBox">
+              <div class="mb-14" *ngIf="showCheckBoxAssoc == false">
+                <ion-item class="status" fill="outline" lines="none">
+                  <ion-checkbox
+                    formControlName="chekcboxAssoc"
+                    value
+                  ></ion-checkbox>
+                  &nbsp;&nbsp;
+                  <label>choisir comme associé ?</label>
+                </ion-item>
+              </div>
+              <div *ngIf="showCheckBoxAssoc == true">
+                <ion-button
+                  class="status"
+                  color="sgreen"
+                  fill="outline"
+                  expand="block"
+                  slot="end"
+                >
+                  Praticien associé
+                </ion-button>
+              </div>
+            </div>
+
+            <!-- <div class="mb-14">
+              <label>Propose une date </label>
+              <ion-datetime
+                display-format="MMM DD, YYYY"
+                formControlName="dateRdv"
+                required
+              ></ion-datetime>
+            </div>
+
+            <div class="mb-14">
+              <label>Propose un horaire</label>
+              <ion-datetime
+                display-format="h:mm A"
+                picker-format="h:mm A"
+                formControlName="heureRdv"
+                required
+              ></ion-datetime>
+            </div> -->
+
+            <ion-row>
+              <ion-col>
+                <ion-button color="sred" expand="block" (click)="dismiss()">
+                  <ion-icon slot="start" name=""> x </ion-icon
+                  >Cancel</ion-button
+                >
+                <legend class="ion-text-center"></legend>
+                <ion-button type="submit" color="sgreen" expand="block"
+                  ><ion-icon slot="start" name="save-outline"></ion-icon>
+                  Save
+                </ion-button>
+              </ion-col>
+            </ion-row>
+          </form>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+  </ion-row>
+</ion-grid>

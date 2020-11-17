@@ -3,22 +3,57 @@
     <ion-button (click)="dismiss()" fill="clear" slot="start">
       <ion-icon slot="start" name="chevron-back-outline"></ion-icon>
     </ion-button>
-    <ion-title>details : {{ vaccinations[0].patient }}</ion-title>
+    <ion-title>Details </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content padding>
   <ion-card *ngFor="let item of vaccinations">
-    <ion-item>
-      <h2>Vaccine</h2>
-    </ion-item>
+    <ion-card-header>
+      {{ vaccinations[0].firstName }} {{ vaccinations[0].lastName }}
+    </ion-card-header>
 
-    <img />
+    <ion-card-content *ngIf="this.isWithNoteBook == false">
+      <ion-item lines="none">
+        <ion-text color="primary">
+          <h3>Vaccin : {{ item.vaccinName }}</h3>
+        </ion-text>
 
-    <ion-card-content>
-      <p>{{ item.date }}</p>
+        <ion-text color="sgreen" slot="end">
+          <h5 *ngIf="item.identification != null">
+            &nbsp;( {{ item.identification }} )
+          </h5>
+        </ion-text>
+      </ion-item>
+      <ion-item lines="none">
+        <ion-text color="sred">
+          <h5 *ngIf="item.identification != null">
+            &nbsp; {{ item.identifiant_vaccin }}
+          </h5>
+        </ion-text>
+      </ion-item>
+      <ion-item lines="none">
+        date de prise : {{ item.date_prise.date | date: 'MMM-dd-yyyy' }}
+      </ion-item>
     </ion-card-content>
 
+    <ion-card-content *ngIf="this.isWithNoteBook == true">
+      <ion-item lines="none">
+        <ion-text color="primary">
+          <h3>Vaccin : {{ item.vaccinName }}</h3>
+        </ion-text>
+
+        <ion-text color="sgreen" slot="end">
+          <h5 *ngIf="item.identification != null">
+            &nbsp;( {{ item.identification }} )
+          </h5>
+        </ion-text>
+      </ion-item>
+
+      <ion-item lines="none">
+        date de prise : {{ item.datePriseVaccin.date | date: 'MMM-dd-yyyy' }}
+      </ion-item>
+    </ion-card-content>
     <!-- <ion-row>
       <ion-col>
         <button>

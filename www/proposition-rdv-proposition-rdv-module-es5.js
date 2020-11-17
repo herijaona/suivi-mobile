@@ -779,6 +779,223 @@
       }) // TODO delete + Modifier
       ], PropositionRdvPage);
       /***/
+    },
+
+    /***/
+    "./src/app/services/patient.service.ts":
+    /*!*********************************************!*\
+      !*** ./src/app/services/patient.service.ts ***!
+      \*********************************************/
+
+    /*! exports provided: PatientService */
+
+    /***/
+    function srcAppServicesPatientServiceTs(module, __webpack_exports__, __webpack_require__) {
+      "use strict";
+
+      __webpack_require__.r(__webpack_exports__);
+      /* harmony export (binding) */
+
+
+      __webpack_require__.d(__webpack_exports__, "PatientService", function () {
+        return PatientService;
+      });
+      /* harmony import */
+
+
+      var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
+      /*! tslib */
+      "./node_modules/tslib/tslib.es6.js");
+      /* harmony import */
+
+
+      var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
+      /*! @angular/core */
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      /* harmony import */
+
+
+      var src_constant__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
+      /*! src/constant */
+      "./src/constant.ts");
+      /* harmony import */
+
+
+      var _angular_common_http__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
+      /*! @angular/common/http */
+      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/http.js");
+      /* harmony import */
+
+
+      var rxjs_operators__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
+      /*! rxjs/operators */
+      "./node_modules/rxjs/_esm2015/operators/index.js");
+      /* harmony import */
+
+
+      var src_environments_environment__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
+      /*! src/environments/environment */
+      "./src/environments/environment.ts");
+
+      var PatientService = /*#__PURE__*/function () {
+        function PatientService(http) {
+          _classCallCheck(this, PatientService);
+
+          this.http = http;
+          this.url = src_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].url_dev;
+          this.url_api = src_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].url_dev_api;
+          this.url_apip = src_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].url_dev;
+        } // TODO Get Patients
+
+
+        _createClass(PatientService, [{
+          key: "getPatients",
+          value: function getPatients() {
+            return this.http.get(this.url + "patients"); // return this.http.get(CONSTANT.MOCK_DATA_JSON).pipe(
+            //   map((data: any) => {
+            //     return data.mockPatient;
+            //   })
+            // );
+          }
+        }, {
+          key: "getAllRdv",
+          value: function getAllRdv() {
+            return this.http.get("".concat(this.url_apip, "patients/rdv")); // return this.http.get(CONSTANT.MOCK_DATA_JSON).pipe(
+            //   map((data: any) => {
+            //     return data.mockRdvListPatient;
+            //   })
+            // );
+          }
+        }, {
+          key: "getTracksRdv",
+          value: function getTracksRdv(excludeTracks) {
+            return this.http.get(src_constant__WEBPACK_IMPORTED_MODULE_2__["CONSTANT"].MOCK_DATA_JSON).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["map"])(function (data) {
+              console.log("PatientService -> getTracksRdv -> data", excludeTracks);
+              return data;
+            }));
+          } //TODO : Get Vaccin by patient
+
+        }, {
+          key: "getVaccinByPatient",
+          value: function getVaccinByPatient() {
+            return this.http.get("".concat(this.url_apip, "patients/vaccination")); // return this.http.get(CONSTANT.MOCK_DATA_JSON).pipe(
+            //   map((data: any) => {
+            //     return data.mockVaccinPatient;
+            //   })
+            // );
+          }
+        }, {
+          key: "registerPatient",
+          value: function registerPatient(data) {
+            return this.http.post("".concat(this.url_api, "users"), data);
+            Object.keys(data).forEach(function (element) {
+              console.log("PatientService -> registerPatient -> element", element);
+              console.log("register => ", data[element]);
+            });
+          }
+        }, {
+          key: "getProfile",
+          value: function getProfile() {
+            return this.http.get("".concat(this.url_apip, "patient/profile")); // return this.http.get(CONSTANT.MOCK_DATA_JSON).pipe(
+            //   map((data: any) => {
+            //     return data.mockPatientProfile;
+            //   })
+            // );
+          }
+        }, {
+          key: "updateProfile",
+          value: function updateProfile(data) {
+            return this.http.post("".concat(this.url_apip, "patient/profile/edit"), data);
+          }
+        }, {
+          key: "getAssociatedPraticians",
+          value: function getAssociatedPraticians() {
+            var res = this.http.get("".concat(this.url_apip, "patients/praticien"));
+            res.subscribe(function (data) {
+              console.log("PatientService -> constructor -> res", data);
+            });
+            return res;
+          }
+        }, {
+          key: "getFamily",
+          value: function getFamily() {
+            var res = this.http.get("".concat(this.url_apip, "patients/family"));
+            res.subscribe(function (data) {
+              return console.log("PatientService -> getFamily -> res", data);
+            });
+            return res;
+          }
+        }, {
+          key: "addGroupFamily",
+          value: function addGroupFamily(nomGroupe) {
+            var data = {
+              designation: nomGroupe
+            };
+            console.log("LL: PatientService -> addGroupFamily -> data", data);
+            var res = this.http.post("".concat(this.url_apip, "register/group"), data);
+            return res;
+          }
+        }, {
+          key: "addGroupFamilyMember",
+          value: function addGroupFamilyMember(data) {
+            console.log("PatientService -> addGroupFamilyMember -> data", data);
+            var res = this.http.post("".concat(this.url_api, "add/membres"), data);
+            return res;
+          }
+        }, {
+          key: "deleteFamilyMember",
+          value: function deleteFamilyMember(_idFamily) {
+            var res = this.http["delete"]("".concat(this.url_api, "family/").concat(_idFamily));
+            return res;
+          }
+        }, {
+          key: "interventionPraticien",
+          value: function interventionPraticien(data) {
+            console.log("####################LL: PatientService -> interventionPraticien -> data", data);
+            var res = this.http.post("".concat(this.url_apip, "intervention"), data);
+            return res;
+          }
+        }, {
+          key: "chekIfPractitionerIsAssociated",
+          value: function chekIfPractitionerIsAssociated(_idPraticien) {
+            var res = this.http.get("".concat(this.url_apip, "patients/check-association/").concat(_idPraticien));
+            return res;
+          }
+        }, {
+          key: "proposeRdv",
+          value: function proposeRdv(data) {
+            var res = this.http.post("".concat(this.url_apip, "add/rdv"), data);
+            return res;
+          }
+        }, {
+          key: "cancelRdvProposition",
+          value: function cancelRdvProposition(data) {
+            var res = this.http.post("".concat(this.url_api, "cancel/rdv"), data);
+            return res;
+          }
+        }, {
+          key: "postVaccinGeneration",
+          value: function postVaccinGeneration(_idPraticien) {
+            var res = this.http.post("".concat(this.url_apip, "patient/generation"), {
+              praticien: _idPraticien
+            });
+            return res;
+          }
+        }]);
+
+        return PatientService;
+      }();
+
+      PatientService.ctorParameters = function () {
+        return [{
+          type: _angular_common_http__WEBPACK_IMPORTED_MODULE_3__["HttpClient"]
+        }];
+      };
+
+      PatientService = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
+        providedIn: "root"
+      })], PatientService);
+      /***/
     }
   }]);
 })();

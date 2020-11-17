@@ -12,3 +12,7 @@
   display: flex;
   justify-content: center;
 }
+
+ion-col > ion-button {
+  min-width: 110px;
+}

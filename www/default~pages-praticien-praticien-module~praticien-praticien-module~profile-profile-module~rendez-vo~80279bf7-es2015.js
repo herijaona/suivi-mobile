@@ -1,4 +1,4 @@
-(window["webpackJsonp"] = window["webpackJsonp"] || []).push([["default~pages-praticien-praticien-module~rendez-vous-rendez-vous-module~vaccination-vaccination-module"],{
+(window["webpackJsonp"] = window["webpackJsonp"] || []).push([["default~pages-praticien-praticien-module~praticien-praticien-module~profile-profile-module~rendez-vo~80279bf7"],{
 
 /***/ "./node_modules/moment/locale sync recursive ^\\.\\/.*$":
 /*!**************************************************!*\
@@ -21262,6 +21262,7 @@ let PraticienService = class PraticienService {
         this.storage = storage;
         this.authSrvc = authSrvc;
         this.url = src_environments_environment__WEBPACK_IMPORTED_MODULE_6__["environment"].url_dev;
+        this.url_apip = src_environments_environment__WEBPACK_IMPORTED_MODULE_6__["environment"].url_dev;
         this.url_api = src_environments_environment__WEBPACK_IMPORTED_MODULE_6__["environment"].url_dev_api;
         this.praticien = {};
     }
@@ -21275,8 +21276,13 @@ let PraticienService = class PraticienService {
         console.log("PraticienService -> getInfoUserID -> res", res);
         return res;
     }
+    getProfile() {
+        const res = this.http.get(this.url + `praticien/profile`);
+        return res;
+    }
     getLocalUserInfo() {
-        return this.http.get(this.url + `getPraticienInfo`);
+        // return this.http.get<IUserPraticien>(this.url + `getPraticienInfo`);
+        return this.http.get(this.url + `praticien/profile`);
     }
     getUserIDByStorage() {
         return this.storage.get("_id");
@@ -21338,9 +21344,14 @@ let PraticienService = class PraticienService {
         }));
     }
     getListsVaccinations() {
-        return this.loadMockData().pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["map"])((data) => {
-            return data.mockVaccination;
-        }));
+        const res = this.http.get(`${this.url_apip}praticien/vaccination`);
+        res.subscribe(data => { console.log("LL: res", data); });
+        return res;
+        // return this.loadMockData().pipe(
+        //   map((data: any) => {
+        //     return data.mockVaccination;
+        //   })
+        // );
     }
     getListsVaccinationsByDate() {
         return this.regroupDataByDate(this.getListsVaccinations());
@@ -21366,6 +21377,30 @@ let PraticienService = class PraticienService {
         });
         return sortedActivities;
     }
+    regroupDataByPatient(data) {
+        const groups = data.reduce((groups, eachData) => {
+            const key = eachData.patient;
+            if (!groups[key]) {
+                groups[key] = [];
+            }
+            groups[key].push(eachData);
+            console.log("LL: regroupDataByPatient -> groups", groups, Object.keys(groups));
+            return groups;
+        }, {});
+        const groupArrays = Object.keys(groups).map((patient) => {
+            return {
+                patient,
+                nomPatient: groups[patient][0].firstName + " " + groups[patient][0].lastName,
+                groups: groups[patient],
+            };
+        });
+        console.log("LL: regroupDataByPatient -> groupArrays", groupArrays);
+        return groupArrays;
+        // const sortedActivities = groupArrays.slice().sort(function (a, b) {
+        //   return b.patient - a.patient;
+        // });
+        // return sortedActivities;
+    }
     deletePropositionRdv(id) {
         return this.http.delete(this.url + `praticien_remove_proposition/${id}`);
     }
@@ -21375,11 +21410,53 @@ let PraticienService = class PraticienService {
         }));
     }
     getAllPraticien() {
-        const data = this.http.get(this.url + "praticiens");
+        const data = this.http.get(this.url_api + "praticiens");
         data.subscribe((data) => {
             console.log("PraticienService -> regroupDataByDate -> data", data);
         });
         return data;
+    }
+    getPraticienFunctions() {
+        return this.http.get(this.url_api + 'fonction');
+    }
+    registerPraticien(data) {
+        return this.http.post(`${this.url_api}users`, data);
+    }
+    getAllRdv() {
+        const res = this.http.get(`${this.url_apip}praticien/rdv/in`);
+        return res;
+    }
+    getAssociatedPatient() {
+        const res = this.http.get(`${this.url_apip}patient/associer`);
+        return res;
+    }
+    watchVaccin(_idPatient) {
+        const res = this.http.get(`${this.url_api}see/calendar/${_idPatient}`);
+        return res;
+    }
+    generateVaccin(_id, _idPatient) {
+        const res = this.http.post(`${this.url_apip}generate/vaccination`, { id: _id, patient: _idPatient });
+        return res;
+    }
+    rejectVaccin(_id) {
+        const res = this.http.post(`${this.url_api}cancel/generation`, { id: _id });
+        return res;
+    }
+    watchVaccinWithNotebook(_idCarnet) {
+        const res = this.http.get(`${this.url_api}see/intervention/${_idCarnet}`);
+        return res;
+    }
+    rejectVaccinithNotebook(_id) {
+        const res = this.http.post(`${this.url_api}cancel/intervention`, { id: _id });
+        return res;
+    }
+    organiseVaccin(data) {
+        const res = this.http.post(`${this.url_api}organize/vaccination`, { id: data.id, date: data.date, heure: data.heure, carnet: data.carnet });
+        return res;
+    }
+    realizeVaccin(data) {
+        const res = this.http.post(`${this.url_apip}realize/vaccination`, { id: data.id, lot: data.lot, carnet: data.carnet });
+        return res;
     }
 };
 PraticienService.ctorParameters = () => [
@@ -21398,4 +21475,4 @@ PraticienService = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
 /***/ })
 
 }]);
-//# sourceMappingURL=default~pages-praticien-praticien-module~rendez-vous-rendez-vous-module~vaccination-vaccination-module-es2015.js.map
+//# sourceMappingURL=default~pages-praticien-praticien-module~praticien-praticien-module~profile-profile-module~rendez-vo~80279bf7-es2015.js.map

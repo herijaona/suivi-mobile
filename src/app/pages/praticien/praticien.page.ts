@@ -37,7 +37,7 @@ export class PraticienPage implements OnInit {
     },
     {
       title: "Rendez-vous",
-      url: "/praticien/proposition-rdv",
+      url: "/praticien/rendez-vous",
     },
   ];
   selectedPath = "";
@@ -105,7 +105,7 @@ export class PraticienPage implements OnInit {
 
         this.storage.set("praticien_info", praticien);
 
-        this.name = `${praticien.firstName} ${praticien.lastName} ( ${praticien.anotherData.username} ) `;
+        this.name = `${praticien.firstName} ${praticien.lastName}`;
         this.fonction = praticien.fonction;
       });
     });
