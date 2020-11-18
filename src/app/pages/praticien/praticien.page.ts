@@ -21,24 +21,30 @@ export class PraticienPage implements OnInit {
     {
       title: "Vaccination",
       url: "/praticien/vaccination",
-      children: [
-        {
-          url: "/praticient/vaccination/details",
-        },
-      ],
+      // children: [
+      //   {
+      //     url: "/praticient/vaccination/details",
+      //   },
+      // ],
     },
-    {
-      title: "Consultation",
-      url: "/praticien/consultation",
-    },
-    {
-      title: "Intervention",
-      url: "/praticien/intervention",
-    },
+    // {
+    //   title: "Consultation",
+    //   url: "/praticien/consultation",
+    // },
+
+    // {
+    //   title: "Intervention",
+    //   url: "/praticien/intervention",
+    // },
     {
       title: "Rendez-vous",
       url: "/praticien/rendez-vous",
     },
+    {
+      title: "Mes Patients",
+      url: "/praticien/assoc-patients",
+    }
+
   ];
   selectedPath = "";
   name = "";

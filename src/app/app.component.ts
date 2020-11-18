@@ -42,8 +42,8 @@ export class AppComponent {
             // this.router.navigate(["/praticien/proposition-rdv"]);
             // this.router.navigate(["/praticien/intervention"]);
             // this.router.navigate(["/praticien/consultation"]);
-            this.router.navigate(["/praticien/vaccination"]);
-            // this.router.navigate(["/praticien/assoc-patients"]);
+            // this.router.navigate(["/praticien/vaccination"]);
+            this.router.navigate(["/praticien/assoc-patients"]);
             // this.router.navigate(["/praticien/profile"]);
             // this.router.navigate(["/praticien/rendez-vous"]);
           }

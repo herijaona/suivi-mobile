@@ -14,7 +14,7 @@
         <ion-card-content>
           <form
             [formGroup]="propositionForm"
-            (ngSubmit)="createRdv()"
+            (ngSubmit)="createVaccin()"
             method="post"
           >
             <div class="mb-14">
@@ -41,18 +41,18 @@
             </div>
 
             <div class="mb-14">
-              <label>Type</label>
+              <label>choisi un vaccin</label>
               <ion-select
                 placeholder="Select"
-                formControlName="typeRdv"
+                formControlName="vaccin"
                 required
               >
-                <ion-select-option value="consultation">
-                  Consultation
-                </ion-select-option>
-                <ion-select-option value="intervention"
-                  >Intervention
-                </ion-select-option>
+                <ion-select-option
+                  *ngFor="let item of vaccins"
+                  [value]="item.id"
+                  >{{ item.vaccinName }}</ion-select-option
+                >
+                <!-- <ion-select-option></ion-select-option> -->
               </ion-select>
               <!-- <small
                 class="form-text red-color"
@@ -91,11 +91,11 @@
             </div>
 
             <div class="mb-14">
-              <label>Description du rendez-vous</label>
+              <label>Identification</label>
               <ion-input
                 type="text"
                 required
-                formControlName="description"
+                formControlName="identification"
               ></ion-input
               ><!-- <small
                 class="form-text red-color"

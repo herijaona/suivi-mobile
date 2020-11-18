@@ -17,6 +17,7 @@ import { IRdvPatient } from 'src/app/Interfaces/patient.interface';
 import { GlobalElementInjectionService } from 'src/app/services/global-element-injection.service';
 import { GlobalInteraction } from '../../global.interaction';
 import { NewRendezVousComponent } from './new-rendez-vous/new-rendez-vous.component';
+import { OrganizeComponent } from './organize/organize.component';
 
 @Component({
   selector: 'app-rendez-vous',
@@ -75,13 +76,13 @@ export class RendezVousPage implements OnInit {
       cssClass: 'test-class',
       swipeToClose: true,
       componentProps: {
-        // praticiens: this.praticiens,
+        praticiens: this.praticiens,
         funcitons: this.functions,
         test: 'test',
       },
     });
     newRdvModal.onDidDismiss().then(() => {
-      this.updateRdvList();
+      this.getAllData();
     });
     return await newRdvModal.present();
   }
@@ -266,5 +267,32 @@ export class RendezVousPage implements OnInit {
     } else if (statusConsultation == 2) {
       return this.CANCELED;
     }
+  }
+
+  async openOrganizeModal(_data) {
+    const newRdvModal = await this.modalCtrl.create({
+      component: OrganizeComponent,
+      cssClass: "test-class",
+      swipeToClose: true,
+      componentProps: {
+        data: _data,
+      },
+    });
+    newRdvModal.onDidDismiss().then(() => {
+      this.getAllData(); //event on dismiss
+    });
+    return await newRdvModal.present();
+  }
+
+  async realizeRdv(_data) {
+    const dataToSend = {
+      id: _data.id,
+      typeRdv: _data.type,
+    }
+    console.log("LL: realizeRdv -> data", dataToSend)
+    this.praticienSrvc.realizeRdv(dataToSend).subscribe((data) => {
+      console.log("LL: realizeRdv -> data", data);
+      this.getAllData();
+    })
   }
 }

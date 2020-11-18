@@ -15,6 +15,7 @@ import { DetailsComponent } from "./details/details.component";
 import { GlobalInteraction } from '../../global.interaction';
 import { OrganizeComponent } from './organize/organize.component';
 import { RealizeComponent } from './realize/realize.component';
+import { NewVaccinationComponent } from './new-vaccination/new-vaccination.component';
 
 @Component({
   selector: "app-vaccination",
@@ -120,6 +121,21 @@ export class VaccinationPage implements OnInit {
   async openRealizeVaccModal(_data) {
     const newRdvModal = await this.modalCtrl.create({
       component: RealizeComponent,
+      cssClass: "test-class",
+      swipeToClose: true,
+      componentProps: {
+        data: _data
+      },
+    });
+    newRdvModal.onDidDismiss().then(() => {
+      this.getListVaccinations();
+    });
+    return await newRdvModal.present();
+  }
+
+  async openCreateVaccModal(_data) {
+    const newRdvModal = await this.modalCtrl.create({
+      component: NewVaccinationComponent,
       cssClass: "test-class",
       swipeToClose: true,
       componentProps: {

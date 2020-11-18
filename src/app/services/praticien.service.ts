@@ -146,6 +146,11 @@ export class PraticienService {
     // );
   }
 
+  getAllVaccin() {
+    const res = this.http.get(`${this.url_api}vaccin`);
+    return res;
+  }
+
   getListsVaccinationsByDate() {
     return this.regroupDataByDate(this.getListsVaccinations());
   }
@@ -272,6 +277,26 @@ export class PraticienService {
 
   realizeVaccin(data) {
     const res = this.http.post(`${this.url_apip}realize/vaccination`, { id: data.id, lot: data.lot, carnet: data.carnet });
+    return res;
+  }
+
+  organizeRdv(data) {
+    const res = this.http.post(`${this.url_api}organize/rdv`, data);
+    return res;
+  }
+
+  createRdv(data) {
+    const res = this.http.post(`${this.url_apip}register/rdv/praticien`, data);
+    return res;
+  }
+
+  realizeRdv(data) {
+    const res = this.http.post(`${this.url_api}realize/rdv`, data);
+    return res;
+  }
+
+  getAssocPatient() {
+    const res = this.http.get(`${this.url_apip}associer/patient`);
     return res;
   }
 }

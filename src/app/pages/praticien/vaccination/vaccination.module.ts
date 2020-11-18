@@ -10,6 +10,7 @@ import { VaccinationPage } from "./vaccination.page";
 import { BrowserModule } from "@angular/platform-browser";
 import { DetailsComponent } from "./details/details.component";
 import { OrganizeComponent } from './organize/organize.component';
+import { NewVaccinationComponent } from './new-vaccination/new-vaccination.component';
 
 @NgModule({
   imports: [
@@ -19,6 +20,6 @@ import { OrganizeComponent } from './organize/organize.component';
     VaccinationPageRoutingModule,
     ReactiveFormsModule
   ],
-  declarations: [VaccinationPage, DetailsComponent, OrganizeComponent],
+  declarations: [VaccinationPage, DetailsComponent, OrganizeComponent, NewVaccinationComponent],
 })
 export class VaccinationPageModule { }
