@@ -30,7 +30,7 @@ export class PropositionRdvPage implements OnInit {
     private authSrvc: AuthService,
     private storage: Storage,
     private alertCtrl: AlertController
-  ) {}
+  ) { }
 
   ionViewWillEnter() {
     this.initializeItems();
@@ -46,7 +46,7 @@ export class PropositionRdvPage implements OnInit {
     this.praticienSrvc
       .getAllProposeRdv(this.storage.get("_id"))
       .subscribe((data) => {
-        console.log("PropositionRdvPage -> initializeItems -> data", data);
+        // console.log("PropositionRdvPage -> initializeItems -> data", data);
         this.items = [...Array.from(this.regroupData(data))];
         this.filterdItems = [...this.items];
       });
@@ -54,8 +54,8 @@ export class PropositionRdvPage implements OnInit {
 
   filterItems(ev: any) {
     const query = ev.target.value.toLowerCase();
-    console.log("PropositionRdvPage -> getItems -> query", query);
-    console.log("PropositionRdvPage -> filterItems -> this.items", this.items);
+    // console.log("PropositionRdvPage -> getItems -> query", query);
+    // console.log("PropositionRdvPage -> filterItems -> this.items", this.items);
 
     requestAnimationFrame(() => {
       if (!query || query === "") {
@@ -130,7 +130,7 @@ export class PropositionRdvPage implements OnInit {
 
   async getPatients() {
     this.patienSrvc.getPatients().subscribe((data) => {
-      console.log("PropositionRdvPage -> getPatients -> data", data);
+      // console.log("PropositionRdvPage -> getPatients -> data", data);
       this.patients = data;
     });
   }
@@ -153,13 +153,13 @@ export class PropositionRdvPage implements OnInit {
           role: "cancel",
           cssClass: "secondary",
           handler: () => {
-            console.log("Confirm Cancel: blah");
+            // console.log("Confirm Cancel: blah");
           },
         },
         {
           text: "Okay",
           handler: () => {
-            console.log("data deleted id" + id);
+            // console.log("data deleted id" + id);
             this.deleteProprdv(id);
           },
         },

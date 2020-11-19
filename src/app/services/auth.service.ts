@@ -34,7 +34,7 @@ export class AuthService {
       if (token) {
         return token;
       } else {
-        console.log("token doesn't exist yet");
+        // console.log("token doesn't exist yet");
         // throw new Error("token doesn't exist yet");
       }
     });
@@ -62,10 +62,10 @@ export class AuthService {
 
         if (!isExpired) {
           this.user = decoded;
-          console.log(
-            "AuthService -> checkToken -> CONSTANT.stringifyParse(this.user)",
-            CONSTANT.stringifyParse(this.user)
-          );
+          // console.log(
+          //   "AuthService -> checkToken -> CONSTANT.stringifyParse(this.user)",
+          //   CONSTANT.stringifyParse(this.user)
+          // );
           this.authenticationState.next(true);
         } else {
           this.storage.remove(TOKEN_KEY);
@@ -75,7 +75,7 @@ export class AuthService {
   }
 
   login(credentials, loadinCtrl: LoadingController) {
-    console.log("AuthService -> login -> credentials", credentials);
+    // console.log("AuthService -> login -> credentials", credentials);
     const header = new HttpHeaders({
       "Content-Type": "application/json",
       Accept: "application/json",
@@ -96,10 +96,10 @@ export class AuthService {
           // };
           // this.storage.set(TOKEN_KEY, testToken);
           this.user = this.helper.decodeToken(res["token"]);
-          console.log(
-            "AuthService -> login -> user",
-            CONSTANT.stringifyParse(this.user)
-          );
+          // console.log(
+          //   "AuthService -> login -> user",
+          //   CONSTANT.stringifyParse(this.user)
+          // );
           this.authenticationState.next(true);
         }),
         catchError((e) => {

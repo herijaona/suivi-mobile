@@ -1,9 +1,9 @@
 (function () {
-  function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
   function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
   function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+  function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
   (window["webpackJsonp"] = window["webpackJsonp"] || []).push([["profile-profile-module"], {
     /***/
@@ -43,225 +43,6 @@
 
 
       __webpack_exports__["default"] = "<ion-header translucent=\"true\">\n  <ion-toolbar>\n    <ion-buttons *ngIf=\"!ios\" slot=\"start\">\n      <ion-menu-button></ion-menu-button>\n      <ion-title slot=\"start\">Profile</ion-title>\n    </ion-buttons>\n\n    <ion-menu-button *ngIf=\"ios\"></ion-menu-button>\n\n    <ion-title slot=\"end\" color=\"tertiary\" class=\"identifiant\" *ngIf=\"profile\"\n      >{{profile.username}}</ion-title\n    >\n  </ion-toolbar>\n</ion-header>\n<ion-content>\n  <div class=\"card\">\n    <div class=\"header\">\n      <div class=\"avatar\">\n        <img src=\"./../../../../assets/images/praticien.jpg\" alt=\"\" />\n      </div>\n    </div>\n  </div>\n\n  <div class=\"card-body\" *ngIf=\"profile\">\n    <div class=\"user-meta ion-text-center\">\n      <h3 class=\"playername\">\n        {{profile.firstName}} {{profile.lastName}} ({{centre_name}})\n      </h3>\n      <h6 class=\"ranking\">\n        Date de création:\n        <ion-chip>\n          <ion-label>{{profile.createdAt | date:\"MMM dd, yyyy\"}}</ion-label>\n        </ion-chip>\n      </h6>\n    </div>\n    <div>\n      <form [formGroup]=\"praticienFormGroup\">\n        <!-- Date de naissance -->\n        <ion-item lines=\"full\" disabled>\n          <ion-label position=\"stacked\">Date de naissance</ion-label>\n          <ion-datetime\n            display-format=\"MMM DD, YYYY\"\n            picker-format=\"MMM DD, YYYY\"\n            [ngModel]=\"profile.dateOnBorn\"\n            formControlName=\"birthday\"\n            required\n          ></ion-datetime>\n        </ion-item>\n        <!-- Pays -->\n        <ion-item\n          lines=\"full\"\n          [disabled]=\"!this.profile.nameState &&!this.countries\"\n        >\n          <ion-label position=\"stacked\">Pays</ion-label>\n          <ion-select\n            formControlName=\"state\"\n            required\n            (ionChange)=\"getCityByCountry(this.praticienFormGroup.value['state'])\"\n            [compareWith]=\"compareFnInv\"\n            [ngModel]=\"profile.nameState\"\n          >\n            <ng-container *ngFor=\"let item of this.countries\">\n              <ion-select-option value=\"{{item.id}}\"\n                >{{item.nameState}}</ion-select-option\n              >\n            </ng-container>\n          </ion-select>\n        </ion-item>\n        <div class=\"validation-errors\">\n          <ng-container *ngFor=\"let validation of validation_msg.state\">\n            <div\n              class=\"error-message\"\n              *ngIf=\"praticienFormGroup.get('state').hasError(validation.type)\"\n            >\n              {{ validation.message }}\n            </div>\n          </ng-container>\n        </div>\n\n        <!-- Téléphone -->\n        <ion-item lines=\"full\">\n          <ion-label position=\"stacked\">Phone</ion-label>\n          <ion-input\n            type=\"text\"\n            required\n            formControlName=\"phone\"\n            [ngModel]=\"profile.phone\"\n          ></ion-input>\n        </ion-item>\n        <div class=\"validation-errors\">\n          <ng-container *ngFor=\"let validation of validation_msg.phone\">\n            <div\n              class=\"error-message\"\n              *ngIf=\"praticienFormGroup.get('phone').hasError(validation.type)\"\n            >\n              {{ validation.message }}\n            </div>\n          </ng-container>\n        </div>\n        <!-- Ville -->\n        <ion-item\n          lines=\"full\"\n          [disabled]=\"!this.profile.nameCity\"\n          *ngIf=\"this.cities\"\n        >\n          <ion-label position=\"stacked\">Ville</ion-label>\n          <ion-select\n            formControlName=\"city\"\n            required\n            [(ngModel)]=\"profile.nameCity\"\n            [compareWith]=\"compareFnInv\"\n          >\n            <ng-container *ngFor=\"let item of this.cities\">\n              <ion-select-option value=\"{{item.id}}\"\n                >{{item.nameCity}}</ion-select-option\n              >\n            </ng-container>\n          </ion-select>\n        </ion-item>\n        <!-- Pays de naissance -->\n        <ion-item\n          lines=\"full\"\n          [disabled]=\"!this.profile.countryBorn &&!this.countries\"\n        >\n          <ion-label position=\"stacked\">Pays de naissance</ion-label>\n          <ion-select\n            formControlName=\"countryBorn\"\n            required\n            (ionChange)=\"getCityByCountryBorn(this.praticienFormGroup.value['countryBorn'])\"\n            [compareWith]=\"compareFnInv\"\n            [ngModel]=\"profile.countryBorn\"\n          >\n            <ng-container *ngFor=\"let item of this.countries\">\n              <ion-select-option value=\"{{item.id}}\"\n                >{{item.nameState}}</ion-select-option\n              >\n            </ng-container>\n          </ion-select>\n        </ion-item>\n        <div class=\"validation-errors\">\n          <ng-container *ngFor=\"let validation of validation_msg.state\">\n            <div\n              class=\"error-message\"\n              *ngIf=\"praticienFormGroup.get('state').hasError(validation.type)\"\n            >\n              {{ validation.message }}\n            </div>\n          </ng-container>\n        </div>\n        <!-- Ville de naissance -->\n        <ion-item\n          lines=\"full\"\n          [disabled]=\"!this.profile.cityBorn\"\n          *ngIf=\"this.citiesBorn\"\n        >\n          <ion-label position=\"stacked\">Ville de naissance</ion-label>\n          <ion-select\n            formControlName=\"cityBorn\"\n            required\n            [(ngModel)]=\"profile.cityBorn\"\n            [compareWith]=\"compareFnInv\"\n          >\n            <ng-container *ngFor=\"let item of this.citiesBorn\">\n              <ion-select-option value=\"{{item.id}}\"\n                >{{item.nameCity}}</ion-select-option\n              >\n            </ng-container>\n          </ion-select>\n        </ion-item>\n        <!-- Sexe -->\n        <ion-item lines=\"full\" disabled>\n          <ion-label position=\"stacked\">Sexe</ion-label>\n          <ion-select\n            placeholder=\"Select\"\n            formControlName=\"gender\"\n            required\n            [ngModel]=\"profile.sexe\"\n          >\n            <ion-select-option>Masculin</ion-select-option>\n            <ion-select-option>Feminin</ion-select-option>\n          </ion-select>\n        </ion-item>\n        <!-- Adresse -->\n        <ion-item lines=\"full\">\n          <ion-label position=\"stacked\">Adresse</ion-label>\n          <ion-textarea\n            required\n            formControlName=\"address\"\n            [ngModel]=\"profile.address\"\n          ></ion-textarea>\n        </ion-item>\n        <!-- Email -->\n        <ion-item lines=\"full\">\n          <ion-label position=\"stacked\">Email</ion-label>\n          <ion-input\n            type=\"text\"\n            required\n            formControlName=\"email\"\n            [ngModel]=\"profile.email\"\n          ></ion-input>\n          <!-- <div\n            style=\"color: red; padding-top: 0.2rem\"\n            *ngIf=\"praticienFormGroup.hasError('required', 'email')\"\n          ></div> -->\n          <!-- <div\n            *ngIf=\"!praticienFormGroup.controls.email.valid &&\n            praticienFormGroup.controls.email.dirty\"\n            class=\"validator-error\"\n          >\n            Please enter a valid email.\n          </div> -->\n        </ion-item>\n        <!-- Nom du père -->\n        <ion-item lines=\"full\" *ngIf=\"profile.fatherName\">\n          <ion-label position=\"stacked\">Nom du père</ion-label>\n          <ion-input\n            type=\"text\"\n            required\n            formControlName=\"father_name\"\n            [ngModel]=\"this.profile.fatherName\"\n          ></ion-input>\n        </ion-item>\n        <!-- Nom de la mère -->\n        <ion-item lines=\"full\" *ngIf=\"profile.motherName\">\n          <ion-label position=\"stacked\">Nom de la mère</ion-label>\n          <ion-input\n            type=\"text\"\n            required\n            formControlName=\"mother_name\"\n            [ngModel]=\"this.profile.motherName\"\n          ></ion-input>\n        </ion-item>\n\n        <ion-row>\n          <ion-col>\n            <ion-button\n              type=\"submit\"\n              color=\"sgreen\"\n              expand=\"full\"\n              (click)=\"update()\"\n              >Modifier</ion-button\n            >\n          </ion-col>\n        </ion-row>\n      </form>\n    </div>\n  </div>\n</ion-content>\n";
-      /***/
-    },
-
-    /***/
-    "./src/app/pages/global.interaction.ts":
-    /*!*********************************************!*\
-      !*** ./src/app/pages/global.interaction.ts ***!
-      \*********************************************/
-
-    /*! exports provided: GlobalInteraction */
-
-    /***/
-    function srcAppPagesGlobalInteractionTs(module, __webpack_exports__, __webpack_require__) {
-      "use strict";
-
-      __webpack_require__.r(__webpack_exports__);
-      /* harmony export (binding) */
-
-
-      __webpack_require__.d(__webpack_exports__, "GlobalInteraction", function () {
-        return GlobalInteraction;
-      });
-      /* harmony import */
-
-
-      var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
-      /*! tslib */
-      "./node_modules/tslib/tslib.es6.js");
-      /* harmony import */
-
-
-      var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
-      /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
-      /* harmony import */
-
-
-      var _ionic_angular__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
-      /*! @ionic/angular */
-      "./node_modules/@ionic/angular/__ivy_ngcc__/fesm2015/ionic-angular.js");
-
-      var GlobalInteraction = /*#__PURE__*/function () {
-        function GlobalInteraction(toastCtrl, loadingCtrl, alertCtrl) {
-          _classCallCheck(this, GlobalInteraction);
-
-          this.toastCtrl = toastCtrl;
-          this.loadingCtrl = loadingCtrl;
-          this.alertCtrl = alertCtrl;
-          this.isLoading = false;
-        }
-
-        _createClass(GlobalInteraction, [{
-          key: "presentToast",
-          value: function presentToast(msg) {
-            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
-              var toast;
-              return regeneratorRuntime.wrap(function _callee$(_context) {
-                while (1) {
-                  switch (_context.prev = _context.next) {
-                    case 0:
-                      _context.next = 2;
-                      return this.toastCtrl.create({
-                        message: msg,
-                        duration: 1800,
-                        position: "top"
-                      });
-
-                    case 2:
-                      toast = _context.sent;
-                      toast.present();
-
-                    case 4:
-                    case "end":
-                      return _context.stop();
-                  }
-                }
-              }, _callee, this);
-            }));
-          }
-        }, {
-          key: "presentLoading",
-          value: function presentLoading() {
-            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
-              var _this = this;
-
-              return regeneratorRuntime.wrap(function _callee2$(_context2) {
-                while (1) {
-                  switch (_context2.prev = _context2.next) {
-                    case 0:
-                      this.isLoading = true;
-                      _context2.next = 3;
-                      return this.loadingCtrl.create({
-                        cssClass: "my-loading-class",
-                        spinner: "bubbles",
-                        translucent: true,
-                        duration: 100000
-                      }).then(function (a) {
-                        a.present().then(function () {
-                          if (!_this.isLoading) {
-                            a.dismiss();
-                          }
-                        });
-                      });
-
-                    case 3:
-                      return _context2.abrupt("return", _context2.sent);
-
-                    case 4:
-                    case "end":
-                      return _context2.stop();
-                  }
-                }
-              }, _callee2, this);
-            }));
-          }
-        }, {
-          key: "dismissLoading",
-          value: function dismissLoading() {
-            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee3() {
-              return regeneratorRuntime.wrap(function _callee3$(_context3) {
-                while (1) {
-                  switch (_context3.prev = _context3.next) {
-                    case 0:
-                      if (!this.isLoading) {
-                        _context3.next = 5;
-                        break;
-                      }
-
-                      this.isLoading = false;
-                      _context3.next = 4;
-                      return this.loadingCtrl.dismiss();
-
-                    case 4:
-                      return _context3.abrupt("return", _context3.sent);
-
-                    case 5:
-                      return _context3.abrupt("return", null);
-
-                    case 6:
-                    case "end":
-                      return _context3.stop();
-                  }
-                }
-              }, _callee3, this);
-            }));
-          }
-        }, {
-          key: "alertDelete",
-          value: function alertDelete(id, parent) {
-            var msg = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : "Tu veux vraiment supprimé cette element ? ";
-            var callback = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : this.defaultCallback;
-
-            var _header = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : "Suppression";
-
-            var array = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : [];
-            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee4() {
-              var alert;
-              return regeneratorRuntime.wrap(function _callee4$(_context4) {
-                while (1) {
-                  switch (_context4.prev = _context4.next) {
-                    case 0:
-                      _context4.next = 2;
-                      return this.alertCtrl.create({
-                        cssClass: "my-custom-class",
-                        header: _header,
-                        message: msg,
-                        buttons: [{
-                          text: "Cancel",
-                          role: "cancel",
-                          cssClass: "secondary",
-                          handler: function handler() {
-                            console.log("Confirm Cancel: blah");
-                          }
-                        }, {
-                          text: "OK",
-                          handler: function handler() {
-                            console.warn("data deleted " + id); // this.remove(id, array, keyStatus, RefuseStatus);
-
-                            callback(id, parent);
-                          }
-                        }]
-                      });
-
-                    case 2:
-                      alert = _context4.sent;
-                      _context4.next = 5;
-                      return alert.present();
-
-                    case 5:
-                    case "end":
-                      return _context4.stop();
-                  }
-                }
-              }, _callee4, this);
-            }));
-          }
-        }, {
-          key: "defaultCallback",
-          value: function defaultCallback(id, parent) {
-            this.presentToast("this is a default callback ".concat(id, " "));
-          }
-        }]);
-
-        return GlobalInteraction;
-      }();
-
-      GlobalInteraction.ctorParameters = function () {
-        return [{
-          type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["ToastController"]
-        }, {
-          type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["LoadingController"]
-        }, {
-          type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["AlertController"]
-        }];
-      };
-
-      GlobalInteraction = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
-        providedIn: 'root'
-      })], GlobalInteraction);
       /***/
     },
 
@@ -482,7 +263,7 @@
 
       var ProfilePage = /*#__PURE__*/function () {
         function ProfilePage(patienSrvc, globalSrvc, globalInteract, loadingController) {
-          var _this2 = this;
+          var _this = this;
 
           _classCallCheck(this, ProfilePage);
 
@@ -544,9 +325,9 @@
             }]
           };
           this.globalSrvc.getCountry().subscribe(function (result) {
-            _this2.countries = result;
+            _this.countries = result;
 
-            _this2.getProfile();
+            _this.getProfile();
           });
         }
 
@@ -581,53 +362,52 @@
         }, {
           key: "update",
           value: function update() {
-            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee5() {
-              var _this3 = this;
+            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
+              var _this2 = this;
 
-              return regeneratorRuntime.wrap(function _callee5$(_context5) {
+              return regeneratorRuntime.wrap(function _callee$(_context) {
                 while (1) {
-                  switch (_context5.prev = _context5.next) {
+                  switch (_context.prev = _context.next) {
                     case 0:
                       if (this.patientRegisterForm.valid) {
                         this.globalInteract.presentLoading();
                         Object.keys(this.patientRegisterForm.value).forEach(function (key) {
-                          console.log("valid", _this3.patientRegisterForm.value[key]);
+                          // console.log("valid", this.patientRegisterForm.value[key]);
                           var data_updated = {
-                            address: _this3.patientRegisterForm.value["address"],
-                            cityBorn: _this3.patientRegisterForm.value["cityBorn"],
-                            countryBorn: _this3.patientRegisterForm.value["countryBorn"],
-                            email: _this3.patientRegisterForm.value["email"],
-                            fatherName: _this3.patientRegisterForm.value['father_name'] == undefined ? '' : _this3.patientRegisterForm.value['father_name'],
-                            id: _this3.profile.id,
-                            motherName: _this3.patientRegisterForm.value['father_name'] == undefined ? '' : _this3.patientRegisterForm.value['mother_name'],
-                            nameCity: _this3.patientRegisterForm.value["city"],
-                            nameState: _this3.patientRegisterForm.value["state"],
-                            phone: _this3.patientRegisterForm.value["phone"]
+                            address: _this2.patientRegisterForm.value["address"],
+                            cityBorn: _this2.patientRegisterForm.value["cityBorn"],
+                            countryBorn: _this2.patientRegisterForm.value["countryBorn"],
+                            email: _this2.patientRegisterForm.value["email"],
+                            fatherName: _this2.patientRegisterForm.value['father_name'] == undefined ? '' : _this2.patientRegisterForm.value['father_name'],
+                            id: _this2.profile.id,
+                            motherName: _this2.patientRegisterForm.value['father_name'] == undefined ? '' : _this2.patientRegisterForm.value['mother_name'],
+                            nameCity: _this2.patientRegisterForm.value["city"],
+                            nameState: _this2.patientRegisterForm.value["state"],
+                            phone: _this2.patientRegisterForm.value["phone"]
                           };
 
-                          _this3.patienSrvc.updateProfile(data_updated).subscribe(function (data) {
-                            if (data == _this3.OK) {
-                              _this3.globalInteract.dismissLoading();
+                          _this2.patienSrvc.updateProfile(data_updated).subscribe(function (data) {
+                            if (data == _this2.OK) {
+                              _this2.globalInteract.dismissLoading();
 
-                              _this3.globalInteract.presentToast('Profile mis à jour');
+                              _this2.globalInteract.presentToast('Profile mis à jour');
                             } else {
-                              _this3.globalInteract.presentToast('Profile non mis à jour !!!');
+                              _this2.globalInteract.presentToast('Profile non mis à jour !!!');
                             }
                           });
                         });
                       } else {
-                        console.log("NOT valid", this.patientRegisterForm);
-                        Object.keys(this.patientRegisterForm.value).forEach(function (key) {
-                          console.log("NOT valid", _this3.patientRegisterForm.value[key]);
+                        // console.log("NOT valid", this.patientRegisterForm);
+                        Object.keys(this.patientRegisterForm.value).forEach(function (key) {// console.log("NOT valid", this.patientRegisterForm.value[key]);
                         });
                       }
 
                     case 1:
                     case "end":
-                      return _context5.stop();
+                      return _context.stop();
                   }
                 }
-              }, _callee5, this);
+              }, _callee, this);
             }));
           } //Comparaison select
 
@@ -644,29 +424,29 @@
         }, {
           key: "getProfile",
           value: function getProfile() {
-            var _this4 = this;
+            var _this3 = this;
 
             this.patienSrvc.getProfile().subscribe(function (data) {
-              return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(_this4, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee6() {
-                var _this5 = this;
+              return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(_this3, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
+                var _this4 = this;
 
-                return regeneratorRuntime.wrap(function _callee6$(_context6) {
+                return regeneratorRuntime.wrap(function _callee2$(_context2) {
                   while (1) {
-                    switch (_context6.prev = _context6.next) {
+                    switch (_context2.prev = _context2.next) {
                       case 0:
-                        console.log(data);
+                        // console.log(data);
                         this.profile = data[0];
                         this.profile.nameState = data[0].namestate;
                         this.globalSrvc.getCity(this.profile.nameState).subscribe(function (data2) {
-                          _this5.cities = data2;
-                          _this5.profile.nameCity = data[0].nameCity;
+                          _this4.cities = data2;
+                          _this4.profile.nameCity = data[0].nameCity;
                         });
                         data[0].countryBorn == null ? this.profile.countryBorn = data[0].namestate : this.profile.countryBorn = data[0].countryBorn;
                         this.globalSrvc.getCity(this.profile.countryBorn).subscribe(function (data3) {
-                          _this5.citiesBorn = data3;
-                          data[0].cityBorn == null ? _this5.profile.cityBorn = data[0].nameCity : _this5.profile.cityBorn = data[0].cityBorn;
+                          _this4.citiesBorn = data3;
+                          data[0].cityBorn == null ? _this4.profile.cityBorn = data[0].nameCity : _this4.profile.cityBorn = data[0].cityBorn;
 
-                          _this5.globalInteract.dismissLoading();
+                          _this4.globalInteract.dismissLoading();
                         });
                         this.profile.dateOnBorn = data[0].dateOnBorn.date;
                         this.profile.createdAt = data[0].createdAt.date; // this.profile.date_on_born = new Date(data.date_on_born);
@@ -674,12 +454,12 @@
                         this.buildForm(data[0]);
                         this.type_patient = data[0].typePatient == 1 ? "Adult" : "Enfant";
 
-                      case 10:
+                      case 9:
                       case "end":
-                        return _context6.stop();
+                        return _context2.stop();
                     }
                   }
-                }, _callee6, this);
+                }, _callee2, this);
               }));
             });
           }
@@ -693,23 +473,23 @@
         }, {
           key: "getCityByCountry",
           value: function getCityByCountry(id) {
-            var _this6 = this;
+            var _this5 = this;
 
-            console.log("LL: ProfilePage -> getCityByCountry -> id", id);
-            console.log("LL: ProfilePage -> getCityByCountry -> id", this.profile);
+            // console.log("LL: ProfilePage -> getCityByCountry -> id", id)
+            // console.log("LL: ProfilePage -> getCityByCountry -> id", this.profile)
             this.globalSrvc.getCity(id).subscribe(function (data) {
-              return _this6.cities = data;
+              return _this5.cities = data;
             });
           }
         }, {
           key: "getCityByCountryBorn",
           value: function getCityByCountryBorn(id) {
-            var _this7 = this;
+            var _this6 = this;
 
-            console.log("LL: ProfilePage -> getCityByCountryBorn -> id", id);
-            console.log("LL: ProfilePage -> getCityByCountryBorn -> id", this.profile);
+            // console.log("LL: ProfilePage -> getCityByCountryBorn -> id", id)
+            // console.log("LL: ProfilePage -> getCityByCountryBorn -> id", this.profile)
             this.globalSrvc.getCity(id).subscribe(function (data) {
-              return _this7.citiesBorn = data;
+              return _this6.citiesBorn = data;
             });
           }
         }]);
@@ -958,7 +738,7 @@
 
       var ProfilePage = /*#__PURE__*/function () {
         function ProfilePage(praticienSrvc, globalSrvc, globalInteract, loadingController) {
-          var _this8 = this;
+          var _this7 = this;
 
           _classCallCheck(this, ProfilePage);
 
@@ -1020,9 +800,9 @@
             }]
           };
           this.globalSrvc.getCountry().subscribe(function (result) {
-            _this8.countries = result;
+            _this7.countries = result;
 
-            _this8.getProfile();
+            _this7.getProfile();
           });
         }
 
@@ -1052,43 +832,42 @@
         }, {
           key: "update",
           value: function update() {
-            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee7() {
-              var _this9 = this;
+            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee3() {
+              var _this8 = this;
 
-              return regeneratorRuntime.wrap(function _callee7$(_context7) {
+              return regeneratorRuntime.wrap(function _callee3$(_context3) {
                 while (1) {
-                  switch (_context7.prev = _context7.next) {
+                  switch (_context3.prev = _context3.next) {
                     case 0:
                       if (this.praticienFormGroup.valid) {
                         this.globalInteract.presentLoading();
                         Object.keys(this.praticienFormGroup.value).forEach(function (key) {
-                          console.log("valid", _this9.praticienFormGroup.value[key]);
+                          // console.log("valid", this.praticienFormGroup.value[key]);
                           var data_updated = {
-                            address: _this9.praticienFormGroup.value["address"],
-                            cityBorn: _this9.praticienFormGroup.value["cityBorn"],
-                            countryBorn: _this9.praticienFormGroup.value["countryBorn"],
-                            email: _this9.praticienFormGroup.value["email"],
-                            fatherName: _this9.praticienFormGroup.value['father_name'] == undefined ? '' : _this9.praticienFormGroup.value['father_name'],
-                            id: _this9.profile.id,
-                            motherName: _this9.praticienFormGroup.value['father_name'] == undefined ? '' : _this9.praticienFormGroup.value['mother_name'],
-                            nameCity: _this9.praticienFormGroup.value["city"],
-                            nameState: _this9.praticienFormGroup.value["state"],
-                            phone: _this9.praticienFormGroup.value["phone"]
+                            address: _this8.praticienFormGroup.value["address"],
+                            cityBorn: _this8.praticienFormGroup.value["cityBorn"],
+                            countryBorn: _this8.praticienFormGroup.value["countryBorn"],
+                            email: _this8.praticienFormGroup.value["email"],
+                            fatherName: _this8.praticienFormGroup.value['father_name'] == undefined ? '' : _this8.praticienFormGroup.value['father_name'],
+                            id: _this8.profile.id,
+                            motherName: _this8.praticienFormGroup.value['father_name'] == undefined ? '' : _this8.praticienFormGroup.value['mother_name'],
+                            nameCity: _this8.praticienFormGroup.value["city"],
+                            nameState: _this8.praticienFormGroup.value["state"],
+                            phone: _this8.praticienFormGroup.value["phone"]
                           };
                         });
                       } else {
-                        console.log("NOT valid", this.praticienFormGroup);
-                        Object.keys(this.praticienFormGroup.value).forEach(function (key) {
-                          console.log("NOT valid", _this9.praticienFormGroup.value[key]);
+                        // console.log("NOT valid", this.praticienFormGroup);
+                        Object.keys(this.praticienFormGroup.value).forEach(function (key) {// console.log("NOT valid", this.praticienFormGroup.value[key]);
                         });
                       }
 
                     case 1:
                     case "end":
-                      return _context7.stop();
+                      return _context3.stop();
                   }
                 }
-              }, _callee7, this);
+              }, _callee3, this);
             }));
           } //Comparaison select
 
@@ -1105,44 +884,44 @@
         }, {
           key: "getProfile",
           value: function getProfile() {
-            var _this10 = this;
+            var _this9 = this;
 
             this.praticienSrvc.getProfile().subscribe(function (response) {
-              return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(_this10, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee8() {
-                var _this11 = this;
+              return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(_this9, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee4() {
+                var _this10 = this;
 
                 var data;
-                return regeneratorRuntime.wrap(function _callee8$(_context8) {
+                return regeneratorRuntime.wrap(function _callee4$(_context4) {
                   while (1) {
-                    switch (_context8.prev = _context8.next) {
+                    switch (_context4.prev = _context4.next) {
                       case 0:
                         data = response.profile;
-                        this.centre_name = response.profile[1].centreName;
-                        console.log(data);
+                        this.centre_name = response.profile[1].centreName; // console.log(data);
+
                         this.profile = data[0];
                         this.profile.nameState = data[0].countryFonction;
                         this.globalSrvc.getCity(this.profile.nameState).subscribe(function (data2) {
-                          _this11.cities = data2;
-                          _this11.profile.nameCity = data[0].CityFonction;
+                          _this10.cities = data2;
+                          _this10.profile.nameCity = data[0].CityFonction;
                         });
                         data[0].countryBorn == null ? this.profile.countryBorn = data[0].countryFonction : this.profile.countryBorn = data[0].countryBorn;
                         this.globalSrvc.getCity(this.profile.countryBorn).subscribe(function (data3) {
-                          _this11.citiesBorn = data3;
-                          data[0].cityBorn == null ? _this11.profile.cityBorn = data[0].CityFonction : _this11.profile.cityBorn = data[0].cityBorn;
+                          _this10.citiesBorn = data3;
+                          data[0].cityBorn == null ? _this10.profile.cityBorn = data[0].CityFonction : _this10.profile.cityBorn = data[0].cityBorn;
 
-                          _this11.globalInteract.dismissLoading();
+                          _this10.globalInteract.dismissLoading();
                         });
                         this.profile.dateOnBorn = data[0].dateBorn.date;
                         this.profile.createdAt = data[0].createdAt.date; // this.profile.date_on_born = new Date(data.date_on_born);
 
                         this.buildForm(data[0]); // this.type_patient = data[0].typePatient == 1 ? "Adult" : "Enfant";
 
-                      case 11:
+                      case 10:
                       case "end":
-                        return _context8.stop();
+                        return _context4.stop();
                     }
                   }
-                }, _callee8, this);
+                }, _callee4, this);
               }));
             });
           }
@@ -1156,23 +935,23 @@
         }, {
           key: "getCityByCountry",
           value: function getCityByCountry(id) {
-            var _this12 = this;
+            var _this11 = this;
 
-            console.log("LL: ProfilePage -> getCityByCountry -> id", id);
-            console.log("LL: ProfilePage -> getCityByCountry -> id", this.profile);
+            // console.log("LL: ProfilePage -> getCityByCountry -> id", id)
+            // console.log("LL: ProfilePage -> getCityByCountry -> id", this.profile)
             this.globalSrvc.getCity(id).subscribe(function (data) {
-              return _this12.cities = data;
+              return _this11.cities = data;
             });
           }
         }, {
           key: "getCityByCountryBorn",
           value: function getCityByCountryBorn(id) {
-            var _this13 = this;
+            var _this12 = this;
 
-            console.log("LL: ProfilePage -> getCityByCountryBorn -> id", id);
-            console.log("LL: ProfilePage -> getCityByCountryBorn -> id", this.profile);
+            // console.log("LL: ProfilePage -> getCityByCountryBorn -> id", id)
+            // console.log("LL: ProfilePage -> getCityByCountryBorn -> id", this.profile)
             this.globalSrvc.getCity(id).subscribe(function (data) {
-              return _this13.citiesBorn = data;
+              return _this12.citiesBorn = data;
             });
           }
         }]);
@@ -1261,18 +1040,16 @@
           key: "getCountry",
           value: function getCountry() {
             var res = this.http.get(this.url_api + "country");
-            res.subscribe(function (data) {
-              console.log("GlobalDataService -> getCountry -> data", data);
+            res.subscribe(function (data) {// console.log("GlobalDataService -> getCountry -> data", data)
             });
             return res;
           }
         }, {
           key: "getCity",
           value: function getCity(id) {
-            var res = this.http.get(this.url_api + "city?id=".concat(id));
-            console.log("GlobalDataService -> constructor -> this.url_api + `city?id=${id}`", this.url_api + "city?id=".concat(id));
-            res.subscribe(function (data) {
-              console.log("GlobalDataService -> getCity -> data", data);
+            var res = this.http.get(this.url_api + "city?id=".concat(id)); // console.log("GlobalDataService -> constructor -> this.url_api + `city?id=${id}`", this.url_api + `city?id=${id}`)
+
+            res.subscribe(function (data) {// console.log("GlobalDataService -> getCity -> data", data)
             });
             return res;
           }
@@ -1425,7 +1202,7 @@
           key: "getTracksRdv",
           value: function getTracksRdv(excludeTracks) {
             return this.http.get(src_constant__WEBPACK_IMPORTED_MODULE_2__["CONSTANT"].MOCK_DATA_JSON).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["map"])(function (data) {
-              console.log("PatientService -> getTracksRdv -> data", excludeTracks);
+              // console.log("PatientService -> getTracksRdv -> data", excludeTracks);
               return data;
             }));
           } //TODO : Get Vaccin by patient

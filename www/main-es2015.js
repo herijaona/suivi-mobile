@@ -405,8 +405,8 @@ let AppComponent = class AppComponent {
                         // this.router.navigate(["/praticien/proposition-rdv"]);
                         // this.router.navigate(["/praticien/intervention"]);
                         // this.router.navigate(["/praticien/consultation"]);
-                        this.router.navigate(["/praticien/vaccination"]);
-                        // this.router.navigate(["/praticien/assoc-patients"]);
+                        // this.router.navigate(["/praticien/vaccination"]);
+                        this.router.navigate(["/praticien/assoc-patients"]);
                         // this.router.navigate(["/praticien/profile"]);
                         // this.router.navigate(["/praticien/rendez-vous"]);
                     }
@@ -528,6 +528,112 @@ AppModule = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
 
 /***/ }),
 
+/***/ "./src/app/pages/global.interaction.ts":
+/*!*********************************************!*\
+  !*** ./src/app/pages/global.interaction.ts ***!
+  \*********************************************/
+/*! exports provided: GlobalInteraction */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GlobalInteraction", function() { return GlobalInteraction; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/__ivy_ngcc__/fesm2015/ionic-angular.js");
+
+
+
+let GlobalInteraction = class GlobalInteraction {
+    constructor(toastCtrl, loadingCtrl, alertCtrl) {
+        this.toastCtrl = toastCtrl;
+        this.loadingCtrl = loadingCtrl;
+        this.alertCtrl = alertCtrl;
+        this.isLoading = false;
+    }
+    presentToast(msg) {
+        return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
+            const toast = yield this.toastCtrl.create({
+                message: msg,
+                duration: 1800,
+                position: "top",
+            });
+            toast.present();
+        });
+    }
+    presentLoading() {
+        return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
+            this.isLoading = true;
+            return yield this.loadingCtrl.create({
+                cssClass: "my-loading-class",
+                spinner: "bubbles",
+                translucent: true,
+                duration: 100000,
+            }).then(a => {
+                a.present().then(() => {
+                    if (!this.isLoading) {
+                        a.dismiss();
+                    }
+                });
+            });
+        });
+    }
+    dismissLoading() {
+        return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
+            if (this.isLoading) {
+                this.isLoading = false;
+                return yield this.loadingCtrl.dismiss();
+            }
+            return null;
+        });
+    }
+    alertDelete(id, parent, msg = "Tu veux vraiment supprimé cette element ? ", callback = this.defaultCallback, _header = "Suppression", array = []) {
+        return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
+            const alert = yield this.alertCtrl.create({
+                cssClass: "my-custom-class",
+                header: _header,
+                message: msg,
+                buttons: [
+                    {
+                        text: "Cancel",
+                        role: "cancel",
+                        cssClass: "secondary",
+                        handler: () => {
+                            // console.log("Confirm Cancel: blah");
+                        },
+                    },
+                    {
+                        text: "OK",
+                        handler: () => {
+                            // console.warn("data deleted " + id);
+                            // this.remove(id, array, keyStatus, RefuseStatus);
+                            callback(id, parent);
+                        },
+                    },
+                ],
+            });
+            yield alert.present();
+        });
+    }
+    defaultCallback(id, parent) {
+        this.presentToast(`this is a default callback ${id} `);
+    }
+};
+GlobalInteraction.ctorParameters = () => [
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["ToastController"] },
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["LoadingController"] },
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["AlertController"] }
+];
+GlobalInteraction = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
+        providedIn: 'root'
+    })
+], GlobalInteraction);
+
+
+
+/***/ }),
+
 /***/ "./src/app/services/auth-guard.service.ts":
 /*!************************************************!*\
   !*** ./src/app/services/auth-guard.service.ts ***!
@@ -585,8 +691,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _auth0_angular_jwt__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @auth0/angular-jwt */ "./node_modules/@auth0/angular-jwt/__ivy_ngcc__/fesm2015/auth0-angular-jwt.js");
 /* harmony import */ var _ionic_storage__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @ionic/storage */ "./node_modules/@ionic/storage/__ivy_ngcc__/fesm2015/ionic-storage.js");
 /* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/__ivy_ngcc__/fesm2015/ionic-angular.js");
-/* harmony import */ var src_constant__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! src/constant */ "./src/constant.ts");
-
 
 
 
@@ -617,7 +721,7 @@ let AuthService = class AuthService {
                 return token;
             }
             else {
-                console.log("token doesn't exist yet");
+                // console.log("token doesn't exist yet");
                 // throw new Error("token doesn't exist yet");
             }
         });
@@ -641,7 +745,10 @@ let AuthService = class AuthService {
                 let isExpired = this.helper.isTokenExpired(token);
                 if (!isExpired) {
                     this.user = decoded;
-                    console.log("AuthService -> checkToken -> CONSTANT.stringifyParse(this.user)", src_constant__WEBPACK_IMPORTED_MODULE_9__["CONSTANT"].stringifyParse(this.user));
+                    // console.log(
+                    //   "AuthService -> checkToken -> CONSTANT.stringifyParse(this.user)",
+                    //   CONSTANT.stringifyParse(this.user)
+                    // );
                     this.authenticationState.next(true);
                 }
                 else {
@@ -651,7 +758,7 @@ let AuthService = class AuthService {
         });
     }
     login(credentials, loadinCtrl) {
-        console.log("AuthService -> login -> credentials", credentials);
+        // console.log("AuthService -> login -> credentials", credentials);
         const header = new _angular_common_http__WEBPACK_IMPORTED_MODULE_5__["HttpHeaders"]({
             "Content-Type": "application/json",
             Accept: "application/json",
@@ -670,7 +777,10 @@ let AuthService = class AuthService {
             // };
             // this.storage.set(TOKEN_KEY, testToken);
             this.user = this.helper.decodeToken(res["token"]);
-            console.log("AuthService -> login -> user", src_constant__WEBPACK_IMPORTED_MODULE_9__["CONSTANT"].stringifyParse(this.user));
+            // console.log(
+            //   "AuthService -> login -> user",
+            //   CONSTANT.stringifyParse(this.user)
+            // );
             this.authenticationState.next(true);
         }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["catchError"])((e) => {
             if (e.error) {
@@ -764,6 +874,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ionic_storage__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @ionic/storage */ "./node_modules/@ionic/storage/__ivy_ngcc__/fesm2015/ionic-storage.js");
 /* harmony import */ var _auth_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../auth.service */ "./src/app/services/auth.service.ts");
 /* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm2015/operators/index.js");
+/* harmony import */ var src_app_pages_global_interaction__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! src/app/pages/global.interaction */ "./src/app/pages/global.interaction.ts");
+
 
 
 
@@ -774,10 +886,11 @@ __webpack_require__.r(__webpack_exports__);
 
 const TOKEN_KEY = src_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].TOKEN_KEY;
 let HttpConfigInterceptorService = class HttpConfigInterceptorService {
-    constructor(alerCtrl, storage, authSvc) {
+    constructor(alerCtrl, storage, authSvc, globalItem) {
         this.alerCtrl = alerCtrl;
         this.storage = storage;
         this.authSvc = authSvc;
+        this.globalItem = globalItem;
         this.url = src_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].url_dev;
         this.debug = true;
     }
@@ -837,9 +950,11 @@ let HttpConfigInterceptorService = class HttpConfigInterceptorService {
             let cloneReq = this.addToken(request, token);
             return next.handle(cloneReq).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_7__["catchError"])((error) => {
                 const status = error.status;
-                console.warn("LL: HttpConfigInterceptorService -> error", error.message);
+                // console.warn("LL: HttpConfigInterceptorService -> error", error.message)
                 const reason = error && error.error.reason ? error.error.reason : "";
                 this.presentAlert(status, reason);
+                this.globalItem.dismissLoading();
+                this.globalItem.presentToast("error " + status);
                 return Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["throwError"])(error);
             }));
         }));
@@ -882,7 +997,8 @@ let HttpConfigInterceptorService = class HttpConfigInterceptorService {
 HttpConfigInterceptorService.ctorParameters = () => [
     { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["AlertController"] },
     { type: _ionic_storage__WEBPACK_IMPORTED_MODULE_5__["Storage"] },
-    { type: _auth_service__WEBPACK_IMPORTED_MODULE_6__["AuthService"] }
+    { type: _auth_service__WEBPACK_IMPORTED_MODULE_6__["AuthService"] },
+    { type: src_app_pages_global_interaction__WEBPACK_IMPORTED_MODULE_8__["GlobalInteraction"] }
 ];
 HttpConfigInterceptorService = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
@@ -944,7 +1060,7 @@ let CONSTANT = class CONSTANT {
             var nvalue = data[`${res}`];
             var json = {};
             json[nkey] = nvalue;
-            console.log("key:" + res + " value: " + data[`${res}`] + json);
+            // console.log("key:" + res + " value: " + data[`${res}`] + json);
             Object.assign(res, json);
         });
         return res;
@@ -982,12 +1098,12 @@ const environment = {
     // url: "http://localhost:9000",
     // url_dev: "http://localhost:9000/apip/",
     // url_dev_api: "http://localhost:9000/api/",
-    // url: "http://suivie-patient.neitic.com",
-    // url_dev: "http://suivie-patient.neitic.com/apip/",
-    // url_dev_api: "http://suivie-patient.neitic.com/api/",
-    url: "http://matipla.com",
-    url_dev: "http://matipla.com/apip/",
-    url_dev_api: "http://matipla.com/api/",
+    url: "http://suivie-patient.neitic.com",
+    url_dev: "http://suivie-patient.neitic.com/apip/",
+    url_dev_api: "http://suivie-patient.neitic.com/api/",
+    // url: "https://matipla.com",
+    // url_dev: "https://matipla.com/apip/",
+    // url_dev_api: "https://matipla.com/api/",
     TOKEN_KEY: "access_token",
 };
 /*

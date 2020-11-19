@@ -67,7 +67,7 @@ export class PatientPage implements OnInit {
   ) {
     this.router.events.subscribe((event: RouterEvent) => {
       this.selectedPath = event.url;
-      console.log("PatientPage -> this.selectedPath", this.selectedPath);
+      // console.log("PatientPage -> this.selectedPath", this.selectedPath);
     });
   }
   async ngOnInit() {
@@ -83,10 +83,10 @@ export class PatientPage implements OnInit {
         if (element.isActive) {
           setTimeout(() => element.toggle(), 10);
         }
-        console.log(
-          "PatientPage -> openFirst -> element.offsetWidth",
-          element.offsetWidth
-        );
+        // console.log(
+        //   "PatientPage -> openFirst -> element.offsetWidth",
+        //   element.offsetWidth
+        // );
       });
     });
   }
@@ -96,8 +96,8 @@ export class PatientPage implements OnInit {
 
   initialize() {
     const { roles, username } = this.authSrvc.user;
-    console.log("PatientPage -> initialize -> username", username);
-    console.log("PatientPage -> initialize -> roles", roles);
+    // console.log("PatientPage -> initialize -> username", username);
+    // console.log("PatientPage -> initialize -> roles", roles);
     // this.name = `${username}`;
     this.patienSrv.getProfile().subscribe((data: IProfilePatient[]) => {
       const type = data[0].typePatient == 1 ? "Adult" : "Enfant";
@@ -107,7 +107,7 @@ export class PatientPage implements OnInit {
   }
 
   async redirect(link) {
-    console.log("PatientPage -> redirect -> link", link);
+    // console.log("PatientPage -> redirect -> link", link);
 
     this.navCtrl.navigateForward(link);
   }

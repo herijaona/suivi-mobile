@@ -21,9 +21,9 @@ export class InterventionComponent implements OnInit {
   ngOnInit() {
     // TODO: reserche bar
     this.navParms.get("praticiens") !== undefined ? this.praticiens = this.navParms.get("praticiens") : this.getAllPraticiens();
-    console.log("LL: InterventionComponent -> ngOnInit -> this.navParms.get()", this.navParms.get("praticiens"))
+    // console.log("LL: InterventionComponent -> ngOnInit -> this.navParms.get()", this.navParms.get("praticiens"))
     this.carnet = this.navParms.get("vaccin"); this.dateVaccin = this.navParms.get("dateVaccin");
-    console.log("InterventionComponent -> ngOnInit -> this.praticiens", this.praticiens);
+    // console.log("InterventionComponent -> ngOnInit -> this.praticiens", this.praticiens);
     this.propositionForm = new FormGroup({
       praticien: new FormControl("", [Validators.required]),
     });
@@ -40,9 +40,9 @@ export class InterventionComponent implements OnInit {
       vaccin: this.carnet.vaccin,
       id_carnet: this.carnet.id,
     }
-    console.error("***************************LL: InterventionComponent -> ngOnInit -> vaccin", data_send);
+    // console.error("***************************LL: InterventionComponent -> ngOnInit -> vaccin", data_send);
     this.patientSrvc.interventionPraticien(data_send).subscribe((data) => {
-      console.log("LL: InterventionComponent -> intervention -> data", data);
+      // console.log("LL: InterventionComponent -> intervention -> data", data);
       this.globalItem.presentToast(data);
       this.closeModal()
     });

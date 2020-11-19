@@ -70,7 +70,7 @@ export class PraticienPage implements OnInit {
     if (this.selectedPath === "" || this.selectedPath === undefined) {
       this.selectedPath = "/praticien/proposition-rdv";
     }
-    console.log("PraticienPage -> this.selectedPath", this.selectedPath);
+    // console.log("PraticienPage -> this.selectedPath", this.selectedPath);
   }
   async ngOnInit() {
     this.initializeApp();
@@ -99,7 +99,7 @@ export class PraticienPage implements OnInit {
       this.storage.set("_id", data.data);
       this.praticienSrvc.getLocalUserInfo().subscribe((data: any) => {
         const el = data.profile[0];
-        console.log("LL: PraticienPage -> initializeApp -> el", data)
+        // console.log("LL: PraticienPage -> initializeApp -> el", data)
         const { roles, username } = this.authSrvc.user;
         const praticien = {
           firstName: el.firstName,

@@ -341,11 +341,9 @@
           value: function register() {
             var _this2 = this;
 
-            console.log("register");
-
+            // console.log("register");
             if (this.praticienRegisterForm.valid) {
-              Object.keys(this.praticienRegisterForm.value).forEach(function (key) {
-                console.log("valid", _this2.praticienRegisterForm.value[key]);
+              Object.keys(this.praticienRegisterForm.value).forEach(function (key) {// console.log("valid", this.praticienRegisterForm.value[key]);
               });
               var dataRegister = {
                 first_name: this.praticienRegisterForm.value['first_name'],
@@ -364,13 +362,11 @@
               };
               this.praticienSrv.registerPraticien(dataRegister).subscribe(function (data) {
                 if (data) {
-                  console.log("PraticienPage -> register -> data", data);
-
+                  // console.log("PraticienPage -> register -> data", data)
                   _this2.navCtrl.navigateRoot('/login');
                 }
               });
-            } else {
-              console.log("NOT valid", this.praticienRegisterForm);
+            } else {// console.log("NOT valid", this.praticienRegisterForm);
             }
           }
         }, {
@@ -394,8 +390,8 @@
         }, {
           key: "createUsername",
           value: function createUsername(birth, gender) {
-            var birthday = new Date(birth);
-            console.log("PatientPage -> createUsername -> birthday", birthday);
+            var birthday = new Date(birth); // console.log("PatientPage -> createUsername -> birthday", birthday)
+
             var sexe = gender.substring(0, 1);
             var mois = "00";
             var jour = "00";
@@ -409,8 +405,8 @@
             jour = birthday.getDay().toString().substring(0, 1); // jour = birthday.getDay()[0]
             // console.log("PatientPage -> createUsername -> jour", jour)
 
-            var username = sexe + annee + mois + jour + this.getRndInt();
-            console.log("PatientPage -> createUsername -> username", username);
+            var username = sexe + annee + mois + jour + this.getRndInt(); // console.log("PatientPage -> createUsername -> username", username)
+
             return username;
           }
         }, {
@@ -506,18 +502,16 @@
           key: "getCountry",
           value: function getCountry() {
             var res = this.http.get(this.url_api + "country");
-            res.subscribe(function (data) {
-              console.log("GlobalDataService -> getCountry -> data", data);
+            res.subscribe(function (data) {// console.log("GlobalDataService -> getCountry -> data", data)
             });
             return res;
           }
         }, {
           key: "getCity",
           value: function getCity(id) {
-            var res = this.http.get(this.url_api + "city?id=".concat(id));
-            console.log("GlobalDataService -> constructor -> this.url_api + `city?id=${id}`", this.url_api + "city?id=".concat(id));
-            res.subscribe(function (data) {
-              console.log("GlobalDataService -> getCity -> data", data);
+            var res = this.http.get(this.url_api + "city?id=".concat(id)); // console.log("GlobalDataService -> constructor -> this.url_api + `city?id=${id}`", this.url_api + `city?id=${id}`)
+
+            res.subscribe(function (data) {// console.log("GlobalDataService -> getCity -> data", data)
             });
             return res;
           }

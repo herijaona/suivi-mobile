@@ -32,7 +32,7 @@ export class AssocPatientsPage implements OnInit {
 
   getAllMyPatients() {
     this.praticientSrvc.getAssociatedPatient().subscribe((data: IUserPatient[]) => {
-      console.log("LL: AssocPatientsPage -> getAllMyPatients -> data", data)
+      // console.log("LL: AssocPatientsPage -> getAllMyPatients -> data", data)
       this.assoc_patients = data;
       this.globalItem.dismissLoading();
     })

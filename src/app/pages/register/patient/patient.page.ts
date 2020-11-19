@@ -65,7 +65,7 @@ export class PatientPage implements OnInit {
     this.globalEl.presentLoading();
     if (this.patientRegisterForm.valid) {
       Object.keys(this.patientRegisterForm.value).forEach((key) => {
-        console.log("valid", this.patientRegisterForm.value[key]);
+        // console.log("valid", this.patientRegisterForm.value[key]);
       });
       const dataRegister: IRegisterPatient = {
         first_name: this.patientRegisterForm.value['first_name'],
@@ -86,13 +86,15 @@ export class PatientPage implements OnInit {
       }
       this.patientSrvc.registerPatient(dataRegister).subscribe(data => {
         if (data) {
-          this.navCtrl.navigateRoot('/login');
+          // this.navCtrl.navigateRoot('/login');
+          this.navCtrl.navigateRoot('/account-activation');
 
-          this.globalEl.dismissLoading();
         }
+        this.globalEl.dismissLoading();
+
       });
     } else {
-      console.log("NOT valid", this.patientRegisterForm);
+      // console.log("NOT valid", this.patientRegisterForm);
     }
   }
 
@@ -102,6 +104,7 @@ export class PatientPage implements OnInit {
 
   myUserName() {
     if (!this.patientRegisterForm.valid || this._id != this.IDENTIFIANT) {
+      // if (!this.patientRegisterForm.valid) {
       return;
     }
     if (this.patientRegisterForm.value['date_on_born'] != '' && this.patientRegisterForm.value['sexe'] != '') {
@@ -111,7 +114,7 @@ export class PatientPage implements OnInit {
 
   createUsername(birth: Date, gender: String) {
     const birthday = new Date(birth);
-    console.log("PatientPage -> createUsername -> birthday", birthday)
+    // console.log("PatientPage -> createUsername -> birthday", birthday)
     const sexe = gender.substring(0, 1);
     let mois = "00";
     let jour = "00";
@@ -127,7 +130,7 @@ export class PatientPage implements OnInit {
     // jour = birthday.getDay()[0]
     // console.log("PatientPage -> createUsername -> jour", jour)
     const username = sexe + annee + mois + jour + this.getRndInt();
-    console.log("PatientPage -> createUsername -> username", username)
+    // console.log("PatientPage -> createUsername -> username", username)
     return username;
   }
 

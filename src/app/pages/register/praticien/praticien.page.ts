@@ -70,10 +70,10 @@ export class PraticienPage implements OnInit {
     });
   }
   register() {
-    console.log("register");
+    // console.log("register");
     if (this.praticienRegisterForm.valid) {
       Object.keys(this.praticienRegisterForm.value).forEach((key) => {
-        console.log("valid", this.praticienRegisterForm.value[key]);
+        // console.log("valid", this.praticienRegisterForm.value[key]);
       });
       const dataRegister: IRegisterPraticien = {
         first_name: this.praticienRegisterForm.value['first_name'],
@@ -92,12 +92,12 @@ export class PraticienPage implements OnInit {
       }
       this.praticienSrv.registerPraticien(dataRegister).subscribe(data => {
         if (data) {
-          console.log("PraticienPage -> register -> data", data)
+          // console.log("PraticienPage -> register -> data", data)
           this.navCtrl.navigateRoot('/login');
         }
       });
     } else {
-      console.log("NOT valid", this.praticienRegisterForm);
+      // console.log("NOT valid", this.praticienRegisterForm);
     }
   }
 
@@ -116,7 +116,7 @@ export class PraticienPage implements OnInit {
 
   createUsername(birth: Date, gender: String) {
     const birthday = new Date(birth);
-    console.log("PatientPage -> createUsername -> birthday", birthday)
+    // console.log("PatientPage -> createUsername -> birthday", birthday)
     const sexe = gender.substring(0, 1);
     let mois = "00";
     let jour = "00";
@@ -132,7 +132,7 @@ export class PraticienPage implements OnInit {
     // jour = birthday.getDay()[0]
     // console.log("PatientPage -> createUsername -> jour", jour)
     const username = sexe + annee + mois + jour + this.getRndInt();
-    console.log("PatientPage -> createUsername -> username", username)
+    // console.log("PatientPage -> createUsername -> username", username)
     return username;
   }
 

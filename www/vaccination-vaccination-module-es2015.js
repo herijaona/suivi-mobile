@@ -52,6 +52,19 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/raw-loader/dist/cjs.js!./src/app/pages/praticien/vaccination/new-vaccination/new-vaccination.component.html":
+/*!**********************************************************************************************************************************!*\
+  !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/pages/praticien/vaccination/new-vaccination/new-vaccination.component.html ***!
+  \**********************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ("<ion-header>\n  <ion-toolbar>\n    <ion-title>Création de rendez-vous</ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-grid fixed>\n  <ion-row>\n    <ion-col size-md=\"6\" offset-md=\"3\">\n      <ion-card>\n        <ion-card-header>\n          <ion-card-title> </ion-card-title>\n        </ion-card-header>\n        <ion-card-content>\n          <form\n            [formGroup]=\"propositionForm\"\n            (ngSubmit)=\"createVaccin()\"\n            method=\"post\"\n          >\n            <div class=\"mb-14\">\n              <label>choisi un patient</label>\n              <ion-select\n                placeholder=\"Select\"\n                formControlName=\"patient\"\n                required\n              >\n                <ion-select-option\n                  *ngFor=\"let item of patients\"\n                  [value]=\"item.id\"\n                  >{{\n                    item.firstName.toString() + ' ' + item.lastName.toString()\n                  }}</ion-select-option\n                >\n                <!-- <ion-select-option></ion-select-option> -->\n              </ion-select>\n              <!-- <small\n                class=\"form-text red-color\"\n                *ngIf=\"isFieldInvalid(propositionForm, 'patient')\"\n                >This field is required</small\n              > -->\n            </div>\n\n            <div class=\"mb-14\">\n              <label>choisi un vaccin</label>\n              <ion-select\n                placeholder=\"Select\"\n                formControlName=\"vaccin\"\n                required\n              >\n                <ion-select-option\n                  *ngFor=\"let item of vaccins\"\n                  [value]=\"item.id\"\n                  >{{ item.vaccinName }}</ion-select-option\n                >\n                <!-- <ion-select-option></ion-select-option> -->\n              </ion-select>\n              <!-- <small\n                class=\"form-text red-color\"\n                *ngIf=\"isFieldInvalid(propositionForm, 'patient')\"\n                >This field is required</small\n              > -->\n            </div>\n\n            <div class=\"mb-14\">\n              <label>Propose une date </label>\n              <ion-datetime\n                display-format=\"MMM DD, YYYY\"\n                formControlName=\"dateRdv\"\n                required\n              ></ion-datetime>\n              <!-- <small\n                class=\"form-text red-color\"\n                *ngIf=\"isFieldInvalid(propositionForm, 'dateRdv')\"\n                >This field is required</small\n              > -->\n            </div>\n\n            <div class=\"mb-14\">\n              <label>Propose un horaire</label>\n              <ion-datetime\n                display-format=\"h:mm A\"\n                picker-format=\"h:mm A\"\n                formControlName=\"heureRdv\"\n                required\n              ></ion-datetime>\n              <!-- <small\n                class=\"form-text red-color\"\n                *ngIf=\"isFieldInvalid(propositionForm, 'heureRdv')\"\n                >This field is required</small\n              > -->\n            </div>\n\n            <div class=\"mb-14\">\n              <label>Identification</label>\n              <ion-input\n                type=\"text\"\n                required\n                formControlName=\"identification\"\n              ></ion-input\n              ><!-- <small\n                class=\"form-text red-color\"\n                *ngIf=\"isFieldInvalid(propositionForm, 'description')\"\n                >This field is required</small\n              > -->\n            </div>\n\n            <ion-row>\n              <ion-col>\n                <ion-button color=\"sred\" expand=\"block\" (click)=\"dismiss()\">\n                  <ion-icon slot=\"start\" name=\"\"> x </ion-icon\n                  >Cancel</ion-button\n                >\n                <legend class=\"ion-text-center\"></legend>\n                <ion-button type=\"submit\" color=\"sgreen\" expand=\"block\"\n                  ><ion-icon slot=\"start\" name=\"save-outline\"></ion-icon>\n                  Save\n                </ion-button>\n              </ion-col>\n            </ion-row>\n          </form>\n        </ion-card-content>\n      </ion-card>\n    </ion-col>\n  </ion-row>\n</ion-grid>\n");
+
+/***/ }),
+
 /***/ "./node_modules/raw-loader/dist/cjs.js!./src/app/pages/praticien/vaccination/organize/organize.component.html":
 /*!********************************************************************************************************************!*\
   !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/pages/praticien/vaccination/organize/organize.component.html ***!
@@ -87,7 +100,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<ion-header translucent=\"true\">\n  <ion-toolbar>\n    <ion-buttons *ngIf=\"!ios && !showSearchbar\" slot=\"start\">\n      <ion-menu-button></ion-menu-button>\n    </ion-buttons>\n    <ion-menu-button *ngIf=\"ios\"></ion-menu-button>\n\n    <ion-title *ngIf=\"!ios && !showSearchbar\">Vaccination</ion-title>\n    <ion-searchbar\n      *ngIf=\"showSearchbar\"\n      showCancelButton=\"always\"\n      [(ngModel)]=\"queryText\"\n      (ionChange)=\"filterItems($event)\"\n      (ionCancel)=\"showSearchbar = false\"\n      placeholder=\"Rechercher\"\n    ></ion-searchbar>\n    <ion-buttons slot=\"end\">\n      <ion-button *ngIf=\"!ios && !showSearchbar\" (click)=\"showSearchbar = true\">\n        <ion-icon slot=\"icon-only\" name=\"search\"></ion-icon>\n      </ion-button>\n    </ion-buttons>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content fullscreen=\"true\">\n  <ion-header collapse=\"condense\">\n    <ion-toolbar>\n      <ion-title size=\"large\">Vaccination</ion-title>\n    </ion-toolbar>\n    <ion-toolbar>\n      <ion-searchbar\n        [(ngModel)]=\"queryText\"\n        (ionChange)=\"filterItems($event)\"\n        placeholder=\"Search\"\n      ></ion-searchbar>\n    </ion-toolbar>\n  </ion-header>\n\n  <ion-list #scheduleList>\n    <ion-item-group *ngFor=\"let consult of filteredVaccinations\">\n      <ion-item-divider sticky>\n        <ion-label class=\"ion-text-center\"> {{ consult.nomPatient}} </ion-label>\n      </ion-item-divider>\n\n      <ion-item-sliding\n        *ngFor=\"let eachVaccination of consult.groups\"\n        #slidingItem\n      >\n        <ion-item>\n          <ion-grid>\n            <ion-row (click)=\"alert()\">\n              <ion-col size=\"8\">\n                <ion-label class=\"information\">\n                  {{eachVaccination.operation}}\n                </ion-label>\n              </ion-col>\n              <ion-col class=\"middle\" size=\"2\" offset-md=\"2\">\n                <ion-button\n                  *ngIf=\"eachVaccination._status.toString() === this.GENERATE\"\n                  class=\"status\"\n                  color=\"tertiary\"\n                  expand=\"block\"\n                  fill=\"outline\"\n                >\n                  {{eachVaccination._status}}\n                </ion-button>\n\n                <ion-button\n                  *ngIf=\"eachVaccination._status.toString() === this.PENDING\"\n                  class=\"status\"\n                  color=\"sorange\"\n                  expand=\"block\"\n                  fill=\"outline\"\n                >\n                  {{eachVaccination._status}}\n                </ion-button>\n\n                <ion-button\n                  *ngIf=\"eachVaccination._status.toString() === this.REJECTED\"\n                  class=\"status\"\n                  color=\"sred\"\n                  expand=\"block\"\n                  fill=\"outline\"\n                >\n                  {{eachVaccination._status}}\n                </ion-button>\n\n                <ion-button\n                  *ngIf=\"eachVaccination._status.toString() === this.SCHEDULED\"\n                  class=\"status\"\n                  color=\"warning\"\n                  expand=\"block\"\n                  fill=\"outline\"\n                >\n                  {{eachVaccination._status}}\n                </ion-button>\n\n                <ion-button\n                  *ngIf=\"eachVaccination._status.toString() === this.REALIZED\"\n                  class=\"status\"\n                  color=\"sgreen\"\n                  expand=\"block\"\n                  fill=\"outline\"\n                >\n                  {{eachVaccination._status}}\n                </ion-button>\n              </ion-col>\n            </ion-row>\n\n            <ion-row>\n              <ion-col class=\"btn-cnfrm\">\n                <ion-button\n                  *ngIf=\"eachVaccination._action.toString() === this.ACTION_VOIR\"\n                  class=\"status\"\n                  color=\"sgreen\"\n                  (click)=\"watchVaccin(eachVaccination)\"\n                  expand=\"block\"\n                >\n                  <ion-icon slot=\"start\" name=\"eye-outline\"></ion-icon>\n                  <ion-label>voir</ion-label>\n                </ion-button>\n\n                <ion-button\n                  *ngIf=\"eachVaccination._action.toString() === this.ACTION_REALIZED && eachVaccination._status.toString() === this.SCHEDULED\"\n                  class=\"status\"\n                  color=\"tertiary\"\n                  expand=\"block\"\n                  (click)=\"openRealizeVaccModal(eachVaccination)\"\n                >\n                  <ion-icon\n                    slot=\"start\"\n                    name=\"checkmark-circle-outline\"\n                  ></ion-icon>\n                  <ion-label>réalisé</ion-label>\n                </ion-button>\n\n                <!-- <ion-button\n                  *ngIf=\"eachVaccination._action.toString() === this.ACTION_REALIZED && eachVaccination._status.toString() === this.REALIZED\"\n                  class=\"status\"\n                  color=\"sred\"\n                  expand=\"block\"\n                >\n                  <ion-icon slot=\"start\" name=\"close-circle-outline\"></ion-icon>\n                  <ion-label>rejeté</ion-label>\n                </ion-button> -->\n\n                <ion-button\n                  *ngIf=\"eachVaccination._action.toString() === this.ACTION_ORGANIZED_REJECT\"\n                  class=\"status\"\n                  color=\"sgreen\"\n                  expand=\"block\"\n                  (click)=\"organizeVaccinWithNotebook(eachVaccination)\"\n                >\n                  <ion-icon slot=\"start\" name=\"close-circle-outline\"></ion-icon>\n                  <ion-label>organisé</ion-label>\n                </ion-button>\n\n                <ion-button\n                  *ngIf=\"eachVaccination._action.toString() === this.ACTION_ORGANIZED_REJECT\"\n                  class=\"status\"\n                  color=\"sred\"\n                  expand=\"block\"\n                  (click)=\"rejectVaccinWithNotebook(eachVaccination)\"\n                >\n                  <ion-icon slot=\"start\" name=\"close-circle-outline\"></ion-icon>\n                  <ion-label>rejeté</ion-label>\n                </ion-button>\n\n                <ion-button\n                  *ngIf=\"eachVaccination._action.toString() === this.ACTION_GENERATE_REJECT\"\n                  class=\"status\"\n                  color=\"sgreen\"\n                  expand=\"block\"\n                  (click)=\"generateVaccin(eachVaccination)\"\n                >\n                  <ion-icon slot=\"start\" name=\"close-circle-outline\"></ion-icon>\n                  <ion-label>généré</ion-label>\n                </ion-button>\n\n                <ion-button\n                  *ngIf=\"eachVaccination._action.toString() === this.ACTION_GENERATE_REJECT\"\n                  class=\"status\"\n                  color=\"sred\"\n                  expand=\"block\"\n                  (click)=\"rejectVaccin(eachVaccination)\"\n                >\n                  <ion-icon slot=\"start\" name=\"close-circle-outline\"></ion-icon>\n                  <ion-label>rejeté</ion-label>\n                </ion-button>\n\n                <ion-button\n                  *ngIf=\"eachVaccination.operation.toString() === this.OPERATION_INT_VACCINATION\"\n                  class=\"status\"\n                  color=\"sgreen\"\n                  expand=\"block\"\n                  (click)=\"watchVaccinWithNotebook(eachVaccination)\"\n                >\n                  <ion-icon slot=\"start\" name=\"eye-outline\"></ion-icon>\n                  <ion-label>Voir</ion-label>\n                </ion-button>\n              </ion-col>\n            </ion-row>\n          </ion-grid>\n        </ion-item>\n      </ion-item-sliding>\n    </ion-item-group>\n  </ion-list>\n\n  <ion-list-header [hidden]=\"vaccinations.length != 0\">\n    No Sessions Found\n  </ion-list-header>\n\n  <ion-fab slot=\"fixed\" vertical=\"bottom\" horizontal=\"end\" #fab>\n    <ion-fab-button color=\"primary\" (click)=\"alert()\">\n      <ion-icon name=\"add-outline\"></ion-icon>\n    </ion-fab-button>\n  </ion-fab>\n</ion-content>\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<ion-header translucent=\"true\">\n  <ion-toolbar>\n    <ion-buttons *ngIf=\"!ios && !showSearchbar\" slot=\"start\">\n      <ion-menu-button></ion-menu-button>\n    </ion-buttons>\n    <ion-menu-button *ngIf=\"ios\"></ion-menu-button>\n\n    <ion-title *ngIf=\"!ios && !showSearchbar\">Vaccination</ion-title>\n    <ion-searchbar\n      *ngIf=\"showSearchbar\"\n      showCancelButton=\"always\"\n      [(ngModel)]=\"queryText\"\n      (ionChange)=\"filterItems($event)\"\n      (ionCancel)=\"showSearchbar = false\"\n      placeholder=\"Rechercher\"\n    ></ion-searchbar>\n    <ion-buttons slot=\"end\">\n      <ion-button *ngIf=\"!ios && !showSearchbar\" (click)=\"showSearchbar = true\">\n        <ion-icon slot=\"icon-only\" name=\"search\"></ion-icon>\n      </ion-button>\n    </ion-buttons>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content fullscreen=\"true\">\n  <ion-header collapse=\"condense\">\n    <ion-toolbar>\n      <ion-title size=\"large\">Vaccination</ion-title>\n    </ion-toolbar>\n    <ion-toolbar>\n      <ion-searchbar\n        [(ngModel)]=\"queryText\"\n        (ionChange)=\"filterItems($event)\"\n        placeholder=\"Search\"\n      ></ion-searchbar>\n    </ion-toolbar>\n  </ion-header>\n\n  <ion-list #scheduleList>\n    <ion-item-group *ngFor=\"let consult of filteredVaccinations\">\n      <ion-item-divider sticky>\n        <ion-label class=\"ion-text-center\"> {{ consult.nomPatient}} </ion-label>\n      </ion-item-divider>\n\n      <ion-item-sliding\n        *ngFor=\"let eachVaccination of consult.groups\"\n        #slidingItem\n      >\n        <ion-item>\n          <ion-grid>\n            <ion-row (click)=\"alert()\">\n              <ion-col size=\"8\">\n                <ion-label class=\"information\">\n                  {{eachVaccination.operation}}\n                </ion-label>\n              </ion-col>\n              <ion-col class=\"middle\" size=\"2\" offset-md=\"2\">\n                <ion-button\n                  *ngIf=\"eachVaccination._status.toString() === this.GENERATE\"\n                  class=\"status\"\n                  color=\"tertiary\"\n                  expand=\"block\"\n                  fill=\"outline\"\n                >\n                  {{eachVaccination._status}}\n                </ion-button>\n\n                <ion-button\n                  *ngIf=\"eachVaccination._status.toString() === this.PENDING\"\n                  class=\"status\"\n                  color=\"sorange\"\n                  expand=\"block\"\n                  fill=\"outline\"\n                >\n                  {{eachVaccination._status}}\n                </ion-button>\n\n                <ion-button\n                  *ngIf=\"eachVaccination._status.toString() === this.REJECTED\"\n                  class=\"status\"\n                  color=\"sred\"\n                  expand=\"block\"\n                  fill=\"outline\"\n                >\n                  {{eachVaccination._status}}\n                </ion-button>\n\n                <ion-button\n                  *ngIf=\"eachVaccination._status.toString() === this.SCHEDULED\"\n                  class=\"status\"\n                  color=\"warning\"\n                  expand=\"block\"\n                  fill=\"outline\"\n                >\n                  {{eachVaccination._status}}\n                </ion-button>\n\n                <ion-button\n                  *ngIf=\"eachVaccination._status.toString() === this.REALIZED\"\n                  class=\"status\"\n                  color=\"sgreen\"\n                  expand=\"block\"\n                  fill=\"outline\"\n                >\n                  {{eachVaccination._status}}\n                </ion-button>\n              </ion-col>\n            </ion-row>\n\n            <ion-row>\n              <ion-col class=\"btn-cnfrm\">\n                <ion-button\n                  *ngIf=\"eachVaccination._action.toString() === this.ACTION_VOIR\"\n                  class=\"status\"\n                  color=\"sgreen\"\n                  (click)=\"watchVaccin(eachVaccination)\"\n                  expand=\"block\"\n                >\n                  <ion-icon slot=\"start\" name=\"eye-outline\"></ion-icon>\n                  <ion-label>voir</ion-label>\n                </ion-button>\n\n                <ion-button\n                  *ngIf=\"eachVaccination._action.toString() === this.ACTION_REALIZED && eachVaccination._status.toString() === this.SCHEDULED\"\n                  class=\"status\"\n                  color=\"tertiary\"\n                  expand=\"block\"\n                  (click)=\"openRealizeVaccModal(eachVaccination)\"\n                >\n                  <ion-icon\n                    slot=\"start\"\n                    name=\"checkmark-circle-outline\"\n                  ></ion-icon>\n                  <ion-label>réalisé</ion-label>\n                </ion-button>\n\n                <!-- <ion-button\n                  *ngIf=\"eachVaccination._action.toString() === this.ACTION_REALIZED && eachVaccination._status.toString() === this.REALIZED\"\n                  class=\"status\"\n                  color=\"sred\"\n                  expand=\"block\"\n                >\n                  <ion-icon slot=\"start\" name=\"close-circle-outline\"></ion-icon>\n                  <ion-label>rejeté</ion-label>\n                </ion-button> -->\n\n                <ion-button\n                  *ngIf=\"eachVaccination._action.toString() === this.ACTION_ORGANIZED_REJECT\"\n                  class=\"status\"\n                  color=\"sgreen\"\n                  expand=\"block\"\n                  (click)=\"organizeVaccinWithNotebook(eachVaccination)\"\n                >\n                  <ion-icon slot=\"start\" name=\"close-circle-outline\"></ion-icon>\n                  <ion-label>organisé</ion-label>\n                </ion-button>\n\n                <ion-button\n                  *ngIf=\"eachVaccination._action.toString() === this.ACTION_ORGANIZED_REJECT\"\n                  class=\"status\"\n                  color=\"sred\"\n                  expand=\"block\"\n                  (click)=\"rejectVaccinWithNotebook(eachVaccination)\"\n                >\n                  <ion-icon slot=\"start\" name=\"close-circle-outline\"></ion-icon>\n                  <ion-label>rejeté</ion-label>\n                </ion-button>\n\n                <ion-button\n                  *ngIf=\"eachVaccination._action.toString() === this.ACTION_GENERATE_REJECT\"\n                  class=\"status\"\n                  color=\"sgreen\"\n                  expand=\"block\"\n                  (click)=\"generateVaccin(eachVaccination)\"\n                >\n                  <ion-icon slot=\"start\" name=\"close-circle-outline\"></ion-icon>\n                  <ion-label>généré</ion-label>\n                </ion-button>\n\n                <ion-button\n                  *ngIf=\"eachVaccination._action.toString() === this.ACTION_GENERATE_REJECT\"\n                  class=\"status\"\n                  color=\"sred\"\n                  expand=\"block\"\n                  (click)=\"rejectVaccin(eachVaccination)\"\n                >\n                  <ion-icon slot=\"start\" name=\"close-circle-outline\"></ion-icon>\n                  <ion-label>rejeté</ion-label>\n                </ion-button>\n\n                <ion-button\n                  *ngIf=\"eachVaccination.operation.toString() === this.OPERATION_INT_VACCINATION\"\n                  class=\"status\"\n                  color=\"sgreen\"\n                  expand=\"block\"\n                  (click)=\"watchVaccinWithNotebook(eachVaccination)\"\n                >\n                  <ion-icon slot=\"start\" name=\"eye-outline\"></ion-icon>\n                  <ion-label>Voir</ion-label>\n                </ion-button>\n              </ion-col>\n            </ion-row>\n          </ion-grid>\n        </ion-item>\n      </ion-item-sliding>\n    </ion-item-group>\n  </ion-list>\n\n  <ion-list-header [hidden]=\"vaccinations.length != 0\">\n    No Sessions Found\n  </ion-list-header>\n\n  <ion-fab slot=\"fixed\" vertical=\"bottom\" horizontal=\"end\" #fab>\n    <ion-fab-button color=\"primary\" (click)=\"openCreateVaccModal()\">\n      <ion-icon name=\"add-outline\"></ion-icon>\n    </ion-fab-button>\n  </ion-fab>\n</ion-content>\n");
 
 /***/ }),
 
@@ -175,7 +188,7 @@ let GenerateComponent = class GenerateComponent {
     }
     cancel() {
         return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
-            console.log(' cancel ');
+            // console.log(' cancel ');
             this.backToList();
         });
     }
@@ -193,13 +206,20 @@ let GenerateComponent = class GenerateComponent {
         this.globalDataSrvc.getCountry().subscribe((data) => this.countries = data);
     }
     getCenterByCity(_idCity) {
-        this.globalDataSrvc.getCenterHealthByCity(_idCity).subscribe((data) => { console.log("LL: GenerateComponent -> getCenterByCity -> this.center_health", data); this.center_health = data; });
+        this.globalDataSrvc.getCenterHealthByCity(_idCity).subscribe((data) => {
+            // console.log("LL: GenerateComponent -> getCenterByCity -> this.center_health", data);
+            this.center_health = data;
+        });
     }
     getPraticienByCenter(_idCenter) {
-        this.globalDataSrvc.getPraticienByCenter(_idCenter).subscribe((data) => { console.log("LL: GenerateComponent -> getCenterByCity -> this.center_health", data); this.praticiens = data; });
+        this.globalDataSrvc.getPraticienByCenter(_idCenter).subscribe((data) => {
+            // console.log("LL: GenerateComponent -> getCenterByCity -> this.center_health", data); this.praticiens = data
+        });
     }
     postVaccinGeneration(_idPractitioner) {
-        this.patientServc.postVaccinGeneration(_idPractitioner).subscribe((data) => console.log("LL: GenerateComponent -> postVaccinGeneration -> data", data));
+        this.patientServc.postVaccinGeneration(_idPractitioner).subscribe((data) => {
+            // console.log("LL: GenerateComponent -> postVaccinGeneration -> data", data)
+        });
     }
 };
 GenerateComponent.ctorParameters = () => [
@@ -275,10 +295,10 @@ let InterventionComponent = class InterventionComponent {
     ngOnInit() {
         // TODO: reserche bar
         this.navParms.get("praticiens") !== undefined ? this.praticiens = this.navParms.get("praticiens") : this.getAllPraticiens();
-        console.log("LL: InterventionComponent -> ngOnInit -> this.navParms.get()", this.navParms.get("praticiens"));
+        // console.log("LL: InterventionComponent -> ngOnInit -> this.navParms.get()", this.navParms.get("praticiens"))
         this.carnet = this.navParms.get("vaccin");
         this.dateVaccin = this.navParms.get("dateVaccin");
-        console.log("InterventionComponent -> ngOnInit -> this.praticiens", this.praticiens);
+        // console.log("InterventionComponent -> ngOnInit -> this.praticiens", this.praticiens);
         this.propositionForm = new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormGroup"]({
             praticien: new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControl"]("", [_angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required]),
         });
@@ -293,9 +313,9 @@ let InterventionComponent = class InterventionComponent {
             vaccin: this.carnet.vaccin,
             id_carnet: this.carnet.id,
         };
-        console.error("***************************LL: InterventionComponent -> ngOnInit -> vaccin", data_send);
+        // console.error("***************************LL: InterventionComponent -> ngOnInit -> vaccin", data_send);
         this.patientSrvc.interventionPraticien(data_send).subscribe((data) => {
-            console.log("LL: InterventionComponent -> intervention -> data", data);
+            // console.log("LL: InterventionComponent -> intervention -> data", data);
             this.globalItem.presentToast(data);
             this.closeModal();
         });
@@ -479,7 +499,7 @@ let VaccinationPage = class VaccinationPage {
         this.PENDINGSTATUS = "PENDING";
         this.PLANIFIED = "PLANIFIED";
         this.STRING_DATE = "date_prise";
-        console.log("VaccinationPage -> constructor");
+        // console.log("VaccinationPage -> constructor");
     }
     checkStatus(status, etat) {
         if (status == 1) {
@@ -495,7 +515,7 @@ let VaccinationPage = class VaccinationPage {
         }
     }
     ngOnInit() {
-        console.log("VaccinationPage -> ngOnInit -> ngOnInit");
+        // console.log("VaccinationPage -> ngOnInit -> ngOnInit");
         this.initializeItems();
     }
     filterItems(ev) {
@@ -513,15 +533,15 @@ let VaccinationPage = class VaccinationPage {
         this.presentLoading();
         this.getAllVaccin();
         this.praticienSrv.getAllPraticien().subscribe(data => {
-            console.log("VaccinationPage -> initializeItems -> data", data);
+            // console.log("VaccinationPage -> initializeItems -> data", data)
             this.praticiens = data;
         });
     }
     getAllVaccin() {
         this.patientSrv.getVaccinByPatient().subscribe((data) => {
-            console.log("VaccinationPage -> getAllVaccin -> data", data);
+            // console.log("VaccinationPage -> getAllVaccin -> data", data);
             this.vaccins = data;
-            console.log(" ");
+            // console.log(" ");
             this.vaccinsShow = this.dataTransformer.allData(data, this.STRING_DATE).data;
             this.vaccinsFiltered = this.dataTransformer.allData(data, this.STRING_DATE).dataByDate;
             this.loadingCtrl.dismiss();
@@ -540,7 +560,7 @@ let VaccinationPage = class VaccinationPage {
     }
     openNewRdvModal(vaccin) {
         return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
-            console.warn("VaccinationPage -> openNewRdvModal -> nom_vaccin", vaccin, "/");
+            // console.warn("VaccinationPage -> openNewRdvModal -> nom_vaccin", vaccin, "/")
             const newRdvModal = yield this.modalCtrl.create({
                 component: _intervention_intervention_component__WEBPACK_IMPORTED_MODULE_5__["InterventionComponent"],
                 cssClass: "test-class",
@@ -558,7 +578,7 @@ let VaccinationPage = class VaccinationPage {
     }
     openGenerateVaccModal(vaccin) {
         return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
-            console.warn("VaccinationPage -> openNewRdvModal -> nom_vaccin", vaccin, "/");
+            // console.warn("VaccinationPage -> openNewRdvModal -> nom_vaccin", vaccin, "/")
             const newRdvModal = yield this.modalCtrl.create({
                 component: _generate_generate_component__WEBPACK_IMPORTED_MODULE_7__["GenerateComponent"],
                 cssClass: "test-class",
@@ -637,7 +657,7 @@ let DetailsComponent = class DetailsComponent {
         this.navParms = navParms;
         this.vaccinations = this.navParms.get("data");
         this.isWithNoteBook = this.navParms.get("isWithNoteBook");
-        console.log(this.vaccinations);
+        // console.log(this.vaccinations);
     }
     ngOnInit() { }
     dismiss() {
@@ -661,6 +681,151 @@ DetailsComponent = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
         styles: [Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"])(__webpack_require__(/*! ./details.component.scss */ "./src/app/pages/praticien/vaccination/details/details.component.scss")).default]
     })
 ], DetailsComponent);
+
+
+
+/***/ }),
+
+/***/ "./src/app/pages/praticien/vaccination/new-vaccination/new-vaccination.component.scss":
+/*!********************************************************************************************!*\
+  !*** ./src/app/pages/praticien/vaccination/new-vaccination/new-vaccination.component.scss ***!
+  \********************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ("\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL3BhZ2VzL3ByYXRpY2llbi92YWNjaW5hdGlvbi9uZXctdmFjY2luYXRpb24vbmV3LXZhY2NpbmF0aW9uLmNvbXBvbmVudC5zY3NzIn0= */");
+
+/***/ }),
+
+/***/ "./src/app/pages/praticien/vaccination/new-vaccination/new-vaccination.component.ts":
+/*!******************************************************************************************!*\
+  !*** ./src/app/pages/praticien/vaccination/new-vaccination/new-vaccination.component.ts ***!
+  \******************************************************************************************/
+/*! exports provided: NewVaccinationComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "NewVaccinationComponent", function() { return NewVaccinationComponent; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/__ivy_ngcc__/fesm2015/ionic-angular.js");
+/* harmony import */ var src_app_pages_global_interaction__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! src/app/pages/global.interaction */ "./src/app/pages/global.interaction.ts");
+/* harmony import */ var src_app_services_praticien_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! src/app/services/praticien.service */ "./src/app/services/praticien.service.ts");
+
+
+
+
+
+
+let NewVaccinationComponent = class NewVaccinationComponent {
+    constructor(praticienSrvc, navCtrl, navParms, modalCtrl, globalItem) {
+        this.praticienSrvc = praticienSrvc;
+        this.navCtrl = navCtrl;
+        this.navParms = navParms;
+        this.modalCtrl = modalCtrl;
+        this.globalItem = globalItem;
+        this.patients = [];
+    }
+    ngOnInit() {
+        return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
+            this.propositionForm = new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormGroup"]({
+                patient: new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControl"]("", [_angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required]),
+                dateRdv: new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControl"]("", [_angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required]),
+                heureRdv: new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControl"]("", [_angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required]),
+                identification: new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControl"]("", [_angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required]),
+                vaccin: new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControl"]("", [_angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required])
+            });
+            // this.navParms.get("patients") != undefined ? this.patients = this.navParms.get("patients") : this.getPatientAssoc();
+            this.getPatientAssoc();
+            this.getVaccins();
+            this.patients.forEach((element) => {
+                // console.log("NewRdvComponent -> patients", element.firstName);
+            });
+        });
+    }
+    getPatientAssoc() {
+        this.praticienSrvc.getAssocPatient().subscribe((data) => {
+            // console.log("LL: NewVaccinationComponent -> getPatientAssoc -> data", data)
+            this.patients = data;
+        });
+    }
+    getVaccins() {
+        this.praticienSrvc.getAllVaccin().subscribe((data) => {
+            // console.log("LL: NewVaccinationComponent -> getVaccins -> data", data)
+            this.vaccins = data;
+        });
+    }
+    isFieldInvalid(dataFormStep, field) {
+        return ((!dataFormStep.get(field).valid && dataFormStep.get(field).touched) ||
+            (dataFormStep.get(field).untouched && !dataFormStep.get(field).valid));
+    }
+    createVaccin() {
+        return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
+            this.globalItem.presentLoading();
+            const date_to_transform = (new Date(this.propositionForm.value.dateRdv).getFullYear() + "-" + new Date(this.propositionForm.value.dateRdv).getMonth() + "-" + new Date(this.propositionForm.value.dateRdv).getDate()).toString();
+            const hour_to_transform = (new Date(this.propositionForm.value.heureRdv).getHours() + ":" + new Date(this.propositionForm.value.heureRdv).getMinutes()).toString();
+            const dataToSend = {
+                identification: this.propositionForm.value.identification,
+                patient: this.propositionForm.value.patient,
+                vaccin: this.propositionForm.value.vaccin,
+                date: date_to_transform,
+                heure: hour_to_transform,
+            };
+            // console.log("LL: NewRendezVousComponent -> createRdv -> dataToSend", dataToSend)
+            if (this.propositionForm.valid) {
+                this.globalItem.presentToast("Vaccin créer");
+                this.praticienSrvc.createRdv(dataToSend).subscribe((data) => {
+                    // console.log("LL: NewRendezVousComponent -> createRdv -> data", data)
+                    this.globalItem.dismissLoading();
+                    this.backToList();
+                });
+            }
+            else {
+                this.globalItem.presentToast("Veuillez remplir tous les champs");
+                this.globalItem.dismissLoading();
+            }
+        });
+    }
+    backToList() {
+        // this.navCtrl.navigateRoot("/praticien/proposition-rdv");
+        this.dismiss();
+    }
+    cancel() {
+        return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
+            // console.log(" cancel ");
+            this.backToList();
+        });
+    }
+    dismiss() {
+        // using the injected ModalController this page
+        // can "dismiss" itself and optionally pass back data
+        this.modalCtrl.dismiss({
+            dismissed: true,
+        });
+    }
+};
+NewVaccinationComponent.ctorParameters = () => [
+    { type: src_app_services_praticien_service__WEBPACK_IMPORTED_MODULE_5__["PraticienService"] },
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["NavController"] },
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["NavParams"] },
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["ModalController"] },
+    { type: src_app_pages_global_interaction__WEBPACK_IMPORTED_MODULE_4__["GlobalInteraction"] }
+];
+NewVaccinationComponent.propDecorators = {
+    test: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"] }],
+    patients: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"] }]
+};
+NewVaccinationComponent = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
+        selector: 'app-new-vaccination',
+        template: Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"])(__webpack_require__(/*! raw-loader!./new-vaccination.component.html */ "./node_modules/raw-loader/dist/cjs.js!./src/app/pages/praticien/vaccination/new-vaccination/new-vaccination.component.html")).default,
+        styles: [Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"])(__webpack_require__(/*! ./new-vaccination.component.scss */ "./src/app/pages/praticien/vaccination/new-vaccination/new-vaccination.component.scss")).default]
+    })
+], NewVaccinationComponent);
 
 
 
@@ -714,12 +879,15 @@ let OrganizeComponent = class OrganizeComponent {
             const transform_date = new Date(this.data.date);
             this.dateT = (transform_date.getFullYear() + "-" + transform_date.getMonth() + "-" + transform_date.getDate()).toString();
             this.hoursT = (new Date(this.dateT).getHours() + "" + new Date(this.dateT).getMinutes()).toString();
-            console.log("LL: OrganizeComponent -> ngOnInit -> hoursT", this.hoursT);
+            // console.log("LL: OrganizeComponent -> ngOnInit -> hoursT", this.hoursT)
             this.organizeForm = new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormGroup"]({
                 dateRdv: new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControl"]("", [_angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required]),
                 heureRdv: new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControl"]("", [_angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required]),
             });
-            console.log("NewRdvComponent -> patients -> test", this.navParms.get("patients"));
+            // console.log(
+            //   "NewRdvComponent -> patients -> test",
+            //   this.navParms.get("patients")
+            // );
         });
     }
     organise() {
@@ -730,7 +898,7 @@ let OrganizeComponent = class OrganizeComponent {
             date: this.dateT,
             heure: this.hoursT,
         };
-        console.log(dataToSend, this.organizeForm.value.dateRdv, this.organizeForm.value.heureRdv);
+        // console.log(dataToSend, this.organizeForm.value.dateRdv, this.organizeForm.value.heureRdv);
         this.praticienSrvc.organiseVaccin(dataToSend).subscribe(() => {
             this.globalItem.dismissLoading();
             this.modalCtrl.dismiss();
@@ -804,11 +972,14 @@ let RealizeComponent = class RealizeComponent {
     ngOnInit() {
         return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
             this.data = this.navParms.get("data");
-            console.log("LL>>>: RealizeComponent -> ngOnInit -> data", this.data);
+            // console.log("LL>>>: RealizeComponent -> ngOnInit -> data", this.data)
             this.realizeForm = new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormGroup"]({
                 lot: new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControl"]("", [_angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required]),
             });
-            console.log("NewRdvComponent -> patients -> test", this.navParms.get("patients"));
+            // console.log(
+            //   "NewRdvComponent -> patients -> test",
+            //   this.navParms.get("patients")
+            // );
         });
     }
     realize() {
@@ -818,7 +989,7 @@ let RealizeComponent = class RealizeComponent {
             carnet: this.data.carnet,
             lot: this.realizeForm.value.lot,
         };
-        console.log("LL: RealizeComponent -> realize -> dataToSend", dataToSend);
+        // console.log("LL: RealizeComponent -> realize -> dataToSend", dataToSend)
         this.praticienSrvc.realizeVaccin(dataToSend).subscribe(() => {
             this.globalItem.dismissLoading();
             this.modalCtrl.dismiss();
@@ -902,6 +1073,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _vaccination_page__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./vaccination.page */ "./src/app/pages/praticien/vaccination/vaccination.page.ts");
 /* harmony import */ var _details_details_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./details/details.component */ "./src/app/pages/praticien/vaccination/details/details.component.ts");
 /* harmony import */ var _organize_organize_component__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./organize/organize.component */ "./src/app/pages/praticien/vaccination/organize/organize.component.ts");
+/* harmony import */ var _new_vaccination_new_vaccination_component__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./new-vaccination/new-vaccination.component */ "./src/app/pages/praticien/vaccination/new-vaccination/new-vaccination.component.ts");
+
 
 
 
@@ -922,7 +1095,7 @@ VaccinationPageModule = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])
             _vaccination_routing_module__WEBPACK_IMPORTED_MODULE_5__["VaccinationPageRoutingModule"],
             _angular_forms__WEBPACK_IMPORTED_MODULE_3__["ReactiveFormsModule"]
         ],
-        declarations: [_vaccination_page__WEBPACK_IMPORTED_MODULE_6__["VaccinationPage"], _details_details_component__WEBPACK_IMPORTED_MODULE_7__["DetailsComponent"], _organize_organize_component__WEBPACK_IMPORTED_MODULE_8__["OrganizeComponent"]],
+        declarations: [_vaccination_page__WEBPACK_IMPORTED_MODULE_6__["VaccinationPage"], _details_details_component__WEBPACK_IMPORTED_MODULE_7__["DetailsComponent"], _organize_organize_component__WEBPACK_IMPORTED_MODULE_8__["OrganizeComponent"], _new_vaccination_new_vaccination_component__WEBPACK_IMPORTED_MODULE_9__["NewVaccinationComponent"]],
     })
 ], VaccinationPageModule);
 
@@ -962,6 +1135,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _global_interaction__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../global.interaction */ "./src/app/pages/global.interaction.ts");
 /* harmony import */ var _organize_organize_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./organize/organize.component */ "./src/app/pages/praticien/vaccination/organize/organize.component.ts");
 /* harmony import */ var _realize_realize_component__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./realize/realize.component */ "./src/app/pages/praticien/vaccination/realize/realize.component.ts");
+/* harmony import */ var _new_vaccination_new_vaccination_component__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./new-vaccination/new-vaccination.component */ "./src/app/pages/praticien/vaccination/new-vaccination/new-vaccination.component.ts");
+
 
 
 
@@ -1008,7 +1183,7 @@ let VaccinationPage = class VaccinationPage {
         this.ACTION_NULL = "";
     }
     alert() {
-        console.log("ok ++++ ");
+        // console.log("ok ++++ ");
     }
     ngOnInit() {
         this.ios = this.config.get("mode") === "ios";
@@ -1017,17 +1192,17 @@ let VaccinationPage = class VaccinationPage {
     getListVaccinations() {
         // Close any open sliding items when the  updates
         if (this.List) {
-            console.log("ConsultationPage -> update -> this.List", this.List);
+            // console.log("ConsultationPage -> update -> this.List", this.List);
             this.List.closeSlidingItems();
         }
         //TODO: get timeline
         this.praticienSrvc.getListsVaccinations().subscribe((data) => {
-            console.log("LL: VaccinationPage -> getListVaccinations -> data", data);
+            // console.log("LL: VaccinationPage -> getListVaccinations -> data", data)
             this.vaccinations = data;
             // this.vaccinationsShow = this.praticienSrvc.regroupDataByDate(data);
             this.vaccinationsShow = this.praticienSrvc.regroupDataByPatient(data);
             this.filteredVaccinations = this.asignOperation([...this.vaccinationsShow]);
-            console.log("LL: VaccinationPage -> getListVaccinations -> this.filteredVaccinations", this.filteredVaccinations);
+            // console.log("LL: VaccinationPage -> getListVaccinations -> this.filteredVaccinations", this.filteredVaccinations)
         });
     }
     openSocial(network, fab) {
@@ -1080,6 +1255,22 @@ let VaccinationPage = class VaccinationPage {
         return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
             const newRdvModal = yield this.modalCtrl.create({
                 component: _realize_realize_component__WEBPACK_IMPORTED_MODULE_8__["RealizeComponent"],
+                cssClass: "test-class",
+                swipeToClose: true,
+                componentProps: {
+                    data: _data
+                },
+            });
+            newRdvModal.onDidDismiss().then(() => {
+                this.getListVaccinations();
+            });
+            return yield newRdvModal.present();
+        });
+    }
+    openCreateVaccModal(_data) {
+        return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
+            const newRdvModal = yield this.modalCtrl.create({
+                component: _new_vaccination_new_vaccination_component__WEBPACK_IMPORTED_MODULE_9__["NewVaccinationComponent"],
                 cssClass: "test-class",
                 swipeToClose: true,
                 componentProps: {
@@ -1163,7 +1354,7 @@ let VaccinationPage = class VaccinationPage {
             else if (data.statusVaccin == 2) {
                 Object.assign(data, { _status: this.REJECTED, _action: this.ACTION_NULL });
             }
-            console.warn(">>>>>>>>>>>>>>>>>>>>>LL: VaccinationPage -> checkOperation -> data", data);
+            // console.warn(">>>>>>>>>>>>>>>>>>>>>LL: VaccinationPage -> checkOperation -> data", data)
             return Object.assign(data, { operation: this.OPERATION_INT_VACCINATION });
         }
         else {
@@ -1177,7 +1368,7 @@ let VaccinationPage = class VaccinationPage {
                 Object.assign(data, { _status: this.REJECTED, _action: this.ACTION_NULL });
             }
             const result = Object.assign(data, { operation: this.OPERATION_VACCIN_CALENDAR });
-            console.warn("LL: VaccinationPage -> checkOperation -> data", result);
+            // console.warn("LL: VaccinationPage -> checkOperation -> data", result)
             return result;
         }
     }
@@ -1191,56 +1382,56 @@ let VaccinationPage = class VaccinationPage {
     }
     watchVaccin(_data) {
         this.praticienSrvc.watchVaccin(_data.patient).subscribe((data) => {
-            console.log("LL: watchVaccin -> _data", data);
+            // console.log("LL: watchVaccin -> _data", data);
             this.seeVaccination = data;
             this.openDetailModal(data);
         });
     }
     generateVaccin(_data) {
         this.globalItem.presentLoading();
-        console.log("LL: generateVaccin -> _data", _data);
+        // console.log("LL: generateVaccin -> _data", _data)
         this.praticienSrvc.generateVaccin(_data.id, _data.patient).subscribe((data) => {
-            console.log("LL: generateVaccin -> data", data);
+            // console.log("LL: generateVaccin -> data", data)
             this.getListVaccinations();
             this.globalItem.dismissLoading();
         });
     }
     rejectVaccin(_data) {
         this.globalItem.presentLoading();
-        console.log("LL: generateVaccin -> _data", _data.id);
+        // console.log("LL: generateVaccin -> _data", _data.id)
         this.praticienSrvc.rejectVaccin(_data.id).subscribe((data) => {
-            console.log("LL: generateVaccin -> data", data);
+            // console.log("LL: generateVaccin -> data", data);
             this.getListVaccinations();
             this.globalItem.dismissLoading();
         });
     }
     watchVaccinWithNotebook(_data) {
-        console.log("LL: watchVaccinWithNotebook -> _data", _data);
+        // console.log("LL: watchVaccinWithNotebook -> _data", _data)
         this.praticienSrvc.watchVaccinWithNotebook(_data.carnet).subscribe((data) => {
-            console.log("LL: watchVaccin -> _data", data);
+            // console.log("LL: watchVaccin -> _data", data);
             this.seeVaccination = data;
             this.openDetailModal(data, true);
         });
     }
     rejectVaccinWithNotebook(_data) {
-        console.log("LL: rejectVaccinWithNotebook -> _data", _data.id);
+        // console.log("LL: rejectVaccinWithNotebook -> _data", _data.id)
         this.globalItem.presentLoading();
         this.praticienSrvc.rejectVaccinithNotebook(_data.id).subscribe((data) => {
-            console.log("LL: rejectVaccinWithNotebook -> data", data);
+            // console.log("LL: rejectVaccinWithNotebook -> data", data)
             this.getListVaccinations();
             this.globalItem.dismissLoading();
         });
     }
     organizeVaccinWithNotebook(_data) {
         return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
-            console.log("LL: organizeVaccinWithNotebook -> _data", _data);
+            // console.log("LL: organizeVaccinWithNotebook -> _data", _data)
             yield this.praticienSrvc.watchVaccinWithNotebook(_data.carnet).subscribe((data) => Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
                 const dataToSend = {
                     date: data[0].datePriseVaccin.date,
                     idCarnet: _data.carnet,
                     id: _data.id,
                 };
-                console.log("LL: organizeVaccinWithNotebook -> dataToSend", dataToSend);
+                // console.log("LL: organizeVaccinWithNotebook -> dataToSend", dataToSend)
                 yield this.openOrganizeModal(dataToSend);
             }));
         });

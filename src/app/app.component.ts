@@ -48,7 +48,8 @@ export class AppComponent {
             // this.router.navigate(["/praticien/rendez-vous"]);
           }
         } else {
-          this.router.navigate(["login"]);
+          // this.router.navigate(["login"]);
+          this.router.navigate(["home"]);
           // this.router.navigate(["register/patient"]);
           // this.router.navigate(["register/praticien"]);
           // this.router.navigate(["/patient/profile"]);

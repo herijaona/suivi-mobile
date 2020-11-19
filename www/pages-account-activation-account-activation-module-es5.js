@@ -239,10 +239,9 @@
           value: function activateAccount() {
             var _this = this;
 
-            console.log("code: ", this.code);
+            // console.log("code: ", this.code);
             this.authSrvc.activateAccount(this.code).subscribe(function (response) {
-              console.log("AccountActivationPage -> activateAccount -> response", response);
-
+              // console.log("AccountActivationPage -> activateAccount -> response", response)
               if (response) {
                 _this.navCtrl.navigateRoot('/login');
               }

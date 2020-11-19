@@ -69,7 +69,7 @@ export class GenerateComponent implements OnInit {
   }
 
   async cancel() {
-    console.log(' cancel ');
+    // console.log(' cancel ');
     this.backToList();
   }
 
@@ -90,13 +90,20 @@ export class GenerateComponent implements OnInit {
   }
 
   getCenterByCity(_idCity) {
-    this.globalDataSrvc.getCenterHealthByCity(_idCity).subscribe((data) => { console.log("LL: GenerateComponent -> getCenterByCity -> this.center_health", data); this.center_health = data });
+    this.globalDataSrvc.getCenterHealthByCity(_idCity).subscribe((data) => {
+      // console.log("LL: GenerateComponent -> getCenterByCity -> this.center_health", data);
+      this.center_health = data
+    });
   }
   getPraticienByCenter(_idCenter) {
-    this.globalDataSrvc.getPraticienByCenter(_idCenter).subscribe((data) => { console.log("LL: GenerateComponent -> getCenterByCity -> this.center_health", data); this.praticiens = data });
+    this.globalDataSrvc.getPraticienByCenter(_idCenter).subscribe((data) => {
+      // console.log("LL: GenerateComponent -> getCenterByCity -> this.center_health", data); this.praticiens = data
+    });
   }
   postVaccinGeneration(_idPractitioner) {
-    this.patientServc.postVaccinGeneration(_idPractitioner).subscribe((data) => console.log("LL: GenerateComponent -> postVaccinGeneration -> data", data));
+    this.patientServc.postVaccinGeneration(_idPractitioner).subscribe((data) => {
+      // console.log("LL: GenerateComponent -> postVaccinGeneration -> data", data)
+    });
 
   }
 }

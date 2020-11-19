@@ -77,7 +77,7 @@ export class ProfilePage implements OnInit {
       this.globalInteract.presentLoading();
 
       Object.keys(this.praticienFormGroup.value).forEach((key) => {
-        console.log("valid", this.praticienFormGroup.value[key]);
+        // console.log("valid", this.praticienFormGroup.value[key]);
         const data_updated = {
           address: this.praticienFormGroup.value["address"],
           cityBorn: this.praticienFormGroup.value["cityBorn"],
@@ -92,10 +92,10 @@ export class ProfilePage implements OnInit {
         }
       });
     } else {
-      console.log("NOT valid", this.praticienFormGroup);
+      // console.log("NOT valid", this.praticienFormGroup);
 
       Object.keys(this.praticienFormGroup.value).forEach((key) => {
-        console.log("NOT valid", this.praticienFormGroup.value[key]);
+        // console.log("NOT valid", this.praticienFormGroup.value[key]);
       });
     }
   }
@@ -112,7 +112,7 @@ export class ProfilePage implements OnInit {
     this.praticienSrvc.getProfile().subscribe(async (response: any) => {
       const data = response.profile;
       this.centre_name = response.profile[1].centreName;
-      console.log(data);
+      // console.log(data);
       this.profile = data[0];
 
       this.profile.nameState = data[0].countryFonction;
@@ -141,13 +141,13 @@ export class ProfilePage implements OnInit {
   }
 
   getCityByCountry(id) {
-    console.log("LL: ProfilePage -> getCityByCountry -> id", id)
-    console.log("LL: ProfilePage -> getCityByCountry -> id", this.profile)
+    // console.log("LL: ProfilePage -> getCityByCountry -> id", id)
+    // console.log("LL: ProfilePage -> getCityByCountry -> id", this.profile)
     this.globalSrvc.getCity(id).subscribe((data) => this.cities = data);
   }
   getCityByCountryBorn(id) {
-    console.log("LL: ProfilePage -> getCityByCountryBorn -> id", id)
-    console.log("LL: ProfilePage -> getCityByCountryBorn -> id", this.profile)
+    // console.log("LL: ProfilePage -> getCityByCountryBorn -> id", id)
+    // console.log("LL: ProfilePage -> getCityByCountryBorn -> id", this.profile)
     this.globalSrvc.getCity(id).subscribe((data) => this.citiesBorn = data);
   }
 }

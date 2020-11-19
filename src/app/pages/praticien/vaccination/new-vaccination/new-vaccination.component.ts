@@ -41,20 +41,20 @@ export class NewVaccinationComponent implements OnInit {
     this.getPatientAssoc();
     this.getVaccins();
     this.patients.forEach((element) => {
-      console.log("NewRdvComponent -> patients", element.firstName);
+      // console.log("NewRdvComponent -> patients", element.firstName);
     });
   }
 
   getPatientAssoc() {
     this.praticienSrvc.getAssocPatient().subscribe((data: any) => {
-      console.log("LL: NewVaccinationComponent -> getPatientAssoc -> data", data)
+      // console.log("LL: NewVaccinationComponent -> getPatientAssoc -> data", data)
       this.patients = data;
     });
   }
 
   getVaccins() {
     this.praticienSrvc.getAllVaccin().subscribe((data) => {
-      console.log("LL: NewVaccinationComponent -> getVaccins -> data", data)
+      // console.log("LL: NewVaccinationComponent -> getVaccins -> data", data)
       this.vaccins = data;
     });
   }
@@ -77,14 +77,14 @@ export class NewVaccinationComponent implements OnInit {
       date: date_to_transform,
       heure: hour_to_transform,
     };
-    console.log("LL: NewRendezVousComponent -> createRdv -> dataToSend", dataToSend)
+    // console.log("LL: NewRendezVousComponent -> createRdv -> dataToSend", dataToSend)
 
 
     if (this.propositionForm.valid) {
       this.globalItem.presentToast("Vaccin créer");
 
       this.praticienSrvc.createRdv(dataToSend).subscribe((data) => {
-        console.log("LL: NewRendezVousComponent -> createRdv -> data", data)
+        // console.log("LL: NewRendezVousComponent -> createRdv -> data", data)
         this.globalItem.dismissLoading();
 
         this.backToList();
@@ -102,7 +102,7 @@ export class NewVaccinationComponent implements OnInit {
   }
 
   async cancel() {
-    console.log(" cancel ");
+    // console.log(" cancel ");
     this.backToList();
   }
 

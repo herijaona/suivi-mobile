@@ -53,6 +53,7 @@ export class LoginPage implements OnInit {
         this.authService
           .login(this.credentialsForm.value, this.loadingCtrl)
           .subscribe((data) => {
+            console.log("LL: LoginPage -> onSubmit -> data", data)
             this.loadingCtrl.dismiss();
           });
       } else {
@@ -73,7 +74,7 @@ export class LoginPage implements OnInit {
       cssClass: "my-loading-class",
       spinner: "bubbles",
       translucent: true,
-      duration: 100000,
+      duration: 10000,
     });
 
     await loading.present();

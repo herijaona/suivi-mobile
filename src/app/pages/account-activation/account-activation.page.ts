@@ -9,15 +9,16 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class AccountActivationPage implements OnInit {
   public code;
+  // public _id;
   constructor(private authSrvc: AuthService, private navCtrl: NavController) { }
 
   ngOnInit() {
   }
 
   activateAccount() {
-    console.log("code: ", this.code);
+    // console.log("code: ", this.code);
     this.authSrvc.activateAccount(this.code).subscribe((response) => {
-      console.log("AccountActivationPage -> activateAccount -> response", response)
+      // console.log("AccountActivationPage -> activateAccount -> response", response)
       if (response) {
         this.navCtrl.navigateRoot('/login');
       }

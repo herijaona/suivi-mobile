@@ -24,7 +24,7 @@ export class NewRdvComponent implements OnInit {
     private navParms: NavParams,
     private modalCtrl: ModalController,
     private storage: Storage
-  ) {}
+  ) { }
 
   async ngOnInit() {
     this.propositionForm = new FormGroup({
@@ -33,13 +33,13 @@ export class NewRdvComponent implements OnInit {
       heureRdv: new FormControl("", [Validators.required]),
       description: new FormControl("", [Validators.required]),
     });
-    console.log(
-      "NewRdvComponent -> patients -> test",
-      this.navParms.get("patients")
-    );
+    // console.log(
+    //   "NewRdvComponent -> patients -> test",
+    //   this.navParms.get("patients")
+    // );
     this.patients = this.navParms.get("patients");
     this.patients.forEach((element) => {
-      console.log("NewRdvComponent -> patients", element.firstName);
+      // console.log("NewRdvComponent -> patients", element.firstName);
     });
   }
 
@@ -60,20 +60,20 @@ export class NewRdvComponent implements OnInit {
       id: 0,
     };
 
-    console.log(
-      this.propositionForm.value.patient,
-      this.propositionForm.value.dateRdv,
-      this.propositionForm.value.description,
-      this.propositionForm.value.heureRdv,
-      prop.id
-    );
+    // console.log(
+    //   this.propositionForm.value.patient,
+    //   this.propositionForm.value.dateRdv,
+    //   this.propositionForm.value.description,
+    //   this.propositionForm.value.heureRdv,
+    //   prop.id
+    // );
     if (this.propositionForm.valid) {
-      console.log(" proposition envoyé ");
+      // console.log(" proposition envoyé ");
 
       this.praticienSrvc.proposeRdv(prop);
       this.backToList();
     } else {
-      console.log(" not valid ");
+      // console.log(" not valid ");
     }
   }
 
@@ -83,7 +83,7 @@ export class NewRdvComponent implements OnInit {
   }
 
   async cancel() {
-    console.log(" cancel ");
+    // console.log(" cancel ");
     this.backToList();
   }
 

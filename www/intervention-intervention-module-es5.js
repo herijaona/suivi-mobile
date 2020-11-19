@@ -279,7 +279,7 @@
 
             // Close any open sliding items when the  updates
             if (this.List) {
-              console.log("ConsultationPage -> update -> this.List", this.List);
+              // console.log("ConsultationPage -> update -> this.List", this.List);
               this.List.closeSlidingItems();
             } //TODO: get timeline
 
@@ -329,11 +329,10 @@
             this.interventionFiltered = temp;
 
             _toConsumableArray(this.interventionShow).forEach(function (item) {
-              console.log("ConsultationPage -> filterItems -> item", item.groups);
+              // console.log("ConsultationPage -> filterItems -> item", item.groups);
               var data = [];
               item.groups.forEach(function (res) {
-                console.log("ConsultationPage  *** -> filterItems -> res", res);
-
+                // console.log("ConsultationPage  *** -> filterItems -> res", res);
                 if (res.status.includes("Accepted")) {
                   data.push(res);
                 }
@@ -347,8 +346,7 @@
           }
         }, {
           key: "alert",
-          value: function alert() {
-            console.log("ok ++++ ");
+          value: function alert() {// console.log("ok ++++ ");
           }
         }, {
           key: "alertAcceptIntervention",
@@ -370,14 +368,12 @@
                           text: "Cancel",
                           role: "cancel",
                           cssClass: "secondary",
-                          handler: function handler() {
-                            console.log("Confirm Cancel: blah");
+                          handler: function handler() {// console.log("Confirm Cancel: blah");
                           }
                         }, {
                           text: "OK",
                           handler: function handler() {
-                            console.log("data accepted " + id);
-
+                            // console.log("data accepted " + id);
                             _this2.acceptIntervention(id);
                           }
                         }]
@@ -416,14 +412,12 @@
                           text: "Cancel",
                           role: "cancel",
                           cssClass: "secondary",
-                          handler: function handler() {
-                            console.log("Confirm Cancel: blah");
+                          handler: function handler() {// console.log("Confirm Cancel: blah");
                           }
                         }, {
                           text: "OK",
                           handler: function handler() {
-                            console.log("data refused " + id);
-
+                            // console.log("data refused " + id);
                             _this3.removeIntervention(id);
                           }
                         }]
@@ -460,8 +454,8 @@
             this.intervention.find(function (element) {
               return element.id == id;
             }).status = "Refused";
-            var index = this.intervention.findIndex(el);
-            console.log(el);
+            var index = this.intervention.findIndex(el); // console.log(el);
+
             this.intervention.slice(index);
           }
         }]);

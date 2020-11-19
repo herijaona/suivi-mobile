@@ -83,16 +83,16 @@ export class NewRdvComponent implements OnInit {
     this.globalDataSrvc
       .getCountryByPratictitionerFunction(_idFunction)
       .subscribe((data: []) => {
-        console.log(
-          'LL: NewRdvComponent -> getCountryByFunction -> data',
-          data
-        );
+        // console.log(
+        //   'LL: NewRdvComponent -> getCountryByFunction -> data',
+        //   data
+        // );
         if (data.length == 0) {
           const VIDE = "Il n'y a pas de praticien présent dans ce pays";
-          console.warn(
-            'LL: NewRdvComponent -> getCountryByFunction -> VIDE',
-            VIDE
-          );
+          // console.warn(
+          //   'LL: NewRdvComponent -> getCountryByFunction -> VIDE',
+          //   VIDE
+          // );
           this.globalInt.presentToast(VIDE);
         }
         this.countries = data;
@@ -104,17 +104,17 @@ export class NewRdvComponent implements OnInit {
     this.globalDataSrvc
       .getCityByPractitionerFunctionAndCountry(_idFunction, _idCountry)
       .subscribe((data: []) => {
-        console.log(
-          'LL: NewRdvComponent -> getCityByFunctionAndCountry -> data',
-          data
-        );
+        // console.log(
+        //   'LL: NewRdvComponent -> getCityByFunctionAndCountry -> data',
+        //   data
+        // );
 
         if (data.length == 0) {
           const VIDE = "Il n'y a pas de praticien présent dans ce pays";
-          console.warn(
-            'LL: NewRdvComponent -> getCityByFunctionAndCountry -> VIDE',
-            VIDE
-          );
+          // console.warn(
+          //   'LL: NewRdvComponent -> getCityByFunctionAndCountry -> VIDE',
+          //   VIDE
+          // );
           this.globalInt.presentToast(VIDE);
         }
         this.cities = data;
@@ -126,17 +126,17 @@ export class NewRdvComponent implements OnInit {
     this.globalDataSrvc
       .getPractitionerByFunctionCountryAndCity(_idFunction, _idCountry, _idCity)
       .subscribe((data: []) => {
-        console.log(
-          'LL: NewRdvComponent -> getPractitionerByFunctionCountryAndCity -> data',
-          data
-        );
+        // console.log(
+        //   'LL: NewRdvComponent -> getPractitionerByFunctionCountryAndCity -> data',
+        //   data
+        // );
 
         if (data.length == 0) {
           const VIDE = "Il n'y a pas de praticien présent dans ce pays";
-          console.warn(
-            'LL: NewRdvComponent -> getPractitionerByFunctionCountryAndCity -> VIDE',
-            VIDE
-          );
+          // console.warn(
+          //   'LL: NewRdvComponent -> getPractitionerByFunctionCountryAndCity -> VIDE',
+          //   VIDE
+          // );
           this.globalInt.presentToast(VIDE);
         }
         this.praticiens = data;
@@ -148,7 +148,7 @@ export class NewRdvComponent implements OnInit {
     this.patientServc
       .chekIfPractitionerIsAssociated(_idPraticien)
       .subscribe((isOK: { status }) => {
-        console.log("LL: NewRdvComponent -> chekcPractitionerAssocOrNot -> isOK", isOK)
+        // console.log("LL: NewRdvComponent -> chekcPractitionerAssocOrNot -> isOK", isOK)
         if (isOK.status === OK) {
           this.showCheckBoxAssoc = true;
         } else {
@@ -185,13 +185,13 @@ export class NewRdvComponent implements OnInit {
           objet: this.propositionForm.value['description'],
         };
       }
-      console.error("###################=>  LL: NewRdvComponent -> propose -> data_to_send", data_to_send)
+      // console.error("###################=>  LL: NewRdvComponent -> propose -> data_to_send", data_to_send)
       this.patientServc.proposeRdv(data_to_send).subscribe((dataV) => {
-        console.log("###################=> LL: NewRdvComponent -> propose -> data", dataV)
+        // console.log("###################=> LL: NewRdvComponent -> propose -> data", dataV)
         this.backToList();
       })
     } else {
-      console.log(' not valid ');
+      // console.log(' not valid ');
       this.globalInt.presentToast('completé les champs !!');
     }
   }
@@ -202,7 +202,7 @@ export class NewRdvComponent implements OnInit {
   }
 
   async cancel() {
-    console.log(' cancel ');
+    // console.log(' cancel ');
     this.backToList();
   }
 

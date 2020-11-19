@@ -16282,7 +16282,7 @@ let DashboardPage = class DashboardPage {
     constructor() { }
     ngOnInit() {
         setTimeout(() => {
-            console.log("DashboardPage -> barChart", this.barCharts);
+            // console.log("DashboardPage -> barChart", this.barCharts);
             this.createBarChart();
         }, 1000);
     }

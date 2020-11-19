@@ -77,10 +77,13 @@ let NewRdvComponent = class NewRdvComponent {
                 heureRdv: new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControl"]("", [_angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required]),
                 description: new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControl"]("", [_angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required]),
             });
-            console.log("NewRdvComponent -> patients -> test", this.navParms.get("patients"));
+            // console.log(
+            //   "NewRdvComponent -> patients -> test",
+            //   this.navParms.get("patients")
+            // );
             this.patients = this.navParms.get("patients");
             this.patients.forEach((element) => {
-                console.log("NewRdvComponent -> patients", element.firstName);
+                // console.log("NewRdvComponent -> patients", element.firstName);
             });
         });
     }
@@ -98,14 +101,20 @@ let NewRdvComponent = class NewRdvComponent {
                 // id: await this.praticienSrvc.getUserIDByStorage(),
                 id: 0,
             };
-            console.log(this.propositionForm.value.patient, this.propositionForm.value.dateRdv, this.propositionForm.value.description, this.propositionForm.value.heureRdv, prop.id);
+            // console.log(
+            //   this.propositionForm.value.patient,
+            //   this.propositionForm.value.dateRdv,
+            //   this.propositionForm.value.description,
+            //   this.propositionForm.value.heureRdv,
+            //   prop.id
+            // );
             if (this.propositionForm.valid) {
-                console.log(" proposition envoyé ");
+                // console.log(" proposition envoyé ");
                 this.praticienSrvc.proposeRdv(prop);
                 this.backToList();
             }
             else {
-                console.log(" not valid ");
+                // console.log(" not valid ");
             }
         });
     }
@@ -115,7 +124,7 @@ let NewRdvComponent = class NewRdvComponent {
     }
     cancel() {
         return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
-            console.log(" cancel ");
+            // console.log(" cancel ");
             this.backToList();
         });
     }
@@ -297,15 +306,15 @@ let PropositionRdvPage = class PropositionRdvPage {
         this.praticienSrvc
             .getAllProposeRdv(this.storage.get("_id"))
             .subscribe((data) => {
-            console.log("PropositionRdvPage -> initializeItems -> data", data);
+            // console.log("PropositionRdvPage -> initializeItems -> data", data);
             this.items = [...Array.from(this.regroupData(data))];
             this.filterdItems = [...this.items];
         });
     }
     filterItems(ev) {
         const query = ev.target.value.toLowerCase();
-        console.log("PropositionRdvPage -> getItems -> query", query);
-        console.log("PropositionRdvPage -> filterItems -> this.items", this.items);
+        // console.log("PropositionRdvPage -> getItems -> query", query);
+        // console.log("PropositionRdvPage -> filterItems -> this.items", this.items);
         requestAnimationFrame(() => {
             if (!query || query === "") {
                 this.filterdItems = [...this.items];
@@ -373,7 +382,7 @@ let PropositionRdvPage = class PropositionRdvPage {
     getPatients() {
         return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
             this.patienSrvc.getPatients().subscribe((data) => {
-                console.log("PropositionRdvPage -> getPatients -> data", data);
+                // console.log("PropositionRdvPage -> getPatients -> data", data);
                 this.patients = data;
             });
         });
@@ -398,13 +407,13 @@ let PropositionRdvPage = class PropositionRdvPage {
                         role: "cancel",
                         cssClass: "secondary",
                         handler: () => {
-                            console.log("Confirm Cancel: blah");
+                            // console.log("Confirm Cancel: blah");
                         },
                     },
                     {
                         text: "Okay",
                         handler: () => {
-                            console.log("data deleted id" + id);
+                            // console.log("data deleted id" + id);
                             this.deleteProprdv(id);
                         },
                     },
@@ -484,7 +493,7 @@ let PatientService = class PatientService {
     }
     getTracksRdv(excludeTracks) {
         return this.http.get(src_constant__WEBPACK_IMPORTED_MODULE_2__["CONSTANT"].MOCK_DATA_JSON).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["map"])((data) => {
-            console.log("PatientService -> getTracksRdv -> data", excludeTracks);
+            // console.log("PatientService -> getTracksRdv -> data", excludeTracks);
             return data;
         }));
     }

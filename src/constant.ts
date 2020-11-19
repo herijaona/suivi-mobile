@@ -43,7 +43,7 @@ export class CONSTANT {
 
       json[nkey] = nvalue;
 
-      console.log("key:" + res + " value: " + data[`${res}`] + json);
+      // console.log("key:" + res + " value: " + data[`${res}`] + json);
       Object.assign(res, json);
     });
     return res;

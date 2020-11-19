@@ -48,7 +48,7 @@ export class VaccinationPage implements OnInit {
     private praticienSrv: PraticienService,
     private globalSrvc: GlobalDataService
   ) {
-    console.log("VaccinationPage -> constructor");
+    // console.log("VaccinationPage -> constructor");
   }
 
   checkStatus(status, etat) {
@@ -64,7 +64,7 @@ export class VaccinationPage implements OnInit {
   }
 
   ngOnInit() {
-    console.log("VaccinationPage -> ngOnInit -> ngOnInit");
+    // console.log("VaccinationPage -> ngOnInit -> ngOnInit");
     this.initializeItems();
 
   }
@@ -91,16 +91,16 @@ export class VaccinationPage implements OnInit {
 
     this.getAllVaccin();
     this.praticienSrv.getAllPraticien().subscribe(data => {
-      console.log("VaccinationPage -> initializeItems -> data", data)
+      // console.log("VaccinationPage -> initializeItems -> data", data)
       this.praticiens = data;
     });
   }
 
   getAllVaccin() {
     this.patientSrv.getVaccinByPatient().subscribe((data) => {
-      console.log("VaccinationPage -> getAllVaccin -> data", data);
+      // console.log("VaccinationPage -> getAllVaccin -> data", data);
       this.vaccins = data;
-      console.log(" ");
+      // console.log(" ");
       this.vaccinsShow = this.dataTransformer.allData(data, this.STRING_DATE).data;
       this.vaccinsFiltered = this.dataTransformer.allData(data, this.STRING_DATE).dataByDate;
       this.loadingCtrl.dismiss();
@@ -119,7 +119,7 @@ export class VaccinationPage implements OnInit {
   }
 
   async openNewRdvModal(vaccin) {
-    console.warn("VaccinationPage -> openNewRdvModal -> nom_vaccin", vaccin, "/")
+    // console.warn("VaccinationPage -> openNewRdvModal -> nom_vaccin", vaccin, "/")
     const newRdvModal = await this.modalCtrl.create({
       component: InterventionComponent,
       cssClass: "test-class",
@@ -136,7 +136,7 @@ export class VaccinationPage implements OnInit {
   }
 
   async openGenerateVaccModal(vaccin) {
-    console.warn("VaccinationPage -> openNewRdvModal -> nom_vaccin", vaccin, "/")
+    // console.warn("VaccinationPage -> openNewRdvModal -> nom_vaccin", vaccin, "/")
     const newRdvModal = await this.modalCtrl.create({
       component: GenerateComponent,
       cssClass: "test-class",

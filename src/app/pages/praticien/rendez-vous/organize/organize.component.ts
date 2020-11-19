@@ -27,19 +27,19 @@ export class OrganizeComponent implements OnInit {
 
   async ngOnInit() {
     this.data = this.navParms.get("data");
-    console.log("LL: OrganizeComponent -> ngOnInit -> data", this.data)
+    // console.log("LL: OrganizeComponent -> ngOnInit -> data", this.data)
     const transform_date = new Date(this.data.date);
     this.dateT = (transform_date.getFullYear() + "-" + transform_date.getMonth() + "-" + transform_date.getDate()).toString();
     this.hoursT = (new Date(this.dateT).getHours() + ":" + new Date(this.dateT).getMinutes()).toString();
-    console.log("LL: OrganizeComponent -> ngOnInit -> hoursT", this.hoursT)
+    // console.log("LL: OrganizeComponent -> ngOnInit -> hoursT", this.hoursT)
     this.organizeForm = new FormGroup({
       dateRdv: new FormControl("", [Validators.required]),
       heureRdv: new FormControl("", [Validators.required]),
     });
-    console.log(
-      "NewRdvComponent -> patients -> test",
-      this.navParms.get("patients")
-    );
+    // console.log(
+    //   "NewRdvComponent -> patients -> test",
+    //   this.navParms.get("patients")
+    // );
   }
 
   organise() {
@@ -51,10 +51,10 @@ export class OrganizeComponent implements OnInit {
       objet: this.data.objetConsultation,
       typeRdv: this.data.type
     };
-    console.log("LL: OrganizeComponent -> organise -> dataToSend", dataToSend)
-    console.log(dataToSend, this.organizeForm.value.dateRdv, this.organizeForm.value.heureRdv);
+    // console.log("LL: OrganizeComponent -> organise -> dataToSend", dataToSend)
+    // console.log(dataToSend, this.organizeForm.value.dateRdv, this.organizeForm.value.heureRdv);
     this.praticienSrvc.organizeRdv(dataToSend).subscribe((data) => {
-      console.log("LL: OrganizeComponent -> organise -> data", data)
+      // console.log("LL: OrganizeComponent -> organise -> data", data)
       this.globalItem.dismissLoading();
       this.modalCtrl.dismiss();
     });

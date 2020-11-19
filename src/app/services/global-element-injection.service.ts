@@ -5,7 +5,7 @@ import { AlertController } from "@ionic/angular";
   providedIn: "root",
 })
 export class GlobalElementInjectionService {
-  constructor(private alertCtrl: AlertController) {}
+  constructor(private alertCtrl: AlertController) { }
 
   async alertAccept(
     id,
@@ -23,13 +23,13 @@ export class GlobalElementInjectionService {
           role: "cancel",
           cssClass: "secondary",
           handler: () => {
-            console.log("Confirm Cancel: blah");
+            // console.log("Confirm Cancel: blah");
           },
         },
         {
           text: "OK",
           handler: () => {
-            console.log("data accepted " + id);
+            // console.log("data accepted " + id);
             this.accept(id, array, keyStatus, OkStatus);
           },
         },
@@ -54,13 +54,13 @@ export class GlobalElementInjectionService {
           role: "cancel",
           cssClass: "secondary",
           handler: () => {
-            console.log("Confirm Cancel: blah");
+            // console.log("Confirm Cancel: blah");
           },
         },
         {
           text: "OK",
           handler: () => {
-            console.log("data refused " + id);
+            // console.log("data refused " + id);
             this.remove(id, array, keyStatus, RefuseStatus);
           },
         },
@@ -88,7 +88,7 @@ export class GlobalElementInjectionService {
     const el = (test) => test.id == id;
     array.find((element) => element.id == id)[`${keyStatus}`] = RefuseStatus;
     const index = array.findIndex(el);
-    console.log(el);
+    // console.log(el);
     array.slice(index);
   }
 }

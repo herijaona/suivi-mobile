@@ -1,9 +1,9 @@
 (function () {
-  function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
   function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
   function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+  function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
   (window["webpackJsonp"] = window["webpackJsonp"] || []).push([["patient-patient-module"], {
     /***/
@@ -23,225 +23,6 @@
 
 
       __webpack_exports__["default"] = "<ion-header>\n  <ion-toolbar>\n    <span *ngIf=\"patientRegisterForm.valid; then myUserName()\"></span>\n    <ion-title slot=\"end\" color=\"tertiary\" class=\"identifiant\"\n      >{{this._id}}</ion-title\n    >\n    <ion-title slot=\"start\">Patient</ion-title>\n  </ion-toolbar>\n</ion-header>\n<div class=\"topContent\">\n  <ion-card>\n    <ion-card-header>\n      <ion-card-title class=\"ion-text-center\">\n        <img\n          src=\"../../../../assets/images/logo_matipla.png\"\n          srcset=\"\"\n          width=\"150px\"\n          class=\"mb-2\"\n        />\n      </ion-card-title>\n    </ion-card-header>\n  </ion-card>\n</div>\n\n<ion-content>\n  <ion-card>\n    <ion-card-content>\n      <form [formGroup]=\"patientRegisterForm\">\n        <ion-item lines=\"full\">\n          <ion-label position=\"stacked\">Nom</ion-label>\n          <ion-input\n            type=\"text\"\n            required\n            formControlName=\"last_name\"\n          ></ion-input>\n        </ion-item>\n        <div class=\"validation-errors\">\n          <ng-container *ngFor=\"let validation of validation_msg.last_name\">\n            <div\n              class=\"error-message\"\n              *ngIf=\"patientRegisterForm.get('last_name').hasError(validation.type)\"\n            >\n              {{ validation.message }}\n            </div>\n          </ng-container>\n        </div>\n\n        <ion-item lines=\"full\">\n          <ion-label position=\"stacked\">Prénom</ion-label>\n          <ion-input\n            type=\"text\"\n            required\n            formControlName=\"first_name\"\n          ></ion-input>\n        </ion-item>\n        <div class=\"validation-errors\">\n          <ng-container *ngFor=\"let validation of validation_msg.first_name\">\n            <div\n              class=\"error-message\"\n              *ngIf=\"patientRegisterForm.get('first_name').hasError(validation.type)\"\n            >\n              {{ validation.message }}\n            </div>\n          </ng-container>\n        </div>\n        <ion-item lines=\"full\">\n          <ion-label position=\"stacked\">Adult / Enfant</ion-label>\n          <ion-select\n            placeholder=\"Type de patient\"\n            formControlName=\"type_patient\"\n            required\n          >\n            <ion-select-option value=\"1\">Adult</ion-select-option>\n            <ion-select-option value=\"2\">Enfant</ion-select-option>\n          </ion-select>\n        </ion-item>\n\n        <ion-item lines=\"full\">\n          <ion-label position=\"stacked\">Date de naissance</ion-label>\n          <ion-datetime\n            display-format=\"MMM DD, YYYY\"\n            formControlName=\"date_on_born\"\n            required\n          ></ion-datetime>\n        </ion-item>\n        <div class=\"validation-errors\">\n          <ng-container *ngFor=\"let validation of validation_msg.date_on_born\">\n            <div\n              class=\"error-message\"\n              *ngIf=\"patientRegisterForm.get('date_on_born').hasError(validation.type)\"\n            >\n              {{ validation.message }}\n            </div>\n          </ng-container>\n        </div>\n\n        <ion-item lines=\"full\" [disabled]=\"!this.country\">\n          <ion-label position=\"stacked\">Pays</ion-label>\n          <ion-select\n            placeholder=\"Select\"\n            formControlName=\"state\"\n            required\n            (ionChange)=\"getCityByCountry(this.patientRegisterForm.value['state'])\"\n          >\n            <ng-container *ngFor=\"let item of country\">\n              <ion-select-option value=\"{{item.id}}\"\n                >{{item.nameState}}</ion-select-option\n              >\n            </ng-container>\n          </ion-select>\n        </ion-item>\n        <div class=\"validation-errors\">\n          <ng-container *ngFor=\"let validation of validation_msg.state\">\n            <div\n              class=\"error-message\"\n              *ngIf=\"patientRegisterForm.get('state').hasError(validation.type)\"\n            >\n              {{ validation.message }}\n            </div>\n          </ng-container>\n        </div>\n\n        <ion-item lines=\"full\" [disabled]=\"!this.city\">\n          <ion-label position=\"stacked\">Ville</ion-label>\n          <ion-select placeholder=\"Select\" formControlName=\"city\" required>\n            <ng-container *ngFor=\"let item of this.city\">\n              <ion-select-option value=\"{{item.id}}\"\n                >{{item.nameCity}}</ion-select-option\n              >\n            </ng-container>\n          </ion-select>\n        </ion-item>\n        <div class=\"validation-errors\">\n          <ng-container *ngFor=\"let validation of validation_msg.city\">\n            <div\n              class=\"error-message\"\n              *ngIf=\"patientRegisterForm.get('city').hasError(validation.type)\"\n            >\n              {{ validation.message }}\n            </div>\n          </ng-container>\n        </div>\n\n        <ion-item lines=\"full\">\n          <ion-label position=\"stacked\">Télephone</ion-label>\n          <ion-input type=\"text\" required formControlName=\"phone\"></ion-input>\n        </ion-item>\n        <div class=\"validation-errors\">\n          <ng-container *ngFor=\"let validation of validation_msg.phone\">\n            <div\n              class=\"error-message\"\n              *ngIf=\"patientRegisterForm.get('phone').hasError(validation.type)\"\n            >\n              {{ validation.message }}\n            </div>\n          </ng-container>\n        </div>\n\n        <ion-item lines=\"full\">\n          <ion-label position=\"stacked\">Sexe</ion-label>\n          <ion-select placeholder=\"Select\" formControlName=\"sexe\" required>\n            <ion-select-option>Masculin</ion-select-option>\n            <ion-select-option>Feminin</ion-select-option>\n          </ion-select>\n        </ion-item>\n        <div class=\"validation-errors\">\n          <ng-container *ngFor=\"let validation of validation_msg.sexe\">\n            <div\n              class=\"error-message\"\n              *ngIf=\"patientRegisterForm.get('sexe').hasError(validation.type)\"\n            >\n              {{ validation.message }}\n            </div>\n          </ng-container>\n        </div>\n\n        <ion-item lines=\"full\">\n          <ion-label position=\"stacked\">Adresse</ion-label>\n          <ion-textarea required formControlName=\"address\"></ion-textarea>\n        </ion-item>\n        <div class=\"validation-errors\">\n          <ng-container *ngFor=\"let validation of validation_msg.address\">\n            <div\n              class=\"error-message\"\n              *ngIf=\"patientRegisterForm.get('address').hasError(validation.type)\"\n            >\n              {{ validation.message }}\n            </div>\n          </ng-container>\n        </div>\n\n        <ion-item\n          lines=\"full\"\n          *ngIf=\"this.patientRegisterForm.value['type_patient'] == 2\"\n        >\n          <ion-label position=\"stacked\">Nom du père</ion-label>\n          <ion-input type=\"text\" formControlName=\"father_name\"></ion-input>\n        </ion-item>\n        <div\n          class=\"validation-errors\"\n          *ngIf=\"this.patientRegisterForm.value['type_patient'] == 2\"\n        >\n          <ng-container *ngFor=\"let validation of validation_msg.father_name\">\n            <div\n              class=\"error-message\"\n              *ngIf=\"patientRegisterForm.get('father_name').hasError(validation.type)\"\n            >\n              {{ validation.message }}\n            </div>\n          </ng-container>\n        </div>\n\n        <ion-item\n          lines=\"full\"\n          *ngIf=\"this.patientRegisterForm.value['type_patient'] == 2\"\n        >\n          <ion-label position=\"stacked\">Nom de la mère</ion-label>\n          <ion-input type=\"text\" formControlName=\"mother_name\"></ion-input>\n        </ion-item>\n        <div\n          class=\"validation-errors\"\n          *ngIf=\"this.patientRegisterForm.value['type_patient'] == 2\"\n        >\n          <ng-container *ngFor=\"let validation of validation_msg.mother_name\">\n            <div\n              class=\"error-message\"\n              *ngIf=\"patientRegisterForm.get('mother_name').hasError(validation.type)\"\n            >\n              {{ validation.message }}\n            </div>\n          </ng-container>\n        </div>\n\n        <ion-item lines=\"full\">\n          <ion-label position=\"stacked\">Email</ion-label>\n          <ion-input type=\"text\" required formControlName=\"email\"></ion-input>\n        </ion-item>\n        <div class=\"validation-errors\">\n          <ng-container *ngFor=\"let validation of validation_msg.email\">\n            <div\n              class=\"error-message\"\n              *ngIf=\"patientRegisterForm.get('email').hasError(validation.type)\"\n            >\n              {{ validation.message }}\n            </div>\n          </ng-container>\n        </div>\n\n        <ion-item lines=\"full\">\n          <ion-label position=\"stacked\">Password</ion-label>\n          <ion-input\n            type=\"password\"\n            required\n            formControlName=\"password\"\n          ></ion-input>\n        </ion-item>\n        <div class=\"validation-errors\">\n          <ng-container *ngFor=\"let validation of validation_msg.password\">\n            <div\n              class=\"error-message\"\n              *ngIf=\"patientRegisterForm.get('password').hasError(validation.type)\"\n            >\n              {{ validation.message }}\n            </div>\n          </ng-container>\n        </div>\n\n        <ion-row>\n          <ion-col>\n            <ion-button\n              type=\"submit\"\n              color=\"sgreen \"\n              expand=\"block\"\n              (click)=\"register()\"\n              [disabled]=\"!patientRegisterForm.valid\"\n              >Sign Up</ion-button\n            >\n          </ion-col>\n        </ion-row>\n      </form>\n    </ion-card-content>\n  </ion-card>\n</ion-content>\n";
-      /***/
-    },
-
-    /***/
-    "./src/app/pages/global.interaction.ts":
-    /*!*********************************************!*\
-      !*** ./src/app/pages/global.interaction.ts ***!
-      \*********************************************/
-
-    /*! exports provided: GlobalInteraction */
-
-    /***/
-    function srcAppPagesGlobalInteractionTs(module, __webpack_exports__, __webpack_require__) {
-      "use strict";
-
-      __webpack_require__.r(__webpack_exports__);
-      /* harmony export (binding) */
-
-
-      __webpack_require__.d(__webpack_exports__, "GlobalInteraction", function () {
-        return GlobalInteraction;
-      });
-      /* harmony import */
-
-
-      var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
-      /*! tslib */
-      "./node_modules/tslib/tslib.es6.js");
-      /* harmony import */
-
-
-      var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
-      /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
-      /* harmony import */
-
-
-      var _ionic_angular__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
-      /*! @ionic/angular */
-      "./node_modules/@ionic/angular/__ivy_ngcc__/fesm2015/ionic-angular.js");
-
-      var GlobalInteraction = /*#__PURE__*/function () {
-        function GlobalInteraction(toastCtrl, loadingCtrl, alertCtrl) {
-          _classCallCheck(this, GlobalInteraction);
-
-          this.toastCtrl = toastCtrl;
-          this.loadingCtrl = loadingCtrl;
-          this.alertCtrl = alertCtrl;
-          this.isLoading = false;
-        }
-
-        _createClass(GlobalInteraction, [{
-          key: "presentToast",
-          value: function presentToast(msg) {
-            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
-              var toast;
-              return regeneratorRuntime.wrap(function _callee$(_context) {
-                while (1) {
-                  switch (_context.prev = _context.next) {
-                    case 0:
-                      _context.next = 2;
-                      return this.toastCtrl.create({
-                        message: msg,
-                        duration: 1800,
-                        position: "top"
-                      });
-
-                    case 2:
-                      toast = _context.sent;
-                      toast.present();
-
-                    case 4:
-                    case "end":
-                      return _context.stop();
-                  }
-                }
-              }, _callee, this);
-            }));
-          }
-        }, {
-          key: "presentLoading",
-          value: function presentLoading() {
-            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
-              var _this = this;
-
-              return regeneratorRuntime.wrap(function _callee2$(_context2) {
-                while (1) {
-                  switch (_context2.prev = _context2.next) {
-                    case 0:
-                      this.isLoading = true;
-                      _context2.next = 3;
-                      return this.loadingCtrl.create({
-                        cssClass: "my-loading-class",
-                        spinner: "bubbles",
-                        translucent: true,
-                        duration: 100000
-                      }).then(function (a) {
-                        a.present().then(function () {
-                          if (!_this.isLoading) {
-                            a.dismiss();
-                          }
-                        });
-                      });
-
-                    case 3:
-                      return _context2.abrupt("return", _context2.sent);
-
-                    case 4:
-                    case "end":
-                      return _context2.stop();
-                  }
-                }
-              }, _callee2, this);
-            }));
-          }
-        }, {
-          key: "dismissLoading",
-          value: function dismissLoading() {
-            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee3() {
-              return regeneratorRuntime.wrap(function _callee3$(_context3) {
-                while (1) {
-                  switch (_context3.prev = _context3.next) {
-                    case 0:
-                      if (!this.isLoading) {
-                        _context3.next = 5;
-                        break;
-                      }
-
-                      this.isLoading = false;
-                      _context3.next = 4;
-                      return this.loadingCtrl.dismiss();
-
-                    case 4:
-                      return _context3.abrupt("return", _context3.sent);
-
-                    case 5:
-                      return _context3.abrupt("return", null);
-
-                    case 6:
-                    case "end":
-                      return _context3.stop();
-                  }
-                }
-              }, _callee3, this);
-            }));
-          }
-        }, {
-          key: "alertDelete",
-          value: function alertDelete(id, parent) {
-            var msg = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : "Tu veux vraiment supprimé cette element ? ";
-            var callback = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : this.defaultCallback;
-
-            var _header = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : "Suppression";
-
-            var array = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : [];
-            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee4() {
-              var alert;
-              return regeneratorRuntime.wrap(function _callee4$(_context4) {
-                while (1) {
-                  switch (_context4.prev = _context4.next) {
-                    case 0:
-                      _context4.next = 2;
-                      return this.alertCtrl.create({
-                        cssClass: "my-custom-class",
-                        header: _header,
-                        message: msg,
-                        buttons: [{
-                          text: "Cancel",
-                          role: "cancel",
-                          cssClass: "secondary",
-                          handler: function handler() {
-                            console.log("Confirm Cancel: blah");
-                          }
-                        }, {
-                          text: "OK",
-                          handler: function handler() {
-                            console.warn("data deleted " + id); // this.remove(id, array, keyStatus, RefuseStatus);
-
-                            callback(id, parent);
-                          }
-                        }]
-                      });
-
-                    case 2:
-                      alert = _context4.sent;
-                      _context4.next = 5;
-                      return alert.present();
-
-                    case 5:
-                    case "end":
-                      return _context4.stop();
-                  }
-                }
-              }, _callee4, this);
-            }));
-          }
-        }, {
-          key: "defaultCallback",
-          value: function defaultCallback(id, parent) {
-            this.presentToast("this is a default callback ".concat(id, " "));
-          }
-        }]);
-
-        return GlobalInteraction;
-      }();
-
-      GlobalInteraction.ctorParameters = function () {
-        return [{
-          type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["ToastController"]
-        }, {
-          type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["LoadingController"]
-        }, {
-          type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["AlertController"]
-        }];
-      };
-
-      GlobalInteraction = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
-        providedIn: 'root'
-      })], GlobalInteraction);
       /***/
     },
 
@@ -527,11 +308,11 @@
         _createClass(PatientPage, [{
           key: "ngOnInit",
           value: function ngOnInit() {
-            var _this2 = this;
+            var _this = this;
 
             this.createForm();
             this.globalSrvc.getCountry().subscribe(function (data) {
-              return _this2.country = data;
+              return _this.country = data;
             });
           }
         }, {
@@ -556,19 +337,18 @@
         }, {
           key: "register",
           value: function register() {
-            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee5() {
-              var _this3 = this;
+            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
+              var _this2 = this;
 
               var dataRegister;
-              return regeneratorRuntime.wrap(function _callee5$(_context5) {
+              return regeneratorRuntime.wrap(function _callee$(_context) {
                 while (1) {
-                  switch (_context5.prev = _context5.next) {
+                  switch (_context.prev = _context.next) {
                     case 0:
                       this.globalEl.presentLoading();
 
                       if (this.patientRegisterForm.valid) {
-                        Object.keys(this.patientRegisterForm.value).forEach(function (key) {
-                          console.log("valid", _this3.patientRegisterForm.value[key]);
+                        Object.keys(this.patientRegisterForm.value).forEach(function (key) {// console.log("valid", this.patientRegisterForm.value[key]);
                         });
                         dataRegister = {
                           first_name: this.patientRegisterForm.value['first_name'],
@@ -589,21 +369,20 @@
                         };
                         this.patientSrvc.registerPatient(dataRegister).subscribe(function (data) {
                           if (data) {
-                            _this3.navCtrl.navigateRoot('/login');
-
-                            _this3.globalEl.dismissLoading();
+                            _this2.navCtrl.navigateRoot('/login');
                           }
+
+                          _this2.globalEl.dismissLoading();
                         });
-                      } else {
-                        console.log("NOT valid", this.patientRegisterForm);
+                      } else {// console.log("NOT valid", this.patientRegisterForm);
                       }
 
                     case 2:
                     case "end":
-                      return _context5.stop();
+                      return _context.stop();
                   }
                 }
-              }, _callee5, this);
+              }, _callee, this);
             }));
           }
         }, {
@@ -627,8 +406,8 @@
         }, {
           key: "createUsername",
           value: function createUsername(birth, gender) {
-            var birthday = new Date(birth);
-            console.log("PatientPage -> createUsername -> birthday", birthday);
+            var birthday = new Date(birth); // console.log("PatientPage -> createUsername -> birthday", birthday)
+
             var sexe = gender.substring(0, 1);
             var mois = "00";
             var jour = "00";
@@ -642,17 +421,17 @@
             jour = birthday.getDay().toString().substring(0, 1); // jour = birthday.getDay()[0]
             // console.log("PatientPage -> createUsername -> jour", jour)
 
-            var username = sexe + annee + mois + jour + this.getRndInt();
-            console.log("PatientPage -> createUsername -> username", username);
+            var username = sexe + annee + mois + jour + this.getRndInt(); // console.log("PatientPage -> createUsername -> username", username)
+
             return username;
           }
         }, {
           key: "getCityByCountry",
           value: function getCityByCountry(id) {
-            var _this4 = this;
+            var _this3 = this;
 
             this.globalSrvc.getCity(id).subscribe(function (data) {
-              return _this4.city = data;
+              return _this3.city = data;
             });
           }
         }]);
@@ -741,18 +520,16 @@
           key: "getCountry",
           value: function getCountry() {
             var res = this.http.get(this.url_api + "country");
-            res.subscribe(function (data) {
-              console.log("GlobalDataService -> getCountry -> data", data);
+            res.subscribe(function (data) {// console.log("GlobalDataService -> getCountry -> data", data)
             });
             return res;
           }
         }, {
           key: "getCity",
           value: function getCity(id) {
-            var res = this.http.get(this.url_api + "city?id=".concat(id));
-            console.log("GlobalDataService -> constructor -> this.url_api + `city?id=${id}`", this.url_api + "city?id=".concat(id));
-            res.subscribe(function (data) {
-              console.log("GlobalDataService -> getCity -> data", data);
+            var res = this.http.get(this.url_api + "city?id=".concat(id)); // console.log("GlobalDataService -> constructor -> this.url_api + `city?id=${id}`", this.url_api + `city?id=${id}`)
+
+            res.subscribe(function (data) {// console.log("GlobalDataService -> getCity -> data", data)
             });
             return res;
           }
@@ -905,7 +682,7 @@
           key: "getTracksRdv",
           value: function getTracksRdv(excludeTracks) {
             return this.http.get(src_constant__WEBPACK_IMPORTED_MODULE_2__["CONSTANT"].MOCK_DATA_JSON).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["map"])(function (data) {
-              console.log("PatientService -> getTracksRdv -> data", excludeTracks);
+              // console.log("PatientService -> getTracksRdv -> data", excludeTracks);
               return data;
             }));
           } //TODO : Get Vaccin by patient

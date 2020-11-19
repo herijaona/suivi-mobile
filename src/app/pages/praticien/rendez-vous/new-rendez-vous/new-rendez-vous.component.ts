@@ -38,7 +38,7 @@ export class NewRendezVousComponent implements OnInit {
     // this.navParms.get("patients") != undefined ? this.patients = this.navParms.get("patients") : this.getPatientAssoc();
     this.getPatientAssoc();
     this.patients.forEach((element) => {
-      console.log("NewRdvComponent -> patients", element.firstName);
+      // console.log("NewRdvComponent -> patients", element.firstName);
     });
   }
 
@@ -66,14 +66,14 @@ export class NewRendezVousComponent implements OnInit {
       heure: hour_to_transform,
       typeRdv: this.propositionForm.value.typeRdv
     };
-    console.log("LL: NewRendezVousComponent -> createRdv -> dataToSend", dataToSend)
+    // console.log("LL: NewRendezVousComponent -> createRdv -> dataToSend", dataToSend)
 
 
     if (this.propositionForm.valid) {
-      console.log(" proposition envoyé ");
+      // console.log(" proposition envoyé ");
 
       this.praticienSrvc.createRdv(dataToSend).subscribe((data) => {
-        console.log("LL: NewRendezVousComponent -> createRdv -> data", data)
+        // console.log("LL: NewRendezVousComponent -> createRdv -> data", data)
         this.globalItem.dismissLoading();
 
         this.backToList();
@@ -91,7 +91,7 @@ export class NewRendezVousComponent implements OnInit {
   }
 
   async cancel() {
-    console.log(" cancel ");
+    // console.log(" cancel ");
     this.backToList();
   }
 

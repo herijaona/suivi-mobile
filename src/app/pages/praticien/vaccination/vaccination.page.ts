@@ -50,7 +50,7 @@ export class VaccinationPage implements OnInit {
   ) { }
 
   alert() {
-    console.log("ok ++++ ");
+    // console.log("ok ++++ ");
   }
 
   ngOnInit() {
@@ -61,17 +61,17 @@ export class VaccinationPage implements OnInit {
   getListVaccinations() {
     // Close any open sliding items when the  updates
     if (this.List) {
-      console.log("ConsultationPage -> update -> this.List", this.List);
+      // console.log("ConsultationPage -> update -> this.List", this.List);
       this.List.closeSlidingItems();
     }
     //TODO: get timeline
     this.praticienSrvc.getListsVaccinations().subscribe((data: any) => {
-      console.log("LL: VaccinationPage -> getListVaccinations -> data", data)
+      // console.log("LL: VaccinationPage -> getListVaccinations -> data", data)
       this.vaccinations = data;
       // this.vaccinationsShow = this.praticienSrvc.regroupDataByDate(data);
       this.vaccinationsShow = this.praticienSrvc.regroupDataByPatient(data);
       this.filteredVaccinations = this.asignOperation([...this.vaccinationsShow]);
-      console.log("LL: VaccinationPage -> getListVaccinations -> this.filteredVaccinations", this.filteredVaccinations)
+      // console.log("LL: VaccinationPage -> getListVaccinations -> this.filteredVaccinations", this.filteredVaccinations)
     });
   }
 
@@ -243,7 +243,7 @@ export class VaccinationPage implements OnInit {
       } else if (data.statusVaccin == 2) {
         Object.assign(data, { _status: this.REJECTED, _action: this.ACTION_NULL });
       }
-      console.warn(">>>>>>>>>>>>>>>>>>>>>LL: VaccinationPage -> checkOperation -> data", data)
+      // console.warn(">>>>>>>>>>>>>>>>>>>>>LL: VaccinationPage -> checkOperation -> data", data)
 
       return Object.assign(data, { operation: this.OPERATION_INT_VACCINATION });
     } else {
@@ -255,7 +255,7 @@ export class VaccinationPage implements OnInit {
         Object.assign(data, { _status: this.REJECTED, _action: this.ACTION_NULL });
       }
       const result = Object.assign(data, { operation: this.OPERATION_VACCIN_CALENDAR })
-      console.warn("LL: VaccinationPage -> checkOperation -> data", result)
+      // console.warn("LL: VaccinationPage -> checkOperation -> data", result)
 
       return result;
     }
@@ -274,7 +274,7 @@ export class VaccinationPage implements OnInit {
 
   watchVaccin(_data) {
     this.praticienSrvc.watchVaccin(_data.patient).subscribe((data) => {
-      console.log("LL: watchVaccin -> _data", data);
+      // console.log("LL: watchVaccin -> _data", data);
       this.seeVaccination = data;
       this.openDetailModal(data);
     });
@@ -283,9 +283,9 @@ export class VaccinationPage implements OnInit {
 
   generateVaccin(_data) {
     this.globalItem.presentLoading();
-    console.log("LL: generateVaccin -> _data", _data)
+    // console.log("LL: generateVaccin -> _data", _data)
     this.praticienSrvc.generateVaccin(_data.id, _data.patient).subscribe((data) => {
-      console.log("LL: generateVaccin -> data", data)
+      // console.log("LL: generateVaccin -> data", data)
       this.getListVaccinations();
       this.globalItem.dismissLoading();
     })
@@ -293,9 +293,9 @@ export class VaccinationPage implements OnInit {
 
   rejectVaccin(_data) {
     this.globalItem.presentLoading();
-    console.log("LL: generateVaccin -> _data", _data.id)
+    // console.log("LL: generateVaccin -> _data", _data.id)
     this.praticienSrvc.rejectVaccin(_data.id).subscribe((data) => {
-      console.log("LL: generateVaccin -> data", data);
+      // console.log("LL: generateVaccin -> data", data);
       this.getListVaccinations();
       this.globalItem.dismissLoading();
     });
@@ -303,9 +303,9 @@ export class VaccinationPage implements OnInit {
 
 
   watchVaccinWithNotebook(_data) {
-    console.log("LL: watchVaccinWithNotebook -> _data", _data)
+    // console.log("LL: watchVaccinWithNotebook -> _data", _data)
     this.praticienSrvc.watchVaccinWithNotebook(_data.carnet).subscribe((data) => {
-      console.log("LL: watchVaccin -> _data", data);
+      // console.log("LL: watchVaccin -> _data", data);
       this.seeVaccination = data;
       this.openDetailModal(data, true);
     });
@@ -313,24 +313,24 @@ export class VaccinationPage implements OnInit {
   }
 
   rejectVaccinWithNotebook(_data) {
-    console.log("LL: rejectVaccinWithNotebook -> _data", _data.id)
+    // console.log("LL: rejectVaccinWithNotebook -> _data", _data.id)
     this.globalItem.presentLoading();
     this.praticienSrvc.rejectVaccinithNotebook(_data.id).subscribe((data) => {
-      console.log("LL: rejectVaccinWithNotebook -> data", data)
+      // console.log("LL: rejectVaccinWithNotebook -> data", data)
       this.getListVaccinations();
       this.globalItem.dismissLoading();
     });
   }
 
   async organizeVaccinWithNotebook(_data) {
-    console.log("LL: organizeVaccinWithNotebook -> _data", _data)
+    // console.log("LL: organizeVaccinWithNotebook -> _data", _data)
     await this.praticienSrvc.watchVaccinWithNotebook(_data.carnet).subscribe(async (data: any) => {
       const dataToSend = {
         date: data[0].datePriseVaccin.date,
         idCarnet: _data.carnet,
         id: _data.id,
       }
-      console.log("LL: organizeVaccinWithNotebook -> dataToSend", dataToSend)
+      // console.log("LL: organizeVaccinWithNotebook -> dataToSend", dataToSend)
       await this.openOrganizeModal(dataToSend);
     });
   }

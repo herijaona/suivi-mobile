@@ -390,8 +390,8 @@
                     // this.router.navigate(["/praticien/proposition-rdv"]);
                     // this.router.navigate(["/praticien/intervention"]);
                     // this.router.navigate(["/praticien/consultation"]);
-                    _this.router.navigate(["/praticien/vaccination"]); // this.router.navigate(["/praticien/assoc-patients"]);
-                    // this.router.navigate(["/praticien/profile"]);
+                    // this.router.navigate(["/praticien/vaccination"]);
+                    _this.router.navigate(["/praticien/assoc-patients"]); // this.router.navigate(["/praticien/profile"]);
                     // this.router.navigate(["/praticien/rendez-vous"]);
 
                   }
@@ -582,6 +582,224 @@
     },
 
     /***/
+    "./src/app/pages/global.interaction.ts":
+    /*!*********************************************!*\
+      !*** ./src/app/pages/global.interaction.ts ***!
+      \*********************************************/
+
+    /*! exports provided: GlobalInteraction */
+
+    /***/
+    function srcAppPagesGlobalInteractionTs(module, __webpack_exports__, __webpack_require__) {
+      "use strict";
+
+      __webpack_require__.r(__webpack_exports__);
+      /* harmony export (binding) */
+
+
+      __webpack_require__.d(__webpack_exports__, "GlobalInteraction", function () {
+        return GlobalInteraction;
+      });
+      /* harmony import */
+
+
+      var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
+      /*! tslib */
+      "./node_modules/tslib/tslib.es6.js");
+      /* harmony import */
+
+
+      var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
+      /*! @angular/core */
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      /* harmony import */
+
+
+      var _ionic_angular__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
+      /*! @ionic/angular */
+      "./node_modules/@ionic/angular/__ivy_ngcc__/fesm2015/ionic-angular.js");
+
+      var GlobalInteraction = /*#__PURE__*/function () {
+        function GlobalInteraction(toastCtrl, loadingCtrl, alertCtrl) {
+          _classCallCheck(this, GlobalInteraction);
+
+          this.toastCtrl = toastCtrl;
+          this.loadingCtrl = loadingCtrl;
+          this.alertCtrl = alertCtrl;
+          this.isLoading = false;
+        }
+
+        _createClass(GlobalInteraction, [{
+          key: "presentToast",
+          value: function presentToast(msg) {
+            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
+              var toast;
+              return regeneratorRuntime.wrap(function _callee$(_context) {
+                while (1) {
+                  switch (_context.prev = _context.next) {
+                    case 0:
+                      _context.next = 2;
+                      return this.toastCtrl.create({
+                        message: msg,
+                        duration: 1800,
+                        position: "top"
+                      });
+
+                    case 2:
+                      toast = _context.sent;
+                      toast.present();
+
+                    case 4:
+                    case "end":
+                      return _context.stop();
+                  }
+                }
+              }, _callee, this);
+            }));
+          }
+        }, {
+          key: "presentLoading",
+          value: function presentLoading() {
+            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
+              var _this2 = this;
+
+              return regeneratorRuntime.wrap(function _callee2$(_context2) {
+                while (1) {
+                  switch (_context2.prev = _context2.next) {
+                    case 0:
+                      this.isLoading = true;
+                      _context2.next = 3;
+                      return this.loadingCtrl.create({
+                        cssClass: "my-loading-class",
+                        spinner: "bubbles",
+                        translucent: true,
+                        duration: 100000
+                      }).then(function (a) {
+                        a.present().then(function () {
+                          if (!_this2.isLoading) {
+                            a.dismiss();
+                          }
+                        });
+                      });
+
+                    case 3:
+                      return _context2.abrupt("return", _context2.sent);
+
+                    case 4:
+                    case "end":
+                      return _context2.stop();
+                  }
+                }
+              }, _callee2, this);
+            }));
+          }
+        }, {
+          key: "dismissLoading",
+          value: function dismissLoading() {
+            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee3() {
+              return regeneratorRuntime.wrap(function _callee3$(_context3) {
+                while (1) {
+                  switch (_context3.prev = _context3.next) {
+                    case 0:
+                      if (!this.isLoading) {
+                        _context3.next = 5;
+                        break;
+                      }
+
+                      this.isLoading = false;
+                      _context3.next = 4;
+                      return this.loadingCtrl.dismiss();
+
+                    case 4:
+                      return _context3.abrupt("return", _context3.sent);
+
+                    case 5:
+                      return _context3.abrupt("return", null);
+
+                    case 6:
+                    case "end":
+                      return _context3.stop();
+                  }
+                }
+              }, _callee3, this);
+            }));
+          }
+        }, {
+          key: "alertDelete",
+          value: function alertDelete(id, parent) {
+            var msg = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : "Tu veux vraiment supprimé cette element ? ";
+            var callback = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : this.defaultCallback;
+
+            var _header = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : "Suppression";
+
+            var array = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : [];
+            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee4() {
+              var alert;
+              return regeneratorRuntime.wrap(function _callee4$(_context4) {
+                while (1) {
+                  switch (_context4.prev = _context4.next) {
+                    case 0:
+                      _context4.next = 2;
+                      return this.alertCtrl.create({
+                        cssClass: "my-custom-class",
+                        header: _header,
+                        message: msg,
+                        buttons: [{
+                          text: "Cancel",
+                          role: "cancel",
+                          cssClass: "secondary",
+                          handler: function handler() {// console.log("Confirm Cancel: blah");
+                          }
+                        }, {
+                          text: "OK",
+                          handler: function handler() {
+                            // console.warn("data deleted " + id);
+                            // this.remove(id, array, keyStatus, RefuseStatus);
+                            callback(id, parent);
+                          }
+                        }]
+                      });
+
+                    case 2:
+                      alert = _context4.sent;
+                      _context4.next = 5;
+                      return alert.present();
+
+                    case 5:
+                    case "end":
+                      return _context4.stop();
+                  }
+                }
+              }, _callee4, this);
+            }));
+          }
+        }, {
+          key: "defaultCallback",
+          value: function defaultCallback(id, parent) {
+            this.presentToast("this is a default callback ".concat(id, " "));
+          }
+        }]);
+
+        return GlobalInteraction;
+      }();
+
+      GlobalInteraction.ctorParameters = function () {
+        return [{
+          type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["ToastController"]
+        }, {
+          type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["LoadingController"]
+        }, {
+          type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["AlertController"]
+        }];
+      };
+
+      GlobalInteraction = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
+        providedIn: 'root'
+      })], GlobalInteraction);
+      /***/
+    },
+
+    /***/
     "./src/app/services/auth-guard.service.ts":
     /*!************************************************!*\
       !*** ./src/app/services/auth-guard.service.ts ***!
@@ -722,18 +940,12 @@
       var _ionic_angular__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(
       /*! @ionic/angular */
       "./node_modules/@ionic/angular/__ivy_ngcc__/fesm2015/ionic-angular.js");
-      /* harmony import */
-
-
-      var src_constant__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(
-      /*! src/constant */
-      "./src/constant.ts");
 
       var TOKEN_KEY = src_environments_environment__WEBPACK_IMPORTED_MODULE_2__["environment"].TOKEN_KEY;
 
       var AuthService = /*#__PURE__*/function () {
         function AuthService(http, helper, storage, alertCtrl, plt) {
-          var _this2 = this;
+          var _this3 = this;
 
           _classCallCheck(this, AuthService);
 
@@ -746,7 +958,7 @@
           this.user = null;
           this.authenticationState = new rxjs__WEBPACK_IMPORTED_MODULE_3__["BehaviorSubject"](false);
           this.plt.ready().then(function () {
-            _this2.checkToken(); // TODO: à decommenter
+            _this3.checkToken(); // TODO: à decommenter
 
           });
         }
@@ -757,8 +969,8 @@
             return this.storage.get(TOKEN_KEY).then(function (token) {
               if (token) {
                 return token;
-              } else {
-                console.log("token doesn't exist yet"); // throw new Error("token doesn't exist yet");
+              } else {// console.log("token doesn't exist yet");
+                // throw new Error("token doesn't exist yet");
               }
             });
           }
@@ -778,21 +990,23 @@
         }, {
           key: "checkToken",
           value: function checkToken() {
-            var _this3 = this;
+            var _this4 = this;
 
             this.storage.get(TOKEN_KEY).then(function (token) {
               if (token) {
-                var decoded = _this3.helper.decodeToken(token);
+                var decoded = _this4.helper.decodeToken(token);
 
-                var isExpired = _this3.helper.isTokenExpired(token);
+                var isExpired = _this4.helper.isTokenExpired(token);
 
                 if (!isExpired) {
-                  _this3.user = decoded;
-                  console.log("AuthService -> checkToken -> CONSTANT.stringifyParse(this.user)", src_constant__WEBPACK_IMPORTED_MODULE_9__["CONSTANT"].stringifyParse(_this3.user));
+                  _this4.user = decoded; // console.log(
+                  //   "AuthService -> checkToken -> CONSTANT.stringifyParse(this.user)",
+                  //   CONSTANT.stringifyParse(this.user)
+                  // );
 
-                  _this3.authenticationState.next(true);
+                  _this4.authenticationState.next(true);
                 } else {
-                  _this3.storage.remove(TOKEN_KEY);
+                  _this4.storage.remove(TOKEN_KEY);
                 }
               }
             });
@@ -800,9 +1014,9 @@
         }, {
           key: "login",
           value: function login(credentials, loadinCtrl) {
-            var _this4 = this;
+            var _this5 = this;
 
-            console.log("AuthService -> login -> credentials", credentials);
+            // console.log("AuthService -> login -> credentials", credentials);
             var header = new _angular_common_http__WEBPACK_IMPORTED_MODULE_5__["HttpHeaders"]({
               "Content-Type": "application/json",
               Accept: "application/json"
@@ -812,7 +1026,7 @@
               headers: header
             }).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["tap"])(function (res) {
               // console.log("*******", CONSTANT.stringifyParse(res));
-              _this4.storage.set(TOKEN_KEY, res["token"]); // TODO : à decommenter
+              _this5.storage.set(TOKEN_KEY, res["token"]); // TODO : à decommenter
               // const testToken = {
               //   token:
               //     "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE2MDA2NzA0MzAsImV4cCI6MTYwMDY3NDAzMCwicm9sZXMiOlsiUk9MRV9QQVRJRU5UIl0sInVzZXJuYW1lIjoicGF0In0.wCv7mjXJIsEOHWyaHxwZ7u9sLIQ9IYH5wxmXfzNgWgL9Ynm8R7QMB6lrE1NJAlYh2wHsUQ5fjiyt59tmXwIuZf2qqw4JEuRShYccKLUDSAon-V_BgNPVwXIBwVMzQi2LkdhTHB0f7CnHLf7b5apJ2t8qSTEtUUsNMqipzqIzvDCBIQvl8XhxXxL9ZUdDfJeW9r4tuiHGl0WcQaDdg5-GyATk3gZDrWW1UNdKYVA7o3CWoD66xgeAi072XY_W_MeH0nzDVyemX-48E4kYKNydDw7HB60D6xNTNsg5dEFCBriA7mZPc-MLJwWcKkGa8nLwEOGXWOnSKmm8_9DQO0TDg72uYK2yQHw3WzEQwWz2io84aj3B7wtvxD4YpK3K_x-zMDJQWzrpJAMxxe2dZlVgWArgIBmqowb30HkrInhjvFssLou_MBU6jdnAFogO188k1pXkS2CwIdaqB9Wzxn_5AXfM8XGTRwKlggBk36owdkdWKyli1SuHA4FlwWdHd5MW3i1RjkwrkzZfXk-cohAWJ_Phrz8aCb51u8nmaH1sCOC5WSGrgQTaenkczr26TYRVBrr54HFxGrGfhf5xKa5NP5uWFzlq2Z0q_bDgv8YKw8G9-y9nhE5dAS3GW0CEcwwBRRw4NRAWJ6HK3foHaskYR4Wi-oukqyTOG8p_H0zE0nE",
@@ -820,10 +1034,12 @@
               // this.storage.set(TOKEN_KEY, testToken);
 
 
-              _this4.user = _this4.helper.decodeToken(res["token"]);
-              console.log("AuthService -> login -> user", src_constant__WEBPACK_IMPORTED_MODULE_9__["CONSTANT"].stringifyParse(_this4.user));
+              _this5.user = _this5.helper.decodeToken(res["token"]); // console.log(
+              //   "AuthService -> login -> user",
+              //   CONSTANT.stringifyParse(this.user)
+              // );
 
-              _this4.authenticationState.next(true);
+              _this5.authenticationState.next(true);
             }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["catchError"])(function (e) {
               if (e.error) {// this.showAlert(e.error.msg);
               }
@@ -984,16 +1200,23 @@
       var rxjs_operators__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
       /*! rxjs/operators */
       "./node_modules/rxjs/_esm2015/operators/index.js");
+      /* harmony import */
+
+
+      var src_app_pages_global_interaction__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(
+      /*! src/app/pages/global.interaction */
+      "./src/app/pages/global.interaction.ts");
 
       var TOKEN_KEY = src_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].TOKEN_KEY;
 
       var HttpConfigInterceptorService = /*#__PURE__*/function () {
-        function HttpConfigInterceptorService(alerCtrl, storage, authSvc) {
+        function HttpConfigInterceptorService(alerCtrl, storage, authSvc, globalItem) {
           _classCallCheck(this, HttpConfigInterceptorService);
 
           this.alerCtrl = alerCtrl;
           this.storage = storage;
           this.authSvc = authSvc;
+          this.globalItem = globalItem;
           this.url = src_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].url_dev;
           this.debug = true;
         } // intercept(
@@ -1051,18 +1274,22 @@
         _createClass(HttpConfigInterceptorService, [{
           key: "intercept",
           value: function intercept(request, next) {
-            var _this5 = this;
+            var _this6 = this;
 
             var promise = this.authSvc.getToken();
             return Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["from"])(promise).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_7__["mergeMap"])(function (token) {
-              var cloneReq = _this5.addToken(request, token);
+              var cloneReq = _this6.addToken(request, token);
 
               return next.handle(cloneReq).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_7__["catchError"])(function (error) {
-                var status = error.status;
-                console.warn("LL: HttpConfigInterceptorService -> error", error.message);
+                var status = error.status; // console.warn("LL: HttpConfigInterceptorService -> error", error.message)
+
                 var reason = error && error.error.reason ? error.error.reason : "";
 
-                _this5.presentAlert(status, reason);
+                _this6.presentAlert(status, reason);
+
+                _this6.globalItem.dismissLoading();
+
+                _this6.globalItem.presentToast("error " + status);
 
                 return Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["throwError"])(error);
               }));
@@ -1096,13 +1323,13 @@
         }, {
           key: "presentAlert",
           value: function presentAlert(status, reason) {
-            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
+            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee5() {
               var alert;
-              return regeneratorRuntime.wrap(function _callee$(_context) {
+              return regeneratorRuntime.wrap(function _callee5$(_context5) {
                 while (1) {
-                  switch (_context.prev = _context.next) {
+                  switch (_context5.prev = _context5.next) {
                     case 0:
-                      _context.next = 2;
+                      _context5.next = 2;
                       return this.alerCtrl.create({
                         header: status + " Error",
                         subHeader: "Subtitle",
@@ -1111,16 +1338,16 @@
                       });
 
                     case 2:
-                      alert = _context.sent;
-                      _context.next = 5;
+                      alert = _context5.sent;
+                      _context5.next = 5;
                       return alert.present();
 
                     case 5:
                     case "end":
-                      return _context.stop();
+                      return _context5.stop();
                   }
                 }
-              }, _callee, this);
+              }, _callee5, this);
             }));
           }
         }]);
@@ -1135,6 +1362,8 @@
           type: _ionic_storage__WEBPACK_IMPORTED_MODULE_5__["Storage"]
         }, {
           type: _auth_service__WEBPACK_IMPORTED_MODULE_6__["AuthService"]
+        }, {
+          type: src_app_pages_global_interaction__WEBPACK_IMPORTED_MODULE_8__["GlobalInteraction"]
         }];
       };
 
@@ -1219,8 +1448,8 @@
               var nkey = res;
               var nvalue = data["".concat(res)];
               var json = {};
-              json[nkey] = nvalue;
-              console.log("key:" + res + " value: " + data["".concat(res)] + json);
+              json[nkey] = nvalue; // console.log("key:" + res + " value: " + data[`${res}`] + json);
+
               Object.assign(res, json);
             });
             return res;
@@ -1270,12 +1499,12 @@
         // url: "http://localhost:9000",
         // url_dev: "http://localhost:9000/apip/",
         // url_dev_api: "http://localhost:9000/api/",
-        // url: "http://suivie-patient.neitic.com",
-        // url_dev: "http://suivie-patient.neitic.com/apip/",
-        // url_dev_api: "http://suivie-patient.neitic.com/api/",
-        url: "http://matipla.com",
-        url_dev: "http://matipla.com/apip/",
-        url_dev_api: "http://matipla.com/api/",
+        url: "http://suivie-patient.neitic.com",
+        url_dev: "http://suivie-patient.neitic.com/apip/",
+        url_dev_api: "http://suivie-patient.neitic.com/api/",
+        // url: "https://matipla.com",
+        // url_dev: "https://matipla.com/apip/",
+        // url_dev_api: "https://matipla.com/api/",
         TOKEN_KEY: "access_token"
       };
       /*

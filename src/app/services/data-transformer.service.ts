@@ -24,7 +24,7 @@ export class DataTransformerService {
   // Regrouper les données en fonction de la date
   regroupDataByDate(data, string_date) {
     const groups = data.reduce((groups, eachData) => {
-      console.log("regroupDataByDate -> eachData", eachData)
+      // console.log("regroupDataByDate -> eachData", eachData)
       // const date = eachData.date_prise.split("T")[0];
       const date = eachData[string_date].date;
       // const date = eachData.date;
@@ -69,10 +69,10 @@ export class DataTransformerService {
                   .toLowerCase()
                   .includes(query)
               ) {
-                console.log(
-                  "regroupDataByDate -> subKeyParent true ==========> ",
-                  res
-                );
+                // console.log(
+                //   "regroupDataByDate -> subKeyParent true ==========> ",
+                //   res
+                // );
                 res.show = true;
                 goOnSecondFilter = true;
                 break;
@@ -122,7 +122,7 @@ export class DataTransformerService {
         }
       });
     });
-    console.log("newData", newData);
+    // console.log("newData", newData);
     return newData;
   }
 
@@ -138,17 +138,17 @@ export class DataTransformerService {
       item.groups.forEach((element) => {
         if (segment == "all") {
           for (let key of keysOnFilter) {
-            console.log(
-              "key",
-              key,
-              "exculeded",
-              exculed,
-              "//////////////////////////",
-              element[`${key}`].toLowerCase()
-            );
+            // console.log(
+            //   "key",
+            //   key,
+            //   "exculeded",
+            //   exculed,
+            //   "//////////////////////////",
+            //   element[`${key}`].toLowerCase()
+            // );
             if (exculed.includes(element[`${key}`].toLowerCase())) {
               element.show = false;
-              console.log("element.show ---------------- ", element.show);
+              // console.log("element.show ---------------- ", element.show);
               break;
             } else {
               element.show = true;
@@ -168,7 +168,7 @@ export class DataTransformerService {
         }
       });
     });
-    console.log("newData", newData);
+    // console.log("newData", newData);
     return newData;
   }
 

@@ -14,7 +14,7 @@ export class DetailsComponent implements OnInit {
   constructor(private modalCtrl: ModalController, private navParms: NavParams) {
     this.vaccinations = this.navParms.get("data");
     this.isWithNoteBook = this.navParms.get("isWithNoteBook");
-    console.log(this.vaccinations);
+    // console.log(this.vaccinations);
   }
 
   ngOnInit() { }

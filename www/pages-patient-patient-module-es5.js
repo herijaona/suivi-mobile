@@ -328,8 +328,7 @@
           }];
           this.selectedPath = "";
           this.router.events.subscribe(function (event) {
-            _this.selectedPath = event.url;
-            console.log("PatientPage -> this.selectedPath", _this.selectedPath);
+            _this.selectedPath = event.url; // console.log("PatientPage -> this.selectedPath", this.selectedPath);
           });
         }
 
@@ -370,9 +369,11 @@
                             setTimeout(function () {
                               return element.toggle();
                             }, 10);
-                          }
+                          } // console.log(
+                          //   "PatientPage -> openFirst -> element.offsetWidth",
+                          //   element.offsetWidth
+                          // );
 
-                          console.log("PatientPage -> openFirst -> element.offsetWidth", element.offsetWidth);
                         });
                       });
 
@@ -396,9 +397,9 @@
 
             var _this$authSrvc$user = this.authSrvc.user,
                 roles = _this$authSrvc$user.roles,
-                username = _this$authSrvc$user.username;
-            console.log("PatientPage -> initialize -> username", username);
-            console.log("PatientPage -> initialize -> roles", roles); // this.name = `${username}`;
+                username = _this$authSrvc$user.username; // console.log("PatientPage -> initialize -> username", username);
+            // console.log("PatientPage -> initialize -> roles", roles);
+            // this.name = `${username}`;
 
             this.patienSrv.getProfile().subscribe(function (data) {
               var type = data[0].typePatient == 1 ? "Adult" : "Enfant";
@@ -414,10 +415,10 @@
                 while (1) {
                   switch (_context3.prev = _context3.next) {
                     case 0:
-                      console.log("PatientPage -> redirect -> link", link);
+                      // console.log("PatientPage -> redirect -> link", link);
                       this.navCtrl.navigateForward(link);
 
-                    case 2:
+                    case 1:
                     case "end":
                       return _context3.stop();
                   }
@@ -549,7 +550,7 @@
           key: "getTracksRdv",
           value: function getTracksRdv(excludeTracks) {
             return this.http.get(src_constant__WEBPACK_IMPORTED_MODULE_2__["CONSTANT"].MOCK_DATA_JSON).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["map"])(function (data) {
-              console.log("PatientService -> getTracksRdv -> data", excludeTracks);
+              // console.log("PatientService -> getTracksRdv -> data", excludeTracks);
               return data;
             }));
           } //TODO : Get Vaccin by patient

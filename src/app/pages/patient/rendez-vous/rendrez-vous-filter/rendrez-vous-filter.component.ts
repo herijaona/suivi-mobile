@@ -65,15 +65,15 @@ export class RendrezVousFilterComponent {
 
     // passed in array of track names that should be excluded (unchecked)
     const excludedTrackStates = this.navParams.get("excludeTracksStates");
-    console.log(
-      "RendrezVousFilterComponent -> ionViewWillEnter -> excludedTracksStates",
-      excludedTrackStates
-    );
+    // console.log(
+    //   "RendrezVousFilterComponent -> ionViewWillEnter -> excludedTracksStates",
+    //   excludedTrackStates
+    // );
     const excludedTrackTypes = this.navParams.get("excludeTracksTypes");
-    console.log(
-      "RendrezVousFilterComponent -> ionViewWillEnter -> excludedTracksTypes",
-      excludedTrackTypes
-    );
+    // console.log(
+    //   "RendrezVousFilterComponent -> ionViewWillEnter -> excludedTracksTypes",
+    //   excludedTrackTypes
+    // );
 
     this.trackStatsMock.forEach((track) => {
       this.tracksStates.push({
@@ -126,7 +126,7 @@ export class RendrezVousFilterComponent {
   }
 
   dismiss(data?: any) {
-    console.log("RendrezVousFilterComponent -> dismiss -> data", data);
+    // console.log("RendrezVousFilterComponent -> dismiss -> data", data);
     // using the injected ModalController this page
     // can "dismiss" itself and pass back data
     this.modalCtrl.dismiss(data);

@@ -41,7 +41,7 @@ export class PatientService {
   getTracksRdv(excludeTracks?) {
     return this.http.get(CONSTANT.MOCK_DATA_JSON).pipe(
       map((data: any) => {
-        console.log("PatientService -> getTracksRdv -> data", excludeTracks);
+        // console.log("PatientService -> getTracksRdv -> data", excludeTracks);
         return data;
       })
     );

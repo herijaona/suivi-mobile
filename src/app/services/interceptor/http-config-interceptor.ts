@@ -13,6 +13,7 @@ import { AlertController } from "@ionic/angular";
 import { Storage } from "@ionic/storage";
 import { AuthService } from "../auth.service";
 import { switchMap, catchError, map, mergeMap } from "rxjs/operators";
+import { GlobalInteraction } from 'src/app/pages/global.interaction';
 
 const TOKEN_KEY = environment.TOKEN_KEY;
 
@@ -26,7 +27,8 @@ export class HttpConfigInterceptorService implements HttpInterceptor {
   constructor(
     private alerCtrl: AlertController,
     private storage: Storage,
-    private authSvc: AuthService
+    private authSvc: AuthService,
+    private globalItem: GlobalInteraction
   ) { }
   // intercept(
   //   req: HttpRequest<any>,
@@ -96,11 +98,14 @@ export class HttpConfigInterceptorService implements HttpInterceptor {
         return next.handle(cloneReq).pipe(
           catchError((error) => {
             const status = error.status;
-            console.warn("LL: HttpConfigInterceptorService -> error", error.message)
+            // console.warn("LL: HttpConfigInterceptorService -> error", error.message)
             const reason =
               error && error.error.reason ? error.error.reason : "";
 
             this.presentAlert(status, reason);
+            this.globalItem.dismissLoading();
+            this.globalItem.presentToast("error " + status);
+
             return throwError(error);
           })
         );

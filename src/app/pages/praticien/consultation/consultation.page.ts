@@ -47,7 +47,7 @@ export class ConsultationPage implements OnInit {
     public toastCtrl: ToastController,
     public user: PraticienService,
     public config: Config
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.getConsultation();
@@ -63,10 +63,10 @@ export class ConsultationPage implements OnInit {
     this.filteredConsultation = temp;
 
     [...this.consultShow].forEach((item) => {
-      console.log("ConsultationPage -> filterItems -> item", item.groups);
+      // console.log("ConsultationPage -> filterItems -> item", item.groups);
       let data: any = [];
       item.groups.forEach((res) => {
-        console.log("ConsultationPage  *** -> filterItems -> res", res);
+        // console.log("ConsultationPage  *** -> filterItems -> res", res);
         if (res.consultationStatus.includes("Accepted")) {
           data.push(res);
         }
@@ -83,7 +83,7 @@ export class ConsultationPage implements OnInit {
   getConsultation() {
     // Close any open sliding items when the  updates
     if (this.List) {
-      console.log("ConsultationPage -> update -> this.List", this.List);
+      // console.log("ConsultationPage -> update -> this.List", this.List);
       this.List.closeSlidingItems();
     }
     //TODO: get timeline
@@ -132,17 +132,17 @@ export class ConsultationPage implements OnInit {
       this.filteredConsultation = temp;
 
       [...this.consultShow].forEach((item) => {
-        console.log("ConsultationPage -> filterItems -> item", item.groups);
+        // console.log("ConsultationPage -> filterItems -> item", item.groups);
         let data: any = [];
         item.groups.forEach((res) => {
-          console.log("ConsultationPage  *** -> filterItems -> res", res);
+          // console.log("ConsultationPage  *** -> filterItems -> res", res);
           if (query && this.segment == "all") {
             if (
               res.type.includes(query) ||
               res.consultationObjet.includes(query) ||
               res.patient.includes(query)
             ) {
-              console.log("ConsultationPage -> filterItems -> res", res);
+              // console.log("ConsultationPage -> filterItems -> res", res);
 
               data.push(res);
             }
@@ -153,7 +153,7 @@ export class ConsultationPage implements OnInit {
                 res.consultationObjet.includes(query) ||
                 res.patient.includes(query))
             ) {
-              console.log("ConsultationPage -> filterItems -> res", res);
+              // console.log("ConsultationPage -> filterItems -> res", res);
 
               data.push(res);
             }
@@ -170,7 +170,7 @@ export class ConsultationPage implements OnInit {
   }
 
   alert() {
-    console.log("ok ++++ ");
+    // console.log("ok ++++ ");
   }
 
   async presentFilter() {

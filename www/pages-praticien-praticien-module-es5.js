@@ -374,19 +374,21 @@
             url: "/praticien/dashboard"
           }, {
             title: "Vaccination",
-            url: "/praticien/vaccination",
-            children: [{
-              url: "/praticient/vaccination/details"
-            }]
-          }, {
-            title: "Consultation",
-            url: "/praticien/consultation"
-          }, {
-            title: "Intervention",
-            url: "/praticien/intervention"
-          }, {
+            url: "/praticien/vaccination"
+          }, // {
+          //   title: "Consultation",
+          //   url: "/praticien/consultation",
+          // },
+          // {
+          //   title: "Intervention",
+          //   url: "/praticien/intervention",
+          // },
+          {
             title: "Rendez-vous",
             url: "/praticien/rendez-vous"
+          }, {
+            title: "Mes Patients",
+            url: "/praticien/assoc-patients"
           }];
           this.selectedPath = "";
           this.name = "";
@@ -398,9 +400,8 @@
 
           if (this.selectedPath === "" || this.selectedPath === undefined) {
             this.selectedPath = "/praticien/proposition-rdv";
-          }
+          } // console.log("PraticienPage -> this.selectedPath", this.selectedPath);
 
-          console.log("PraticienPage -> this.selectedPath", this.selectedPath);
         }
 
         _createClass(PraticienPage, [{
@@ -470,8 +471,8 @@
               _this3.storage.set("_id", data.data);
 
               _this3.praticienSrvc.getLocalUserInfo().subscribe(function (data) {
-                var el = data.profile[0];
-                console.log("LL: PraticienPage -> initializeApp -> el", data);
+                var el = data.profile[0]; // console.log("LL: PraticienPage -> initializeApp -> el", data)
+
                 var _this3$authSrvc$user = _this3.authSrvc.user,
                     roles = _this3$authSrvc$user.roles,
                     username = _this3$authSrvc$user.username;

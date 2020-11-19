@@ -45,7 +45,7 @@ export class PraticienService {
 
   getInfoUserID() {
     const res = this.http.get<any>(this.url + "current_user_check");
-    console.log("PraticienService -> getInfoUserID -> res", res);
+    // console.log("PraticienService -> getInfoUserID -> res", res);
     return res;
   }
 
@@ -76,9 +76,9 @@ export class PraticienService {
       heureRdv: prop.heureRdv,
       id: prop.id,
     };
-    console.log(
-      "PraticienService -> proposeRdv -> test -> send data $$$$$$$$$$$$$$$"
-    );
+    // console.log(
+    //   "PraticienService -> proposeRdv -> test -> send data $$$$$$$$$$$$$$$"
+    // );
     /* this.token = await this.isToken();
     const headers = new HttpHeaders({
       Accept: "application/json",
@@ -118,10 +118,10 @@ export class PraticienService {
   getTypeTrackConsultation() {
     return this.loadMockData().pipe(
       map((data: any) => {
-        console.log(
-          "PraticienService -> getTypeTrackConsultation -> data",
-          data
-        );
+        // console.log(
+        //   "PraticienService -> getTypeTrackConsultation -> data",
+        //   data
+        // );
         return data.mockTrackConsultation.sort();
       })
     );
@@ -137,7 +137,9 @@ export class PraticienService {
 
   getListsVaccinations(): Observable<IVaccination[]> {
     const res = this.http.get<IVaccination[]>(`${this.url_apip}praticien/vaccination`);
-    res.subscribe(data => { console.log("LL: res", data) });
+    res.subscribe(data => {
+      // console.log("LL: res", data)
+    });
     return res;
     // return this.loadMockData().pipe(
     //   map((data: any) => {
@@ -185,7 +187,7 @@ export class PraticienService {
         groups[key] = [];
       }
       groups[key].push(eachData);
-      console.log("LL: regroupDataByPatient -> groups", groups, Object.keys(groups))
+      // console.log("LL: regroupDataByPatient -> groups", groups, Object.keys(groups))
       return groups;
     }, {});
 
@@ -196,7 +198,7 @@ export class PraticienService {
         groups: groups[patient],
       };
     });
-    console.log("LL: regroupDataByPatient -> groupArrays", groupArrays)
+    // console.log("LL: regroupDataByPatient -> groupArrays", groupArrays)
     return groupArrays;
 
 
@@ -221,7 +223,7 @@ export class PraticienService {
   getAllPraticien(): Observable<IUserPraticien[]> {
     const data = this.http.get<IUserPraticien[]>(this.url_api + "praticiens");
     data.subscribe((data) => {
-      console.log("PraticienService -> regroupDataByDate -> data", data);
+      // console.log("PraticienService -> regroupDataByDate -> data", data);
     });
     return data;
   }

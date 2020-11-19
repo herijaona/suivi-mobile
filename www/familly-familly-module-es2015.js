@@ -13,112 +13,6 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./src/app/pages/global.interaction.ts":
-/*!*********************************************!*\
-  !*** ./src/app/pages/global.interaction.ts ***!
-  \*********************************************/
-/*! exports provided: GlobalInteraction */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GlobalInteraction", function() { return GlobalInteraction; });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
-/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/__ivy_ngcc__/fesm2015/ionic-angular.js");
-
-
-
-let GlobalInteraction = class GlobalInteraction {
-    constructor(toastCtrl, loadingCtrl, alertCtrl) {
-        this.toastCtrl = toastCtrl;
-        this.loadingCtrl = loadingCtrl;
-        this.alertCtrl = alertCtrl;
-        this.isLoading = false;
-    }
-    presentToast(msg) {
-        return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
-            const toast = yield this.toastCtrl.create({
-                message: msg,
-                duration: 1800,
-                position: "top",
-            });
-            toast.present();
-        });
-    }
-    presentLoading() {
-        return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
-            this.isLoading = true;
-            return yield this.loadingCtrl.create({
-                cssClass: "my-loading-class",
-                spinner: "bubbles",
-                translucent: true,
-                duration: 100000,
-            }).then(a => {
-                a.present().then(() => {
-                    if (!this.isLoading) {
-                        a.dismiss();
-                    }
-                });
-            });
-        });
-    }
-    dismissLoading() {
-        return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
-            if (this.isLoading) {
-                this.isLoading = false;
-                return yield this.loadingCtrl.dismiss();
-            }
-            return null;
-        });
-    }
-    alertDelete(id, parent, msg = "Tu veux vraiment supprimé cette element ? ", callback = this.defaultCallback, _header = "Suppression", array = []) {
-        return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
-            const alert = yield this.alertCtrl.create({
-                cssClass: "my-custom-class",
-                header: _header,
-                message: msg,
-                buttons: [
-                    {
-                        text: "Cancel",
-                        role: "cancel",
-                        cssClass: "secondary",
-                        handler: () => {
-                            console.log("Confirm Cancel: blah");
-                        },
-                    },
-                    {
-                        text: "OK",
-                        handler: () => {
-                            console.warn("data deleted " + id);
-                            // this.remove(id, array, keyStatus, RefuseStatus);
-                            callback(id, parent);
-                        },
-                    },
-                ],
-            });
-            yield alert.present();
-        });
-    }
-    defaultCallback(id, parent) {
-        this.presentToast(`this is a default callback ${id} `);
-    }
-};
-GlobalInteraction.ctorParameters = () => [
-    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["ToastController"] },
-    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["LoadingController"] },
-    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["AlertController"] }
-];
-GlobalInteraction = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
-    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
-        providedIn: 'root'
-    })
-], GlobalInteraction);
-
-
-
-/***/ }),
-
 /***/ "./src/app/pages/patient/familly/familly-routing.module.ts":
 /*!*****************************************************************!*\
   !*** ./src/app/pages/patient/familly/familly-routing.module.ts ***!
@@ -270,7 +164,7 @@ let FamillyPage = class FamillyPage {
     }
     getAllGroup() {
         this.patientSrvc.getFamily().subscribe(data => {
-            console.log("LL: FamillyPage -> getAllMyPraticians -> data", data[1]);
+            // console.log("LL: FamillyPage -> getAllMyPraticians -> data", data[1])
             if (data[0][0] && data[0][0] != undefined && data[1] != []) {
                 this.familyGroupe = {
                     groupe_info: data[0],
@@ -285,14 +179,14 @@ let FamillyPage = class FamillyPage {
         });
     }
     createGroup() {
-        console.log("créer groupe !!! ");
+        // console.log("créer groupe !!! ");
     }
     deleteMember(member) {
         const { roles, username } = this.authSrvc.user;
         const _USERNAME = username;
         const CAN_I_DELETE = this.familyGroupe.groupeMember.find(({ username }) => username === _USERNAME);
         if (CAN_I_DELETE && CAN_I_DELETE.Referent == true) {
-            console.warn("attention you delete !!! ", CAN_I_DELETE.patient, "/", this.familyGroupe.groupe_info[0].ID);
+            // console.warn("attention you delete !!! ", CAN_I_DELETE.patient, "/", this.familyGroupe.groupe_info[0].ID);
             this.familyGroupe.groupeMember.find((data, index) => {
                 if (data == CAN_I_DELETE) {
                     if (CAN_I_DELETE == member) {
@@ -301,8 +195,8 @@ let FamillyPage = class FamillyPage {
                         this.globalItem.alertDelete(member.id, this, MSG, this.deleteIt);
                         return;
                     }
-                    console.log("LL: FamillyPage -> deleteMember -> CAN_I_DELETE", member);
-                    console.log("LL: FamillyPage -> deleteMember -> member", member.id);
+                    // console.log("LL: FamillyPage -> deleteMember -> CAN_I_DELETE", member);
+                    // console.log("LL: FamillyPage -> deleteMember -> member", member.id);
                     const MSG = `Tu veux vraiment supprimé ${member.firstName} ?`;
                     this.globalItem.alertDelete(member.id, this, MSG, this.deleteIt);
                     return;
@@ -311,7 +205,7 @@ let FamillyPage = class FamillyPage {
         }
     }
     deleteIt(_id, parent) {
-        console.log("LL: FamillyPage -> deleteIt -> _id", _id);
+        // console.log("LL: FamillyPage -> deleteIt -> _id", _id)
         parent.globalItem.presentLoading();
         // parent.familyGroupe.groupeMember = parent.familyGroupe.groupeMember.slice(index)
         parent.patientSrvc.deleteFamilyMember(_id).subscribe(() => {
@@ -325,9 +219,9 @@ let FamillyPage = class FamillyPage {
             id_group: this.familyGroupe.groupe_info[0].ID
         };
         const SUCCESS = "Success";
-        console.log("LL: FamillyPage -> addNewFamilyMember -> data_to_send", data_to_send);
+        // console.log("LL: FamillyPage -> addNewFamilyMember -> data_to_send", data_to_send);
         this.patientSrvc.addGroupFamilyMember(data_to_send).subscribe(response => {
-            console.log("LL: FamillyPage -> addNewFamilyMember -> response", response);
+            // console.log("LL: FamillyPage -> addNewFamilyMember -> response", response)
             if (response == SUCCESS) {
                 this.globalItem.presentLoading();
                 this.getAllGroup();
@@ -336,9 +230,9 @@ let FamillyPage = class FamillyPage {
         });
     }
     addNewFamilyGroup(data) {
-        console.log("LL: FamillyPage -> addNewFamilyGroup -> data", data);
+        // console.log("LL: FamillyPage -> addNewFamilyGroup -> data", data);
         this.patientSrvc.addGroupFamily(data).subscribe((response) => {
-            console.log("LL: FamillyPage -> addNewFamilyGroup -> response", response);
+            // console.log("LL: FamillyPage -> addNewFamilyGroup -> response", response)
             this.globalItem.presentLoading();
             this.getAllGroup();
         });

@@ -99,6 +99,26 @@
     },
 
     /***/
+    "./node_modules/raw-loader/dist/cjs.js!./src/app/pages/praticien/vaccination/new-vaccination/new-vaccination.component.html":
+    /*!**********************************************************************************************************************************!*\
+      !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/pages/praticien/vaccination/new-vaccination/new-vaccination.component.html ***!
+      \**********************************************************************************************************************************/
+
+    /*! exports provided: default */
+
+    /***/
+    function node_modulesRawLoaderDistCjsJsSrcAppPagesPraticienVaccinationNewVaccinationNewVaccinationComponentHtml(module, __webpack_exports__, __webpack_require__) {
+      "use strict";
+
+      __webpack_require__.r(__webpack_exports__);
+      /* harmony default export */
+
+
+      __webpack_exports__["default"] = "<ion-header>\n  <ion-toolbar>\n    <ion-title>Création de rendez-vous</ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-grid fixed>\n  <ion-row>\n    <ion-col size-md=\"6\" offset-md=\"3\">\n      <ion-card>\n        <ion-card-header>\n          <ion-card-title> </ion-card-title>\n        </ion-card-header>\n        <ion-card-content>\n          <form\n            [formGroup]=\"propositionForm\"\n            (ngSubmit)=\"createVaccin()\"\n            method=\"post\"\n          >\n            <div class=\"mb-14\">\n              <label>choisi un patient</label>\n              <ion-select\n                placeholder=\"Select\"\n                formControlName=\"patient\"\n                required\n              >\n                <ion-select-option\n                  *ngFor=\"let item of patients\"\n                  [value]=\"item.id\"\n                  >{{\n                    item.firstName.toString() + ' ' + item.lastName.toString()\n                  }}</ion-select-option\n                >\n                <!-- <ion-select-option></ion-select-option> -->\n              </ion-select>\n              <!-- <small\n                class=\"form-text red-color\"\n                *ngIf=\"isFieldInvalid(propositionForm, 'patient')\"\n                >This field is required</small\n              > -->\n            </div>\n\n            <div class=\"mb-14\">\n              <label>choisi un vaccin</label>\n              <ion-select\n                placeholder=\"Select\"\n                formControlName=\"vaccin\"\n                required\n              >\n                <ion-select-option\n                  *ngFor=\"let item of vaccins\"\n                  [value]=\"item.id\"\n                  >{{ item.vaccinName }}</ion-select-option\n                >\n                <!-- <ion-select-option></ion-select-option> -->\n              </ion-select>\n              <!-- <small\n                class=\"form-text red-color\"\n                *ngIf=\"isFieldInvalid(propositionForm, 'patient')\"\n                >This field is required</small\n              > -->\n            </div>\n\n            <div class=\"mb-14\">\n              <label>Propose une date </label>\n              <ion-datetime\n                display-format=\"MMM DD, YYYY\"\n                formControlName=\"dateRdv\"\n                required\n              ></ion-datetime>\n              <!-- <small\n                class=\"form-text red-color\"\n                *ngIf=\"isFieldInvalid(propositionForm, 'dateRdv')\"\n                >This field is required</small\n              > -->\n            </div>\n\n            <div class=\"mb-14\">\n              <label>Propose un horaire</label>\n              <ion-datetime\n                display-format=\"h:mm A\"\n                picker-format=\"h:mm A\"\n                formControlName=\"heureRdv\"\n                required\n              ></ion-datetime>\n              <!-- <small\n                class=\"form-text red-color\"\n                *ngIf=\"isFieldInvalid(propositionForm, 'heureRdv')\"\n                >This field is required</small\n              > -->\n            </div>\n\n            <div class=\"mb-14\">\n              <label>Identification</label>\n              <ion-input\n                type=\"text\"\n                required\n                formControlName=\"identification\"\n              ></ion-input\n              ><!-- <small\n                class=\"form-text red-color\"\n                *ngIf=\"isFieldInvalid(propositionForm, 'description')\"\n                >This field is required</small\n              > -->\n            </div>\n\n            <ion-row>\n              <ion-col>\n                <ion-button color=\"sred\" expand=\"block\" (click)=\"dismiss()\">\n                  <ion-icon slot=\"start\" name=\"\"> x </ion-icon\n                  >Cancel</ion-button\n                >\n                <legend class=\"ion-text-center\"></legend>\n                <ion-button type=\"submit\" color=\"sgreen\" expand=\"block\"\n                  ><ion-icon slot=\"start\" name=\"save-outline\"></ion-icon>\n                  Save\n                </ion-button>\n              </ion-col>\n            </ion-row>\n          </form>\n        </ion-card-content>\n      </ion-card>\n    </ion-col>\n  </ion-row>\n</ion-grid>\n";
+      /***/
+    },
+
+    /***/
     "./node_modules/raw-loader/dist/cjs.js!./src/app/pages/praticien/vaccination/organize/organize.component.html":
     /*!********************************************************************************************************************!*\
       !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/pages/praticien/vaccination/organize/organize.component.html ***!
@@ -154,7 +174,7 @@
       /* harmony default export */
 
 
-      __webpack_exports__["default"] = "<ion-header translucent=\"true\">\n  <ion-toolbar>\n    <ion-buttons *ngIf=\"!ios && !showSearchbar\" slot=\"start\">\n      <ion-menu-button></ion-menu-button>\n    </ion-buttons>\n    <ion-menu-button *ngIf=\"ios\"></ion-menu-button>\n\n    <ion-title *ngIf=\"!ios && !showSearchbar\">Vaccination</ion-title>\n    <ion-searchbar\n      *ngIf=\"showSearchbar\"\n      showCancelButton=\"always\"\n      [(ngModel)]=\"queryText\"\n      (ionChange)=\"filterItems($event)\"\n      (ionCancel)=\"showSearchbar = false\"\n      placeholder=\"Rechercher\"\n    ></ion-searchbar>\n    <ion-buttons slot=\"end\">\n      <ion-button *ngIf=\"!ios && !showSearchbar\" (click)=\"showSearchbar = true\">\n        <ion-icon slot=\"icon-only\" name=\"search\"></ion-icon>\n      </ion-button>\n    </ion-buttons>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content fullscreen=\"true\">\n  <ion-header collapse=\"condense\">\n    <ion-toolbar>\n      <ion-title size=\"large\">Vaccination</ion-title>\n    </ion-toolbar>\n    <ion-toolbar>\n      <ion-searchbar\n        [(ngModel)]=\"queryText\"\n        (ionChange)=\"filterItems($event)\"\n        placeholder=\"Search\"\n      ></ion-searchbar>\n    </ion-toolbar>\n  </ion-header>\n\n  <ion-list #scheduleList>\n    <ion-item-group *ngFor=\"let consult of filteredVaccinations\">\n      <ion-item-divider sticky>\n        <ion-label class=\"ion-text-center\"> {{ consult.nomPatient}} </ion-label>\n      </ion-item-divider>\n\n      <ion-item-sliding\n        *ngFor=\"let eachVaccination of consult.groups\"\n        #slidingItem\n      >\n        <ion-item>\n          <ion-grid>\n            <ion-row (click)=\"alert()\">\n              <ion-col size=\"8\">\n                <ion-label class=\"information\">\n                  {{eachVaccination.operation}}\n                </ion-label>\n              </ion-col>\n              <ion-col class=\"middle\" size=\"2\" offset-md=\"2\">\n                <ion-button\n                  *ngIf=\"eachVaccination._status.toString() === this.GENERATE\"\n                  class=\"status\"\n                  color=\"tertiary\"\n                  expand=\"block\"\n                  fill=\"outline\"\n                >\n                  {{eachVaccination._status}}\n                </ion-button>\n\n                <ion-button\n                  *ngIf=\"eachVaccination._status.toString() === this.PENDING\"\n                  class=\"status\"\n                  color=\"sorange\"\n                  expand=\"block\"\n                  fill=\"outline\"\n                >\n                  {{eachVaccination._status}}\n                </ion-button>\n\n                <ion-button\n                  *ngIf=\"eachVaccination._status.toString() === this.REJECTED\"\n                  class=\"status\"\n                  color=\"sred\"\n                  expand=\"block\"\n                  fill=\"outline\"\n                >\n                  {{eachVaccination._status}}\n                </ion-button>\n\n                <ion-button\n                  *ngIf=\"eachVaccination._status.toString() === this.SCHEDULED\"\n                  class=\"status\"\n                  color=\"warning\"\n                  expand=\"block\"\n                  fill=\"outline\"\n                >\n                  {{eachVaccination._status}}\n                </ion-button>\n\n                <ion-button\n                  *ngIf=\"eachVaccination._status.toString() === this.REALIZED\"\n                  class=\"status\"\n                  color=\"sgreen\"\n                  expand=\"block\"\n                  fill=\"outline\"\n                >\n                  {{eachVaccination._status}}\n                </ion-button>\n              </ion-col>\n            </ion-row>\n\n            <ion-row>\n              <ion-col class=\"btn-cnfrm\">\n                <ion-button\n                  *ngIf=\"eachVaccination._action.toString() === this.ACTION_VOIR\"\n                  class=\"status\"\n                  color=\"sgreen\"\n                  (click)=\"watchVaccin(eachVaccination)\"\n                  expand=\"block\"\n                >\n                  <ion-icon slot=\"start\" name=\"eye-outline\"></ion-icon>\n                  <ion-label>voir</ion-label>\n                </ion-button>\n\n                <ion-button\n                  *ngIf=\"eachVaccination._action.toString() === this.ACTION_REALIZED && eachVaccination._status.toString() === this.SCHEDULED\"\n                  class=\"status\"\n                  color=\"tertiary\"\n                  expand=\"block\"\n                  (click)=\"openRealizeVaccModal(eachVaccination)\"\n                >\n                  <ion-icon\n                    slot=\"start\"\n                    name=\"checkmark-circle-outline\"\n                  ></ion-icon>\n                  <ion-label>réalisé</ion-label>\n                </ion-button>\n\n                <!-- <ion-button\n                  *ngIf=\"eachVaccination._action.toString() === this.ACTION_REALIZED && eachVaccination._status.toString() === this.REALIZED\"\n                  class=\"status\"\n                  color=\"sred\"\n                  expand=\"block\"\n                >\n                  <ion-icon slot=\"start\" name=\"close-circle-outline\"></ion-icon>\n                  <ion-label>rejeté</ion-label>\n                </ion-button> -->\n\n                <ion-button\n                  *ngIf=\"eachVaccination._action.toString() === this.ACTION_ORGANIZED_REJECT\"\n                  class=\"status\"\n                  color=\"sgreen\"\n                  expand=\"block\"\n                  (click)=\"organizeVaccinWithNotebook(eachVaccination)\"\n                >\n                  <ion-icon slot=\"start\" name=\"close-circle-outline\"></ion-icon>\n                  <ion-label>organisé</ion-label>\n                </ion-button>\n\n                <ion-button\n                  *ngIf=\"eachVaccination._action.toString() === this.ACTION_ORGANIZED_REJECT\"\n                  class=\"status\"\n                  color=\"sred\"\n                  expand=\"block\"\n                  (click)=\"rejectVaccinWithNotebook(eachVaccination)\"\n                >\n                  <ion-icon slot=\"start\" name=\"close-circle-outline\"></ion-icon>\n                  <ion-label>rejeté</ion-label>\n                </ion-button>\n\n                <ion-button\n                  *ngIf=\"eachVaccination._action.toString() === this.ACTION_GENERATE_REJECT\"\n                  class=\"status\"\n                  color=\"sgreen\"\n                  expand=\"block\"\n                  (click)=\"generateVaccin(eachVaccination)\"\n                >\n                  <ion-icon slot=\"start\" name=\"close-circle-outline\"></ion-icon>\n                  <ion-label>généré</ion-label>\n                </ion-button>\n\n                <ion-button\n                  *ngIf=\"eachVaccination._action.toString() === this.ACTION_GENERATE_REJECT\"\n                  class=\"status\"\n                  color=\"sred\"\n                  expand=\"block\"\n                  (click)=\"rejectVaccin(eachVaccination)\"\n                >\n                  <ion-icon slot=\"start\" name=\"close-circle-outline\"></ion-icon>\n                  <ion-label>rejeté</ion-label>\n                </ion-button>\n\n                <ion-button\n                  *ngIf=\"eachVaccination.operation.toString() === this.OPERATION_INT_VACCINATION\"\n                  class=\"status\"\n                  color=\"sgreen\"\n                  expand=\"block\"\n                  (click)=\"watchVaccinWithNotebook(eachVaccination)\"\n                >\n                  <ion-icon slot=\"start\" name=\"eye-outline\"></ion-icon>\n                  <ion-label>Voir</ion-label>\n                </ion-button>\n              </ion-col>\n            </ion-row>\n          </ion-grid>\n        </ion-item>\n      </ion-item-sliding>\n    </ion-item-group>\n  </ion-list>\n\n  <ion-list-header [hidden]=\"vaccinations.length != 0\">\n    No Sessions Found\n  </ion-list-header>\n\n  <ion-fab slot=\"fixed\" vertical=\"bottom\" horizontal=\"end\" #fab>\n    <ion-fab-button color=\"primary\" (click)=\"alert()\">\n      <ion-icon name=\"add-outline\"></ion-icon>\n    </ion-fab-button>\n  </ion-fab>\n</ion-content>\n";
+      __webpack_exports__["default"] = "<ion-header translucent=\"true\">\n  <ion-toolbar>\n    <ion-buttons *ngIf=\"!ios && !showSearchbar\" slot=\"start\">\n      <ion-menu-button></ion-menu-button>\n    </ion-buttons>\n    <ion-menu-button *ngIf=\"ios\"></ion-menu-button>\n\n    <ion-title *ngIf=\"!ios && !showSearchbar\">Vaccination</ion-title>\n    <ion-searchbar\n      *ngIf=\"showSearchbar\"\n      showCancelButton=\"always\"\n      [(ngModel)]=\"queryText\"\n      (ionChange)=\"filterItems($event)\"\n      (ionCancel)=\"showSearchbar = false\"\n      placeholder=\"Rechercher\"\n    ></ion-searchbar>\n    <ion-buttons slot=\"end\">\n      <ion-button *ngIf=\"!ios && !showSearchbar\" (click)=\"showSearchbar = true\">\n        <ion-icon slot=\"icon-only\" name=\"search\"></ion-icon>\n      </ion-button>\n    </ion-buttons>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content fullscreen=\"true\">\n  <ion-header collapse=\"condense\">\n    <ion-toolbar>\n      <ion-title size=\"large\">Vaccination</ion-title>\n    </ion-toolbar>\n    <ion-toolbar>\n      <ion-searchbar\n        [(ngModel)]=\"queryText\"\n        (ionChange)=\"filterItems($event)\"\n        placeholder=\"Search\"\n      ></ion-searchbar>\n    </ion-toolbar>\n  </ion-header>\n\n  <ion-list #scheduleList>\n    <ion-item-group *ngFor=\"let consult of filteredVaccinations\">\n      <ion-item-divider sticky>\n        <ion-label class=\"ion-text-center\"> {{ consult.nomPatient}} </ion-label>\n      </ion-item-divider>\n\n      <ion-item-sliding\n        *ngFor=\"let eachVaccination of consult.groups\"\n        #slidingItem\n      >\n        <ion-item>\n          <ion-grid>\n            <ion-row (click)=\"alert()\">\n              <ion-col size=\"8\">\n                <ion-label class=\"information\">\n                  {{eachVaccination.operation}}\n                </ion-label>\n              </ion-col>\n              <ion-col class=\"middle\" size=\"2\" offset-md=\"2\">\n                <ion-button\n                  *ngIf=\"eachVaccination._status.toString() === this.GENERATE\"\n                  class=\"status\"\n                  color=\"tertiary\"\n                  expand=\"block\"\n                  fill=\"outline\"\n                >\n                  {{eachVaccination._status}}\n                </ion-button>\n\n                <ion-button\n                  *ngIf=\"eachVaccination._status.toString() === this.PENDING\"\n                  class=\"status\"\n                  color=\"sorange\"\n                  expand=\"block\"\n                  fill=\"outline\"\n                >\n                  {{eachVaccination._status}}\n                </ion-button>\n\n                <ion-button\n                  *ngIf=\"eachVaccination._status.toString() === this.REJECTED\"\n                  class=\"status\"\n                  color=\"sred\"\n                  expand=\"block\"\n                  fill=\"outline\"\n                >\n                  {{eachVaccination._status}}\n                </ion-button>\n\n                <ion-button\n                  *ngIf=\"eachVaccination._status.toString() === this.SCHEDULED\"\n                  class=\"status\"\n                  color=\"warning\"\n                  expand=\"block\"\n                  fill=\"outline\"\n                >\n                  {{eachVaccination._status}}\n                </ion-button>\n\n                <ion-button\n                  *ngIf=\"eachVaccination._status.toString() === this.REALIZED\"\n                  class=\"status\"\n                  color=\"sgreen\"\n                  expand=\"block\"\n                  fill=\"outline\"\n                >\n                  {{eachVaccination._status}}\n                </ion-button>\n              </ion-col>\n            </ion-row>\n\n            <ion-row>\n              <ion-col class=\"btn-cnfrm\">\n                <ion-button\n                  *ngIf=\"eachVaccination._action.toString() === this.ACTION_VOIR\"\n                  class=\"status\"\n                  color=\"sgreen\"\n                  (click)=\"watchVaccin(eachVaccination)\"\n                  expand=\"block\"\n                >\n                  <ion-icon slot=\"start\" name=\"eye-outline\"></ion-icon>\n                  <ion-label>voir</ion-label>\n                </ion-button>\n\n                <ion-button\n                  *ngIf=\"eachVaccination._action.toString() === this.ACTION_REALIZED && eachVaccination._status.toString() === this.SCHEDULED\"\n                  class=\"status\"\n                  color=\"tertiary\"\n                  expand=\"block\"\n                  (click)=\"openRealizeVaccModal(eachVaccination)\"\n                >\n                  <ion-icon\n                    slot=\"start\"\n                    name=\"checkmark-circle-outline\"\n                  ></ion-icon>\n                  <ion-label>réalisé</ion-label>\n                </ion-button>\n\n                <!-- <ion-button\n                  *ngIf=\"eachVaccination._action.toString() === this.ACTION_REALIZED && eachVaccination._status.toString() === this.REALIZED\"\n                  class=\"status\"\n                  color=\"sred\"\n                  expand=\"block\"\n                >\n                  <ion-icon slot=\"start\" name=\"close-circle-outline\"></ion-icon>\n                  <ion-label>rejeté</ion-label>\n                </ion-button> -->\n\n                <ion-button\n                  *ngIf=\"eachVaccination._action.toString() === this.ACTION_ORGANIZED_REJECT\"\n                  class=\"status\"\n                  color=\"sgreen\"\n                  expand=\"block\"\n                  (click)=\"organizeVaccinWithNotebook(eachVaccination)\"\n                >\n                  <ion-icon slot=\"start\" name=\"close-circle-outline\"></ion-icon>\n                  <ion-label>organisé</ion-label>\n                </ion-button>\n\n                <ion-button\n                  *ngIf=\"eachVaccination._action.toString() === this.ACTION_ORGANIZED_REJECT\"\n                  class=\"status\"\n                  color=\"sred\"\n                  expand=\"block\"\n                  (click)=\"rejectVaccinWithNotebook(eachVaccination)\"\n                >\n                  <ion-icon slot=\"start\" name=\"close-circle-outline\"></ion-icon>\n                  <ion-label>rejeté</ion-label>\n                </ion-button>\n\n                <ion-button\n                  *ngIf=\"eachVaccination._action.toString() === this.ACTION_GENERATE_REJECT\"\n                  class=\"status\"\n                  color=\"sgreen\"\n                  expand=\"block\"\n                  (click)=\"generateVaccin(eachVaccination)\"\n                >\n                  <ion-icon slot=\"start\" name=\"close-circle-outline\"></ion-icon>\n                  <ion-label>généré</ion-label>\n                </ion-button>\n\n                <ion-button\n                  *ngIf=\"eachVaccination._action.toString() === this.ACTION_GENERATE_REJECT\"\n                  class=\"status\"\n                  color=\"sred\"\n                  expand=\"block\"\n                  (click)=\"rejectVaccin(eachVaccination)\"\n                >\n                  <ion-icon slot=\"start\" name=\"close-circle-outline\"></ion-icon>\n                  <ion-label>rejeté</ion-label>\n                </ion-button>\n\n                <ion-button\n                  *ngIf=\"eachVaccination.operation.toString() === this.OPERATION_INT_VACCINATION\"\n                  class=\"status\"\n                  color=\"sgreen\"\n                  expand=\"block\"\n                  (click)=\"watchVaccinWithNotebook(eachVaccination)\"\n                >\n                  <ion-icon slot=\"start\" name=\"eye-outline\"></ion-icon>\n                  <ion-label>Voir</ion-label>\n                </ion-button>\n              </ion-col>\n            </ion-row>\n          </ion-grid>\n        </ion-item>\n      </ion-item-sliding>\n    </ion-item-group>\n  </ion-list>\n\n  <ion-list-header [hidden]=\"vaccinations.length != 0\">\n    No Sessions Found\n  </ion-list-header>\n\n  <ion-fab slot=\"fixed\" vertical=\"bottom\" horizontal=\"end\" #fab>\n    <ion-fab-button color=\"primary\" (click)=\"openCreateVaccModal()\">\n      <ion-icon name=\"add-outline\"></ion-icon>\n    </ion-fab-button>\n  </ion-fab>\n</ion-content>\n";
       /***/
     },
 
@@ -317,10 +337,10 @@
                 while (1) {
                   switch (_context2.prev = _context2.next) {
                     case 0:
-                      console.log(' cancel ');
+                      // console.log(' cancel ');
                       this.backToList();
 
-                    case 2:
+                    case 1:
                     case "end":
                       return _context2.stop();
                   }
@@ -361,25 +381,20 @@
             var _this3 = this;
 
             this.globalDataSrvc.getCenterHealthByCity(_idCity).subscribe(function (data) {
-              console.log("LL: GenerateComponent -> getCenterByCity -> this.center_health", data);
+              // console.log("LL: GenerateComponent -> getCenterByCity -> this.center_health", data);
               _this3.center_health = data;
             });
           }
         }, {
           key: "getPraticienByCenter",
           value: function getPraticienByCenter(_idCenter) {
-            var _this4 = this;
-
-            this.globalDataSrvc.getPraticienByCenter(_idCenter).subscribe(function (data) {
-              console.log("LL: GenerateComponent -> getCenterByCity -> this.center_health", data);
-              _this4.praticiens = data;
+            this.globalDataSrvc.getPraticienByCenter(_idCenter).subscribe(function (data) {// console.log("LL: GenerateComponent -> getCenterByCity -> this.center_health", data); this.praticiens = data
             });
           }
         }, {
           key: "postVaccinGeneration",
           value: function postVaccinGeneration(_idPractitioner) {
-            this.patientServc.postVaccinGeneration(_idPractitioner).subscribe(function (data) {
-              return console.log("LL: GenerateComponent -> postVaccinGeneration -> data", data);
+            this.patientServc.postVaccinGeneration(_idPractitioner).subscribe(function (data) {// console.log("LL: GenerateComponent -> postVaccinGeneration -> data", data)
             });
           }
         }]);
@@ -522,11 +537,11 @@
           key: "ngOnInit",
           value: function ngOnInit() {
             // TODO: reserche bar
-            this.navParms.get("praticiens") !== undefined ? this.praticiens = this.navParms.get("praticiens") : this.getAllPraticiens();
-            console.log("LL: InterventionComponent -> ngOnInit -> this.navParms.get()", this.navParms.get("praticiens"));
+            this.navParms.get("praticiens") !== undefined ? this.praticiens = this.navParms.get("praticiens") : this.getAllPraticiens(); // console.log("LL: InterventionComponent -> ngOnInit -> this.navParms.get()", this.navParms.get("praticiens"))
+
             this.carnet = this.navParms.get("vaccin");
-            this.dateVaccin = this.navParms.get("dateVaccin");
-            console.log("InterventionComponent -> ngOnInit -> this.praticiens", this.praticiens);
+            this.dateVaccin = this.navParms.get("dateVaccin"); // console.log("InterventionComponent -> ngOnInit -> this.praticiens", this.praticiens);
+
             this.propositionForm = new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormGroup"]({
               praticien: new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControl"]("", [_angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required])
             });
@@ -539,30 +554,29 @@
         }, {
           key: "intervention",
           value: function intervention(data) {
-            var _this5 = this;
+            var _this4 = this;
 
             var data_send = {
               date_prise: this.carnet.date_prise.date,
               praticien: data,
               vaccin: this.carnet.vaccin,
               id_carnet: this.carnet.id
-            };
-            console.error("***************************LL: InterventionComponent -> ngOnInit -> vaccin", data_send);
+            }; // console.error("***************************LL: InterventionComponent -> ngOnInit -> vaccin", data_send);
+
             this.patientSrvc.interventionPraticien(data_send).subscribe(function (data) {
-              console.log("LL: InterventionComponent -> intervention -> data", data);
+              // console.log("LL: InterventionComponent -> intervention -> data", data);
+              _this4.globalItem.presentToast(data);
 
-              _this5.globalItem.presentToast(data);
-
-              _this5.closeModal();
+              _this4.closeModal();
             });
           }
         }, {
           key: "getAllPraticiens",
           value: function getAllPraticiens() {
-            var _this6 = this;
+            var _this5 = this;
 
             this.praticienSrv.getAllPraticien().subscribe(function (data) {
-              _this6.praticiens = data;
+              _this5.praticiens = data;
             });
           }
         }]);
@@ -875,8 +889,7 @@
           this.OKSTATUS = "REALISED";
           this.PENDINGSTATUS = "PENDING";
           this.PLANIFIED = "PLANIFIED";
-          this.STRING_DATE = "date_prise";
-          console.log("VaccinationPage -> constructor");
+          this.STRING_DATE = "date_prise"; // console.log("VaccinationPage -> constructor");
         }
 
         _createClass(VaccinationPage, [{
@@ -895,13 +908,13 @@
         }, {
           key: "ngOnInit",
           value: function ngOnInit() {
-            console.log("VaccinationPage -> ngOnInit -> ngOnInit");
+            // console.log("VaccinationPage -> ngOnInit -> ngOnInit");
             this.initializeItems();
           }
         }, {
           key: "filterItems",
           value: function filterItems(ev) {
-            var _this7 = this;
+            var _this6 = this;
 
             var query = ev.target.value.toLowerCase();
             requestAnimationFrame(function () {
@@ -910,35 +923,35 @@
               }
 
               var keys = ["vaccin"];
-              _this7.vaccinsFiltered = _this7.dataTransformer.filterItems(query, keys, "status", _this7.segment, _this7.vaccinsFiltered);
+              _this6.vaccinsFiltered = _this6.dataTransformer.filterItems(query, keys, "status", _this6.segment, _this6.vaccinsFiltered);
             });
           }
         }, {
           key: "initializeItems",
           value: function initializeItems() {
-            var _this8 = this;
+            var _this7 = this;
 
             // this.patientSrv.getCarnetVaccinationId(3);
             this.presentLoading();
             this.getAllVaccin();
             this.praticienSrv.getAllPraticien().subscribe(function (data) {
-              console.log("VaccinationPage -> initializeItems -> data", data);
-              _this8.praticiens = data;
+              // console.log("VaccinationPage -> initializeItems -> data", data)
+              _this7.praticiens = data;
             });
           }
         }, {
           key: "getAllVaccin",
           value: function getAllVaccin() {
-            var _this9 = this;
+            var _this8 = this;
 
             this.patientSrv.getVaccinByPatient().subscribe(function (data) {
-              console.log("VaccinationPage -> getAllVaccin -> data", data);
-              _this9.vaccins = data;
-              console.log(" ");
-              _this9.vaccinsShow = _this9.dataTransformer.allData(data, _this9.STRING_DATE).data;
-              _this9.vaccinsFiltered = _this9.dataTransformer.allData(data, _this9.STRING_DATE).dataByDate;
+              // console.log("VaccinationPage -> getAllVaccin -> data", data);
+              _this8.vaccins = data; // console.log(" ");
 
-              _this9.loadingCtrl.dismiss();
+              _this8.vaccinsShow = _this8.dataTransformer.allData(data, _this8.STRING_DATE).data;
+              _this8.vaccinsFiltered = _this8.dataTransformer.allData(data, _this8.STRING_DATE).dataByDate;
+
+              _this8.loadingCtrl.dismiss();
             });
           }
         }, {
@@ -975,15 +988,14 @@
           key: "openNewRdvModal",
           value: function openNewRdvModal(vaccin) {
             return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee4() {
-              var _this10 = this;
+              var _this9 = this;
 
               var newRdvModal;
               return regeneratorRuntime.wrap(function _callee4$(_context4) {
                 while (1) {
                   switch (_context4.prev = _context4.next) {
                     case 0:
-                      console.warn("VaccinationPage -> openNewRdvModal -> nom_vaccin", vaccin, "/");
-                      _context4.next = 3;
+                      _context4.next = 2;
                       return this.modalCtrl.create({
                         component: _intervention_intervention_component__WEBPACK_IMPORTED_MODULE_5__["InterventionComponent"],
                         cssClass: "test-class",
@@ -994,18 +1006,18 @@
                         }
                       });
 
-                    case 3:
+                    case 2:
                       newRdvModal = _context4.sent;
                       newRdvModal.onDidDismiss().then(function () {
-                        _this10.initializeItems();
+                        _this9.initializeItems();
                       });
-                      _context4.next = 7;
+                      _context4.next = 6;
                       return newRdvModal.present();
 
-                    case 7:
+                    case 6:
                       return _context4.abrupt("return", _context4.sent);
 
-                    case 8:
+                    case 7:
                     case "end":
                       return _context4.stop();
                   }
@@ -1017,15 +1029,14 @@
           key: "openGenerateVaccModal",
           value: function openGenerateVaccModal(vaccin) {
             return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee5() {
-              var _this11 = this;
+              var _this10 = this;
 
               var newRdvModal;
               return regeneratorRuntime.wrap(function _callee5$(_context5) {
                 while (1) {
                   switch (_context5.prev = _context5.next) {
                     case 0:
-                      console.warn("VaccinationPage -> openNewRdvModal -> nom_vaccin", vaccin, "/");
-                      _context5.next = 3;
+                      _context5.next = 2;
                       return this.modalCtrl.create({
                         component: _generate_generate_component__WEBPACK_IMPORTED_MODULE_7__["GenerateComponent"],
                         cssClass: "test-class",
@@ -1037,18 +1048,18 @@
                         }
                       });
 
-                    case 3:
+                    case 2:
                       newRdvModal = _context5.sent;
                       newRdvModal.onDidDismiss().then(function () {
-                        _this11.initializeItems();
+                        _this10.initializeItems();
                       });
-                      _context5.next = 7;
+                      _context5.next = 6;
                       return newRdvModal.present();
 
-                    case 7:
+                    case 6:
                       return _context5.abrupt("return", _context5.sent);
 
-                    case 8:
+                    case 7:
                     case "end":
                       return _context5.stop();
                   }
@@ -1169,8 +1180,7 @@
           this.modalCtrl = modalCtrl;
           this.navParms = navParms;
           this.vaccinations = this.navParms.get("data");
-          this.isWithNoteBook = this.navParms.get("isWithNoteBook");
-          console.log(this.vaccinations);
+          this.isWithNoteBook = this.navParms.get("isWithNoteBook"); // console.log(this.vaccinations);
         }
 
         _createClass(DetailsComponent, [{
@@ -1213,6 +1223,264 @@
         /*! ./details.component.scss */
         "./src/app/pages/praticien/vaccination/details/details.component.scss"))["default"]]
       })], DetailsComponent);
+      /***/
+    },
+
+    /***/
+    "./src/app/pages/praticien/vaccination/new-vaccination/new-vaccination.component.scss":
+    /*!********************************************************************************************!*\
+      !*** ./src/app/pages/praticien/vaccination/new-vaccination/new-vaccination.component.scss ***!
+      \********************************************************************************************/
+
+    /*! exports provided: default */
+
+    /***/
+    function srcAppPagesPraticienVaccinationNewVaccinationNewVaccinationComponentScss(module, __webpack_exports__, __webpack_require__) {
+      "use strict";
+
+      __webpack_require__.r(__webpack_exports__);
+      /* harmony default export */
+
+
+      __webpack_exports__["default"] = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL3BhZ2VzL3ByYXRpY2llbi92YWNjaW5hdGlvbi9uZXctdmFjY2luYXRpb24vbmV3LXZhY2NpbmF0aW9uLmNvbXBvbmVudC5zY3NzIn0= */";
+      /***/
+    },
+
+    /***/
+    "./src/app/pages/praticien/vaccination/new-vaccination/new-vaccination.component.ts":
+    /*!******************************************************************************************!*\
+      !*** ./src/app/pages/praticien/vaccination/new-vaccination/new-vaccination.component.ts ***!
+      \******************************************************************************************/
+
+    /*! exports provided: NewVaccinationComponent */
+
+    /***/
+    function srcAppPagesPraticienVaccinationNewVaccinationNewVaccinationComponentTs(module, __webpack_exports__, __webpack_require__) {
+      "use strict";
+
+      __webpack_require__.r(__webpack_exports__);
+      /* harmony export (binding) */
+
+
+      __webpack_require__.d(__webpack_exports__, "NewVaccinationComponent", function () {
+        return NewVaccinationComponent;
+      });
+      /* harmony import */
+
+
+      var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
+      /*! tslib */
+      "./node_modules/tslib/tslib.es6.js");
+      /* harmony import */
+
+
+      var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
+      /*! @angular/core */
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      /* harmony import */
+
+
+      var _angular_forms__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
+      /*! @angular/forms */
+      "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
+      /* harmony import */
+
+
+      var _ionic_angular__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
+      /*! @ionic/angular */
+      "./node_modules/@ionic/angular/__ivy_ngcc__/fesm2015/ionic-angular.js");
+      /* harmony import */
+
+
+      var src_app_pages_global_interaction__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
+      /*! src/app/pages/global.interaction */
+      "./src/app/pages/global.interaction.ts");
+      /* harmony import */
+
+
+      var src_app_services_praticien_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
+      /*! src/app/services/praticien.service */
+      "./src/app/services/praticien.service.ts");
+
+      var NewVaccinationComponent = /*#__PURE__*/function () {
+        function NewVaccinationComponent(praticienSrvc, navCtrl, navParms, modalCtrl, globalItem) {
+          _classCallCheck(this, NewVaccinationComponent);
+
+          this.praticienSrvc = praticienSrvc;
+          this.navCtrl = navCtrl;
+          this.navParms = navParms;
+          this.modalCtrl = modalCtrl;
+          this.globalItem = globalItem;
+          this.patients = [];
+        }
+
+        _createClass(NewVaccinationComponent, [{
+          key: "ngOnInit",
+          value: function ngOnInit() {
+            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee6() {
+              return regeneratorRuntime.wrap(function _callee6$(_context6) {
+                while (1) {
+                  switch (_context6.prev = _context6.next) {
+                    case 0:
+                      this.propositionForm = new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormGroup"]({
+                        patient: new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControl"]("", [_angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required]),
+                        dateRdv: new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControl"]("", [_angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required]),
+                        heureRdv: new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControl"]("", [_angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required]),
+                        identification: new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControl"]("", [_angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required]),
+                        vaccin: new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControl"]("", [_angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required])
+                      }); // this.navParms.get("patients") != undefined ? this.patients = this.navParms.get("patients") : this.getPatientAssoc();
+
+                      this.getPatientAssoc();
+                      this.getVaccins();
+                      this.patients.forEach(function (element) {// console.log("NewRdvComponent -> patients", element.firstName);
+                      });
+
+                    case 4:
+                    case "end":
+                      return _context6.stop();
+                  }
+                }
+              }, _callee6, this);
+            }));
+          }
+        }, {
+          key: "getPatientAssoc",
+          value: function getPatientAssoc() {
+            var _this11 = this;
+
+            this.praticienSrvc.getAssocPatient().subscribe(function (data) {
+              // console.log("LL: NewVaccinationComponent -> getPatientAssoc -> data", data)
+              _this11.patients = data;
+            });
+          }
+        }, {
+          key: "getVaccins",
+          value: function getVaccins() {
+            var _this12 = this;
+
+            this.praticienSrvc.getAllVaccin().subscribe(function (data) {
+              // console.log("LL: NewVaccinationComponent -> getVaccins -> data", data)
+              _this12.vaccins = data;
+            });
+          }
+        }, {
+          key: "isFieldInvalid",
+          value: function isFieldInvalid(dataFormStep, field) {
+            return !dataFormStep.get(field).valid && dataFormStep.get(field).touched || dataFormStep.get(field).untouched && !dataFormStep.get(field).valid;
+          }
+        }, {
+          key: "createVaccin",
+          value: function createVaccin() {
+            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee7() {
+              var _this13 = this;
+
+              var date_to_transform, hour_to_transform, dataToSend;
+              return regeneratorRuntime.wrap(function _callee7$(_context7) {
+                while (1) {
+                  switch (_context7.prev = _context7.next) {
+                    case 0:
+                      this.globalItem.presentLoading();
+                      date_to_transform = (new Date(this.propositionForm.value.dateRdv).getFullYear() + "-" + new Date(this.propositionForm.value.dateRdv).getMonth() + "-" + new Date(this.propositionForm.value.dateRdv).getDate()).toString();
+                      hour_to_transform = (new Date(this.propositionForm.value.heureRdv).getHours() + ":" + new Date(this.propositionForm.value.heureRdv).getMinutes()).toString();
+                      dataToSend = {
+                        identification: this.propositionForm.value.identification,
+                        patient: this.propositionForm.value.patient,
+                        vaccin: this.propositionForm.value.vaccin,
+                        date: date_to_transform,
+                        heure: hour_to_transform
+                      }; // console.log("LL: NewRendezVousComponent -> createRdv -> dataToSend", dataToSend)
+
+                      if (this.propositionForm.valid) {
+                        this.globalItem.presentToast("Vaccin créer");
+                        this.praticienSrvc.createRdv(dataToSend).subscribe(function (data) {
+                          // console.log("LL: NewRendezVousComponent -> createRdv -> data", data)
+                          _this13.globalItem.dismissLoading();
+
+                          _this13.backToList();
+                        });
+                      } else {
+                        this.globalItem.presentToast("Veuillez remplir tous les champs");
+                        this.globalItem.dismissLoading();
+                      }
+
+                    case 5:
+                    case "end":
+                      return _context7.stop();
+                  }
+                }
+              }, _callee7, this);
+            }));
+          }
+        }, {
+          key: "backToList",
+          value: function backToList() {
+            // this.navCtrl.navigateRoot("/praticien/proposition-rdv");
+            this.dismiss();
+          }
+        }, {
+          key: "cancel",
+          value: function cancel() {
+            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee8() {
+              return regeneratorRuntime.wrap(function _callee8$(_context8) {
+                while (1) {
+                  switch (_context8.prev = _context8.next) {
+                    case 0:
+                      // console.log(" cancel ");
+                      this.backToList();
+
+                    case 1:
+                    case "end":
+                      return _context8.stop();
+                  }
+                }
+              }, _callee8, this);
+            }));
+          }
+        }, {
+          key: "dismiss",
+          value: function dismiss() {
+            // using the injected ModalController this page
+            // can "dismiss" itself and optionally pass back data
+            this.modalCtrl.dismiss({
+              dismissed: true
+            });
+          }
+        }]);
+
+        return NewVaccinationComponent;
+      }();
+
+      NewVaccinationComponent.ctorParameters = function () {
+        return [{
+          type: src_app_services_praticien_service__WEBPACK_IMPORTED_MODULE_5__["PraticienService"]
+        }, {
+          type: _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["NavController"]
+        }, {
+          type: _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["NavParams"]
+        }, {
+          type: _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["ModalController"]
+        }, {
+          type: src_app_pages_global_interaction__WEBPACK_IMPORTED_MODULE_4__["GlobalInteraction"]
+        }];
+      };
+
+      NewVaccinationComponent.propDecorators = {
+        test: [{
+          type: _angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"]
+        }],
+        patients: [{
+          type: _angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"]
+        }]
+      };
+      NewVaccinationComponent = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
+        selector: 'app-new-vaccination',
+        template: Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"])(__webpack_require__(
+        /*! raw-loader!./new-vaccination.component.html */
+        "./node_modules/raw-loader/dist/cjs.js!./src/app/pages/praticien/vaccination/new-vaccination/new-vaccination.component.html"))["default"],
+        styles: [Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"])(__webpack_require__(
+        /*! ./new-vaccination.component.scss */
+        "./src/app/pages/praticien/vaccination/new-vaccination/new-vaccination.component.scss"))["default"]]
+      })], NewVaccinationComponent);
       /***/
     },
 
@@ -1305,35 +1573,37 @@
         _createClass(OrganizeComponent, [{
           key: "ngOnInit",
           value: function ngOnInit() {
-            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee6() {
+            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee9() {
               var transform_date;
-              return regeneratorRuntime.wrap(function _callee6$(_context6) {
+              return regeneratorRuntime.wrap(function _callee9$(_context9) {
                 while (1) {
-                  switch (_context6.prev = _context6.next) {
+                  switch (_context9.prev = _context9.next) {
                     case 0:
                       this.data = this.navParms.get("data");
                       transform_date = new Date(this.data.date);
                       this.dateT = (transform_date.getFullYear() + "-" + transform_date.getMonth() + "-" + transform_date.getDate()).toString();
-                      this.hoursT = (new Date(this.dateT).getHours() + "" + new Date(this.dateT).getMinutes()).toString();
-                      console.log("LL: OrganizeComponent -> ngOnInit -> hoursT", this.hoursT);
+                      this.hoursT = (new Date(this.dateT).getHours() + "" + new Date(this.dateT).getMinutes()).toString(); // console.log("LL: OrganizeComponent -> ngOnInit -> hoursT", this.hoursT)
+
                       this.organizeForm = new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormGroup"]({
                         dateRdv: new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControl"]("", [_angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required]),
                         heureRdv: new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControl"]("", [_angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required])
-                      });
-                      console.log("NewRdvComponent -> patients -> test", this.navParms.get("patients"));
+                      }); // console.log(
+                      //   "NewRdvComponent -> patients -> test",
+                      //   this.navParms.get("patients")
+                      // );
 
-                    case 7:
+                    case 5:
                     case "end":
-                      return _context6.stop();
+                      return _context9.stop();
                   }
                 }
-              }, _callee6, this);
+              }, _callee9, this);
             }));
           }
         }, {
           key: "organise",
           value: function organise() {
-            var _this12 = this;
+            var _this14 = this;
 
             this.globalItem.presentLoading();
             var dataToSend = {
@@ -1341,12 +1611,12 @@
               carnet: this.data.idCarnet,
               date: this.dateT,
               heure: this.hoursT
-            };
-            console.log(dataToSend, this.organizeForm.value.dateRdv, this.organizeForm.value.heureRdv);
-            this.praticienSrvc.organiseVaccin(dataToSend).subscribe(function () {
-              _this12.globalItem.dismissLoading();
+            }; // console.log(dataToSend, this.organizeForm.value.dateRdv, this.organizeForm.value.heureRdv);
 
-              _this12.modalCtrl.dismiss();
+            this.praticienSrvc.organiseVaccin(dataToSend).subscribe(function () {
+              _this14.globalItem.dismissLoading();
+
+              _this14.modalCtrl.dismiss();
             });
           }
         }]);
@@ -1475,42 +1745,44 @@
         _createClass(RealizeComponent, [{
           key: "ngOnInit",
           value: function ngOnInit() {
-            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee7() {
-              return regeneratorRuntime.wrap(function _callee7$(_context7) {
+            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee10() {
+              return regeneratorRuntime.wrap(function _callee10$(_context10) {
                 while (1) {
-                  switch (_context7.prev = _context7.next) {
+                  switch (_context10.prev = _context10.next) {
                     case 0:
-                      this.data = this.navParms.get("data");
-                      console.log("LL>>>: RealizeComponent -> ngOnInit -> data", this.data);
+                      this.data = this.navParms.get("data"); // console.log("LL>>>: RealizeComponent -> ngOnInit -> data", this.data)
+
                       this.realizeForm = new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormGroup"]({
                         lot: new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControl"]("", [_angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required])
-                      });
-                      console.log("NewRdvComponent -> patients -> test", this.navParms.get("patients"));
+                      }); // console.log(
+                      //   "NewRdvComponent -> patients -> test",
+                      //   this.navParms.get("patients")
+                      // );
 
-                    case 4:
+                    case 2:
                     case "end":
-                      return _context7.stop();
+                      return _context10.stop();
                   }
                 }
-              }, _callee7, this);
+              }, _callee10, this);
             }));
           }
         }, {
           key: "realize",
           value: function realize() {
-            var _this13 = this;
+            var _this15 = this;
 
             this.globalItem.presentLoading();
             var dataToSend = {
               id: this.data.id,
               carnet: this.data.carnet,
               lot: this.realizeForm.value.lot
-            };
-            console.log("LL: RealizeComponent -> realize -> dataToSend", dataToSend);
-            this.praticienSrvc.realizeVaccin(dataToSend).subscribe(function () {
-              _this13.globalItem.dismissLoading();
+            }; // console.log("LL: RealizeComponent -> realize -> dataToSend", dataToSend)
 
-              _this13.modalCtrl.dismiss();
+            this.praticienSrvc.realizeVaccin(dataToSend).subscribe(function () {
+              _this15.globalItem.dismissLoading();
+
+              _this15.modalCtrl.dismiss();
             });
           }
         }]);
@@ -1680,6 +1952,12 @@
       var _organize_organize_component__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(
       /*! ./organize/organize.component */
       "./src/app/pages/praticien/vaccination/organize/organize.component.ts");
+      /* harmony import */
+
+
+      var _new_vaccination_new_vaccination_component__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(
+      /*! ./new-vaccination/new-vaccination.component */
+      "./src/app/pages/praticien/vaccination/new-vaccination/new-vaccination.component.ts");
 
       var VaccinationPageModule = function VaccinationPageModule() {
         _classCallCheck(this, VaccinationPageModule);
@@ -1687,7 +1965,7 @@
 
       VaccinationPageModule = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["NgModule"])({
         imports: [_angular_common__WEBPACK_IMPORTED_MODULE_2__["CommonModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormsModule"], _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["IonicModule"], _vaccination_routing_module__WEBPACK_IMPORTED_MODULE_5__["VaccinationPageRoutingModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_3__["ReactiveFormsModule"]],
-        declarations: [_vaccination_page__WEBPACK_IMPORTED_MODULE_6__["VaccinationPage"], _details_details_component__WEBPACK_IMPORTED_MODULE_7__["DetailsComponent"], _organize_organize_component__WEBPACK_IMPORTED_MODULE_8__["OrganizeComponent"]]
+        declarations: [_vaccination_page__WEBPACK_IMPORTED_MODULE_6__["VaccinationPage"], _details_details_component__WEBPACK_IMPORTED_MODULE_7__["DetailsComponent"], _organize_organize_component__WEBPACK_IMPORTED_MODULE_8__["OrganizeComponent"], _new_vaccination_new_vaccination_component__WEBPACK_IMPORTED_MODULE_9__["NewVaccinationComponent"]]
       })], VaccinationPageModule);
       /***/
     },
@@ -1785,6 +2063,12 @@
       var _realize_realize_component__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(
       /*! ./realize/realize.component */
       "./src/app/pages/praticien/vaccination/realize/realize.component.ts");
+      /* harmony import */
+
+
+      var _new_vaccination_new_vaccination_component__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(
+      /*! ./new-vaccination/new-vaccination.component */
+      "./src/app/pages/praticien/vaccination/new-vaccination/new-vaccination.component.ts");
 
       var VaccinationPage = /*#__PURE__*/function () {
         // public OKSTATUS = "Accepted";
@@ -1827,8 +2111,7 @@
 
         _createClass(VaccinationPage, [{
           key: "alert",
-          value: function alert() {
-            console.log("ok ++++ ");
+          value: function alert() {// console.log("ok ++++ ");
           }
         }, {
           key: "ngOnInit",
@@ -1839,46 +2122,45 @@
         }, {
           key: "getListVaccinations",
           value: function getListVaccinations() {
-            var _this14 = this;
+            var _this16 = this;
 
             // Close any open sliding items when the  updates
             if (this.List) {
-              console.log("ConsultationPage -> update -> this.List", this.List);
+              // console.log("ConsultationPage -> update -> this.List", this.List);
               this.List.closeSlidingItems();
             } //TODO: get timeline
 
 
             this.praticienSrvc.getListsVaccinations().subscribe(function (data) {
-              console.log("LL: VaccinationPage -> getListVaccinations -> data", data);
-              _this14.vaccinations = data; // this.vaccinationsShow = this.praticienSrvc.regroupDataByDate(data);
+              // console.log("LL: VaccinationPage -> getListVaccinations -> data", data)
+              _this16.vaccinations = data; // this.vaccinationsShow = this.praticienSrvc.regroupDataByDate(data);
 
-              _this14.vaccinationsShow = _this14.praticienSrvc.regroupDataByPatient(data);
-              _this14.filteredVaccinations = _this14.asignOperation(_toConsumableArray(_this14.vaccinationsShow));
-              console.log("LL: VaccinationPage -> getListVaccinations -> this.filteredVaccinations", _this14.filteredVaccinations);
+              _this16.vaccinationsShow = _this16.praticienSrvc.regroupDataByPatient(data);
+              _this16.filteredVaccinations = _this16.asignOperation(_toConsumableArray(_this16.vaccinationsShow)); // console.log("LL: VaccinationPage -> getListVaccinations -> this.filteredVaccinations", this.filteredVaccinations)
             });
           }
         }, {
           key: "openSocial",
           value: function openSocial(network, fab) {
-            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee8() {
+            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee11() {
               var loading;
-              return regeneratorRuntime.wrap(function _callee8$(_context8) {
+              return regeneratorRuntime.wrap(function _callee11$(_context11) {
                 while (1) {
-                  switch (_context8.prev = _context8.next) {
+                  switch (_context11.prev = _context11.next) {
                     case 0:
-                      _context8.next = 2;
+                      _context11.next = 2;
                       return this.loadingCtrl.create({
                         message: "Posting to ".concat(network),
                         duration: Math.random() * 1000 + 500
                       });
 
                     case 2:
-                      loading = _context8.sent;
-                      _context8.next = 5;
+                      loading = _context11.sent;
+                      _context11.next = 5;
                       return loading.present();
 
                     case 5:
-                      _context8.next = 7;
+                      _context11.next = 7;
                       return loading.onWillDismiss();
 
                     case 7:
@@ -1886,10 +2168,10 @@
 
                     case 8:
                     case "end":
-                      return _context8.stop();
+                      return _context11.stop();
                   }
                 }
-              }, _callee8, this);
+              }, _callee11, this);
             }));
           }
         }, {
@@ -1897,13 +2179,13 @@
           value: function openDetailModal(_data) {
             var _isWithNoteBook = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
 
-            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee9() {
+            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee12() {
               var newRdvModal;
-              return regeneratorRuntime.wrap(function _callee9$(_context9) {
+              return regeneratorRuntime.wrap(function _callee12$(_context12) {
                 while (1) {
-                  switch (_context9.prev = _context9.next) {
+                  switch (_context12.prev = _context12.next) {
                     case 0:
-                      _context9.next = 2;
+                      _context12.next = 2;
                       return this.modalCtrl.create({
                         component: _details_details_component__WEBPACK_IMPORTED_MODULE_5__["DetailsComponent"],
                         cssClass: "test-class",
@@ -1917,35 +2199,35 @@
                       });
 
                     case 2:
-                      newRdvModal = _context9.sent;
+                      newRdvModal = _context12.sent;
                       newRdvModal.onDidDismiss().then(function () {// this.initializeItems(); //event on dismiss
                       });
-                      _context9.next = 6;
+                      _context12.next = 6;
                       return newRdvModal.present();
 
                     case 6:
-                      return _context9.abrupt("return", _context9.sent);
+                      return _context12.abrupt("return", _context12.sent);
 
                     case 7:
                     case "end":
-                      return _context9.stop();
+                      return _context12.stop();
                   }
                 }
-              }, _callee9, this);
+              }, _callee12, this);
             }));
           }
         }, {
           key: "openOrganizeModal",
           value: function openOrganizeModal(_data) {
-            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee10() {
-              var _this15 = this;
+            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee13() {
+              var _this17 = this;
 
               var newRdvModal;
-              return regeneratorRuntime.wrap(function _callee10$(_context10) {
+              return regeneratorRuntime.wrap(function _callee13$(_context13) {
                 while (1) {
-                  switch (_context10.prev = _context10.next) {
+                  switch (_context13.prev = _context13.next) {
                     case 0:
-                      _context10.next = 2;
+                      _context13.next = 2;
                       return this.modalCtrl.create({
                         component: _organize_organize_component__WEBPACK_IMPORTED_MODULE_7__["OrganizeComponent"],
                         cssClass: "test-class",
@@ -1956,37 +2238,37 @@
                       });
 
                     case 2:
-                      newRdvModal = _context10.sent;
+                      newRdvModal = _context13.sent;
                       newRdvModal.onDidDismiss().then(function () {
-                        _this15.getListVaccinations(); //event on dismiss
+                        _this17.getListVaccinations(); //event on dismiss
 
                       });
-                      _context10.next = 6;
+                      _context13.next = 6;
                       return newRdvModal.present();
 
                     case 6:
-                      return _context10.abrupt("return", _context10.sent);
+                      return _context13.abrupt("return", _context13.sent);
 
                     case 7:
                     case "end":
-                      return _context10.stop();
+                      return _context13.stop();
                   }
                 }
-              }, _callee10, this);
+              }, _callee13, this);
             }));
           }
         }, {
           key: "openRealizeVaccModal",
           value: function openRealizeVaccModal(_data) {
-            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee11() {
-              var _this16 = this;
+            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee14() {
+              var _this18 = this;
 
               var newRdvModal;
-              return regeneratorRuntime.wrap(function _callee11$(_context11) {
+              return regeneratorRuntime.wrap(function _callee14$(_context14) {
                 while (1) {
-                  switch (_context11.prev = _context11.next) {
+                  switch (_context14.prev = _context14.next) {
                     case 0:
-                      _context11.next = 2;
+                      _context14.next = 2;
                       return this.modalCtrl.create({
                         component: _realize_realize_component__WEBPACK_IMPORTED_MODULE_8__["RealizeComponent"],
                         cssClass: "test-class",
@@ -1997,22 +2279,62 @@
                       });
 
                     case 2:
-                      newRdvModal = _context11.sent;
+                      newRdvModal = _context14.sent;
                       newRdvModal.onDidDismiss().then(function () {
-                        _this16.getListVaccinations();
+                        _this18.getListVaccinations();
                       });
-                      _context11.next = 6;
+                      _context14.next = 6;
                       return newRdvModal.present();
 
                     case 6:
-                      return _context11.abrupt("return", _context11.sent);
+                      return _context14.abrupt("return", _context14.sent);
 
                     case 7:
                     case "end":
-                      return _context11.stop();
+                      return _context14.stop();
                   }
                 }
-              }, _callee11, this);
+              }, _callee14, this);
+            }));
+          }
+        }, {
+          key: "openCreateVaccModal",
+          value: function openCreateVaccModal(_data) {
+            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee15() {
+              var _this19 = this;
+
+              var newRdvModal;
+              return regeneratorRuntime.wrap(function _callee15$(_context15) {
+                while (1) {
+                  switch (_context15.prev = _context15.next) {
+                    case 0:
+                      _context15.next = 2;
+                      return this.modalCtrl.create({
+                        component: _new_vaccination_new_vaccination_component__WEBPACK_IMPORTED_MODULE_9__["NewVaccinationComponent"],
+                        cssClass: "test-class",
+                        swipeToClose: true,
+                        componentProps: {
+                          data: _data
+                        }
+                      });
+
+                    case 2:
+                      newRdvModal = _context15.sent;
+                      newRdvModal.onDidDismiss().then(function () {
+                        _this19.getListVaccinations();
+                      });
+                      _context15.next = 6;
+                      return newRdvModal.present();
+
+                    case 6:
+                      return _context15.abrupt("return", _context15.sent);
+
+                    case 7:
+                    case "end":
+                      return _context15.stop();
+                  }
+                }
+              }, _callee15, this);
             }));
           }
         }, {
@@ -2099,9 +2421,9 @@
                   _status: this.REJECTED,
                   _action: this.ACTION_NULL
                 });
-              }
+              } // console.warn(">>>>>>>>>>>>>>>>>>>>>LL: VaccinationPage -> checkOperation -> data", data)
 
-              console.warn(">>>>>>>>>>>>>>>>>>>>>LL: VaccinationPage -> checkOperation -> data", data);
+
               return Object.assign(data, {
                 operation: this.OPERATION_INT_VACCINATION
               });
@@ -2125,19 +2447,19 @@
 
               var result = Object.assign(data, {
                 operation: this.OPERATION_VACCIN_CALENDAR
-              });
-              console.warn("LL: VaccinationPage -> checkOperation -> data", result);
+              }); // console.warn("LL: VaccinationPage -> checkOperation -> data", result)
+
               return result;
             }
           }
         }, {
           key: "asignOperation",
           value: function asignOperation(filteredVaccinations) {
-            var _this17 = this;
+            var _this20 = this;
 
             filteredVaccinations.forEach(function (element) {
               element.groups.forEach(function (data) {
-                _this17.checkOperation(data);
+                _this20.checkOperation(data);
               });
             });
             return filteredVaccinations;
@@ -2145,116 +2467,112 @@
         }, {
           key: "watchVaccin",
           value: function watchVaccin(_data) {
-            var _this18 = this;
+            var _this21 = this;
 
             this.praticienSrvc.watchVaccin(_data.patient).subscribe(function (data) {
-              console.log("LL: watchVaccin -> _data", data);
-              _this18.seeVaccination = data;
+              // console.log("LL: watchVaccin -> _data", data);
+              _this21.seeVaccination = data;
 
-              _this18.openDetailModal(data);
+              _this21.openDetailModal(data);
             });
           }
         }, {
           key: "generateVaccin",
           value: function generateVaccin(_data) {
-            var _this19 = this;
-
-            this.globalItem.presentLoading();
-            console.log("LL: generateVaccin -> _data", _data);
-            this.praticienSrvc.generateVaccin(_data.id, _data.patient).subscribe(function (data) {
-              console.log("LL: generateVaccin -> data", data);
-
-              _this19.getListVaccinations();
-
-              _this19.globalItem.dismissLoading();
-            });
-          }
-        }, {
-          key: "rejectVaccin",
-          value: function rejectVaccin(_data) {
-            var _this20 = this;
-
-            this.globalItem.presentLoading();
-            console.log("LL: generateVaccin -> _data", _data.id);
-            this.praticienSrvc.rejectVaccin(_data.id).subscribe(function (data) {
-              console.log("LL: generateVaccin -> data", data);
-
-              _this20.getListVaccinations();
-
-              _this20.globalItem.dismissLoading();
-            });
-          }
-        }, {
-          key: "watchVaccinWithNotebook",
-          value: function watchVaccinWithNotebook(_data) {
-            var _this21 = this;
-
-            console.log("LL: watchVaccinWithNotebook -> _data", _data);
-            this.praticienSrvc.watchVaccinWithNotebook(_data.carnet).subscribe(function (data) {
-              console.log("LL: watchVaccin -> _data", data);
-              _this21.seeVaccination = data;
-
-              _this21.openDetailModal(data, true);
-            });
-          }
-        }, {
-          key: "rejectVaccinWithNotebook",
-          value: function rejectVaccinWithNotebook(_data) {
             var _this22 = this;
 
-            console.log("LL: rejectVaccinWithNotebook -> _data", _data.id);
-            this.globalItem.presentLoading();
-            this.praticienSrvc.rejectVaccinithNotebook(_data.id).subscribe(function (data) {
-              console.log("LL: rejectVaccinWithNotebook -> data", data);
+            this.globalItem.presentLoading(); // console.log("LL: generateVaccin -> _data", _data)
 
+            this.praticienSrvc.generateVaccin(_data.id, _data.patient).subscribe(function (data) {
+              // console.log("LL: generateVaccin -> data", data)
               _this22.getListVaccinations();
 
               _this22.globalItem.dismissLoading();
             });
           }
         }, {
+          key: "rejectVaccin",
+          value: function rejectVaccin(_data) {
+            var _this23 = this;
+
+            this.globalItem.presentLoading(); // console.log("LL: generateVaccin -> _data", _data.id)
+
+            this.praticienSrvc.rejectVaccin(_data.id).subscribe(function (data) {
+              // console.log("LL: generateVaccin -> data", data);
+              _this23.getListVaccinations();
+
+              _this23.globalItem.dismissLoading();
+            });
+          }
+        }, {
+          key: "watchVaccinWithNotebook",
+          value: function watchVaccinWithNotebook(_data) {
+            var _this24 = this;
+
+            // console.log("LL: watchVaccinWithNotebook -> _data", _data)
+            this.praticienSrvc.watchVaccinWithNotebook(_data.carnet).subscribe(function (data) {
+              // console.log("LL: watchVaccin -> _data", data);
+              _this24.seeVaccination = data;
+
+              _this24.openDetailModal(data, true);
+            });
+          }
+        }, {
+          key: "rejectVaccinWithNotebook",
+          value: function rejectVaccinWithNotebook(_data) {
+            var _this25 = this;
+
+            // console.log("LL: rejectVaccinWithNotebook -> _data", _data.id)
+            this.globalItem.presentLoading();
+            this.praticienSrvc.rejectVaccinithNotebook(_data.id).subscribe(function (data) {
+              // console.log("LL: rejectVaccinWithNotebook -> data", data)
+              _this25.getListVaccinations();
+
+              _this25.globalItem.dismissLoading();
+            });
+          }
+        }, {
           key: "organizeVaccinWithNotebook",
           value: function organizeVaccinWithNotebook(_data) {
-            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee13() {
-              var _this23 = this;
+            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee17() {
+              var _this26 = this;
 
-              return regeneratorRuntime.wrap(function _callee13$(_context13) {
+              return regeneratorRuntime.wrap(function _callee17$(_context17) {
                 while (1) {
-                  switch (_context13.prev = _context13.next) {
+                  switch (_context17.prev = _context17.next) {
                     case 0:
-                      console.log("LL: organizeVaccinWithNotebook -> _data", _data);
-                      _context13.next = 3;
+                      _context17.next = 2;
                       return this.praticienSrvc.watchVaccinWithNotebook(_data.carnet).subscribe(function (data) {
-                        return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(_this23, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee12() {
+                        return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(_this26, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee16() {
                           var dataToSend;
-                          return regeneratorRuntime.wrap(function _callee12$(_context12) {
+                          return regeneratorRuntime.wrap(function _callee16$(_context16) {
                             while (1) {
-                              switch (_context12.prev = _context12.next) {
+                              switch (_context16.prev = _context16.next) {
                                 case 0:
                                   dataToSend = {
                                     date: data[0].datePriseVaccin.date,
                                     idCarnet: _data.carnet,
                                     id: _data.id
-                                  };
-                                  console.log("LL: organizeVaccinWithNotebook -> dataToSend", dataToSend);
-                                  _context12.next = 4;
+                                  }; // console.log("LL: organizeVaccinWithNotebook -> dataToSend", dataToSend)
+
+                                  _context16.next = 3;
                                   return this.openOrganizeModal(dataToSend);
 
-                                case 4:
+                                case 3:
                                 case "end":
-                                  return _context12.stop();
+                                  return _context16.stop();
                               }
                             }
-                          }, _callee12, this);
+                          }, _callee16, this);
                         }));
                       });
 
-                    case 3:
+                    case 2:
                     case "end":
-                      return _context13.stop();
+                      return _context17.stop();
                   }
                 }
-              }, _callee13, this);
+              }, _callee17, this);
             }));
           }
         }]);

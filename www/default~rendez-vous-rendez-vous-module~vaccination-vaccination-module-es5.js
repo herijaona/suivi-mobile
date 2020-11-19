@@ -21,225 +21,6 @@
 
   (window["webpackJsonp"] = window["webpackJsonp"] || []).push([["default~rendez-vous-rendez-vous-module~vaccination-vaccination-module"], {
     /***/
-    "./src/app/pages/global.interaction.ts":
-    /*!*********************************************!*\
-      !*** ./src/app/pages/global.interaction.ts ***!
-      \*********************************************/
-
-    /*! exports provided: GlobalInteraction */
-
-    /***/
-    function srcAppPagesGlobalInteractionTs(module, __webpack_exports__, __webpack_require__) {
-      "use strict";
-
-      __webpack_require__.r(__webpack_exports__);
-      /* harmony export (binding) */
-
-
-      __webpack_require__.d(__webpack_exports__, "GlobalInteraction", function () {
-        return GlobalInteraction;
-      });
-      /* harmony import */
-
-
-      var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
-      /*! tslib */
-      "./node_modules/tslib/tslib.es6.js");
-      /* harmony import */
-
-
-      var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
-      /*! @angular/core */
-      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
-      /* harmony import */
-
-
-      var _ionic_angular__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
-      /*! @ionic/angular */
-      "./node_modules/@ionic/angular/__ivy_ngcc__/fesm2015/ionic-angular.js");
-
-      var GlobalInteraction = /*#__PURE__*/function () {
-        function GlobalInteraction(toastCtrl, loadingCtrl, alertCtrl) {
-          _classCallCheck(this, GlobalInteraction);
-
-          this.toastCtrl = toastCtrl;
-          this.loadingCtrl = loadingCtrl;
-          this.alertCtrl = alertCtrl;
-          this.isLoading = false;
-        }
-
-        _createClass(GlobalInteraction, [{
-          key: "presentToast",
-          value: function presentToast(msg) {
-            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
-              var toast;
-              return regeneratorRuntime.wrap(function _callee$(_context) {
-                while (1) {
-                  switch (_context.prev = _context.next) {
-                    case 0:
-                      _context.next = 2;
-                      return this.toastCtrl.create({
-                        message: msg,
-                        duration: 1800,
-                        position: "top"
-                      });
-
-                    case 2:
-                      toast = _context.sent;
-                      toast.present();
-
-                    case 4:
-                    case "end":
-                      return _context.stop();
-                  }
-                }
-              }, _callee, this);
-            }));
-          }
-        }, {
-          key: "presentLoading",
-          value: function presentLoading() {
-            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
-              var _this = this;
-
-              return regeneratorRuntime.wrap(function _callee2$(_context2) {
-                while (1) {
-                  switch (_context2.prev = _context2.next) {
-                    case 0:
-                      this.isLoading = true;
-                      _context2.next = 3;
-                      return this.loadingCtrl.create({
-                        cssClass: "my-loading-class",
-                        spinner: "bubbles",
-                        translucent: true,
-                        duration: 100000
-                      }).then(function (a) {
-                        a.present().then(function () {
-                          if (!_this.isLoading) {
-                            a.dismiss();
-                          }
-                        });
-                      });
-
-                    case 3:
-                      return _context2.abrupt("return", _context2.sent);
-
-                    case 4:
-                    case "end":
-                      return _context2.stop();
-                  }
-                }
-              }, _callee2, this);
-            }));
-          }
-        }, {
-          key: "dismissLoading",
-          value: function dismissLoading() {
-            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee3() {
-              return regeneratorRuntime.wrap(function _callee3$(_context3) {
-                while (1) {
-                  switch (_context3.prev = _context3.next) {
-                    case 0:
-                      if (!this.isLoading) {
-                        _context3.next = 5;
-                        break;
-                      }
-
-                      this.isLoading = false;
-                      _context3.next = 4;
-                      return this.loadingCtrl.dismiss();
-
-                    case 4:
-                      return _context3.abrupt("return", _context3.sent);
-
-                    case 5:
-                      return _context3.abrupt("return", null);
-
-                    case 6:
-                    case "end":
-                      return _context3.stop();
-                  }
-                }
-              }, _callee3, this);
-            }));
-          }
-        }, {
-          key: "alertDelete",
-          value: function alertDelete(id, parent) {
-            var msg = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : "Tu veux vraiment supprimé cette element ? ";
-            var callback = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : this.defaultCallback;
-
-            var _header = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : "Suppression";
-
-            var array = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : [];
-            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee4() {
-              var alert;
-              return regeneratorRuntime.wrap(function _callee4$(_context4) {
-                while (1) {
-                  switch (_context4.prev = _context4.next) {
-                    case 0:
-                      _context4.next = 2;
-                      return this.alertCtrl.create({
-                        cssClass: "my-custom-class",
-                        header: _header,
-                        message: msg,
-                        buttons: [{
-                          text: "Cancel",
-                          role: "cancel",
-                          cssClass: "secondary",
-                          handler: function handler() {
-                            console.log("Confirm Cancel: blah");
-                          }
-                        }, {
-                          text: "OK",
-                          handler: function handler() {
-                            console.warn("data deleted " + id); // this.remove(id, array, keyStatus, RefuseStatus);
-
-                            callback(id, parent);
-                          }
-                        }]
-                      });
-
-                    case 2:
-                      alert = _context4.sent;
-                      _context4.next = 5;
-                      return alert.present();
-
-                    case 5:
-                    case "end":
-                      return _context4.stop();
-                  }
-                }
-              }, _callee4, this);
-            }));
-          }
-        }, {
-          key: "defaultCallback",
-          value: function defaultCallback(id, parent) {
-            this.presentToast("this is a default callback ".concat(id, " "));
-          }
-        }]);
-
-        return GlobalInteraction;
-      }();
-
-      GlobalInteraction.ctorParameters = function () {
-        return [{
-          type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["ToastController"]
-        }, {
-          type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["LoadingController"]
-        }, {
-          type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["AlertController"]
-        }];
-      };
-
-      GlobalInteraction = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
-        providedIn: 'root'
-      })], GlobalInteraction);
-      /***/
-    },
-
-    /***/
     "./src/app/services/data-transformer.service.ts":
     /*!******************************************************!*\
       !*** ./src/app/services/data-transformer.service.ts ***!
@@ -299,8 +80,8 @@
           key: "regroupDataByDate",
           value: function regroupDataByDate(data, string_date) {
             var groups = data.reduce(function (groups, eachData) {
-              console.log("regroupDataByDate -> eachData", eachData); // const date = eachData.date_prise.split("T")[0];
-
+              // console.log("regroupDataByDate -> eachData", eachData)
+              // const date = eachData.date_prise.split("T")[0];
               var date = eachData[string_date].date; // const date = eachData.date;
 
               if (!groups[date]) {
@@ -348,7 +129,10 @@
                         var element = _step.value;
 
                         if (res["".concat(subKeyParent)]["".concat(element)].toLowerCase().includes(query)) {
-                          console.log("regroupDataByDate -> subKeyParent true ==========> ", res);
+                          // console.log(
+                          //   "regroupDataByDate -> subKeyParent true ==========> ",
+                          //   res
+                          // );
                           res.show = true;
                           goOnSecondFilter = true;
                           break;
@@ -433,8 +217,8 @@
                   }
                 }
               });
-            });
-            console.log("newData", newData);
+            }); // console.log("newData", newData);
+
             return newData;
           }
         }, {
@@ -457,11 +241,18 @@
                   try {
                     for (_iterator5.s(); !(_step5 = _iterator5.n()).done;) {
                       var key = _step5.value;
-                      console.log("key", key, "exculeded", exculed, "//////////////////////////", element["".concat(key)].toLowerCase());
 
+                      // console.log(
+                      //   "key",
+                      //   key,
+                      //   "exculeded",
+                      //   exculed,
+                      //   "//////////////////////////",
+                      //   element[`${key}`].toLowerCase()
+                      // );
                       if (exculed.includes(element["".concat(key)].toLowerCase())) {
-                        element.show = false;
-                        console.log("element.show ---------------- ", element.show);
+                        element.show = false; // console.log("element.show ---------------- ", element.show);
+
                         break;
                       } else {
                         element.show = true;
@@ -496,8 +287,8 @@
                   }
                 }
               });
-            });
-            console.log("newData", newData);
+            }); // console.log("newData", newData);
+
             return newData;
           }
         }, {
@@ -604,18 +395,16 @@
           key: "getCountry",
           value: function getCountry() {
             var res = this.http.get(this.url_api + "country");
-            res.subscribe(function (data) {
-              console.log("GlobalDataService -> getCountry -> data", data);
+            res.subscribe(function (data) {// console.log("GlobalDataService -> getCountry -> data", data)
             });
             return res;
           }
         }, {
           key: "getCity",
           value: function getCity(id) {
-            var res = this.http.get(this.url_api + "city?id=".concat(id));
-            console.log("GlobalDataService -> constructor -> this.url_api + `city?id=${id}`", this.url_api + "city?id=".concat(id));
-            res.subscribe(function (data) {
-              console.log("GlobalDataService -> getCity -> data", data);
+            var res = this.http.get(this.url_api + "city?id=".concat(id)); // console.log("GlobalDataService -> constructor -> this.url_api + `city?id=${id}`", this.url_api + `city?id=${id}`)
+
+            res.subscribe(function (data) {// console.log("GlobalDataService -> getCity -> data", data)
             });
             return res;
           }
@@ -768,7 +557,7 @@
           key: "getTracksRdv",
           value: function getTracksRdv(excludeTracks) {
             return this.http.get(src_constant__WEBPACK_IMPORTED_MODULE_2__["CONSTANT"].MOCK_DATA_JSON).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["map"])(function (data) {
-              console.log("PatientService -> getTracksRdv -> data", excludeTracks);
+              // console.log("PatientService -> getTracksRdv -> data", excludeTracks);
               return data;
             }));
           } //TODO : Get Vaccin by patient

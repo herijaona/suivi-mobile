@@ -154,7 +154,7 @@ let InterventionPage = class InterventionPage {
     getIntervention() {
         // Close any open sliding items when the  updates
         if (this.List) {
-            console.log("ConsultationPage -> update -> this.List", this.List);
+            // console.log("ConsultationPage -> update -> this.List", this.List);
             this.List.closeSlidingItems();
         }
         //TODO: get timeline
@@ -193,10 +193,10 @@ let InterventionPage = class InterventionPage {
         let temp = [];
         this.interventionFiltered = temp;
         [...this.interventionShow].forEach((item) => {
-            console.log("ConsultationPage -> filterItems -> item", item.groups);
+            // console.log("ConsultationPage -> filterItems -> item", item.groups);
             let data = [];
             item.groups.forEach((res) => {
-                console.log("ConsultationPage  *** -> filterItems -> res", res);
+                // console.log("ConsultationPage  *** -> filterItems -> res", res);
                 if (res.status.includes("Accepted")) {
                     data.push(res);
                 }
@@ -209,7 +209,7 @@ let InterventionPage = class InterventionPage {
         });
     }
     alert() {
-        console.log("ok ++++ ");
+        // console.log("ok ++++ ");
     }
     alertAcceptIntervention(id) {
         return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
@@ -223,13 +223,13 @@ let InterventionPage = class InterventionPage {
                         role: "cancel",
                         cssClass: "secondary",
                         handler: () => {
-                            console.log("Confirm Cancel: blah");
+                            // console.log("Confirm Cancel: blah");
                         },
                     },
                     {
                         text: "OK",
                         handler: () => {
-                            console.log("data accepted " + id);
+                            // console.log("data accepted " + id);
                             this.acceptIntervention(id);
                         },
                     },
@@ -250,13 +250,13 @@ let InterventionPage = class InterventionPage {
                         role: "cancel",
                         cssClass: "secondary",
                         handler: () => {
-                            console.log("Confirm Cancel: blah");
+                            // console.log("Confirm Cancel: blah");
                         },
                     },
                     {
                         text: "OK",
                         handler: () => {
-                            console.log("data refused " + id);
+                            // console.log("data refused " + id);
                             this.removeIntervention(id);
                         },
                     },
@@ -273,7 +273,7 @@ let InterventionPage = class InterventionPage {
         const el = (test) => test.id == id;
         this.intervention.find((element) => element.id == id).status = "Refused";
         const index = this.intervention.findIndex(el);
-        console.log(el);
+        // console.log(el);
         this.intervention.slice(index);
     }
 };

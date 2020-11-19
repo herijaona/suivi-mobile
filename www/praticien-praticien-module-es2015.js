@@ -181,10 +181,10 @@ let PraticienPage = class PraticienPage {
         });
     }
     register() {
-        console.log("register");
+        // console.log("register");
         if (this.praticienRegisterForm.valid) {
             Object.keys(this.praticienRegisterForm.value).forEach((key) => {
-                console.log("valid", this.praticienRegisterForm.value[key]);
+                // console.log("valid", this.praticienRegisterForm.value[key]);
             });
             const dataRegister = {
                 first_name: this.praticienRegisterForm.value['first_name'],
@@ -203,13 +203,13 @@ let PraticienPage = class PraticienPage {
             };
             this.praticienSrv.registerPraticien(dataRegister).subscribe(data => {
                 if (data) {
-                    console.log("PraticienPage -> register -> data", data);
+                    // console.log("PraticienPage -> register -> data", data)
                     this.navCtrl.navigateRoot('/login');
                 }
             });
         }
         else {
-            console.log("NOT valid", this.praticienRegisterForm);
+            // console.log("NOT valid", this.praticienRegisterForm);
         }
     }
     getRndInt(min = 10000, max = 100000) {
@@ -225,7 +225,7 @@ let PraticienPage = class PraticienPage {
     }
     createUsername(birth, gender) {
         const birthday = new Date(birth);
-        console.log("PatientPage -> createUsername -> birthday", birthday);
+        // console.log("PatientPage -> createUsername -> birthday", birthday)
         const sexe = gender.substring(0, 1);
         let mois = "00";
         let jour = "00";
@@ -240,7 +240,7 @@ let PraticienPage = class PraticienPage {
         // jour = birthday.getDay()[0]
         // console.log("PatientPage -> createUsername -> jour", jour)
         const username = sexe + annee + mois + jour + this.getRndInt();
-        console.log("PatientPage -> createUsername -> username", username);
+        // console.log("PatientPage -> createUsername -> username", username)
         return username;
     }
     getCityByCountry(id) {
@@ -291,15 +291,15 @@ let GlobalDataService = class GlobalDataService {
     getCountry() {
         const res = this.http.get(this.url_api + "country");
         res.subscribe(data => {
-            console.log("GlobalDataService -> getCountry -> data", data);
+            // console.log("GlobalDataService -> getCountry -> data", data)
         });
         return res;
     }
     getCity(id) {
         const res = this.http.get(this.url_api + `city?id=${id}`);
-        console.log("GlobalDataService -> constructor -> this.url_api + `city?id=${id}`", this.url_api + `city?id=${id}`);
+        // console.log("GlobalDataService -> constructor -> this.url_api + `city?id=${id}`", this.url_api + `city?id=${id}`)
         res.subscribe(data => {
-            console.log("GlobalDataService -> getCity -> data", data);
+            // console.log("GlobalDataService -> getCity -> data", data)
         });
         return res;
     }

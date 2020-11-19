@@ -486,11 +486,10 @@
             this.filteredConsultation = temp;
 
             _toConsumableArray(this.consultShow).forEach(function (item) {
-              console.log("ConsultationPage -> filterItems -> item", item.groups);
+              // console.log("ConsultationPage -> filterItems -> item", item.groups);
               var data = [];
               item.groups.forEach(function (res) {
-                console.log("ConsultationPage  *** -> filterItems -> res", res);
-
+                // console.log("ConsultationPage  *** -> filterItems -> res", res);
                 if (res.consultationStatus.includes("Accepted")) {
                   data.push(res);
                 }
@@ -509,7 +508,7 @@
 
             // Close any open sliding items when the  updates
             if (this.List) {
-              console.log("ConsultationPage -> update -> this.List", this.List);
+              // console.log("ConsultationPage -> update -> this.List", this.List);
               this.List.closeSlidingItems();
             } //TODO: get timeline
 
@@ -568,19 +567,18 @@
               _this3.filteredConsultation = temp;
 
               _toConsumableArray(_this3.consultShow).forEach(function (item) {
-                console.log("ConsultationPage -> filterItems -> item", item.groups);
+                // console.log("ConsultationPage -> filterItems -> item", item.groups);
                 var data = [];
                 item.groups.forEach(function (res) {
-                  console.log("ConsultationPage  *** -> filterItems -> res", res);
-
+                  // console.log("ConsultationPage  *** -> filterItems -> res", res);
                   if (query && _this3.segment == "all") {
                     if (res.type.includes(query) || res.consultationObjet.includes(query) || res.patient.includes(query)) {
-                      console.log("ConsultationPage -> filterItems -> res", res);
+                      // console.log("ConsultationPage -> filterItems -> res", res);
                       data.push(res);
                     }
                   } else {
                     if (res.consultationStatus === "Accepted" && (res.type.includes(query) || res.consultationObjet.includes(query) || res.patient.includes(query))) {
-                      console.log("ConsultationPage -> filterItems -> res", res);
+                      // console.log("ConsultationPage -> filterItems -> res", res);
                       data.push(res);
                     }
                   }
@@ -595,8 +593,7 @@
           }
         }, {
           key: "alert",
-          value: function alert() {
-            console.log("ok ++++ ");
+          value: function alert() {// console.log("ok ++++ ");
           }
         }, {
           key: "presentFilter",

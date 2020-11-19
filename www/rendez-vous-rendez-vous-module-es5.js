@@ -82,7 +82,27 @@
       /* harmony default export */
 
 
-      __webpack_exports__["default"] = "<ion-header>\n  <ion-toolbar>\n    <ion-title>Création de rendez-vous</ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-grid fixed>\n  <ion-row>\n    <ion-col size-md=\"6\" offset-md=\"3\">\n      <ion-card>\n        <ion-card-header>\n          <ion-card-title> </ion-card-title>\n        </ion-card-header>\n        <ion-card-content>\n          <form\n            [formGroup]=\"propositionForm\"\n            (ngSubmit)=\"propose()\"\n            method=\"post\"\n          >\n            <div class=\"mb-14\">\n              <label>choisi un patient</label>\n              <ion-select\n                placeholder=\"Select\"\n                formControlName=\"patient\"\n                required\n              >\n                <ion-select-option\n                  *ngFor=\"let item of patients\"\n                  [value]=\"item.id\"\n                  >{{\n                    item.firstName.toString() + ' ' + item.lastName.toString()\n                  }}</ion-select-option\n                >\n                <!-- <ion-select-option></ion-select-option> -->\n              </ion-select>\n              <!-- <small\n                class=\"form-text red-color\"\n                *ngIf=\"isFieldInvalid(propositionForm, 'patient')\"\n                >This field is required</small\n              > -->\n            </div>\n\n            <div class=\"mb-14\">\n              <label>Propose une date </label>\n              <ion-datetime\n                display-format=\"MMM DD, YYYY\"\n                formControlName=\"dateRdv\"\n                required\n              ></ion-datetime>\n              <!-- <small\n                class=\"form-text red-color\"\n                *ngIf=\"isFieldInvalid(propositionForm, 'dateRdv')\"\n                >This field is required</small\n              > -->\n            </div>\n\n            <div class=\"mb-14\">\n              <label>Propose un horaire</label>\n              <ion-datetime\n                display-format=\"h:mm A\"\n                picker-format=\"h:mm A\"\n                formControlName=\"heureRdv\"\n                required\n              ></ion-datetime>\n              <!-- <small\n                class=\"form-text red-color\"\n                *ngIf=\"isFieldInvalid(propositionForm, 'heureRdv')\"\n                >This field is required</small\n              > -->\n            </div>\n\n            <div class=\"mb-14\">\n              <label>Description du rendez-vous</label>\n              <ion-input\n                type=\"text\"\n                required\n                formControlName=\"description\"\n              ></ion-input\n              ><!-- <small\n                class=\"form-text red-color\"\n                *ngIf=\"isFieldInvalid(propositionForm, 'description')\"\n                >This field is required</small\n              > -->\n            </div>\n\n            <ion-row>\n              <ion-col>\n                <ion-button color=\"sred\" expand=\"block\" (click)=\"dismiss()\">\n                  <ion-icon slot=\"start\" name=\"\"> x </ion-icon\n                  >Cancel</ion-button\n                >\n                <legend class=\"ion-text-center\"></legend>\n                <ion-button type=\"submit\" color=\"sgreen\" expand=\"block\"\n                  ><ion-icon slot=\"start\" name=\"save-outline\"></ion-icon>\n                  Save\n                </ion-button>\n              </ion-col>\n            </ion-row>\n          </form>\n        </ion-card-content>\n      </ion-card>\n    </ion-col>\n  </ion-row>\n</ion-grid>\n";
+      __webpack_exports__["default"] = "<ion-header>\n  <ion-toolbar>\n    <ion-title>Création de rendez-vous</ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-grid fixed>\n  <ion-row>\n    <ion-col size-md=\"6\" offset-md=\"3\">\n      <ion-card>\n        <ion-card-header>\n          <ion-card-title> </ion-card-title>\n        </ion-card-header>\n        <ion-card-content>\n          <form\n            [formGroup]=\"propositionForm\"\n            (ngSubmit)=\"createRdv()\"\n            method=\"post\"\n          >\n            <div class=\"mb-14\">\n              <label>choisi un patient</label>\n              <ion-select\n                placeholder=\"Select\"\n                formControlName=\"patient\"\n                required\n              >\n                <ion-select-option\n                  *ngFor=\"let item of patients\"\n                  [value]=\"item.id\"\n                  >{{\n                    item.firstName.toString() + ' ' + item.lastName.toString()\n                  }}</ion-select-option\n                >\n                <!-- <ion-select-option></ion-select-option> -->\n              </ion-select>\n              <!-- <small\n                class=\"form-text red-color\"\n                *ngIf=\"isFieldInvalid(propositionForm, 'patient')\"\n                >This field is required</small\n              > -->\n            </div>\n\n            <div class=\"mb-14\">\n              <label>Type</label>\n              <ion-select\n                placeholder=\"Select\"\n                formControlName=\"typeRdv\"\n                required\n              >\n                <ion-select-option value=\"consultation\">\n                  Consultation\n                </ion-select-option>\n                <ion-select-option value=\"intervention\"\n                  >Intervention\n                </ion-select-option>\n              </ion-select>\n              <!-- <small\n                class=\"form-text red-color\"\n                *ngIf=\"isFieldInvalid(propositionForm, 'patient')\"\n                >This field is required</small\n              > -->\n            </div>\n\n            <div class=\"mb-14\">\n              <label>Propose une date </label>\n              <ion-datetime\n                display-format=\"MMM DD, YYYY\"\n                formControlName=\"dateRdv\"\n                required\n              ></ion-datetime>\n              <!-- <small\n                class=\"form-text red-color\"\n                *ngIf=\"isFieldInvalid(propositionForm, 'dateRdv')\"\n                >This field is required</small\n              > -->\n            </div>\n\n            <div class=\"mb-14\">\n              <label>Propose un horaire</label>\n              <ion-datetime\n                display-format=\"h:mm A\"\n                picker-format=\"h:mm A\"\n                formControlName=\"heureRdv\"\n                required\n              ></ion-datetime>\n              <!-- <small\n                class=\"form-text red-color\"\n                *ngIf=\"isFieldInvalid(propositionForm, 'heureRdv')\"\n                >This field is required</small\n              > -->\n            </div>\n\n            <div class=\"mb-14\">\n              <label>Description du rendez-vous</label>\n              <ion-input\n                type=\"text\"\n                required\n                formControlName=\"description\"\n              ></ion-input\n              ><!-- <small\n                class=\"form-text red-color\"\n                *ngIf=\"isFieldInvalid(propositionForm, 'description')\"\n                >This field is required</small\n              > -->\n            </div>\n\n            <ion-row>\n              <ion-col>\n                <ion-button color=\"sred\" expand=\"block\" (click)=\"dismiss()\">\n                  <ion-icon slot=\"start\" name=\"\"> x </ion-icon\n                  >Cancel</ion-button\n                >\n                <legend class=\"ion-text-center\"></legend>\n                <ion-button type=\"submit\" color=\"sgreen\" expand=\"block\"\n                  ><ion-icon slot=\"start\" name=\"save-outline\"></ion-icon>\n                  Save\n                </ion-button>\n              </ion-col>\n            </ion-row>\n          </form>\n        </ion-card-content>\n      </ion-card>\n    </ion-col>\n  </ion-row>\n</ion-grid>\n";
+      /***/
+    },
+
+    /***/
+    "./node_modules/raw-loader/dist/cjs.js!./src/app/pages/praticien/rendez-vous/organize/organize.component.html":
+    /*!********************************************************************************************************************!*\
+      !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/pages/praticien/rendez-vous/organize/organize.component.html ***!
+      \********************************************************************************************************************/
+
+    /*! exports provided: default */
+
+    /***/
+    function node_modulesRawLoaderDistCjsJsSrcAppPagesPraticienRendezVousOrganizeOrganizeComponentHtml(module, __webpack_exports__, __webpack_require__) {
+      "use strict";
+
+      __webpack_require__.r(__webpack_exports__);
+      /* harmony default export */
+
+
+      __webpack_exports__["default"] = "<ion-header>\n  <ion-toolbar>\n    <ion-title>Intervention</ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-grid fixed>\n  <ion-row>\n    <ion-col size-md=\"6\" offset-md=\"3\">\n      <ion-card>\n        <ion-card-header>\n          <ion-card-title><ion-text color=\"sred\"> </ion-text> </ion-card-title>\n        </ion-card-header>\n        <ion-card-content>\n          <form\n            [formGroup]=\"organizeForm\"\n            method=\"post\"\n            (ngSubmit)=\"organise()\"\n          >\n            <div class=\"mb-14\">\n              <label>Propose une date </label>\n              <ion-datetime\n                display-format=\"MMM DD, YYYY\"\n                formControlName=\"dateRdv\"\n                required\n                [(ngModel)]=\"this.dateT\"\n              ></ion-datetime>\n            </div>\n\n            <div class=\"mb-14\">\n              <label>Propose un horaire</label>\n              <ion-datetime\n                display-format=\"h:mm A\"\n                picker-format=\"h:mm A\"\n                formControlName=\"heureRdv\"\n                required\n                [(ngModel)]=\"this.hoursT\"\n              ></ion-datetime>\n            </div>\n            <ion-row>\n              <ion-col>\n                <ion-button color=\"sred\" expand=\"block\">\n                  <ion-icon slot=\"start\" name=\"\"> x </ion-icon\n                  >Cancel</ion-button\n                >\n                <legend class=\"ion-text-center\"></legend>\n                <ion-button type=\"submit\" color=\"sgreen\" expand=\"block\"\n                  ><ion-icon slot=\"start\" name=\"save-outline\"></ion-icon>\n                  Save\n                </ion-button>\n              </ion-col>\n            </ion-row>\n          </form>\n        </ion-card-content>\n      </ion-card>\n    </ion-col>\n  </ion-row>\n</ion-grid>\n";
       /***/
     },
 
@@ -102,7 +122,7 @@
       /* harmony default export */
 
 
-      __webpack_exports__["default"] = "<ion-header translucent=\"true\">\n  <ion-toolbar>\n    <ion-buttons *ngIf=\"!ios && !showSearchbar\" slot=\"start\">\n      <ion-menu-button></ion-menu-button>\n    </ion-buttons>\n    <ion-menu-button *ngIf=\"ios\"></ion-menu-button>\n    <ion-title *ngIf=\"!ios && !showSearchbar\">Rendez-vous</ion-title>\n    <ion-searchbar\n      *ngIf=\"showSearchbar\"\n      showCancelButton=\"always\"\n      [(ngModel)]=\"queryText\"\n      (ionChange)=\"updateRdvList()\"\n      (ionCancel)=\"showSearchbar = false\"\n      placeholder=\"Rechercher\"\n    ></ion-searchbar>\n    <ion-buttons slot=\"end\">\n      <ion-button *ngIf=\"!ios && !showSearchbar\" (click)=\"showSearchbar = true\">\n        <ion-icon slot=\"end\" name=\"search\"></ion-icon>\n      </ion-button>\n      <ion-button *ngIf=\"!showSearchbar\" (click)=\"presentFilter()\">\n        <span *ngIf=\"ios\">Filtrer</span>\n        <span *ngIf=\"!ios\">\n          <ion-icon slot=\"icon-only\" name=\"options\"></ion-icon>\n        </span>\n      </ion-button>\n    </ion-buttons>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content fullscreen=\"true\">\n  <ion-header collapse=\"condense\">\n    <ion-toolbar>\n      <ion-title size=\"large\">Rendez-vous</ion-title>\n    </ion-toolbar>\n    <ion-toolbar>\n      <ion-searchbar\n        [(ngModel)]=\"queryText\"\n        (ionChange)=\"filterItems($event)\"\n        placeholder=\"Search\"\n      ></ion-searchbar>\n    </ion-toolbar>\n  </ion-header>\n\n  <ion-list #scheduleList [hidden]=\"shownSessions === 0\">\n    <ion-item-group *ngFor=\"let rdv of rdvFiltered\">\n      <ion-item-divider sticky>\n        <ion-label class=\"ion-text-center\">\n          {{ rdv.date | date:\"MMM dd, yyyy\"}}\n        </ion-label>\n      </ion-item-divider>\n\n      <ion-item-sliding\n        *ngFor=\"let eachRdv of rdv.groups\"\n        #slidingItem\n        [attr.track]=\"eachRdv.type | lowercase\"\n      >\n        <ion-item *ngIf=\"eachRdv.show === true\">\n          <ion-grid>\n            <ion-row (click)=\"alert()\">\n              <ion-col size=\"12\">\n                <ion-label class=\"information\">\n                  <ion-row>\n                    <ion-col size=\"7\">\n                      <h2 class=\"makeBoldAndLarge\">{{eachRdv.type}}</h2>\n                    </ion-col>\n                    <ion-col class=\"middle\" size=\"2\" offset-md=\"2\">\n                      <ion-button\n                        *ngIf=\"this.checkStatus(eachRdv._status, eachRdv.etat) === this.REALIZED\"\n                        class=\"status\"\n                        color=\"sgreen\"\n                        expand=\"block\"\n                        fill=\"outline\"\n                      >\n                        réalisé\n                      </ion-button>\n\n                      <ion-button\n                        *ngIf=\"this.checkStatus(eachRdv._status, eachRdv.etat) === this.CANCELED\"\n                        class=\"status\"\n                        color=\"sred\"\n                        expand=\"block\"\n                        fill=\"outline\"\n                      >\n                        annulé\n                      </ion-button>\n\n                      <ion-button\n                        *ngIf=\"this.checkStatus(eachRdv._status, eachRdv.etat) === this.SCHEDULED\"\n                        class=\"status\"\n                        color=\"primary\"\n                        expand=\"block\"\n                        fill=\"outline\"\n                      >\n                        planifié\n                      </ion-button>\n\n                      <ion-button\n                        *ngIf=\"this.checkStatus(eachRdv._status, eachRdv.etat) === this.PENDING\"\n                        class=\"status\"\n                        color=\"sorange\"\n                        expand=\"block\"\n                        fill=\"outline\"\n                      >\n                        en attente\n                      </ion-button>\n                    </ion-col>\n                  </ion-row>\n                  <ion-row>\n                    <p>{{eachRdv.firstName + \" \" + eachRdv.lastName}}</p>\n                    <p>{{eachRdv.centreName}}</p>\n                  </ion-row>\n                </ion-label>\n              </ion-col>\n            </ion-row>\n            <ion-row\n              *ngIf=\"this.checkStatus(eachRdv._status, eachRdv.etat) === this.PENDING\"\n            >\n              <ion-col class=\"btn-cnfrm\">\n                <ion-button\n                  (click)=\"alertRemoveRdv(eachRdv.id, eachRdv.type)\"\n                  expand=\"block\"\n                  color=\"primary\"\n                >\n                  <ion-icon name=\"close-circle-outline\" slot=\"start\"></ion-icon>\n                  <ion-label>organisé</ion-label>\n                </ion-button>\n                <ion-button\n                  (click)=\"alertRemoveRdv(eachRdv.id, eachRdv.type)\"\n                  expand=\"block\"\n                  color=\"sred\"\n                >\n                  <ion-icon name=\"close-circle-outline\" slot=\"start\"></ion-icon>\n                  <ion-label>annulé</ion-label>\n                </ion-button>\n              </ion-col>\n            </ion-row>\n            <ion-row\n              *ngIf=\"this.checkStatus(eachRdv._status, eachRdv.etat) === this.SCHEDULED \"\n            >\n              <ion-col class=\"btn-cnfrm\">\n                <ion-button\n                  (click)=\"alertRemoveRdv(eachRdv.id, eachRdv.type)\"\n                  expand=\"block\"\n                  color=\"sgreen\"\n                >\n                  <ion-icon name=\"close-circle-outline\" slot=\"start\"></ion-icon>\n                  <ion-label>réalisé</ion-label>\n                </ion-button>\n              </ion-col>\n            </ion-row>\n          </ion-grid>\n        </ion-item>\n      </ion-item-sliding>\n    </ion-item-group>\n  </ion-list>\n\n  <ion-list-header [hidden]=\"rdvShow.size != 0\">\n    No Sessions Found\n  </ion-list-header>\n\n  <ion-fab slot=\"fixed\" vertical=\"bottom\" horizontal=\"end\" #fab>\n    <ion-fab-button color=\"sgreen\" (click)=\"openNewRdvModal()\">\n      <ion-icon name=\"add\"></ion-icon>\n    </ion-fab-button>\n  </ion-fab>\n</ion-content>\n";
+      __webpack_exports__["default"] = "<ion-header translucent=\"true\">\n  <ion-toolbar>\n    <ion-buttons *ngIf=\"!ios && !showSearchbar\" slot=\"start\">\n      <ion-menu-button></ion-menu-button>\n    </ion-buttons>\n    <ion-menu-button *ngIf=\"ios\"></ion-menu-button>\n    <ion-title *ngIf=\"!ios && !showSearchbar\">Rendez-vous</ion-title>\n    <ion-searchbar\n      *ngIf=\"showSearchbar\"\n      showCancelButton=\"always\"\n      [(ngModel)]=\"queryText\"\n      (ionChange)=\"updateRdvList()\"\n      (ionCancel)=\"showSearchbar = false\"\n      placeholder=\"Rechercher\"\n    ></ion-searchbar>\n    <ion-buttons slot=\"end\">\n      <ion-button *ngIf=\"!ios && !showSearchbar\" (click)=\"showSearchbar = true\">\n        <ion-icon slot=\"end\" name=\"search\"></ion-icon>\n      </ion-button>\n      <ion-button *ngIf=\"!showSearchbar\" (click)=\"presentFilter()\">\n        <span *ngIf=\"ios\">Filtrer</span>\n        <span *ngIf=\"!ios\">\n          <ion-icon slot=\"icon-only\" name=\"options\"></ion-icon>\n        </span>\n      </ion-button>\n    </ion-buttons>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content fullscreen=\"true\">\n  <ion-header collapse=\"condense\">\n    <ion-toolbar>\n      <ion-title size=\"large\">Rendez-vous</ion-title>\n    </ion-toolbar>\n    <ion-toolbar>\n      <ion-searchbar\n        [(ngModel)]=\"queryText\"\n        (ionChange)=\"filterItems($event)\"\n        placeholder=\"Search\"\n      ></ion-searchbar>\n    </ion-toolbar>\n  </ion-header>\n\n  <ion-list #scheduleList [hidden]=\"shownSessions === 0\">\n    <ion-item-group *ngFor=\"let rdv of rdvFiltered\">\n      <ion-item-divider sticky>\n        <ion-label class=\"ion-text-center\">\n          {{ rdv.date | date:\"MMM dd, yyyy\"}}\n        </ion-label>\n      </ion-item-divider>\n\n      <ion-item-sliding\n        *ngFor=\"let eachRdv of rdv.groups\"\n        #slidingItem\n        [attr.track]=\"eachRdv.type | lowercase\"\n      >\n        <ion-item *ngIf=\"eachRdv.show === true\">\n          <ion-grid>\n            <ion-row (click)=\"alert()\">\n              <ion-col size=\"12\">\n                <ion-label class=\"information\">\n                  <ion-row>\n                    <ion-col size=\"7\">\n                      <h2 class=\"makeBoldAndLarge\">{{eachRdv.type}}</h2>\n                    </ion-col>\n                    <ion-col class=\"middle\" size=\"2\" offset-md=\"2\">\n                      <ion-button\n                        *ngIf=\"this.checkStatus(eachRdv._status, eachRdv.etat) === this.REALIZED\"\n                        class=\"status\"\n                        color=\"sgreen\"\n                        expand=\"block\"\n                        fill=\"outline\"\n                      >\n                        réalisé\n                      </ion-button>\n\n                      <ion-button\n                        *ngIf=\"this.checkStatus(eachRdv._status, eachRdv.etat) === this.CANCELED\"\n                        class=\"status\"\n                        color=\"sred\"\n                        expand=\"block\"\n                        fill=\"outline\"\n                      >\n                        annulé\n                      </ion-button>\n\n                      <ion-button\n                        *ngIf=\"this.checkStatus(eachRdv._status, eachRdv.etat) === this.SCHEDULED\"\n                        class=\"status\"\n                        color=\"primary\"\n                        expand=\"block\"\n                        fill=\"outline\"\n                      >\n                        planifié\n                      </ion-button>\n\n                      <ion-button\n                        *ngIf=\"this.checkStatus(eachRdv._status, eachRdv.etat) === this.PENDING\"\n                        class=\"status\"\n                        color=\"sorange\"\n                        expand=\"block\"\n                        fill=\"outline\"\n                      >\n                        en attente\n                      </ion-button>\n                    </ion-col>\n                  </ion-row>\n                  <ion-row>\n                    <p>{{eachRdv.firstName + \" \" + eachRdv.lastName}}</p>\n                    <p>{{eachRdv.centreName}} {{eachRdv.patient}}</p>\n                  </ion-row>\n                </ion-label>\n              </ion-col>\n            </ion-row>\n            <ion-row\n              *ngIf=\"this.checkStatus(eachRdv._status, eachRdv.etat) === this.PENDING\"\n            >\n              <ion-col class=\"btn-cnfrm\">\n                <ion-button\n                  (click)=\"openOrganizeModal(eachRdv)\"\n                  expand=\"block\"\n                  color=\"primary\"\n                  ><ion-icon\n                    name=\"checkmark-circle-outline\"\n                    slot=\"start\"\n                  ></ion-icon>\n                  <ion-label>organisé</ion-label>\n                </ion-button>\n                <ion-button\n                  (click)=\"alertRemoveRdv(eachRdv.id, eachRdv.type)\"\n                  expand=\"block\"\n                  color=\"sred\"\n                >\n                  <ion-icon name=\"close-circle-outline\" slot=\"start\"></ion-icon>\n                  <ion-label>annulé</ion-label>\n                </ion-button>\n              </ion-col>\n            </ion-row>\n            <ion-row\n              *ngIf=\"this.checkStatus(eachRdv._status, eachRdv.etat) === this.SCHEDULED \"\n            >\n              <ion-col class=\"btn-cnfrm\">\n                <ion-button\n                  (click)=\"realizeRdv(eachRdv)\"\n                  expand=\"block\"\n                  color=\"sgreen\"\n                >\n                  <ion-icon name=\"checkbox-outline\" slot=\"start\"></ion-icon>\n                  <ion-label>réalisé</ion-label>\n                </ion-button>\n              </ion-col>\n            </ion-row>\n          </ion-grid>\n        </ion-item>\n      </ion-item-sliding>\n    </ion-item-group>\n  </ion-list>\n\n  <ion-list-header [hidden]=\"rdvShow.size != 0\">\n    No Sessions Found\n  </ion-list-header>\n\n  <ion-fab slot=\"fixed\" vertical=\"bottom\" horizontal=\"end\" #fab>\n    <ion-fab-button color=\"sgreen\" (click)=\"openNewRdvModal()\">\n      <ion-icon name=\"add\"></ion-icon>\n    </ion-fab-button>\n  </ion-fab>\n</ion-content>\n";
       /***/
     },
 
@@ -280,11 +300,15 @@
             var _this2 = this;
 
             this.globalDataSrvc.getCountryByPratictitionerFunction(_idFunction).subscribe(function (data) {
-              console.log('LL: NewRdvComponent -> getCountryByFunction -> data', data);
-
+              // console.log(
+              //   'LL: NewRdvComponent -> getCountryByFunction -> data',
+              //   data
+              // );
               if (data.length == 0) {
-                var VIDE = "Il n'y a pas de praticien présent dans ce pays";
-                console.warn('LL: NewRdvComponent -> getCountryByFunction -> VIDE', VIDE);
+                var VIDE = "Il n'y a pas de praticien présent dans ce pays"; // console.warn(
+                //   'LL: NewRdvComponent -> getCountryByFunction -> VIDE',
+                //   VIDE
+                // );
 
                 _this2.globalInt.presentToast(VIDE);
               }
@@ -299,11 +323,15 @@
 
             this.after_praticien_choice = false;
             this.globalDataSrvc.getCityByPractitionerFunctionAndCountry(_idFunction, _idCountry).subscribe(function (data) {
-              console.log('LL: NewRdvComponent -> getCityByFunctionAndCountry -> data', data);
-
+              // console.log(
+              //   'LL: NewRdvComponent -> getCityByFunctionAndCountry -> data',
+              //   data
+              // );
               if (data.length == 0) {
-                var VIDE = "Il n'y a pas de praticien présent dans ce pays";
-                console.warn('LL: NewRdvComponent -> getCityByFunctionAndCountry -> VIDE', VIDE);
+                var VIDE = "Il n'y a pas de praticien présent dans ce pays"; // console.warn(
+                //   'LL: NewRdvComponent -> getCityByFunctionAndCountry -> VIDE',
+                //   VIDE
+                // );
 
                 _this3.globalInt.presentToast(VIDE);
               }
@@ -318,11 +346,15 @@
 
             this.after_praticien_choice = false;
             this.globalDataSrvc.getPractitionerByFunctionCountryAndCity(_idFunction, _idCountry, _idCity).subscribe(function (data) {
-              console.log('LL: NewRdvComponent -> getPractitionerByFunctionCountryAndCity -> data', data);
-
+              // console.log(
+              //   'LL: NewRdvComponent -> getPractitionerByFunctionCountryAndCity -> data',
+              //   data
+              // );
               if (data.length == 0) {
-                var VIDE = "Il n'y a pas de praticien présent dans ce pays";
-                console.warn('LL: NewRdvComponent -> getPractitionerByFunctionCountryAndCity -> VIDE', VIDE);
+                var VIDE = "Il n'y a pas de praticien présent dans ce pays"; // console.warn(
+                //   'LL: NewRdvComponent -> getPractitionerByFunctionCountryAndCity -> VIDE',
+                //   VIDE
+                // );
 
                 _this4.globalInt.presentToast(VIDE);
               }
@@ -337,8 +369,7 @@
 
             var OK = 'OK';
             this.patientServc.chekIfPractitionerIsAssociated(_idPraticien).subscribe(function (isOK) {
-              console.log("LL: NewRdvComponent -> chekcPractitionerAssocOrNot -> isOK", isOK);
-
+              // console.log("LL: NewRdvComponent -> chekcPractitionerAssocOrNot -> isOK", isOK)
               if (isOK.status === OK) {
                 _this5.showCheckBoxAssoc = true;
               } else {
@@ -382,16 +413,15 @@
                             typeRdv: this.propositionForm.value['typeRdv'],
                             objet: this.propositionForm.value['description']
                           };
-                        }
+                        } // console.error("###################=>  LL: NewRdvComponent -> propose -> data_to_send", data_to_send)
 
-                        console.error("###################=>  LL: NewRdvComponent -> propose -> data_to_send", data_to_send);
+
                         this.patientServc.proposeRdv(data_to_send).subscribe(function (dataV) {
-                          console.log("###################=> LL: NewRdvComponent -> propose -> data", dataV);
-
+                          // console.log("###################=> LL: NewRdvComponent -> propose -> data", dataV)
                           _this6.backToList();
                         });
                       } else {
-                        console.log(' not valid ');
+                        // console.log(' not valid ');
                         this.globalInt.presentToast('completé les champs !!');
                       }
 
@@ -417,10 +447,10 @@
                 while (1) {
                   switch (_context3.prev = _context3.next) {
                     case 0:
-                      console.log(' cancel ');
+                      // console.log(' cancel ');
                       this.backToList();
 
-                    case 2:
+                    case 1:
                     case "end":
                       return _context3.stop();
                   }
@@ -844,7 +874,7 @@
                     case 0:
                       _context5.next = 2;
                       return this.patientSrvc.getAllRdv().subscribe(function (data) {
-                        console.log('RendezVousPage -> getAllData -> data', data);
+                        // console.log('RendezVousPage -> getAllData -> data', data);
                         _this9.rdvs = data;
 
                         var result = _this9.allData(data, _this9.STRING_DATE, _this9.STRING2_DATE);
@@ -890,8 +920,7 @@
           }
         }, {
           key: "alert",
-          value: function alert() {
-            console.log('ok ++++ ');
+          value: function alert() {// console.log('ok ++++ ');
           }
         }, {
           key: "presentFilter",
@@ -1005,7 +1034,10 @@
         }, {
           key: "cancelRdv",
           value: function cancelRdv(dataRdv, parent) {
-            console.log('LL: RendezVousPage -> cancelRdv -> _idRdv, typeRdv', dataRdv);
+            // console.log(
+            //   'LL: RendezVousPage -> cancelRdv -> _idRdv, typeRdv',
+            //   dataRdv
+            // );
             parent.patientSrvc.cancelRdvProposition(dataRdv).subscribe(function () {
               parent.globalItem.presentToast('Rendez-vous annulé!!!');
               parent.getAllData();
@@ -1034,19 +1066,17 @@
         }, {
           key: "regroupDataByDate",
           value: function regroupDataByDate(data, string_date, string2_date) {
-            var _this12 = this;
-
-            console.log('regroupDataByDate -> string_date **** ', string_date);
+            // console.log('regroupDataByDate -> string_date **** ', string_date);
             var groups = data.reduce(function (groups, eachData) {
-              console.log('regroupDataByDate -> eachData', eachData);
+              // console.log('regroupDataByDate -> eachData', eachData);
               var true_date = eachData[string_date] !== undefined ? eachData[string_date] !== null ? eachData[string_date].date : new Date() : eachData[string2_date] !== null ? eachData[string2_date].date : new Date();
               var type_rdv = eachData[string_date] !== undefined ? 'consultation' : 'intervention';
               var allStatus = eachData.status == null ? eachData.statusConsultation : eachData.status;
               var result = Object.assign(eachData, {
                 type: type_rdv,
                 _status: allStatus
-              });
-              console.log("LL: regroupDataByDate -> this.checkStatus(eachData._status, eachData.etat)", _this12.checkStatus(eachData._status, eachData.etat));
+              }); // console.log("LL: regroupDataByDate -> this.checkStatus(eachData._status, eachData.etat)", this.checkStatus(eachData._status, eachData.etat))
+
               var date = true_date;
 
               if (!groups[date]) {
@@ -1064,8 +1094,8 @@
             });
             var sortedActivities = groupArrays.slice().sort(function (a, b) {
               return new Date(a.date).getTime() - new Date(b.date).getTime();
-            });
-            console.log('regroupDataByDate -> sortedActivities', sortedActivities);
+            }); // console.log('regroupDataByDate -> sortedActivities', sortedActivities);
+
             return sortedActivities;
           }
         }, {
@@ -1242,23 +1272,29 @@
         _createClass(RendrezVousFilterComponent, [{
           key: "ionViewWillEnter",
           value: function ionViewWillEnter() {
-            var _this13 = this;
+            var _this12 = this;
 
             this.ios = this.config.get("mode") === "ios"; // passed in array of track names that should be excluded (unchecked)
 
-            var excludedTrackStates = this.navParams.get("excludeTracksStates");
-            console.log("RendrezVousFilterComponent -> ionViewWillEnter -> excludedTracksStates", excludedTrackStates);
-            var excludedTrackTypes = this.navParams.get("excludeTracksTypes");
-            console.log("RendrezVousFilterComponent -> ionViewWillEnter -> excludedTracksTypes", excludedTrackTypes);
+            var excludedTrackStates = this.navParams.get("excludeTracksStates"); // console.log(
+            //   "RendrezVousFilterComponent -> ionViewWillEnter -> excludedTracksStates",
+            //   excludedTrackStates
+            // );
+
+            var excludedTrackTypes = this.navParams.get("excludeTracksTypes"); // console.log(
+            //   "RendrezVousFilterComponent -> ionViewWillEnter -> excludedTracksTypes",
+            //   excludedTrackTypes
+            // );
+
             this.trackStatsMock.forEach(function (track) {
-              _this13.tracksStates.push({
+              _this12.tracksStates.push({
                 name: track.name,
                 icon: track.icon,
                 isChecked: excludedTrackStates === undefined ? true : excludedTrackStates.indexOf(track.name.toLowerCase()) === -1
               });
             });
             this.trackTypeMock.forEach(function (track) {
-              _this13.tracksTypes.push({
+              _this12.tracksTypes.push({
                 name: track.name,
                 icon: track.icon,
                 isChecked: excludedTrackTypes === undefined ? true : excludedTrackTypes.indexOf(track.name.toLowerCase()) === -1
@@ -1300,9 +1336,9 @@
         }, {
           key: "dismiss",
           value: function dismiss(data) {
-            console.log("RendrezVousFilterComponent -> dismiss -> data", data); // using the injected ModalController this page
+            // console.log("RendrezVousFilterComponent -> dismiss -> data", data);
+            // using the injected ModalController this page
             // can "dismiss" itself and pass back data
-
             this.modalCtrl.dismiss(data);
           }
         }]);
@@ -1400,18 +1436,26 @@
       /* harmony import */
 
 
-      var src_app_services_praticien_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
+      var src_app_pages_global_interaction__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
+      /*! src/app/pages/global.interaction */
+      "./src/app/pages/global.interaction.ts");
+      /* harmony import */
+
+
+      var src_app_services_praticien_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
       /*! src/app/services/praticien.service */
       "./src/app/services/praticien.service.ts");
 
       var NewRendezVousComponent = /*#__PURE__*/function () {
-        function NewRendezVousComponent(praticienSrvc, navCtrl, navParms, modalCtrl) {
+        function NewRendezVousComponent(praticienSrvc, navCtrl, navParms, modalCtrl, globalItem) {
           _classCallCheck(this, NewRendezVousComponent);
 
           this.praticienSrvc = praticienSrvc;
           this.navCtrl = navCtrl;
           this.navParms = navParms;
           this.modalCtrl = modalCtrl;
+          this.globalItem = globalItem;
+          this.patients = [];
         }
 
         _createClass(NewRendezVousComponent, [{
@@ -1426,15 +1470,15 @@
                         patient: new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControl"]("", [_angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required]),
                         dateRdv: new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControl"]("", [_angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required]),
                         heureRdv: new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControl"]("", [_angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required]),
-                        description: new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControl"]("", [_angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required])
-                      });
-                      console.log("NewRdvComponent -> patients -> test", this.navParms.get("patients"));
-                      this.patients = this.navParms.get("patients");
-                      this.patients.forEach(function (element) {
-                        console.log("NewRdvComponent -> patients", element.firstName);
+                        description: new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControl"]("", [_angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required]),
+                        typeRdv: new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControl"]("", [_angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required])
+                      }); // this.navParms.get("patients") != undefined ? this.patients = this.navParms.get("patients") : this.getPatientAssoc();
+
+                      this.getPatientAssoc();
+                      this.patients.forEach(function (element) {// console.log("NewRdvComponent -> patients", element.firstName);
                       });
 
-                    case 4:
+                    case 3:
                     case "end":
                       return _context8.stop();
                   }
@@ -1443,38 +1487,55 @@
             }));
           }
         }, {
+          key: "getPatientAssoc",
+          value: function getPatientAssoc() {
+            var _this13 = this;
+
+            this.praticienSrvc.getAssocPatient().subscribe(function (data) {
+              _this13.patients = data;
+            });
+          }
+        }, {
           key: "isFieldInvalid",
           value: function isFieldInvalid(dataFormStep, field) {
             return !dataFormStep.get(field).valid && dataFormStep.get(field).touched || dataFormStep.get(field).untouched && !dataFormStep.get(field).valid;
           }
         }, {
-          key: "propose",
-          value: function propose() {
+          key: "createRdv",
+          value: function createRdv() {
             return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee9() {
-              var prop;
+              var _this14 = this;
+
+              var date_to_transform, hour_to_transform, dataToSend;
               return regeneratorRuntime.wrap(function _callee9$(_context9) {
                 while (1) {
                   switch (_context9.prev = _context9.next) {
                     case 0:
-                      prop = {
-                        description: this.propositionForm.value.description,
+                      this.globalItem.presentLoading();
+                      date_to_transform = (new Date(this.propositionForm.value.dateRdv).getFullYear() + "-" + new Date(this.propositionForm.value.dateRdv).getMonth() + "-" + new Date(this.propositionForm.value.dateRdv).getDate()).toString();
+                      hour_to_transform = (new Date(this.propositionForm.value.heureRdv).getHours() + ":" + new Date(this.propositionForm.value.heureRdv).getMinutes()).toString();
+                      dataToSend = {
+                        objet: this.propositionForm.value.description,
                         patient: this.propositionForm.value.patient,
-                        dateRdv: this.propositionForm.value.dateRdv,
-                        heureRdv: this.propositionForm.value.heureRdv,
-                        // id: await this.praticienSrvc.getUserIDByStorage(),
-                        id: 0
-                      };
-                      console.log(this.propositionForm.value.patient, this.propositionForm.value.dateRdv, this.propositionForm.value.description, this.propositionForm.value.heureRdv, prop.id);
+                        date: date_to_transform,
+                        heure: hour_to_transform,
+                        typeRdv: this.propositionForm.value.typeRdv
+                      }; // console.log("LL: NewRendezVousComponent -> createRdv -> dataToSend", dataToSend)
 
                       if (this.propositionForm.valid) {
-                        console.log(" proposition envoyé ");
-                        this.praticienSrvc.proposeRdv(prop);
-                        this.backToList();
+                        // console.log(" proposition envoyé ");
+                        this.praticienSrvc.createRdv(dataToSend).subscribe(function (data) {
+                          // console.log("LL: NewRendezVousComponent -> createRdv -> data", data)
+                          _this14.globalItem.dismissLoading();
+
+                          _this14.backToList();
+                        });
                       } else {
-                        console.log(" not valid ");
+                        this.globalItem.presentToast("Veuillez remplir tous les champs");
+                        this.globalItem.dismissLoading();
                       }
 
-                    case 3:
+                    case 5:
                     case "end":
                       return _context9.stop();
                   }
@@ -1485,7 +1546,7 @@
         }, {
           key: "backToList",
           value: function backToList() {
-            this.navCtrl.navigateRoot("/praticien/proposition-rdv");
+            // this.navCtrl.navigateRoot("/praticien/proposition-rdv");
             this.dismiss();
           }
         }, {
@@ -1496,10 +1557,10 @@
                 while (1) {
                   switch (_context10.prev = _context10.next) {
                     case 0:
-                      console.log(" cancel ");
+                      // console.log(" cancel ");
                       this.backToList();
 
-                    case 2:
+                    case 1:
                     case "end":
                       return _context10.stop();
                   }
@@ -1523,13 +1584,15 @@
 
       NewRendezVousComponent.ctorParameters = function () {
         return [{
-          type: src_app_services_praticien_service__WEBPACK_IMPORTED_MODULE_4__["PraticienService"]
+          type: src_app_services_praticien_service__WEBPACK_IMPORTED_MODULE_5__["PraticienService"]
         }, {
           type: _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["NavController"]
         }, {
           type: _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["NavParams"]
         }, {
           type: _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["ModalController"]
+        }, {
+          type: src_app_pages_global_interaction__WEBPACK_IMPORTED_MODULE_4__["GlobalInteraction"]
         }];
       };
 
@@ -1550,6 +1613,179 @@
         /*! ./new-rendez-vous.component.scss */
         "./src/app/pages/praticien/rendez-vous/new-rendez-vous/new-rendez-vous.component.scss"))["default"]]
       })], NewRendezVousComponent);
+      /***/
+    },
+
+    /***/
+    "./src/app/pages/praticien/rendez-vous/organize/organize.component.scss":
+    /*!******************************************************************************!*\
+      !*** ./src/app/pages/praticien/rendez-vous/organize/organize.component.scss ***!
+      \******************************************************************************/
+
+    /*! exports provided: default */
+
+    /***/
+    function srcAppPagesPraticienRendezVousOrganizeOrganizeComponentScss(module, __webpack_exports__, __webpack_require__) {
+      "use strict";
+
+      __webpack_require__.r(__webpack_exports__);
+      /* harmony default export */
+
+
+      __webpack_exports__["default"] = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL3BhZ2VzL3ByYXRpY2llbi9yZW5kZXotdm91cy9vcmdhbml6ZS9vcmdhbml6ZS5jb21wb25lbnQuc2NzcyJ9 */";
+      /***/
+    },
+
+    /***/
+    "./src/app/pages/praticien/rendez-vous/organize/organize.component.ts":
+    /*!****************************************************************************!*\
+      !*** ./src/app/pages/praticien/rendez-vous/organize/organize.component.ts ***!
+      \****************************************************************************/
+
+    /*! exports provided: OrganizeComponent */
+
+    /***/
+    function srcAppPagesPraticienRendezVousOrganizeOrganizeComponentTs(module, __webpack_exports__, __webpack_require__) {
+      "use strict";
+
+      __webpack_require__.r(__webpack_exports__);
+      /* harmony export (binding) */
+
+
+      __webpack_require__.d(__webpack_exports__, "OrganizeComponent", function () {
+        return OrganizeComponent;
+      });
+      /* harmony import */
+
+
+      var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
+      /*! tslib */
+      "./node_modules/tslib/tslib.es6.js");
+      /* harmony import */
+
+
+      var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
+      /*! @angular/core */
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      /* harmony import */
+
+
+      var _angular_forms__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
+      /*! @angular/forms */
+      "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
+      /* harmony import */
+
+
+      var _ionic_angular__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
+      /*! @ionic/angular */
+      "./node_modules/@ionic/angular/__ivy_ngcc__/fesm2015/ionic-angular.js");
+      /* harmony import */
+
+
+      var src_app_pages_global_interaction__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
+      /*! src/app/pages/global.interaction */
+      "./src/app/pages/global.interaction.ts");
+      /* harmony import */
+
+
+      var src_app_services_praticien_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
+      /*! src/app/services/praticien.service */
+      "./src/app/services/praticien.service.ts");
+
+      var OrganizeComponent = /*#__PURE__*/function () {
+        function OrganizeComponent(navParms, modalCtrl, praticienSrvc, globalItem) {
+          _classCallCheck(this, OrganizeComponent);
+
+          this.navParms = navParms;
+          this.modalCtrl = modalCtrl;
+          this.praticienSrvc = praticienSrvc;
+          this.globalItem = globalItem;
+        }
+
+        _createClass(OrganizeComponent, [{
+          key: "ngOnInit",
+          value: function ngOnInit() {
+            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee11() {
+              var transform_date;
+              return regeneratorRuntime.wrap(function _callee11$(_context11) {
+                while (1) {
+                  switch (_context11.prev = _context11.next) {
+                    case 0:
+                      this.data = this.navParms.get("data"); // console.log("LL: OrganizeComponent -> ngOnInit -> data", this.data)
+
+                      transform_date = new Date(this.data.date);
+                      this.dateT = (transform_date.getFullYear() + "-" + transform_date.getMonth() + "-" + transform_date.getDate()).toString();
+                      this.hoursT = (new Date(this.dateT).getHours() + ":" + new Date(this.dateT).getMinutes()).toString(); // console.log("LL: OrganizeComponent -> ngOnInit -> hoursT", this.hoursT)
+
+                      this.organizeForm = new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormGroup"]({
+                        dateRdv: new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControl"]("", [_angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required]),
+                        heureRdv: new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControl"]("", [_angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required])
+                      }); // console.log(
+                      //   "NewRdvComponent -> patients -> test",
+                      //   this.navParms.get("patients")
+                      // );
+
+                    case 5:
+                    case "end":
+                      return _context11.stop();
+                  }
+                }
+              }, _callee11, this);
+            }));
+          }
+        }, {
+          key: "organise",
+          value: function organise() {
+            var _this15 = this;
+
+            this.globalItem.presentLoading();
+            var dataToSend = {
+              id: this.data.id,
+              date: (new Date(this.dateT).getFullYear() + "-" + new Date(this.dateT).getMonth() + "-" + new Date(this.dateT).getDate()).toString(),
+              heure: this.hoursT,
+              objet: this.data.objetConsultation,
+              typeRdv: this.data.type
+            }; // console.log("LL: OrganizeComponent -> organise -> dataToSend", dataToSend)
+            // console.log(dataToSend, this.organizeForm.value.dateRdv, this.organizeForm.value.heureRdv);
+
+            this.praticienSrvc.organizeRdv(dataToSend).subscribe(function (data) {
+              // console.log("LL: OrganizeComponent -> organise -> data", data)
+              _this15.globalItem.dismissLoading();
+
+              _this15.modalCtrl.dismiss();
+            });
+          }
+        }]);
+
+        return OrganizeComponent;
+      }();
+
+      OrganizeComponent.ctorParameters = function () {
+        return [{
+          type: _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["NavParams"]
+        }, {
+          type: _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["ModalController"]
+        }, {
+          type: src_app_services_praticien_service__WEBPACK_IMPORTED_MODULE_5__["PraticienService"]
+        }, {
+          type: src_app_pages_global_interaction__WEBPACK_IMPORTED_MODULE_4__["GlobalInteraction"]
+        }];
+      };
+
+      OrganizeComponent.propDecorators = {
+        data: [{
+          type: _angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"]
+        }]
+      };
+      OrganizeComponent = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
+        selector: 'app-organize',
+        template: Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"])(__webpack_require__(
+        /*! raw-loader!./organize.component.html */
+        "./node_modules/raw-loader/dist/cjs.js!./src/app/pages/praticien/rendez-vous/organize/organize.component.html"))["default"],
+        styles: [Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"])(__webpack_require__(
+        /*! ./organize.component.scss */
+        "./src/app/pages/praticien/rendez-vous/organize/organize.component.scss"))["default"]]
+      })], OrganizeComponent);
       /***/
     },
 
@@ -1680,6 +1916,12 @@
       var _new_rendez_vous_new_rendez_vous_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
       /*! ./new-rendez-vous/new-rendez-vous.component */
       "./src/app/pages/praticien/rendez-vous/new-rendez-vous/new-rendez-vous.component.ts");
+      /* harmony import */
+
+
+      var _organize_organize_component__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(
+      /*! ./organize/organize.component */
+      "./src/app/pages/praticien/rendez-vous/organize/organize.component.ts");
 
       var RendezVousPageModule = function RendezVousPageModule() {
         _classCallCheck(this, RendezVousPageModule);
@@ -1687,7 +1929,7 @@
 
       RendezVousPageModule = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["NgModule"])({
         imports: [_angular_common__WEBPACK_IMPORTED_MODULE_2__["CommonModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormsModule"], _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["IonicModule"], _rendez_vous_routing_module__WEBPACK_IMPORTED_MODULE_5__["RendezVousPageRoutingModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_3__["ReactiveFormsModule"]],
-        declarations: [_rendez_vous_page__WEBPACK_IMPORTED_MODULE_6__["RendezVousPage"], _new_rendez_vous_new_rendez_vous_component__WEBPACK_IMPORTED_MODULE_7__["NewRendezVousComponent"]]
+        declarations: [_rendez_vous_page__WEBPACK_IMPORTED_MODULE_6__["RendezVousPage"], _new_rendez_vous_new_rendez_vous_component__WEBPACK_IMPORTED_MODULE_7__["NewRendezVousComponent"], _organize_organize_component__WEBPACK_IMPORTED_MODULE_8__["OrganizeComponent"]]
       })], RendezVousPageModule);
       /***/
     },
@@ -1791,6 +2033,12 @@
       var _new_rendez_vous_new_rendez_vous_component__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(
       /*! ./new-rendez-vous/new-rendez-vous.component */
       "./src/app/pages/praticien/rendez-vous/new-rendez-vous/new-rendez-vous.component.ts");
+      /* harmony import */
+
+
+      var _organize_organize_component__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(
+      /*! ./organize/organize.component */
+      "./src/app/pages/praticien/rendez-vous/organize/organize.component.ts");
 
       var RendezVousPage = /*#__PURE__*/function () {
         function RendezVousPage(alertCtrl, patientSrvc, // TODO : list of data
@@ -1837,75 +2085,75 @@
         }, {
           key: "openNewRdvModal",
           value: function openNewRdvModal() {
-            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee11() {
-              var _this14 = this;
+            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee12() {
+              var _this16 = this;
 
               var newRdvModal;
-              return regeneratorRuntime.wrap(function _callee11$(_context11) {
+              return regeneratorRuntime.wrap(function _callee12$(_context12) {
                 while (1) {
-                  switch (_context11.prev = _context11.next) {
+                  switch (_context12.prev = _context12.next) {
                     case 0:
-                      _context11.next = 2;
+                      _context12.next = 2;
                       return this.modalCtrl.create({
                         component: _new_rendez_vous_new_rendez_vous_component__WEBPACK_IMPORTED_MODULE_9__["NewRendezVousComponent"],
                         cssClass: 'test-class',
                         swipeToClose: true,
                         componentProps: {
-                          // praticiens: this.praticiens,
+                          praticiens: this.praticiens,
                           funcitons: this.functions,
                           test: 'test'
                         }
                       });
 
                     case 2:
-                      newRdvModal = _context11.sent;
+                      newRdvModal = _context12.sent;
                       newRdvModal.onDidDismiss().then(function () {
-                        _this14.updateRdvList();
+                        _this16.getAllData();
                       });
-                      _context11.next = 6;
+                      _context12.next = 6;
                       return newRdvModal.present();
 
                     case 6:
-                      return _context11.abrupt("return", _context11.sent);
+                      return _context12.abrupt("return", _context12.sent);
 
                     case 7:
-                    case "end":
-                      return _context11.stop();
-                  }
-                }
-              }, _callee11, this);
-            }));
-          }
-        }, {
-          key: "getAllData",
-          value: function getAllData() {
-            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee12() {
-              var _this15 = this;
-
-              return regeneratorRuntime.wrap(function _callee12$(_context12) {
-                while (1) {
-                  switch (_context12.prev = _context12.next) {
-                    case 0:
-                      _context12.next = 2;
-                      return this.praticienSrvc.getAllRdv().subscribe(function (data) {
-                        console.log('RendezVousPage -> getAllData -> data', data);
-                        _this15.rdvs = data;
-
-                        var result = _this15.allData(data, _this15.STRING_DATE, _this15.STRING2_DATE);
-
-                        _this15.allBrute = result;
-                        _this15.rdvShow = result.data;
-                        _this15.rdvFiltered = result.dataByDate;
-
-                        _this15.getPraticiens();
-                      });
-
-                    case 2:
                     case "end":
                       return _context12.stop();
                   }
                 }
               }, _callee12, this);
+            }));
+          }
+        }, {
+          key: "getAllData",
+          value: function getAllData() {
+            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee13() {
+              var _this17 = this;
+
+              return regeneratorRuntime.wrap(function _callee13$(_context13) {
+                while (1) {
+                  switch (_context13.prev = _context13.next) {
+                    case 0:
+                      _context13.next = 2;
+                      return this.praticienSrvc.getAllRdv().subscribe(function (data) {
+                        // console.log('RendezVousPage -> getAllData -> data', data);
+                        _this17.rdvs = data;
+
+                        var result = _this17.allData(data, _this17.STRING_DATE, _this17.STRING2_DATE);
+
+                        _this17.allBrute = result;
+                        _this17.rdvShow = result.data;
+                        _this17.rdvFiltered = result.dataByDate;
+
+                        _this17.getPraticiens();
+                      });
+
+                    case 2:
+                    case "end":
+                      return _context13.stop();
+                  }
+                }
+              }, _callee13, this);
             }));
           }
         }, {
@@ -1919,7 +2167,7 @@
         }, {
           key: "filterItems",
           value: function filterItems(ev) {
-            var _this16 = this;
+            var _this18 = this;
 
             var query = ev.target.value.toLowerCase();
             requestAnimationFrame(function () {
@@ -1927,25 +2175,24 @@
                 return;
               }
 
-              _this16.rdvFiltered = _this16.dataTransformer.filterItems(query, ['objetConsultation', 'vaccin'], 'status', _this16.segment, _this16.rdvFiltered, 'praticien', ['firstName', 'lastName']);
+              _this18.rdvFiltered = _this18.dataTransformer.filterItems(query, ['objetConsultation', 'vaccin'], 'status', _this18.segment, _this18.rdvFiltered, 'praticien', ['firstName', 'lastName']);
             });
           }
         }, {
           key: "alert",
-          value: function alert() {
-            console.log('ok ++++ ');
+          value: function alert() {// console.log('ok ++++ ');
           }
         }, {
           key: "presentFilter",
           value: function presentFilter() {
-            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee13() {
+            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee14() {
               var modal, _yield$modal$onWillDi2, data;
 
-              return regeneratorRuntime.wrap(function _callee13$(_context13) {
+              return regeneratorRuntime.wrap(function _callee14$(_context14) {
                 while (1) {
-                  switch (_context13.prev = _context13.next) {
+                  switch (_context14.prev = _context14.next) {
                     case 0:
-                      _context13.next = 2;
+                      _context14.next = 2;
                       return this.modalCtrl.create({
                         component: "RendrezVousFilterComponent",
                         swipeToClose: true,
@@ -1957,16 +2204,16 @@
                       });
 
                     case 2:
-                      modal = _context13.sent;
-                      _context13.next = 5;
+                      modal = _context14.sent;
+                      _context14.next = 5;
                       return modal.present();
 
                     case 5:
-                      _context13.next = 7;
+                      _context14.next = 7;
                       return modal.onWillDismiss();
 
                     case 7:
-                      _yield$modal$onWillDi2 = _context13.sent;
+                      _yield$modal$onWillDi2 = _context14.sent;
                       data = _yield$modal$onWillDi2.data;
 
                       if (data) {
@@ -1977,41 +2224,6 @@
 
                     case 10:
                     case "end":
-                      return _context13.stop();
-                  }
-                }
-              }, _callee13, this);
-            }));
-          }
-        }, {
-          key: "openSocial",
-          value: function openSocial(network, fab) {
-            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee14() {
-              var loading;
-              return regeneratorRuntime.wrap(function _callee14$(_context14) {
-                while (1) {
-                  switch (_context14.prev = _context14.next) {
-                    case 0:
-                      _context14.next = 2;
-                      return this.loadingCtrl.create({
-                        message: "Posting to ".concat(network),
-                        duration: Math.random() * 1000 + 500
-                      });
-
-                    case 2:
-                      loading = _context14.sent;
-                      _context14.next = 5;
-                      return loading.present();
-
-                    case 5:
-                      _context14.next = 7;
-                      return loading.onWillDismiss();
-
-                    case 7:
-                      fab.close();
-
-                    case 8:
-                    case "end":
                       return _context14.stop();
                   }
                 }
@@ -2019,15 +2231,50 @@
             }));
           }
         }, {
+          key: "openSocial",
+          value: function openSocial(network, fab) {
+            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee15() {
+              var loading;
+              return regeneratorRuntime.wrap(function _callee15$(_context15) {
+                while (1) {
+                  switch (_context15.prev = _context15.next) {
+                    case 0:
+                      _context15.next = 2;
+                      return this.loadingCtrl.create({
+                        message: "Posting to ".concat(network),
+                        duration: Math.random() * 1000 + 500
+                      });
+
+                    case 2:
+                      loading = _context15.sent;
+                      _context15.next = 5;
+                      return loading.present();
+
+                    case 5:
+                      _context15.next = 7;
+                      return loading.onWillDismiss();
+
+                    case 7:
+                      fab.close();
+
+                    case 8:
+                    case "end":
+                      return _context15.stop();
+                  }
+                }
+              }, _callee15, this);
+            }));
+          }
+        }, {
           key: "getPraticiens",
           value: function getPraticiens() {
-            var _this17 = this;
+            var _this19 = this;
 
             // TODO APK: à decommenter
             this.praticientSrvc.getAllPraticien().subscribe(function (data) {
-              _this17.praticiens = data;
+              _this19.praticiens = data;
 
-              _this17.globalItem.dismissLoading();
+              _this19.globalItem.dismissLoading();
             });
           }
         }, {
@@ -2047,7 +2294,10 @@
         }, {
           key: "cancelRdv",
           value: function cancelRdv(dataRdv, parent) {
-            console.log('LL: RendezVousPage -> cancelRdv -> _idRdv, typeRdv', dataRdv);
+            // console.log(
+            //   'LL: RendezVousPage -> cancelRdv -> _idRdv, typeRdv',
+            //   dataRdv
+            // );
             parent.patientSrvc.cancelRdvProposition(dataRdv).subscribe(function () {
               parent.globalItem.presentToast('Rendez-vous annulé!!!');
               parent.getAllData();
@@ -2076,11 +2326,9 @@
         }, {
           key: "regroupDataByDate",
           value: function regroupDataByDate(data, string_date, string2_date) {
-            var _this18 = this;
-
-            console.log('regroupDataByDate -> string_date **** ', string_date);
+            // console.log('regroupDataByDate -> string_date **** ', string_date);
             var groups = data.reduce(function (groups, eachData) {
-              console.log('regroupDataByDate -> eachData', eachData);
+              // console.log('regroupDataByDate -> eachData', eachData);
               var true_date = eachData[string_date] !== undefined ? eachData[string_date] !== null ? eachData[string_date].date : new Date() : eachData[string2_date] !== null ? eachData[string2_date].date : new Date();
               var type_rdv = eachData[string_date] !== undefined ? 'consultation' : 'intervention';
               var allStatus = eachData.status == null ? eachData.statusConsultation : eachData.status;
@@ -2088,8 +2336,8 @@
                 type: type_rdv,
                 _status: allStatus,
                 date: true_date
-              });
-              console.log("LL: regroupDataByDate -> this.checkStatus(eachData._status, eachData.etat)", _this18.checkStatus(eachData._status, eachData.etat));
+              }); // console.log("LL: regroupDataByDate -> this.checkStatus(eachData._status, eachData.etat)", this.checkStatus(eachData._status, eachData.etat))
+
               var date = true_date;
 
               if (!groups[date]) {
@@ -2107,8 +2355,8 @@
             });
             var sortedActivities = groupArrays.slice().sort(function (a, b) {
               return new Date(a.date).getTime() - new Date(b.date).getTime();
-            });
-            console.log('regroupDataByDate -> sortedActivities', sortedActivities);
+            }); // console.log('regroupDataByDate -> sortedActivities', sortedActivities);
+
             return sortedActivities;
           }
         }, {
@@ -2125,6 +2373,76 @@
             } else if (statusConsultation == 2) {
               return this.CANCELED;
             }
+          }
+        }, {
+          key: "openOrganizeModal",
+          value: function openOrganizeModal(_data) {
+            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee16() {
+              var _this20 = this;
+
+              var newRdvModal;
+              return regeneratorRuntime.wrap(function _callee16$(_context16) {
+                while (1) {
+                  switch (_context16.prev = _context16.next) {
+                    case 0:
+                      _context16.next = 2;
+                      return this.modalCtrl.create({
+                        component: _organize_organize_component__WEBPACK_IMPORTED_MODULE_10__["OrganizeComponent"],
+                        cssClass: "test-class",
+                        swipeToClose: true,
+                        componentProps: {
+                          data: _data
+                        }
+                      });
+
+                    case 2:
+                      newRdvModal = _context16.sent;
+                      newRdvModal.onDidDismiss().then(function () {
+                        _this20.getAllData(); //event on dismiss
+
+                      });
+                      _context16.next = 6;
+                      return newRdvModal.present();
+
+                    case 6:
+                      return _context16.abrupt("return", _context16.sent);
+
+                    case 7:
+                    case "end":
+                      return _context16.stop();
+                  }
+                }
+              }, _callee16, this);
+            }));
+          }
+        }, {
+          key: "realizeRdv",
+          value: function realizeRdv(_data) {
+            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee17() {
+              var _this21 = this;
+
+              var dataToSend;
+              return regeneratorRuntime.wrap(function _callee17$(_context17) {
+                while (1) {
+                  switch (_context17.prev = _context17.next) {
+                    case 0:
+                      dataToSend = {
+                        id: _data.id,
+                        typeRdv: _data.type
+                      }; // console.log("LL: realizeRdv -> data", dataToSend)
+
+                      this.praticienSrvc.realizeRdv(dataToSend).subscribe(function (data) {
+                        // console.log("LL: realizeRdv -> data", data);
+                        _this21.getAllData();
+                      });
+
+                    case 2:
+                    case "end":
+                      return _context17.stop();
+                  }
+                }
+              }, _callee17, this);
+            }));
           }
         }]);
 
@@ -2232,15 +2550,15 @@
             var array = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : [];
             var keyStatus = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : "status";
             var OkStatus = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : "Accepted";
-            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee15() {
-              var _this19 = this;
+            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee18() {
+              var _this22 = this;
 
               var alert;
-              return regeneratorRuntime.wrap(function _callee15$(_context15) {
+              return regeneratorRuntime.wrap(function _callee18$(_context18) {
                 while (1) {
-                  switch (_context15.prev = _context15.next) {
+                  switch (_context18.prev = _context18.next) {
                     case 0:
-                      _context15.next = 2;
+                      _context18.next = 2;
                       return this.alertCtrl.create({
                         cssClass: "my-custom-class",
                         header: "Accept",
@@ -2249,30 +2567,28 @@
                           text: "Cancel",
                           role: "cancel",
                           cssClass: "secondary",
-                          handler: function handler() {
-                            console.log("Confirm Cancel: blah");
+                          handler: function handler() {// console.log("Confirm Cancel: blah");
                           }
                         }, {
                           text: "OK",
                           handler: function handler() {
-                            console.log("data accepted " + id);
-
-                            _this19.accept(id, array, keyStatus, OkStatus);
+                            // console.log("data accepted " + id);
+                            _this22.accept(id, array, keyStatus, OkStatus);
                           }
                         }]
                       });
 
                     case 2:
-                      alert = _context15.sent;
-                      _context15.next = 5;
+                      alert = _context18.sent;
+                      _context18.next = 5;
                       return alert.present();
 
                     case 5:
                     case "end":
-                      return _context15.stop();
+                      return _context18.stop();
                   }
                 }
-              }, _callee15, this);
+              }, _callee18, this);
             }));
           }
         }, {
@@ -2281,15 +2597,15 @@
             var array = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : [];
             var keyStatus = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : "status";
             var RefuseStatus = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : "Refused";
-            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee16() {
-              var _this20 = this;
+            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee19() {
+              var _this23 = this;
 
               var alert;
-              return regeneratorRuntime.wrap(function _callee16$(_context16) {
+              return regeneratorRuntime.wrap(function _callee19$(_context19) {
                 while (1) {
-                  switch (_context16.prev = _context16.next) {
+                  switch (_context19.prev = _context19.next) {
                     case 0:
-                      _context16.next = 2;
+                      _context19.next = 2;
                       return this.alertCtrl.create({
                         cssClass: "my-custom-class",
                         header: "Refuse",
@@ -2298,30 +2614,28 @@
                           text: "Cancel",
                           role: "cancel",
                           cssClass: "secondary",
-                          handler: function handler() {
-                            console.log("Confirm Cancel: blah");
+                          handler: function handler() {// console.log("Confirm Cancel: blah");
                           }
                         }, {
                           text: "OK",
                           handler: function handler() {
-                            console.log("data refused " + id);
-
-                            _this20.remove(id, array, keyStatus, RefuseStatus);
+                            // console.log("data refused " + id);
+                            _this23.remove(id, array, keyStatus, RefuseStatus);
                           }
                         }]
                       });
 
                     case 2:
-                      alert = _context16.sent;
-                      _context16.next = 5;
+                      alert = _context19.sent;
+                      _context19.next = 5;
                       return alert.present();
 
                     case 5:
                     case "end":
-                      return _context16.stop();
+                      return _context19.stop();
                   }
                 }
-              }, _callee16, this);
+              }, _callee19, this);
             }));
           } // TODO:change by id // actually it s his name
 
@@ -2349,8 +2663,8 @@
             array.find(function (element) {
               return element.id == id;
             })["".concat(keyStatus)] = RefuseStatus;
-            var index = array.findIndex(el);
-            console.log(el);
+            var index = array.findIndex(el); // console.log(el);
+
             array.slice(index);
           }
         }]);

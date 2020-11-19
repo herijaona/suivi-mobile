@@ -158,14 +158,16 @@
                         dateRdv: new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControl"]("", [_angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required]),
                         heureRdv: new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControl"]("", [_angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required]),
                         description: new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControl"]("", [_angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required])
-                      });
-                      console.log("NewRdvComponent -> patients -> test", this.navParms.get("patients"));
+                      }); // console.log(
+                      //   "NewRdvComponent -> patients -> test",
+                      //   this.navParms.get("patients")
+                      // );
+
                       this.patients = this.navParms.get("patients");
-                      this.patients.forEach(function (element) {
-                        console.log("NewRdvComponent -> patients", element.firstName);
+                      this.patients.forEach(function (element) {// console.log("NewRdvComponent -> patients", element.firstName);
                       });
 
-                    case 4:
+                    case 3:
                     case "end":
                       return _context.stop();
                   }
@@ -194,18 +196,22 @@
                         heureRdv: this.propositionForm.value.heureRdv,
                         // id: await this.praticienSrvc.getUserIDByStorage(),
                         id: 0
-                      };
-                      console.log(this.propositionForm.value.patient, this.propositionForm.value.dateRdv, this.propositionForm.value.description, this.propositionForm.value.heureRdv, prop.id);
+                      }; // console.log(
+                      //   this.propositionForm.value.patient,
+                      //   this.propositionForm.value.dateRdv,
+                      //   this.propositionForm.value.description,
+                      //   this.propositionForm.value.heureRdv,
+                      //   prop.id
+                      // );
 
                       if (this.propositionForm.valid) {
-                        console.log(" proposition envoyé ");
+                        // console.log(" proposition envoyé ");
                         this.praticienSrvc.proposeRdv(prop);
                         this.backToList();
-                      } else {
-                        console.log(" not valid ");
+                      } else {// console.log(" not valid ");
                       }
 
-                    case 3:
+                    case 2:
                     case "end":
                       return _context2.stop();
                   }
@@ -227,10 +233,10 @@
                 while (1) {
                   switch (_context3.prev = _context3.next) {
                     case 0:
-                      console.log(" cancel ");
+                      // console.log(" cancel ");
                       this.backToList();
 
-                    case 2:
+                    case 1:
                     case "end":
                       return _context3.stop();
                   }
@@ -548,7 +554,7 @@
             var _this = this;
 
             this.praticienSrvc.getAllProposeRdv(this.storage.get("_id")).subscribe(function (data) {
-              console.log("PropositionRdvPage -> initializeItems -> data", data);
+              // console.log("PropositionRdvPage -> initializeItems -> data", data);
               _this.items = _toConsumableArray(Array.from(_this.regroupData(data)));
               _this.filterdItems = _toConsumableArray(_this.items);
             });
@@ -558,9 +564,9 @@
           value: function filterItems(ev) {
             var _this2 = this;
 
-            var query = ev.target.value.toLowerCase();
-            console.log("PropositionRdvPage -> getItems -> query", query);
-            console.log("PropositionRdvPage -> filterItems -> this.items", this.items);
+            var query = ev.target.value.toLowerCase(); // console.log("PropositionRdvPage -> getItems -> query", query);
+            // console.log("PropositionRdvPage -> filterItems -> this.items", this.items);
+
             requestAnimationFrame(function () {
               if (!query || query === "") {
                 _this2.filterdItems = _toConsumableArray(_this2.items);
@@ -664,7 +670,7 @@
                   switch (_context5.prev = _context5.next) {
                     case 0:
                       this.patienSrvc.getPatients().subscribe(function (data) {
-                        console.log("PropositionRdvPage -> getPatients -> data", data);
+                        // console.log("PropositionRdvPage -> getPatients -> data", data);
                         _this4.patients = data;
                       });
 
@@ -719,14 +725,12 @@
                           text: "Cancel",
                           role: "cancel",
                           cssClass: "secondary",
-                          handler: function handler() {
-                            console.log("Confirm Cancel: blah");
+                          handler: function handler() {// console.log("Confirm Cancel: blah");
                           }
                         }, {
                           text: "Okay",
                           handler: function handler() {
-                            console.log("data deleted id" + id);
-
+                            // console.log("data deleted id" + id);
                             _this6.deleteProprdv(id);
                           }
                         }]
@@ -870,7 +874,7 @@
           key: "getTracksRdv",
           value: function getTracksRdv(excludeTracks) {
             return this.http.get(src_constant__WEBPACK_IMPORTED_MODULE_2__["CONSTANT"].MOCK_DATA_JSON).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["map"])(function (data) {
-              console.log("PatientService -> getTracksRdv -> data", excludeTracks);
+              // console.log("PatientService -> getTracksRdv -> data", excludeTracks);
               return data;
             }));
           } //TODO : Get Vaccin by patient

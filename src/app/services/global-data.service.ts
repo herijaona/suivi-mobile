@@ -16,16 +16,16 @@ export class GlobalDataService {
   getCountry(): Observable<any> {
     const res = this.http.get<any>(this.url_api + "country");
     res.subscribe(data => {
-      console.log("GlobalDataService -> getCountry -> data", data)
+      // console.log("GlobalDataService -> getCountry -> data", data)
     })
     return res;
   }
 
   getCity(id): Observable<any> {
     const res = this.http.get<any>(this.url_api + `city?id=${id}`);
-    console.log("GlobalDataService -> constructor -> this.url_api + `city?id=${id}`", this.url_api + `city?id=${id}`)
+    // console.log("GlobalDataService -> constructor -> this.url_api + `city?id=${id}`", this.url_api + `city?id=${id}`)
     res.subscribe(data => {
-      console.log("GlobalDataService -> getCity -> data", data)
+      // console.log("GlobalDataService -> getCity -> data", data)
     })
     return res;
   }

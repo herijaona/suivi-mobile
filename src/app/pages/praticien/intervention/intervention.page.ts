@@ -45,7 +45,7 @@ export class InterventionPage implements OnInit {
     public routerOutlet: IonRouterOutlet,
     public toastCtrl: ToastController,
     public config: Config
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.getIntervention();
@@ -55,7 +55,7 @@ export class InterventionPage implements OnInit {
   getIntervention() {
     // Close any open sliding items when the  updates
     if (this.List) {
-      console.log("ConsultationPage -> update -> this.List", this.List);
+      // console.log("ConsultationPage -> update -> this.List", this.List);
       this.List.closeSlidingItems();
     }
     //TODO: get timeline
@@ -99,10 +99,10 @@ export class InterventionPage implements OnInit {
     this.interventionFiltered = temp;
 
     [...this.interventionShow].forEach((item) => {
-      console.log("ConsultationPage -> filterItems -> item", item.groups);
+      // console.log("ConsultationPage -> filterItems -> item", item.groups);
       let data: any = [];
       item.groups.forEach((res) => {
-        console.log("ConsultationPage  *** -> filterItems -> res", res);
+        // console.log("ConsultationPage  *** -> filterItems -> res", res);
         if (res.status.includes("Accepted")) {
           data.push(res);
         }
@@ -117,7 +117,7 @@ export class InterventionPage implements OnInit {
   }
 
   alert() {
-    console.log("ok ++++ ");
+    // console.log("ok ++++ ");
   }
 
   async alertAcceptIntervention(id) {
@@ -131,13 +131,13 @@ export class InterventionPage implements OnInit {
           role: "cancel",
           cssClass: "secondary",
           handler: () => {
-            console.log("Confirm Cancel: blah");
+            // console.log("Confirm Cancel: blah");
           },
         },
         {
           text: "OK",
           handler: () => {
-            console.log("data accepted " + id);
+            // console.log("data accepted " + id);
             this.acceptIntervention(id);
           },
         },
@@ -157,13 +157,13 @@ export class InterventionPage implements OnInit {
           role: "cancel",
           cssClass: "secondary",
           handler: () => {
-            console.log("Confirm Cancel: blah");
+            // console.log("Confirm Cancel: blah");
           },
         },
         {
           text: "OK",
           handler: () => {
-            console.log("data refused " + id);
+            // console.log("data refused " + id);
             this.removeIntervention(id);
           },
         },
@@ -181,7 +181,7 @@ export class InterventionPage implements OnInit {
     const el = (test) => test.id == id;
     this.intervention.find((element) => element.id == id).status = "Refused";
     const index = this.intervention.findIndex(el);
-    console.log(el);
+    // console.log(el);
     this.intervention.slice(index);
   }
 }

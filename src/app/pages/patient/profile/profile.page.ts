@@ -85,7 +85,7 @@ export class ProfilePage implements OnInit {
       this.globalInteract.presentLoading();
 
       Object.keys(this.patientRegisterForm.value).forEach((key) => {
-        console.log("valid", this.patientRegisterForm.value[key]);
+        // console.log("valid", this.patientRegisterForm.value[key]);
         const data_updated = {
           address: this.patientRegisterForm.value["address"],
           cityBorn: this.patientRegisterForm.value["cityBorn"],
@@ -110,10 +110,10 @@ export class ProfilePage implements OnInit {
         });
       });
     } else {
-      console.log("NOT valid", this.patientRegisterForm);
+      // console.log("NOT valid", this.patientRegisterForm);
 
       Object.keys(this.patientRegisterForm.value).forEach((key) => {
-        console.log("NOT valid", this.patientRegisterForm.value[key]);
+        // console.log("NOT valid", this.patientRegisterForm.value[key]);
       });
     }
   }
@@ -128,7 +128,7 @@ export class ProfilePage implements OnInit {
   getProfile() {
 
     this.patienSrvc.getProfile().subscribe(async (data: IProfilePatient[]) => {
-      console.log(data);
+      // console.log(data);
       this.profile = data[0];
 
       this.profile.nameState = data[0].namestate;
@@ -157,13 +157,13 @@ export class ProfilePage implements OnInit {
   }
 
   getCityByCountry(id) {
-    console.log("LL: ProfilePage -> getCityByCountry -> id", id)
-    console.log("LL: ProfilePage -> getCityByCountry -> id", this.profile)
+    // console.log("LL: ProfilePage -> getCityByCountry -> id", id)
+    // console.log("LL: ProfilePage -> getCityByCountry -> id", this.profile)
     this.globalSrvc.getCity(id).subscribe((data) => this.cities = data);
   }
   getCityByCountryBorn(id) {
-    console.log("LL: ProfilePage -> getCityByCountryBorn -> id", id)
-    console.log("LL: ProfilePage -> getCityByCountryBorn -> id", this.profile)
+    // console.log("LL: ProfilePage -> getCityByCountryBorn -> id", id)
+    // console.log("LL: ProfilePage -> getCityByCountryBorn -> id", this.profile)
     this.globalSrvc.getCity(id).subscribe((data) => this.citiesBorn = data);
   }
 }

@@ -186,24 +186,23 @@ let PraticienPage = class PraticienPage {
             {
                 title: "Vaccination",
                 url: "/praticien/vaccination",
-                children: [
-                    {
-                        url: "/praticient/vaccination/details",
-                    },
-                ],
             },
-            {
-                title: "Consultation",
-                url: "/praticien/consultation",
-            },
-            {
-                title: "Intervention",
-                url: "/praticien/intervention",
-            },
+            // {
+            //   title: "Consultation",
+            //   url: "/praticien/consultation",
+            // },
+            // {
+            //   title: "Intervention",
+            //   url: "/praticien/intervention",
+            // },
             {
                 title: "Rendez-vous",
                 url: "/praticien/rendez-vous",
             },
+            {
+                title: "Mes Patients",
+                url: "/praticien/assoc-patients",
+            }
         ];
         this.selectedPath = "";
         this.name = "";
@@ -215,7 +214,7 @@ let PraticienPage = class PraticienPage {
         if (this.selectedPath === "" || this.selectedPath === undefined) {
             this.selectedPath = "/praticien/proposition-rdv";
         }
-        console.log("PraticienPage -> this.selectedPath", this.selectedPath);
+        // console.log("PraticienPage -> this.selectedPath", this.selectedPath);
     }
     ngOnInit() {
         return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
@@ -247,7 +246,7 @@ let PraticienPage = class PraticienPage {
             this.storage.set("_id", data.data);
             this.praticienSrvc.getLocalUserInfo().subscribe((data) => {
                 const el = data.profile[0];
-                console.log("LL: PraticienPage -> initializeApp -> el", data);
+                // console.log("LL: PraticienPage -> initializeApp -> el", data)
                 const { roles, username } = this.authSrvc.user;
                 const praticien = {
                     firstName: el.firstName,

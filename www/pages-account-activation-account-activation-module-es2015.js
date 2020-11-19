@@ -131,9 +131,9 @@ let AccountActivationPage = class AccountActivationPage {
     ngOnInit() {
     }
     activateAccount() {
-        console.log("code: ", this.code);
+        // console.log("code: ", this.code);
         this.authSrvc.activateAccount(this.code).subscribe((response) => {
-            console.log("AccountActivationPage -> activateAccount -> response", response);
+            // console.log("AccountActivationPage -> activateAccount -> response", response)
             if (response) {
                 this.navCtrl.navigateRoot('/login');
             }

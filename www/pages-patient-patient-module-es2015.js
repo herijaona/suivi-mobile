@@ -185,7 +185,7 @@ let PatientPage = class PatientPage {
         this.selectedPath = "";
         this.router.events.subscribe((event) => {
             this.selectedPath = event.url;
-            console.log("PatientPage -> this.selectedPath", this.selectedPath);
+            // console.log("PatientPage -> this.selectedPath", this.selectedPath);
         });
     }
     ngOnInit() {
@@ -204,7 +204,10 @@ let PatientPage = class PatientPage {
                     if (element.isActive) {
                         setTimeout(() => element.toggle(), 10);
                     }
-                    console.log("PatientPage -> openFirst -> element.offsetWidth", element.offsetWidth);
+                    // console.log(
+                    //   "PatientPage -> openFirst -> element.offsetWidth",
+                    //   element.offsetWidth
+                    // );
                 });
             });
         });
@@ -214,8 +217,8 @@ let PatientPage = class PatientPage {
     }
     initialize() {
         const { roles, username } = this.authSrvc.user;
-        console.log("PatientPage -> initialize -> username", username);
-        console.log("PatientPage -> initialize -> roles", roles);
+        // console.log("PatientPage -> initialize -> username", username);
+        // console.log("PatientPage -> initialize -> roles", roles);
         // this.name = `${username}`;
         this.patienSrv.getProfile().subscribe((data) => {
             const type = data[0].typePatient == 1 ? "Adult" : "Enfant";
@@ -225,7 +228,7 @@ let PatientPage = class PatientPage {
     }
     redirect(link) {
         return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
-            console.log("PatientPage -> redirect -> link", link);
+            // console.log("PatientPage -> redirect -> link", link);
             this.navCtrl.navigateForward(link);
         });
     }
@@ -299,7 +302,7 @@ let PatientService = class PatientService {
     }
     getTracksRdv(excludeTracks) {
         return this.http.get(src_constant__WEBPACK_IMPORTED_MODULE_2__["CONSTANT"].MOCK_DATA_JSON).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["map"])((data) => {
-            console.log("PatientService -> getTracksRdv -> data", excludeTracks);
+            // console.log("PatientService -> getTracksRdv -> data", excludeTracks);
             return data;
         }));
     }

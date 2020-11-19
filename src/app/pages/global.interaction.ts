@@ -59,13 +59,13 @@ export class GlobalInteraction {
                     role: "cancel",
                     cssClass: "secondary",
                     handler: () => {
-                        console.log("Confirm Cancel: blah");
+                        // console.log("Confirm Cancel: blah");
                     },
                 },
                 {
                     text: "OK",
                     handler: () => {
-                        console.warn("data deleted " + id);
+                        // console.warn("data deleted " + id);
                         // this.remove(id, array, keyStatus, RefuseStatus);
                         callback(id, parent)
                     },

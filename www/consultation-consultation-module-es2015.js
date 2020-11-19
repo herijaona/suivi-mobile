@@ -272,10 +272,10 @@ let ConsultationPage = class ConsultationPage {
         let temp = [];
         this.filteredConsultation = temp;
         [...this.consultShow].forEach((item) => {
-            console.log("ConsultationPage -> filterItems -> item", item.groups);
+            // console.log("ConsultationPage -> filterItems -> item", item.groups);
             let data = [];
             item.groups.forEach((res) => {
-                console.log("ConsultationPage  *** -> filterItems -> res", res);
+                // console.log("ConsultationPage  *** -> filterItems -> res", res);
                 if (res.consultationStatus.includes("Accepted")) {
                     data.push(res);
                 }
@@ -290,7 +290,7 @@ let ConsultationPage = class ConsultationPage {
     getConsultation() {
         // Close any open sliding items when the  updates
         if (this.List) {
-            console.log("ConsultationPage -> update -> this.List", this.List);
+            // console.log("ConsultationPage -> update -> this.List", this.List);
             this.List.closeSlidingItems();
         }
         //TODO: get timeline
@@ -335,15 +335,15 @@ let ConsultationPage = class ConsultationPage {
             let temp = [];
             this.filteredConsultation = temp;
             [...this.consultShow].forEach((item) => {
-                console.log("ConsultationPage -> filterItems -> item", item.groups);
+                // console.log("ConsultationPage -> filterItems -> item", item.groups);
                 let data = [];
                 item.groups.forEach((res) => {
-                    console.log("ConsultationPage  *** -> filterItems -> res", res);
+                    // console.log("ConsultationPage  *** -> filterItems -> res", res);
                     if (query && this.segment == "all") {
                         if (res.type.includes(query) ||
                             res.consultationObjet.includes(query) ||
                             res.patient.includes(query)) {
-                            console.log("ConsultationPage -> filterItems -> res", res);
+                            // console.log("ConsultationPage -> filterItems -> res", res);
                             data.push(res);
                         }
                     }
@@ -352,7 +352,7 @@ let ConsultationPage = class ConsultationPage {
                             (res.type.includes(query) ||
                                 res.consultationObjet.includes(query) ||
                                 res.patient.includes(query))) {
-                            console.log("ConsultationPage -> filterItems -> res", res);
+                            // console.log("ConsultationPage -> filterItems -> res", res);
                             data.push(res);
                         }
                     }
@@ -366,7 +366,7 @@ let ConsultationPage = class ConsultationPage {
         });
     }
     alert() {
-        console.log("ok ++++ ");
+        // console.log("ok ++++ ");
     }
     presentFilter() {
         return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {

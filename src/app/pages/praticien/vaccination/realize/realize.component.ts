@@ -26,14 +26,14 @@ export class RealizeComponent implements OnInit {
 
   async ngOnInit() {
     this.data = this.navParms.get("data");
-    console.log("LL>>>: RealizeComponent -> ngOnInit -> data", this.data)
+    // console.log("LL>>>: RealizeComponent -> ngOnInit -> data", this.data)
     this.realizeForm = new FormGroup({
       lot: new FormControl("", [Validators.required]),
     });
-    console.log(
-      "NewRdvComponent -> patients -> test",
-      this.navParms.get("patients")
-    );
+    // console.log(
+    //   "NewRdvComponent -> patients -> test",
+    //   this.navParms.get("patients")
+    // );
   }
 
   realize() {
@@ -43,7 +43,7 @@ export class RealizeComponent implements OnInit {
       carnet: this.data.carnet,
       lot: this.realizeForm.value.lot,
     };
-    console.log("LL: RealizeComponent -> realize -> dataToSend", dataToSend)
+    // console.log("LL: RealizeComponent -> realize -> dataToSend", dataToSend)
     this.praticienSrvc.realizeVaccin(dataToSend).subscribe(() => {
       this.globalItem.dismissLoading();
       this.modalCtrl.dismiss();

@@ -26,112 +26,6 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./src/app/pages/global.interaction.ts":
-/*!*********************************************!*\
-  !*** ./src/app/pages/global.interaction.ts ***!
-  \*********************************************/
-/*! exports provided: GlobalInteraction */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GlobalInteraction", function() { return GlobalInteraction; });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
-/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/__ivy_ngcc__/fesm2015/ionic-angular.js");
-
-
-
-let GlobalInteraction = class GlobalInteraction {
-    constructor(toastCtrl, loadingCtrl, alertCtrl) {
-        this.toastCtrl = toastCtrl;
-        this.loadingCtrl = loadingCtrl;
-        this.alertCtrl = alertCtrl;
-        this.isLoading = false;
-    }
-    presentToast(msg) {
-        return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
-            const toast = yield this.toastCtrl.create({
-                message: msg,
-                duration: 1800,
-                position: "top",
-            });
-            toast.present();
-        });
-    }
-    presentLoading() {
-        return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
-            this.isLoading = true;
-            return yield this.loadingCtrl.create({
-                cssClass: "my-loading-class",
-                spinner: "bubbles",
-                translucent: true,
-                duration: 100000,
-            }).then(a => {
-                a.present().then(() => {
-                    if (!this.isLoading) {
-                        a.dismiss();
-                    }
-                });
-            });
-        });
-    }
-    dismissLoading() {
-        return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
-            if (this.isLoading) {
-                this.isLoading = false;
-                return yield this.loadingCtrl.dismiss();
-            }
-            return null;
-        });
-    }
-    alertDelete(id, parent, msg = "Tu veux vraiment supprimé cette element ? ", callback = this.defaultCallback, _header = "Suppression", array = []) {
-        return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
-            const alert = yield this.alertCtrl.create({
-                cssClass: "my-custom-class",
-                header: _header,
-                message: msg,
-                buttons: [
-                    {
-                        text: "Cancel",
-                        role: "cancel",
-                        cssClass: "secondary",
-                        handler: () => {
-                            console.log("Confirm Cancel: blah");
-                        },
-                    },
-                    {
-                        text: "OK",
-                        handler: () => {
-                            console.warn("data deleted " + id);
-                            // this.remove(id, array, keyStatus, RefuseStatus);
-                            callback(id, parent);
-                        },
-                    },
-                ],
-            });
-            yield alert.present();
-        });
-    }
-    defaultCallback(id, parent) {
-        this.presentToast(`this is a default callback ${id} `);
-    }
-};
-GlobalInteraction.ctorParameters = () => [
-    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["ToastController"] },
-    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["LoadingController"] },
-    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["AlertController"] }
-];
-GlobalInteraction = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
-    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
-        providedIn: 'root'
-    })
-], GlobalInteraction);
-
-
-
-/***/ }),
-
 /***/ "./src/app/pages/patient/profile/profile-routing.module.ts":
 /*!*****************************************************************!*\
   !*** ./src/app/pages/patient/profile/profile-routing.module.ts ***!
@@ -307,7 +201,7 @@ let ProfilePage = class ProfilePage {
             if (this.patientRegisterForm.valid) {
                 this.globalInteract.presentLoading();
                 Object.keys(this.patientRegisterForm.value).forEach((key) => {
-                    console.log("valid", this.patientRegisterForm.value[key]);
+                    // console.log("valid", this.patientRegisterForm.value[key]);
                     const data_updated = {
                         address: this.patientRegisterForm.value["address"],
                         cityBorn: this.patientRegisterForm.value["cityBorn"],
@@ -332,9 +226,9 @@ let ProfilePage = class ProfilePage {
                 });
             }
             else {
-                console.log("NOT valid", this.patientRegisterForm);
+                // console.log("NOT valid", this.patientRegisterForm);
                 Object.keys(this.patientRegisterForm.value).forEach((key) => {
-                    console.log("NOT valid", this.patientRegisterForm.value[key]);
+                    // console.log("NOT valid", this.patientRegisterForm.value[key]);
                 });
             }
         });
@@ -348,7 +242,7 @@ let ProfilePage = class ProfilePage {
     }
     getProfile() {
         this.patienSrvc.getProfile().subscribe((data) => Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
-            console.log(data);
+            // console.log(data);
             this.profile = data[0];
             this.profile.nameState = data[0].namestate;
             this.globalSrvc.getCity(this.profile.nameState).subscribe(data2 => {
@@ -372,13 +266,13 @@ let ProfilePage = class ProfilePage {
         return Object.keys(object).find(key => object[key] === value);
     }
     getCityByCountry(id) {
-        console.log("LL: ProfilePage -> getCityByCountry -> id", id);
-        console.log("LL: ProfilePage -> getCityByCountry -> id", this.profile);
+        // console.log("LL: ProfilePage -> getCityByCountry -> id", id)
+        // console.log("LL: ProfilePage -> getCityByCountry -> id", this.profile)
         this.globalSrvc.getCity(id).subscribe((data) => this.cities = data);
     }
     getCityByCountryBorn(id) {
-        console.log("LL: ProfilePage -> getCityByCountryBorn -> id", id);
-        console.log("LL: ProfilePage -> getCityByCountryBorn -> id", this.profile);
+        // console.log("LL: ProfilePage -> getCityByCountryBorn -> id", id)
+        // console.log("LL: ProfilePage -> getCityByCountryBorn -> id", this.profile)
         this.globalSrvc.getCity(id).subscribe((data) => this.citiesBorn = data);
     }
 };
@@ -571,7 +465,7 @@ let ProfilePage = class ProfilePage {
             if (this.praticienFormGroup.valid) {
                 this.globalInteract.presentLoading();
                 Object.keys(this.praticienFormGroup.value).forEach((key) => {
-                    console.log("valid", this.praticienFormGroup.value[key]);
+                    // console.log("valid", this.praticienFormGroup.value[key]);
                     const data_updated = {
                         address: this.praticienFormGroup.value["address"],
                         cityBorn: this.praticienFormGroup.value["cityBorn"],
@@ -587,9 +481,9 @@ let ProfilePage = class ProfilePage {
                 });
             }
             else {
-                console.log("NOT valid", this.praticienFormGroup);
+                // console.log("NOT valid", this.praticienFormGroup);
                 Object.keys(this.praticienFormGroup.value).forEach((key) => {
-                    console.log("NOT valid", this.praticienFormGroup.value[key]);
+                    // console.log("NOT valid", this.praticienFormGroup.value[key]);
                 });
             }
         });
@@ -605,7 +499,7 @@ let ProfilePage = class ProfilePage {
         this.praticienSrvc.getProfile().subscribe((response) => Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
             const data = response.profile;
             this.centre_name = response.profile[1].centreName;
-            console.log(data);
+            // console.log(data);
             this.profile = data[0];
             this.profile.nameState = data[0].countryFonction;
             this.globalSrvc.getCity(this.profile.nameState).subscribe(data2 => {
@@ -629,13 +523,13 @@ let ProfilePage = class ProfilePage {
         return Object.keys(object).find(key => object[key] === value);
     }
     getCityByCountry(id) {
-        console.log("LL: ProfilePage -> getCityByCountry -> id", id);
-        console.log("LL: ProfilePage -> getCityByCountry -> id", this.profile);
+        // console.log("LL: ProfilePage -> getCityByCountry -> id", id)
+        // console.log("LL: ProfilePage -> getCityByCountry -> id", this.profile)
         this.globalSrvc.getCity(id).subscribe((data) => this.cities = data);
     }
     getCityByCountryBorn(id) {
-        console.log("LL: ProfilePage -> getCityByCountryBorn -> id", id);
-        console.log("LL: ProfilePage -> getCityByCountryBorn -> id", this.profile);
+        // console.log("LL: ProfilePage -> getCityByCountryBorn -> id", id)
+        // console.log("LL: ProfilePage -> getCityByCountryBorn -> id", this.profile)
         this.globalSrvc.getCity(id).subscribe((data) => this.citiesBorn = data);
     }
 };
@@ -684,15 +578,15 @@ let GlobalDataService = class GlobalDataService {
     getCountry() {
         const res = this.http.get(this.url_api + "country");
         res.subscribe(data => {
-            console.log("GlobalDataService -> getCountry -> data", data);
+            // console.log("GlobalDataService -> getCountry -> data", data)
         });
         return res;
     }
     getCity(id) {
         const res = this.http.get(this.url_api + `city?id=${id}`);
-        console.log("GlobalDataService -> constructor -> this.url_api + `city?id=${id}`", this.url_api + `city?id=${id}`);
+        // console.log("GlobalDataService -> constructor -> this.url_api + `city?id=${id}`", this.url_api + `city?id=${id}`)
         res.subscribe(data => {
-            console.log("GlobalDataService -> getCity -> data", data);
+            // console.log("GlobalDataService -> getCity -> data", data)
         });
         return res;
     }
@@ -778,7 +672,7 @@ let PatientService = class PatientService {
     }
     getTracksRdv(excludeTracks) {
         return this.http.get(src_constant__WEBPACK_IMPORTED_MODULE_2__["CONSTANT"].MOCK_DATA_JSON).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["map"])((data) => {
-            console.log("PatientService -> getTracksRdv -> data", excludeTracks);
+            // console.log("PatientService -> getTracksRdv -> data", excludeTracks);
             return data;
         }));
     }

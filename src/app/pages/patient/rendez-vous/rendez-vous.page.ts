@@ -104,7 +104,7 @@ export class RendezVousPage implements OnInit {
 
   async getAllData() {
     await this.patientSrvc.getAllRdv().subscribe((data: any) => {
-      console.log('RendezVousPage -> getAllData -> data', data);
+      // console.log('RendezVousPage -> getAllData -> data', data);
       this.rdvs = data;
       const result = this.allData(data, this.STRING_DATE, this.STRING2_DATE);
       this.allBrute = result;
@@ -141,7 +141,7 @@ export class RendezVousPage implements OnInit {
   }
 
   alert() {
-    console.log('ok ++++ ');
+    // console.log('ok ++++ ');
   }
 
   async presentFilter() {
@@ -204,10 +204,10 @@ export class RendezVousPage implements OnInit {
   }
 
   cancelRdv(dataRdv, parent) {
-    console.log(
-      'LL: RendezVousPage -> cancelRdv -> _idRdv, typeRdv',
-      dataRdv
-    );
+    // console.log(
+    //   'LL: RendezVousPage -> cancelRdv -> _idRdv, typeRdv',
+    //   dataRdv
+    // );
     parent.patientSrvc.cancelRdvProposition(dataRdv).subscribe(() => {
       parent.globalItem.presentToast('Rendez-vous annulé!!!');
       parent.getAllData();
@@ -237,9 +237,9 @@ export class RendezVousPage implements OnInit {
   }
   // Regrouper les données en fonction de la date
   regroupDataByDate(data, string_date, string2_date) {
-    console.log('regroupDataByDate -> string_date **** ', string_date);
+    // console.log('regroupDataByDate -> string_date **** ', string_date);
     const groups = data.reduce((groups, eachData) => {
-      console.log('regroupDataByDate -> eachData', eachData);
+      // console.log('regroupDataByDate -> eachData', eachData);
       let true_date =
         eachData[string_date] !== undefined
           ? (eachData[string_date] !== null ? eachData[string_date].date : new Date())
@@ -248,7 +248,7 @@ export class RendezVousPage implements OnInit {
         eachData[string_date] !== undefined ? 'consultation' : 'intervention';
       const allStatus = eachData.status == null ? eachData.statusConsultation : eachData.status;
       const result = Object.assign(eachData, { type: type_rdv, _status: allStatus });
-      console.log("LL: regroupDataByDate -> this.checkStatus(eachData._status, eachData.etat)", this.checkStatus(eachData._status, eachData.etat))
+      // console.log("LL: regroupDataByDate -> this.checkStatus(eachData._status, eachData.etat)", this.checkStatus(eachData._status, eachData.etat))
       const date = true_date;
       if (!groups[date]) {
         groups[date] = [];
@@ -266,7 +266,7 @@ export class RendezVousPage implements OnInit {
     const sortedActivities = groupArrays.slice().sort(function (a, b) {
       return new Date(a.date).getTime() - new Date(b.date).getTime();
     });
-    console.log('regroupDataByDate -> sortedActivities', sortedActivities);
+    // console.log('regroupDataByDate -> sortedActivities', sortedActivities);
     return sortedActivities;
   }
 

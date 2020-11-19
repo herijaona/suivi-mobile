@@ -20191,8 +20191,8 @@
         }, {
           key: "getInfoUserID",
           value: function getInfoUserID() {
-            var res = this.http.get(this.url + "current_user_check");
-            console.log("PraticienService -> getInfoUserID -> res", res);
+            var res = this.http.get(this.url + "current_user_check"); // console.log("PraticienService -> getInfoUserID -> res", res);
+
             return res;
           }
         }, {
@@ -20233,8 +20233,10 @@
                         dateRdv: prop.dateRdv,
                         heureRdv: prop.heureRdv,
                         id: prop.id
-                      };
-                      console.log("PraticienService -> proposeRdv -> test -> send data $$$$$$$$$$$$$$$");
+                      }; // console.log(
+                      //   "PraticienService -> proposeRdv -> test -> send data $$$$$$$$$$$$$$$"
+                      // );
+
                       /* this.token = await this.isToken();
                       const headers = new HttpHeaders({
                         Accept: "application/json",
@@ -20248,7 +20250,7 @@
 
                       this.http.post(this.url + "register_proposition", prop).subscribe();
 
-                    case 3:
+                    case 2:
                     case "end":
                       return _context.stop();
                   }
@@ -20273,7 +20275,10 @@
           key: "getTypeTrackConsultation",
           value: function getTypeTrackConsultation() {
             return this.loadMockData().pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["map"])(function (data) {
-              console.log("PraticienService -> getTypeTrackConsultation -> data", data);
+              // console.log(
+              //   "PraticienService -> getTypeTrackConsultation -> data",
+              //   data
+              // );
               return data.mockTrackConsultation.sort();
             }));
           }
@@ -20288,14 +20293,19 @@
           key: "getListsVaccinations",
           value: function getListsVaccinations() {
             var res = this.http.get("".concat(this.url_apip, "praticien/vaccination"));
-            res.subscribe(function (data) {
-              console.log("LL: res", data);
+            res.subscribe(function (data) {// console.log("LL: res", data)
             });
             return res; // return this.loadMockData().pipe(
             //   map((data: any) => {
             //     return data.mockVaccination;
             //   })
             // );
+          }
+        }, {
+          key: "getAllVaccin",
+          value: function getAllVaccin() {
+            var res = this.http.get("".concat(this.url_api, "vaccin"));
+            return res;
           }
         }, {
           key: "getListsVaccinationsByDate",
@@ -20337,8 +20347,8 @@
                 groups[key] = [];
               }
 
-              groups[key].push(eachData);
-              console.log("LL: regroupDataByPatient -> groups", groups, Object.keys(groups));
+              groups[key].push(eachData); // console.log("LL: regroupDataByPatient -> groups", groups, Object.keys(groups))
+
               return groups;
             }, {});
             var groupArrays = Object.keys(groups).map(function (patient) {
@@ -20347,8 +20357,8 @@
                 nomPatient: groups[patient][0].firstName + " " + groups[patient][0].lastName,
                 groups: groups[patient]
               };
-            });
-            console.log("LL: regroupDataByPatient -> groupArrays", groupArrays);
+            }); // console.log("LL: regroupDataByPatient -> groupArrays", groupArrays)
+
             return groupArrays; // const sortedActivities = groupArrays.slice().sort(function (a, b) {
             //   return b.patient - a.patient;
             // });
@@ -20370,8 +20380,7 @@
           key: "getAllPraticien",
           value: function getAllPraticien() {
             var data = this.http.get(this.url_api + "praticiens");
-            data.subscribe(function (data) {
-              console.log("PraticienService -> regroupDataByDate -> data", data);
+            data.subscribe(function (data) {// console.log("PraticienService -> regroupDataByDate -> data", data);
             });
             return data;
           }
@@ -20453,6 +20462,30 @@
               lot: data.lot,
               carnet: data.carnet
             });
+            return res;
+          }
+        }, {
+          key: "organizeRdv",
+          value: function organizeRdv(data) {
+            var res = this.http.post("".concat(this.url_api, "organize/rdv"), data);
+            return res;
+          }
+        }, {
+          key: "createRdv",
+          value: function createRdv(data) {
+            var res = this.http.post("".concat(this.url_apip, "register/rdv/praticien"), data);
+            return res;
+          }
+        }, {
+          key: "realizeRdv",
+          value: function realizeRdv(data) {
+            var res = this.http.post("".concat(this.url_api, "realize/rdv"), data);
+            return res;
+          }
+        }, {
+          key: "getAssocPatient",
+          value: function getAssocPatient() {
+            var res = this.http.get("".concat(this.url_apip, "associer/patient"));
             return res;
           }
         }]);

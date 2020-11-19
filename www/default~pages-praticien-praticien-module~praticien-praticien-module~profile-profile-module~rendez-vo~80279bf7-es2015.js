@@ -21273,7 +21273,7 @@ let PraticienService = class PraticienService {
     }
     getInfoUserID() {
         const res = this.http.get(this.url + "current_user_check");
-        console.log("PraticienService -> getInfoUserID -> res", res);
+        // console.log("PraticienService -> getInfoUserID -> res", res);
         return res;
     }
     getProfile() {
@@ -21300,7 +21300,9 @@ let PraticienService = class PraticienService {
                 heureRdv: prop.heureRdv,
                 id: prop.id,
             };
-            console.log("PraticienService -> proposeRdv -> test -> send data $$$$$$$$$$$$$$$");
+            // console.log(
+            //   "PraticienService -> proposeRdv -> test -> send data $$$$$$$$$$$$$$$"
+            // );
             /* this.token = await this.isToken();
             const headers = new HttpHeaders({
               Accept: "application/json",
@@ -21334,7 +21336,10 @@ let PraticienService = class PraticienService {
     // TODO: Type consultation
     getTypeTrackConsultation() {
         return this.loadMockData().pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["map"])((data) => {
-            console.log("PraticienService -> getTypeTrackConsultation -> data", data);
+            // console.log(
+            //   "PraticienService -> getTypeTrackConsultation -> data",
+            //   data
+            // );
             return data.mockTrackConsultation.sort();
         }));
     }
@@ -21345,13 +21350,19 @@ let PraticienService = class PraticienService {
     }
     getListsVaccinations() {
         const res = this.http.get(`${this.url_apip}praticien/vaccination`);
-        res.subscribe(data => { console.log("LL: res", data); });
+        res.subscribe(data => {
+            // console.log("LL: res", data)
+        });
         return res;
         // return this.loadMockData().pipe(
         //   map((data: any) => {
         //     return data.mockVaccination;
         //   })
         // );
+    }
+    getAllVaccin() {
+        const res = this.http.get(`${this.url_api}vaccin`);
+        return res;
     }
     getListsVaccinationsByDate() {
         return this.regroupDataByDate(this.getListsVaccinations());
@@ -21384,7 +21395,7 @@ let PraticienService = class PraticienService {
                 groups[key] = [];
             }
             groups[key].push(eachData);
-            console.log("LL: regroupDataByPatient -> groups", groups, Object.keys(groups));
+            // console.log("LL: regroupDataByPatient -> groups", groups, Object.keys(groups))
             return groups;
         }, {});
         const groupArrays = Object.keys(groups).map((patient) => {
@@ -21394,7 +21405,7 @@ let PraticienService = class PraticienService {
                 groups: groups[patient],
             };
         });
-        console.log("LL: regroupDataByPatient -> groupArrays", groupArrays);
+        // console.log("LL: regroupDataByPatient -> groupArrays", groupArrays)
         return groupArrays;
         // const sortedActivities = groupArrays.slice().sort(function (a, b) {
         //   return b.patient - a.patient;
@@ -21412,7 +21423,7 @@ let PraticienService = class PraticienService {
     getAllPraticien() {
         const data = this.http.get(this.url_api + "praticiens");
         data.subscribe((data) => {
-            console.log("PraticienService -> regroupDataByDate -> data", data);
+            // console.log("PraticienService -> regroupDataByDate -> data", data);
         });
         return data;
     }
@@ -21456,6 +21467,22 @@ let PraticienService = class PraticienService {
     }
     realizeVaccin(data) {
         const res = this.http.post(`${this.url_apip}realize/vaccination`, { id: data.id, lot: data.lot, carnet: data.carnet });
+        return res;
+    }
+    organizeRdv(data) {
+        const res = this.http.post(`${this.url_api}organize/rdv`, data);
+        return res;
+    }
+    createRdv(data) {
+        const res = this.http.post(`${this.url_apip}register/rdv/praticien`, data);
+        return res;
+    }
+    realizeRdv(data) {
+        const res = this.http.post(`${this.url_api}realize/rdv`, data);
+        return res;
+    }
+    getAssocPatient() {
+        const res = this.http.get(`${this.url_apip}associer/patient`);
         return res;
     }
 };

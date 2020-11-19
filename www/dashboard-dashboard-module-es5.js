@@ -15888,8 +15888,7 @@
             var _this = this;
 
             setTimeout(function () {
-              console.log("DashboardPage -> barChart", _this.barCharts);
-
+              // console.log("DashboardPage -> barChart", this.barCharts);
               _this.createBarChart();
             }, 1000);
           }
