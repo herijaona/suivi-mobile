@@ -116,10 +116,15 @@ export class HttpConfigInterceptorService implements HttpInterceptor {
   private addToken(request: HttpRequest<any>, tok: any) {
     if (tok) {
       let clone: HttpRequest<any>;
+      // headers.append("Access-Control-Allow-Origin", '*');
+      // 	headers.append("Access-Control-Allow-Methods", 'POST, GET, OPTIONS, DELETE');
+      // 	headers.append('Content-Type', 'application/json' );
       clone = request.clone({
         setHeaders: {
           Accept: "application/json",
           "Content-type": "application/json",
+          "Access-Control-Allow-Origin": '*',
+          // "Access-Control-Allow-Methods": 'POST, GET, OPTIONS, DELETE',
           Authorization: `Bearer ${tok}`,
         },
       });
