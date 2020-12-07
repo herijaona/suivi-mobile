@@ -16,12 +16,12 @@ export class AssocPraticiensPage implements OnInit {
   ios: boolean;
   showSearchbar: boolean;
   assoc_praticiens: IUserPraticien[] = [];
-  constructor(public patientSrvc: PatientService, private globalItem: GlobalInteraction, private appEmpty: EmptyPageComponent) { }
+  constructor(public patientSrvc: PatientService, private globalItem: GlobalInteraction) { }
 
   ngOnInit() {
     this.globalItem.presentLoading();
     this.getAllMyPraticians();
-    this.appEmpty.page = " des praticiens associé ";
+    // this.appEmpty.page = " des praticiens associé ";
   }
   updateRdvList() {
     if (this.List) {

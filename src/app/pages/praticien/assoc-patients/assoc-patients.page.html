@@ -13,6 +13,10 @@
   </ion-toolbar>
 </ion-header>
 
+<ion-content *ngIf="this.assoc_patients.length == 0">
+  <app-empty-page></app-empty-page>
+</ion-content>
+
 <ion-content>
   <ion-list #scheduleList>
     <ion-item-group>

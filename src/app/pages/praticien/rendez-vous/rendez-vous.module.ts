@@ -9,6 +9,7 @@ import { RendezVousPageRoutingModule } from './rendez-vous-routing.module';
 import { RendezVousPage } from './rendez-vous.page';
 import { NewRendezVousComponent } from './new-rendez-vous/new-rendez-vous.component';
 import { OrganizeComponent } from './organize/organize.component';
+import { EmptyPageComponent } from 'src/app/components/empty-page/empty-page.component';
 
 @NgModule({
   imports: [
@@ -18,6 +19,6 @@ import { OrganizeComponent } from './organize/organize.component';
     RendezVousPageRoutingModule,
     ReactiveFormsModule
   ],
-  declarations: [RendezVousPage, NewRendezVousComponent, OrganizeComponent]
+  declarations: [RendezVousPage, NewRendezVousComponent, OrganizeComponent, EmptyPageComponent]
 })
 export class RendezVousPageModule { }

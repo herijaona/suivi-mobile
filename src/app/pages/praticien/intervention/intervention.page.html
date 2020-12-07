@@ -47,6 +47,7 @@
     </ion-toolbar>
   </ion-header>
 
+
   <ion-list #scheduleList [hidden]="shownSessions === 0">
     <ion-item-group *ngFor="let intervt of interventionFiltered">
       <ion-item-divider sticky>
@@ -137,6 +138,8 @@
   </ion-list>
 
   <ion-list-header [hidden]="interventionShow.size != 0">
-    No Sessions Found
+   
+  <app-empty-page></app-empty-page>
+
   </ion-list-header>
 </ion-content>

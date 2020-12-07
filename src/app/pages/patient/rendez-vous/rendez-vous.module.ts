@@ -9,6 +9,7 @@ import { RendezVousPageRoutingModule } from "./rendez-vous-routing.module";
 import { RendezVousPage } from "./rendez-vous.page";
 import { RendrezVousFilterComponent } from "./rendrez-vous-filter/rendrez-vous-filter.component";
 import { NewRdvComponent } from "./new-rdv/new-rdv.component";
+import { EmptyPageComponent } from 'src/app/components/empty-page/empty-page.component';
 
 @NgModule({
   imports: [
@@ -18,6 +19,6 @@ import { NewRdvComponent } from "./new-rdv/new-rdv.component";
     RendezVousPageRoutingModule,
     ReactiveFormsModule,
   ],
-  declarations: [RendezVousPage, RendrezVousFilterComponent, NewRdvComponent],
+  declarations: [RendezVousPage, RendrezVousFilterComponent, NewRdvComponent, EmptyPageComponent],
 })
 export class RendezVousPageModule {}

@@ -157,7 +157,9 @@
   </ion-list>
 
   <ion-list-header [hidden]="rdvShow.size != 0">
-    No Sessions Found
+    
+    <app-empty-page></app-empty-page>
+
   </ion-list-header>
 
   <ion-fab slot="fixed" vertical="bottom" horizontal="end" #fab>

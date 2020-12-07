@@ -34,8 +34,8 @@ export class AppComponent {
           if (this.authService.getRole() == CONSTANT.ROLE_PATIENT) {
             // this.router.navigate(["patient/profile"]);
             // this.router.navigate(["/patient/rendez-vous"]);
-            // this.router.navigate(["/patient/assoc-praticiens"]);
-            this.router.navigate(["/patient/vaccination"]);
+            this.router.navigate(["/patient/assoc-praticiens"]);
+            // this.router.navigate(["/patient/vaccination"]);
             // this.router.navigate(["/patient/family"]);
           } else if (this.authService.getRole() == CONSTANT.ROLE_PRATICIEN) {
             // this.router.navigate(["praticien"]);

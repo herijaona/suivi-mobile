@@ -8,6 +8,7 @@ import { ConsultationPageRoutingModule } from "./consultation-routing.module";
 
 import { ConsultationPage } from "./consultation.page";
 import { ConsultationFilterComponent } from "./consultation-filter/consultation-filter.component";
+import { EmptyPageComponent } from 'src/app/components/empty-page/empty-page.component';
 
 @NgModule({
   imports: [
@@ -16,7 +17,7 @@ import { ConsultationFilterComponent } from "./consultation-filter/consultation-
     IonicModule,
     ConsultationPageRoutingModule,
   ],
-  declarations: [ConsultationPage, ConsultationFilterComponent],
+  declarations: [ConsultationPage, ConsultationFilterComponent, EmptyPageComponent],
   entryComponents: [ConsultationFilterComponent],
 })
 export class ConsultationPageModule {}

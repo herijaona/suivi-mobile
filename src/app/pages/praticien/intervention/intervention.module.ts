@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { InterventionPageRoutingModule } from './intervention-routing.module';
 
 import { InterventionPage } from './intervention.page';
+import { EmptyPageComponent } from 'src/app/components/empty-page/empty-page.component';
 
 @NgModule({
   imports: [
@@ -15,6 +16,6 @@ import { InterventionPage } from './intervention.page';
     IonicModule,
     InterventionPageRoutingModule
   ],
-  declarations: [InterventionPage]
+  declarations: [InterventionPage, EmptyPageComponent]
 })
 export class InterventionPageModule {}
