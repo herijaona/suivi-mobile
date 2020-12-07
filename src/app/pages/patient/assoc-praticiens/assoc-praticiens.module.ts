@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { AssocPraticiensPageRoutingModule } from './assoc-praticiens-routing.module';
 
 import { AssocPraticiensPage } from './assoc-praticiens.page';
+import { EmptyPageComponent } from 'src/app/components/empty-page/empty-page.component';
 
 @NgModule({
   imports: [
@@ -15,6 +16,6 @@ import { AssocPraticiensPage } from './assoc-praticiens.page';
     IonicModule,
     AssocPraticiensPageRoutingModule
   ],
-  declarations: [AssocPraticiensPage]
+  declarations: [AssocPraticiensPage, EmptyPageComponent]
 })
 export class AssocPraticiensPageModule {}

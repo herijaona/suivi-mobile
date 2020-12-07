@@ -1,7 +1,8 @@
 {
   "name": "suivi-via-mobile",
   "integrations": {
-    "capacitor": {}
+    "capacitor": {},
+    "cordova": {}
   },
   "type": "angular"
 }

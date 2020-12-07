@@ -20,8 +20,12 @@
   </ion-toolbar>
 </ion-header>
 
+<ion-content *ngIf="this.assoc_praticiens.length == 0">
+  <app-empty-page></app-empty-page>
+</ion-content>
+
 <ion-content>
-  <ion-list #scheduleList>
+  <ion-list>
     <ion-item-group>
       <ion-item-sliding #slidingItem>
         <ion-item lines="none" *ngFor="let praticien of this.assoc_praticiens">

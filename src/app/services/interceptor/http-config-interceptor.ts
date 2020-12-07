@@ -123,7 +123,7 @@ export class HttpConfigInterceptorService implements HttpInterceptor {
         setHeaders: {
           Accept: "application/json",
           "Content-type": "application/json",
-          "Access-Control-Allow-Origin": '*',
+          // "Access-Control-Allow-Origin": '*',
           // "Access-Control-Allow-Methods": 'POST, GET, OPTIONS, DELETE',
           Authorization: `Bearer ${tok}`,
         },

@@ -9,7 +9,7 @@
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<ion-header>\n  <ion-toolbar>\n    <ion-title slot=\"start\" color=\"tertiary\" class=\"identifiant\"\n      >Activé votre compte</ion-title\n    >\n  </ion-toolbar>\n</ion-header>\n<div class=\"topContent\">\n  <ion-card>\n    <ion-card-header>\n      <ion-card-title class=\"ion-text-center\">\n        <img\n          src=\"../../../../assets/images/logo_matipla.png\"\n          srcset=\"\"\n          width=\"150px\"\n          class=\"mb-2\"\n        />\n      </ion-card-title>\n    </ion-card-header>\n  </ion-card>\n</div>\n\n<ion-content>\n  <ion-card>\n    <ion-card-content>\n      <div class=\"ion-padding\">\n        <ion-label>Code d'activation</ion-label>\n        <ion-input\n          type=\"text\"\n          required\n          class=\"border-input\"\n          [(ngModel)]=\"code\"\n        ></ion-input>\n      </div>\n\n      <ion-button color=\"success\" expand=\"block\" (click)=\"activateAccount()\">\n        Activé\n      </ion-button>\n      <ion-button [routerLink]=\"['/login']\" color=\"primary\" expand=\"block\">\n        Connexion\n      </ion-button>\n      <a [routerLink]=\"['/register']\" class=\"small-text\">inscription</a>\n    </ion-card-content>\n  </ion-card>\n</ion-content>\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<ion-header>\n  <ion-toolbar>\n    <ion-title slot=\"start\" color=\"tertiary\" class=\"identifiant\"\n      >Activé votre compte</ion-title\n    >\n  </ion-toolbar>\n</ion-header>\n<div class=\"topContent\">\n  <ion-card>\n    <ion-card-header>\n      <ion-card-title class=\"ion-text-center\">\n        <img\n          src=\"../../../../assets/images/logo_matipla.png\"\n          srcset=\"\"\n          width=\"150px\"\n          class=\"mb-2\"\n        />\n      </ion-card-title>\n    </ion-card-header>\n  </ion-card>\n</div>\n\n<ion-content>\n  <ion-card>\n    <ion-card-content>\n      <!-- <div class=\"ion-padding\">\n        <ion-label>identifiant</ion-label>\n        <ion-input\n          type=\"text\"\n          required\n          class=\"border-input\"\n          [(ngModel)]=\"_id\"\n        ></ion-input>\n      </div> -->\n      <div class=\"ion-padding\">\n        <ion-label>Code d'activation</ion-label>\n        <ion-input\n          type=\"text\"\n          required\n          class=\"border-input\"\n          [(ngModel)]=\"code\"\n        ></ion-input>\n      </div>\n\n      <ion-button color=\"success\" expand=\"block\" (click)=\"activateAccount()\">\n        Activé\n      </ion-button>\n      <ion-button [routerLink]=\"['/login']\" color=\"primary\" expand=\"block\">\n        Connexion\n      </ion-button>\n      <a [routerLink]=\"['/register']\" class=\"small-text\">inscription</a>\n    </ion-card-content>\n  </ion-card>\n</ion-content>\n");
 
 /***/ }),
 
@@ -124,6 +124,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let AccountActivationPage = class AccountActivationPage {
+    // public _id;
     constructor(authSrvc, navCtrl) {
         this.authSrvc = authSrvc;
         this.navCtrl = navCtrl;

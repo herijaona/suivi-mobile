@@ -12,9 +12,13 @@ export const environment = {
   // url_dev: "http://suivie-patient.neitic.com/apip/",
   // url_dev_api: "http://suivie-patient.neitic.com/api/",
 
-  url: "https://matipla.com",
-  url_dev: "https://matipla.com/apip/",
-  url_dev_api: "https://matipla.com/api/",
+  // url: "https://www.matipla.com",
+  // url_dev: "https://www.matipla.com/apip/",
+  // url_dev_api: "https://www.matipla.com/api/",
+
+  url: "http://www.matipla.com",
+  url_dev: "http://www.matipla.com/apip/",
+  url_dev_api: "http://www.matipla.com/api/",
 
   TOKEN_KEY: "access_token",
 };

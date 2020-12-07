@@ -78,4 +78,12 @@ export class GlobalInteraction {
     defaultCallback(id, parent) {
         this.presentToast(`this is a default callback ${id} `);
     }
+
+    async pageRefresher(callback) {
+        this.presentLoading();
+        callback((data) => {
+            console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>LL: GlobalInteraction -> pageRefresher -> data", data)
+            this.dismissLoading();
+        });
+    }
 }

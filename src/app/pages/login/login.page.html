@@ -26,7 +26,7 @@
                     />
                   </ion-card-title>
                 </ion-card-header>
-                <ion-card-content>
+                <ion-card-content class="container">
                   <div>
                     <div class="ion-padding">
                       <ion-label>Identifiant</ion-label>
@@ -49,16 +49,17 @@
                     </div>
 
                     <ion-row>
-                      <ion-col>
+                      <div class="ion-padding">
                         <ion-button
-                          color="success"
-                          expand="block"
-                          type="submit"
-                          [disabled]="!credentialsForm.valid"
-                        >
-                          Login
-                        </ion-button>
-                      </ion-col>
+                        color="success"
+                        expand="block"
+                        type="submit"
+                        
+                        [disabled]="!credentialsForm.valid"
+                      >
+                        Login
+                      </ion-button>
+                      </div>
                     </ion-row>
 
                     <!-- <a [routerLink]="['#']" class="small-text"

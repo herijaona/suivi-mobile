@@ -34,14 +34,13 @@
 </ion-header>
 
 <ion-content>
-  <div *ngIf="vaccinsFiltered.length==0">
+  <div *ngIf="vaccinsFiltered.length==0" class="ion-text-center">
+    <br>
     <ion-button
       (click)="openGenerateVaccModal()"
-      expand="block"
-      fill="clear"
-      shape="round"
-    >
-      Generate Carnet
+      color="sgreen"
+      >
+      Généré carnet
     </ion-button>
   </div>
 

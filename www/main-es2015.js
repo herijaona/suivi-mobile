@@ -412,7 +412,8 @@ let AppComponent = class AppComponent {
                     }
                 }
                 else {
-                    this.router.navigate(["login"]);
+                    // this.router.navigate(["login"]);
+                    this.router.navigate(["home"]);
                     // this.router.navigate(["register/patient"]);
                     // this.router.navigate(["register/praticien"]);
                     // this.router.navigate(["/patient/profile"]);
@@ -617,6 +618,15 @@ let GlobalInteraction = class GlobalInteraction {
     }
     defaultCallback(id, parent) {
         this.presentToast(`this is a default callback ${id} `);
+    }
+    pageRefresher(callback) {
+        return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
+            this.presentLoading();
+            callback((data) => {
+                console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>LL: GlobalInteraction -> pageRefresher -> data", data);
+                this.dismissLoading();
+            });
+        });
     }
 };
 GlobalInteraction.ctorParameters = () => [
@@ -962,10 +972,15 @@ let HttpConfigInterceptorService = class HttpConfigInterceptorService {
     addToken(request, tok) {
         if (tok) {
             let clone;
+            // headers.append("Access-Control-Allow-Origin", '*');
+            // 	headers.append("Access-Control-Allow-Methods", 'POST, GET, OPTIONS, DELETE');
+            // 	headers.append('Content-Type', 'application/json' );
             clone = request.clone({
                 setHeaders: {
                     Accept: "application/json",
                     "Content-type": "application/json",
+                    // "Access-Control-Allow-Origin": '*',
+                    // "Access-Control-Allow-Methods": 'POST, GET, OPTIONS, DELETE',
                     Authorization: `Bearer ${tok}`,
                 },
             });
@@ -1098,12 +1113,15 @@ const environment = {
     // url: "http://localhost:9000",
     // url_dev: "http://localhost:9000/apip/",
     // url_dev_api: "http://localhost:9000/api/",
-    url: "http://suivie-patient.neitic.com",
-    url_dev: "http://suivie-patient.neitic.com/apip/",
-    url_dev_api: "http://suivie-patient.neitic.com/api/",
-    // url: "https://matipla.com",
-    // url_dev: "https://matipla.com/apip/",
-    // url_dev_api: "https://matipla.com/api/",
+    // url: "http://suivie-patient.neitic.com",
+    // url_dev: "http://suivie-patient.neitic.com/apip/",
+    // url_dev_api: "http://suivie-patient.neitic.com/api/",
+    // url: "https://www.matipla.com",
+    // url_dev: "https://www.matipla.com/apip/",
+    // url_dev_api: "https://www.matipla.com/api/",
+    url: "http://www.matipla.com",
+    url_dev: "http://www.matipla.com/apip/",
+    url_dev_api: "http://www.matipla.com/api/",
     TOKEN_KEY: "access_token",
 };
 /*

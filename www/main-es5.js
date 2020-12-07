@@ -396,7 +396,8 @@
 
                   }
                 } else {
-                  _this.router.navigate(["login"]); // this.router.navigate(["register/patient"]);
+                  // this.router.navigate(["login"]);
+                  _this.router.navigate(["home"]); // this.router.navigate(["register/patient"]);
                   // this.router.navigate(["register/praticien"]);
                   // this.router.navigate(["/patient/profile"]);
                   // this.router.navigate(["/praticien/dashboard"]);
@@ -778,6 +779,31 @@
           value: function defaultCallback(id, parent) {
             this.presentToast("this is a default callback ".concat(id, " "));
           }
+        }, {
+          key: "pageRefresher",
+          value: function pageRefresher(callback) {
+            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee5() {
+              var _this3 = this;
+
+              return regeneratorRuntime.wrap(function _callee5$(_context5) {
+                while (1) {
+                  switch (_context5.prev = _context5.next) {
+                    case 0:
+                      this.presentLoading();
+                      callback(function (data) {
+                        console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>LL: GlobalInteraction -> pageRefresher -> data", data);
+
+                        _this3.dismissLoading();
+                      });
+
+                    case 2:
+                    case "end":
+                      return _context5.stop();
+                  }
+                }
+              }, _callee5, this);
+            }));
+          }
         }]);
 
         return GlobalInteraction;
@@ -945,7 +971,7 @@
 
       var AuthService = /*#__PURE__*/function () {
         function AuthService(http, helper, storage, alertCtrl, plt) {
-          var _this3 = this;
+          var _this4 = this;
 
           _classCallCheck(this, AuthService);
 
@@ -958,7 +984,7 @@
           this.user = null;
           this.authenticationState = new rxjs__WEBPACK_IMPORTED_MODULE_3__["BehaviorSubject"](false);
           this.plt.ready().then(function () {
-            _this3.checkToken(); // TODO: à decommenter
+            _this4.checkToken(); // TODO: à decommenter
 
           });
         }
@@ -990,23 +1016,23 @@
         }, {
           key: "checkToken",
           value: function checkToken() {
-            var _this4 = this;
+            var _this5 = this;
 
             this.storage.get(TOKEN_KEY).then(function (token) {
               if (token) {
-                var decoded = _this4.helper.decodeToken(token);
+                var decoded = _this5.helper.decodeToken(token);
 
-                var isExpired = _this4.helper.isTokenExpired(token);
+                var isExpired = _this5.helper.isTokenExpired(token);
 
                 if (!isExpired) {
-                  _this4.user = decoded; // console.log(
+                  _this5.user = decoded; // console.log(
                   //   "AuthService -> checkToken -> CONSTANT.stringifyParse(this.user)",
                   //   CONSTANT.stringifyParse(this.user)
                   // );
 
-                  _this4.authenticationState.next(true);
+                  _this5.authenticationState.next(true);
                 } else {
-                  _this4.storage.remove(TOKEN_KEY);
+                  _this5.storage.remove(TOKEN_KEY);
                 }
               }
             });
@@ -1014,7 +1040,7 @@
         }, {
           key: "login",
           value: function login(credentials, loadinCtrl) {
-            var _this5 = this;
+            var _this6 = this;
 
             // console.log("AuthService -> login -> credentials", credentials);
             var header = new _angular_common_http__WEBPACK_IMPORTED_MODULE_5__["HttpHeaders"]({
@@ -1026,7 +1052,7 @@
               headers: header
             }).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["tap"])(function (res) {
               // console.log("*******", CONSTANT.stringifyParse(res));
-              _this5.storage.set(TOKEN_KEY, res["token"]); // TODO : à decommenter
+              _this6.storage.set(TOKEN_KEY, res["token"]); // TODO : à decommenter
               // const testToken = {
               //   token:
               //     "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE2MDA2NzA0MzAsImV4cCI6MTYwMDY3NDAzMCwicm9sZXMiOlsiUk9MRV9QQVRJRU5UIl0sInVzZXJuYW1lIjoicGF0In0.wCv7mjXJIsEOHWyaHxwZ7u9sLIQ9IYH5wxmXfzNgWgL9Ynm8R7QMB6lrE1NJAlYh2wHsUQ5fjiyt59tmXwIuZf2qqw4JEuRShYccKLUDSAon-V_BgNPVwXIBwVMzQi2LkdhTHB0f7CnHLf7b5apJ2t8qSTEtUUsNMqipzqIzvDCBIQvl8XhxXxL9ZUdDfJeW9r4tuiHGl0WcQaDdg5-GyATk3gZDrWW1UNdKYVA7o3CWoD66xgeAi072XY_W_MeH0nzDVyemX-48E4kYKNydDw7HB60D6xNTNsg5dEFCBriA7mZPc-MLJwWcKkGa8nLwEOGXWOnSKmm8_9DQO0TDg72uYK2yQHw3WzEQwWz2io84aj3B7wtvxD4YpK3K_x-zMDJQWzrpJAMxxe2dZlVgWArgIBmqowb30HkrInhjvFssLou_MBU6jdnAFogO188k1pXkS2CwIdaqB9Wzxn_5AXfM8XGTRwKlggBk36owdkdWKyli1SuHA4FlwWdHd5MW3i1RjkwrkzZfXk-cohAWJ_Phrz8aCb51u8nmaH1sCOC5WSGrgQTaenkczr26TYRVBrr54HFxGrGfhf5xKa5NP5uWFzlq2Z0q_bDgv8YKw8G9-y9nhE5dAS3GW0CEcwwBRRw4NRAWJ6HK3foHaskYR4Wi-oukqyTOG8p_H0zE0nE",
@@ -1034,12 +1060,12 @@
               // this.storage.set(TOKEN_KEY, testToken);
 
 
-              _this5.user = _this5.helper.decodeToken(res["token"]); // console.log(
+              _this6.user = _this6.helper.decodeToken(res["token"]); // console.log(
               //   "AuthService -> login -> user",
               //   CONSTANT.stringifyParse(this.user)
               // );
 
-              _this5.authenticationState.next(true);
+              _this6.authenticationState.next(true);
             }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["catchError"])(function (e) {
               if (e.error) {// this.showAlert(e.error.msg);
               }
@@ -1274,22 +1300,22 @@
         _createClass(HttpConfigInterceptorService, [{
           key: "intercept",
           value: function intercept(request, next) {
-            var _this6 = this;
+            var _this7 = this;
 
             var promise = this.authSvc.getToken();
             return Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["from"])(promise).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_7__["mergeMap"])(function (token) {
-              var cloneReq = _this6.addToken(request, token);
+              var cloneReq = _this7.addToken(request, token);
 
               return next.handle(cloneReq).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_7__["catchError"])(function (error) {
                 var status = error.status; // console.warn("LL: HttpConfigInterceptorService -> error", error.message)
 
                 var reason = error && error.error.reason ? error.error.reason : "";
 
-                _this6.presentAlert(status, reason);
+                _this7.presentAlert(status, reason);
 
-                _this6.globalItem.dismissLoading();
+                _this7.globalItem.dismissLoading();
 
-                _this6.globalItem.presentToast("error " + status);
+                _this7.globalItem.presentToast("error " + status);
 
                 return Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["throwError"])(error);
               }));
@@ -1299,11 +1325,16 @@
           key: "addToken",
           value: function addToken(request, tok) {
             if (tok) {
-              var clone;
+              var clone; // headers.append("Access-Control-Allow-Origin", '*');
+              // 	headers.append("Access-Control-Allow-Methods", 'POST, GET, OPTIONS, DELETE');
+              // 	headers.append('Content-Type', 'application/json' );
+
               clone = request.clone({
                 setHeaders: {
                   Accept: "application/json",
                   "Content-type": "application/json",
+                  // "Access-Control-Allow-Origin": '*',
+                  // "Access-Control-Allow-Methods": 'POST, GET, OPTIONS, DELETE',
                   Authorization: "Bearer ".concat(tok)
                 }
               });
@@ -1323,13 +1354,13 @@
         }, {
           key: "presentAlert",
           value: function presentAlert(status, reason) {
-            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee5() {
+            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee6() {
               var alert;
-              return regeneratorRuntime.wrap(function _callee5$(_context5) {
+              return regeneratorRuntime.wrap(function _callee6$(_context6) {
                 while (1) {
-                  switch (_context5.prev = _context5.next) {
+                  switch (_context6.prev = _context6.next) {
                     case 0:
-                      _context5.next = 2;
+                      _context6.next = 2;
                       return this.alerCtrl.create({
                         header: status + " Error",
                         subHeader: "Subtitle",
@@ -1338,16 +1369,16 @@
                       });
 
                     case 2:
-                      alert = _context5.sent;
-                      _context5.next = 5;
+                      alert = _context6.sent;
+                      _context6.next = 5;
                       return alert.present();
 
                     case 5:
                     case "end":
-                      return _context5.stop();
+                      return _context6.stop();
                   }
                 }
-              }, _callee5, this);
+              }, _callee6, this);
             }));
           }
         }]);
@@ -1499,12 +1530,15 @@
         // url: "http://localhost:9000",
         // url_dev: "http://localhost:9000/apip/",
         // url_dev_api: "http://localhost:9000/api/",
-        url: "http://suivie-patient.neitic.com",
-        url_dev: "http://suivie-patient.neitic.com/apip/",
-        url_dev_api: "http://suivie-patient.neitic.com/api/",
-        // url: "https://matipla.com",
-        // url_dev: "https://matipla.com/apip/",
-        // url_dev_api: "https://matipla.com/api/",
+        // url: "http://suivie-patient.neitic.com",
+        // url_dev: "http://suivie-patient.neitic.com/apip/",
+        // url_dev_api: "http://suivie-patient.neitic.com/api/",
+        // url: "https://www.matipla.com",
+        // url_dev: "https://www.matipla.com/apip/",
+        // url_dev_api: "https://www.matipla.com/api/",
+        url: "http://www.matipla.com",
+        url_dev: "http://www.matipla.com/apip/",
+        url_dev_api: "http://www.matipla.com/api/",
         TOKEN_KEY: "access_token"
       };
       /*

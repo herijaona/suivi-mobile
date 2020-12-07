@@ -102,7 +102,8 @@ export class GenerateComponent implements OnInit {
   }
   postVaccinGeneration(_idPractitioner) {
     this.patientServc.postVaccinGeneration(_idPractitioner).subscribe((data) => {
-      // console.log("LL: GenerateComponent -> postVaccinGeneration -> data", data)
+      console.log("LL: GenerateComponent -> postVaccinGeneration -> data", data);
+      this.dismiss();
     });
 
   }
