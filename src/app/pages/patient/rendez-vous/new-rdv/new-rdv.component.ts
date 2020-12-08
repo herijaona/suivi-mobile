@@ -23,6 +23,7 @@ export class NewRdvComponent implements OnInit {
   praticiens: IUserPraticien[];
   public propositionForm: FormGroup;
   showCheckBoxAssoc = false;
+
   after_praticien_choice = false;
 
   selected: any;

@@ -113,20 +113,19 @@ export class PatientPage implements OnInit {
   }
 
   createUsername(birth: Date, gender: String) {
-    const birthday = new Date(birth);
+    const dateFormat = birth.split('T')[0];
     // console.log("PatientPage -> createUsername -> birthday", birthday)
     const sexe = gender.substring(0, 1);
     let mois = "00";
     let jour = "00";
     let annee = "0000";
-
-    let datChoice = birthday.toString().split("/");
-    mois = birthday.getMonth().toString().substring(0, 1);
+    const birthday = dateFormat.split('-');
+    mois = birthday[1];
     // console.log("PatientPage -> createUsername -> mois", mois)
-    annee = birthday.getFullYear().toString().substring(1, 2);
+    annee = birthday[0];
     // annee = birthday.getFullYear()[2];
     // console.log("PatientPage -> createUsername -> annee", annee)
-    jour = birthday.getDay().toString().substring(0, 1);
+    jour = birthday[2];
     // jour = birthday.getDay()[0]
     // console.log("PatientPage -> createUsername -> jour", jour)
     const username = sexe + annee + mois + jour + this.getRndInt();

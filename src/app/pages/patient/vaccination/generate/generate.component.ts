@@ -7,6 +7,7 @@ import { GlobalDataService } from 'src/app/services/global-data.service';
 import { PatientService } from 'src/app/services/patient.service';
 import { PraticienService } from 'src/app/services/praticien.service';
 
+// @ts-ignore
 @Component({
   selector: 'app-generate',
   templateUrl: './generate.component.html',
@@ -92,17 +93,19 @@ export class GenerateComponent implements OnInit {
   getCenterByCity(_idCity) {
     this.globalDataSrvc.getCenterHealthByCity(_idCity).subscribe((data) => {
       // console.log("LL: GenerateComponent -> getCenterByCity -> this.center_health", data);
-      this.center_health = data
+      this.center_health = data;
     });
   }
+
   getPraticienByCenter(_idCenter) {
     this.globalDataSrvc.getPraticienByCenter(_idCenter).subscribe((data) => {
-      // console.log("LL: GenerateComponent -> getCenterByCity -> this.center_health", data); this.praticiens = data
+      // console.log("LL: GenerateComponent -> getCenterByCity -> this.center_health", data);
+      this.praticiens = data;
     });
   }
   postVaccinGeneration(_idPractitioner) {
     this.patientServc.postVaccinGeneration(_idPractitioner).subscribe((data) => {
-      console.log("LL: GenerateComponent -> postVaccinGeneration -> data", data);
+      console.log('LL: GenerateComponent -> postVaccinGeneration -> data', data);
       this.dismiss();
     });
 

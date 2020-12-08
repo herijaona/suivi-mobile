@@ -221,7 +221,7 @@ let PatientPage = class PatientPage {
         // console.log("PatientPage -> initialize -> roles", roles);
         // this.name = `${username}`;
         this.patienSrv.getProfile().subscribe((data) => {
-            const type = data[0].typePatient == 1 ? "Adult" : "Enfant";
+            const type = data[0].typePatient == 1 ? "Adulte" : "Enfant";
             this.name = `${data[0].firstName}  ${data[0].lastName} (${type})`;
         });
         this.fonction = "patient";

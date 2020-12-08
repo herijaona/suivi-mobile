@@ -15,7 +15,7 @@ import { IProfilePatient } from 'src/app/Interfaces/patient.interface';
 export class PatientPage implements OnInit {
   pages = [
     {
-      title: "Callendrier de vaccination",
+      title: "Calendrier de vaccination",
       url: "/patient/vaccination",
     },
     {
@@ -45,7 +45,7 @@ export class PatientPage implements OnInit {
       // ],
     },
     {
-      title: "My Praticiens",
+      title: "Mes Praticiens",
       url: "/patient/assoc-praticiens",
     },
     {
@@ -100,7 +100,7 @@ export class PatientPage implements OnInit {
     // console.log("PatientPage -> initialize -> roles", roles);
     // this.name = `${username}`;
     this.patienSrv.getProfile().subscribe((data: IProfilePatient[]) => {
-      const type = data[0].typePatient == 1 ? "Adult" : "Enfant";
+      const type = data[0].typePatient == 1 ? "Adulte" : "Enfant";
       this.name = `${data[0].firstName}  ${data[0].lastName} (${type})`;
     });
     this.fonction = "patient";

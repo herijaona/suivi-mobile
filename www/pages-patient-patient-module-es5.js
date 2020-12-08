@@ -402,7 +402,7 @@
             // this.name = `${username}`;
 
             this.patienSrv.getProfile().subscribe(function (data) {
-              var type = data[0].typePatient == 1 ? "Adult" : "Enfant";
+              var type = data[0].typePatient == 1 ? "Adulte" : "Enfant";
               _this3.name = "".concat(data[0].firstName, "  ").concat(data[0].lastName, " (").concat(type, ")");
             });
             this.fonction = "patient";

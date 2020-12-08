@@ -259,7 +259,7 @@ let ProfilePage = class ProfilePage {
             this.profile.createdAt = data[0].createdAt.date;
             // this.profile.date_on_born = new Date(data.date_on_born);
             this.buildForm(data[0]);
-            this.type_patient = data[0].typePatient == 1 ? "Adult" : "Enfant";
+            this.type_patient = data[0].typePatient == 1 ? "Adulte" : "Enfant";
         }));
     }
     getKeyByValue(object, value) {

@@ -90,21 +90,21 @@ export class PatientService {
 
   getFamily() {
     const res = this.http.get(`${this.url_apip}patients/family`);
-    res.subscribe(data => console.log("PatientService -> getFamily -> res", data))
+    res.subscribe(data => console.log("PatientService -> getFamily -> res", data));
     return res;
   }
 
   addGroupFamily(nomGroupe) {
     const data = {
       designation: nomGroupe,
-    }
-    console.log("LL: PatientService -> addGroupFamily -> data", data)
+    };
+    console.log("LL: PatientService -> addGroupFamily -> data", data);
     const res = this.http.post(`${this.url_apip}register/group`, data);
     return res;
   }
 
   addGroupFamilyMember(data) {
-    console.log("PatientService -> addGroupFamilyMember -> data", data)
+    console.log("PatientService -> addGroupFamilyMember -> data", data);
     const res = this.http.post(`${this.url_api}add/membres`, data);
     return res;
   }
@@ -115,7 +115,7 @@ export class PatientService {
   }
 
   interventionPraticien(data) {
-    console.log("####################LL: PatientService -> interventionPraticien -> data", data)
+    console.log("####################LL: PatientService -> interventionPraticien -> data", data);
     const res = this.http.post(`${this.url_apip}intervention`, data);
     return res;
   }
