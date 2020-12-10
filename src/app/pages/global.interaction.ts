@@ -55,7 +55,7 @@ export class GlobalInteraction {
             message: msg,
             buttons: [
                 {
-                    text: "Cancel",
+                    text: "Annuler",
                     role: "cancel",
                     cssClass: "secondary",
                     handler: () => {

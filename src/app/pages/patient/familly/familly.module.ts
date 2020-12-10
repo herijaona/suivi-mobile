@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { FamillyPageRoutingModule } from './familly-routing.module';
 
 import { FamillyPage } from './familly.page';
+import { EmptyPageComponent } from 'src/app/components/empty-page/empty-page.component';
 
 @NgModule({
   imports: [
@@ -16,6 +17,6 @@ import { FamillyPage } from './familly.page';
     FamillyPageRoutingModule,
     ReactiveFormsModule
   ],
-  declarations: [FamillyPage]
+  declarations: [FamillyPage, EmptyPageComponent]
 })
 export class FamillyPageModule { }

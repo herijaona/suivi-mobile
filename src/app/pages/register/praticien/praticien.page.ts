@@ -114,7 +114,7 @@ export class PraticienPage implements OnInit {
     }
   }
 
-  createUsername(birth: Date, gender: String) {
+  createUsername(birth: any, gender: String) {
     const dateFormat = birth.split('T')[0];
     // console.log("PatientPage -> createUsername -> birthday", birthday)
     const sexe = gender.substring(0, 1);

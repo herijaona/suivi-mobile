@@ -149,7 +149,7 @@ export class PropositionRdvPage implements OnInit {
       message: "Do you really want to delete it ?",
       buttons: [
         {
-          text: "Cancel",
+          text: "Annuler",
           role: "cancel",
           cssClass: "secondary",
           handler: () => {

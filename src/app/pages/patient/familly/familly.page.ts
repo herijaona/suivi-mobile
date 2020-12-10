@@ -6,6 +6,7 @@ import { IPatientFamilyGroup, IPatientFamily } from 'src/app/Interfaces/patient.
 import { AuthService } from 'src/app/services/auth.service';
 import { GlobalInteraction } from '../../global.interaction';
 import { FormGroup, Validators, FormControl } from '@angular/forms';
+import { Storage } from '@ionic/storage';
 
 @Component({
   selector: 'app-familly',
@@ -19,13 +20,14 @@ export class FamillyPage implements OnInit {
   ios: boolean;
   showSearchbar: boolean;
   familyGroupe: IPatientFamilyGroup;
+  type_adult_or_children: boolean;
   public HAVE_A_MEMBER: boolean = false;
   public ADD_GROUP: boolean = false;
   public ADD_MEMBER: boolean = false;
   addMemberFormGroup: FormGroup;
   addFamilyformGroup: FormGroup;
 
-  constructor(public patientSrvc: PatientService, private authSrvc: AuthService, private globalItem: GlobalInteraction) { }
+  constructor(public patientSrvc: PatientService, private authSrvc: AuthService, private globalItem: GlobalInteraction, private storage: Storage) { }
 
   showAddGroup() {
     this.ADD_GROUP = !this.ADD_GROUP;
@@ -34,7 +36,9 @@ export class FamillyPage implements OnInit {
     this.ADD_MEMBER = !this.ADD_MEMBER;
   }
 
-  ngOnInit() {
+  async ngOnInit() {
+    this.type_adult_or_children = await this.storage.get("_type") == "Enfant";
+    console.log("LL: FamillyPage -> ngOnInit -> type_adult_or_children", this.type_adult_or_children)
     this.globalItem.presentLoading();
     this.getAllGroup();
     this.setupForm();

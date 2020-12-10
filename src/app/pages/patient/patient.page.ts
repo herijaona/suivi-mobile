@@ -101,6 +101,8 @@ export class PatientPage implements OnInit {
     // this.name = `${username}`;
     this.patienSrv.getProfile().subscribe((data: IProfilePatient[]) => {
       const type = data[0].typePatient == 1 ? "Adulte" : "Enfant";
+      console.log("LL: PatientPage -> initialize -> type", type);
+      this.storage.set('_type', type);
       this.name = `${data[0].firstName}  ${data[0].lastName} (${type})`;
     });
     this.fonction = "patient";

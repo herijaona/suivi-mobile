@@ -127,7 +127,7 @@ export class InterventionPage implements OnInit {
       message: "Do you really want to accept it ? ",
       buttons: [
         {
-          text: "Cancel",
+          text: "Annuler",
           role: "cancel",
           cssClass: "secondary",
           handler: () => {
@@ -153,7 +153,7 @@ export class InterventionPage implements OnInit {
       message: "Do you really want to refuse it ? ",
       buttons: [
         {
-          text: "Cancel",
+          text: "Annuler",
           role: "cancel",
           cssClass: "secondary",
           handler: () => {

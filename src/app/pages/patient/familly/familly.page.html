@@ -20,8 +20,11 @@
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
+<ion-content *ngIf="!HAVE_A_MEMBER && type_adult_or_children">
+  <app-empty-page></app-empty-page>
+</ion-content>
 
-<ion-content *ngIf="!HAVE_A_MEMBER">
+<ion-content *ngIf="!HAVE_A_MEMBER && !this.type_adult_or_children">
   <ion-button
     (click)="showAddGroup()"
     expand="block"
@@ -62,11 +65,12 @@
         >
           validé
         </ion-button>
-        <ion-button color="sred" (click)="showAddGroup()"> Annulé </ion-button>
+        <ion-button color="sred" (click)="showAddGroup()"> Annuler </ion-button>
       </div>
     </form>
   </ion-card>
 </ion-content>
+
 
 <ion-content *ngIf="HAVE_A_MEMBER">
   <ion-card>
@@ -116,7 +120,7 @@
         >
           validé
         </ion-button>
-        <ion-button color="sred" (click)="showAddMember()"> Annulé </ion-button>
+        <ion-button color="sred" (click)="showAddMember()"> Annuler </ion-button>
       </div>
     </form>
   </ion-card>
