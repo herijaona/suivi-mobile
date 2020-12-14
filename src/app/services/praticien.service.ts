@@ -301,4 +301,9 @@ export class PraticienService {
     const res = this.http.get(`${this.url_apip}associer/patient`);
     return res;
   }
+
+  generateVaccinFromPraticien(data){
+    const res = this.http.post(`${this.url_apip}generate/praticien`, data);
+    return res;
+  }
 }

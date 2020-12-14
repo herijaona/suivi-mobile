@@ -83,7 +83,7 @@ export class NewVaccinationComponent implements OnInit {
     if (this.propositionForm.valid) {
       this.globalItem.presentToast("Vaccin créer");
 
-      this.praticienSrvc.createRdv(dataToSend).subscribe((data) => {
+      this.praticienSrvc.generateVaccinFromPraticien(dataToSend).subscribe((data) => {
         // console.log("LL: NewRendezVousComponent -> createRdv -> data", data)
         this.globalItem.dismissLoading();
 

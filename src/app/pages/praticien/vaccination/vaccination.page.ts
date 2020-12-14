@@ -215,12 +215,12 @@ export class VaccinationPage implements OnInit {
   public OPERATION_INT_VACCINATION = "Intervention Vaccination";
 
   // _STATUS
-  public GENERATE = "Généré"
+  public GENERATE = "Générée"
   public PENDING = "En attente"
-  public REJECTED = "Rejeté"
+  public REJECTED = "Rejetée"
 
-  public SCHEDULED = "Planifié"
-  public REALIZED = "Réalisé"
+  public SCHEDULED = "Planifiée"
+  public REALIZED = "Réalisée"
 
   //_ACTION
   public ACTION_VOIR = "Voir"
