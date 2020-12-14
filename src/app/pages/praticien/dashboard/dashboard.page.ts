@@ -21,7 +21,7 @@ export class DashboardPage implements OnInit {
     consultation
   };
   ageRangeData : {listOfLabel, listOfAge};
-
+  piePatient : {listOfLabel, listOfValue};
   constructor(private dashboardSrvc: DashboardService) { }
 
   ngOnInit() {
@@ -32,6 +32,7 @@ export class DashboardPage implements OnInit {
 
     this.getPatientNumber();
     this.getAgePatient();
+    this.getPiePatient();
   }
 
   getPatientNumber(){
@@ -56,6 +57,23 @@ export class DashboardPage implements OnInit {
         listAge.push(element.y);
       });
       this.ageRangeData = {listOfLabel: listLabel, listOfAge: listAge};
+    })
+  }
+
+  getPiePatient(){
+    this.dashboardSrvc.getPatient().subscribe((data : any) => {
+    console.log("LL: DashboardPage -> getPiePatient -> data", data)
+
+      let listLabel = [] ;
+      let listValue = [];
+
+      for (const [key, value] of Object.entries(data)) {
+        console.log(`${key}: ${value}`);
+        listLabel.push(key);
+        listValue.push(value);
+      }
+    
+      this.piePatient = {listOfLabel: listLabel, listOfValue: listValue};
     })
   }
 
@@ -105,22 +123,24 @@ export class DashboardPage implements OnInit {
     this.pie = new Chart(this.pieChart.nativeElement, {
       type: "pie",
       data: {
-        labels: [
-          "0-9",
-          "10-19",
-          "20-29",
-          "30-39",
-          "40-49",
-          "50-59",
-          "60-69",
-          "70-79",
-        ],
+        // labels: [
+        //   "Vaccination",
+        //   "Consultation",
+        //   "20-29",
+        //   "30-39",
+        //   "Vaccination",
+        //   "50-59",
+        //   "60-69",
+        //   "70-79",
+        // ],
+        labels: this.piePatient.listOfLabel,
         datasets: [
           {
             label: "Nombre de patient",
-            data: [2.5, 3.8, 5, 17, 6.9, 7.5, 5, 3],
+            // data: [2.5, 3.8, 5, 17, 6.9, 7.5, 5, 3],
+            data: this.piePatient.listOfValue,
             backgroundColor: [
-              "rgb(52, 213, 235)",
+              "rgb(113, 235, 52)",
               "rgb(235, 174, 52)",
               "rgb(235, 52, 52)",
               "rgb(235, 171, 52)",
@@ -132,6 +152,7 @@ export class DashboardPage implements OnInit {
             borderColor: "rgb(38, 194, 129)", // array should have same number of elements as number of dataset
             borderWidth: 1,
           },
+          
         ],
       },
       options: {

@@ -19,4 +19,8 @@ export class DashboardService {
   getAgePatient(){
     return this.http.get(`${this.url_apip}praticien/agepatient`)
   }
+
+  getPatient(){
+    return this.http.get(`${this.url_apip}praticien/chart/patient`);
+  }
 }
