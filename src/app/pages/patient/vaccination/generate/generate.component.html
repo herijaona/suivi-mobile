@@ -63,6 +63,7 @@
                 placeholder="Select"
                 formControlName="center_health"
                 required
+                [disabled]="!this.center_health"
                 (ionChange)="
                   getPraticienByCenter(
                     this.propositionForm.value['center_health']
@@ -122,7 +123,7 @@
                     value
                   ></ion-checkbox>
                   &nbsp;&nbsp;
-                  <label>choisir comme associé ?</label>
+                  <label>choisir en tant qu'associé ?</label>
                 </ion-item>
               </div>
               <div *ngIf="showCheckBoxAssoc == true">

@@ -8,7 +8,7 @@
 </ion-header>
 
 <ion-content>
-  <ion-card>
+  <ion-card *ngIf="this.dataToShow1">
     <ion-card-header>
       <ion-card-title></ion-card-title>
     </ion-card-header>
@@ -20,7 +20,7 @@
               <ion-icon name="person-outline" slot="start"></ion-icon>
               <ion-label class="ion-text-center">
                 <h2>Patient</h2>
-                <p>7</p>
+                <p>{{this.dataToShow1.patient}}</p>
               </ion-label>
             </ion-item>
           </ion-col>
@@ -29,7 +29,7 @@
               <ion-icon name="medkit-outline" slot="start"></ion-icon>
               <ion-label class="ion-text-center">
                 <h2>Consultation</h2>
-                <p>17</p>
+                <p>{{this.dataToShow1.consultation}}</p>
               </ion-label>
             </ion-item>
           </ion-col>
@@ -40,28 +40,18 @@
       <ion-item lines="none">
         <ion-icon name="bandage" slot="start"></ion-icon>
         <ion-label>
-          <h2>Vaccin réalisé</h2>
+          <h2>Vaccination</h2>
         </ion-label>
-        <ion-badge color="sgreen">17</ion-badge>
+        <ion-badge color="sgreen">{{this.dataToShow1.vaccination}}</ion-badge>
       </ion-item>
 
       <ion-item lines="none">
         <ion-icon name="bandage" slot="start"></ion-icon>
         <ion-label>
-          <h2>Vaccin non réalisé</h2>
+          <h2>Activité en attente</h2>
         </ion-label>
-        <ion-badge color="sred">3</ion-badge>
+        <ion-badge color="sred">{{this.dataToShow1["pending activity"]}}</ion-badge>
       </ion-item>
-    </ion-card-content>
-  </ion-card>
-  <ion-card>
-    <ion-card-header>
-      <ion-card-title> Disparité vaccin</ion-card-title>
-
-      <ion-card-subtitle>Tranche d'âge</ion-card-subtitle>
-    </ion-card-header>
-    <ion-card-content>
-      <canvas #pieChart></canvas>
     </ion-card-content>
   </ion-card>
 
@@ -75,8 +65,21 @@
       <canvas #barChart></canvas>
     </ion-card-content>
   </ion-card>
-
+  
   <ion-card>
+    <ion-card-header>
+      <ion-card-title> Disparité vaccin</ion-card-title>
+
+      <ion-card-subtitle>Tranche d'âge</ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>
+      <canvas #pieChart></canvas>
+    </ion-card-content>
+  </ion-card>
+
+  
+
+  <!-- <ion-card>
     <ion-card-header>
       <ion-card-title> Graph </ion-card-title>
 
@@ -85,5 +88,5 @@
     <ion-card-content>
       <canvas #lineChart></canvas>
     </ion-card-content>
-  </ion-card>
+  </ion-card> -->
 </ion-content>

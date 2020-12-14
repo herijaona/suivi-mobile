@@ -16,9 +16,9 @@ export const environment = {
   // url_dev: "https://www.matipla.com/apip/",
   // url_dev_api: "https://www.matipla.com/api/",
 
-  url: 'http://www.matipla.com',
-  url_dev: 'http://www.matipla.com/apip/',
-  url_dev_api: 'http://www.matipla.com/api/',
+  url: 'http://matipla.com',
+  url_dev: 'http://matipla.com/apip/',
+  url_dev_api: 'http://matipla.com/api/',
 
   TOKEN_KEY: 'access_token',
 };

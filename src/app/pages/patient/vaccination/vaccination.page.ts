@@ -142,7 +142,7 @@ export class VaccinationPage implements OnInit {
       cssClass: "test-class",
       swipeToClose: true,
       componentProps: {
-        praticiens: this.praticiens,
+        // praticiens: this.praticiens,
         countries: this.countries,
         vaccin: vaccin,
       },
