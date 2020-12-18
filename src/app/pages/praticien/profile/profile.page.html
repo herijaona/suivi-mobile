@@ -43,7 +43,7 @@
             picker-format="MMM DD, YYYY"
             [ngModel]="profile.dateOnBorn"
             formControlName="birthday"
-            required
+            
           ></ion-datetime>
         </ion-item>
         <!-- Pays -->
@@ -54,7 +54,7 @@
           <ion-label position="stacked">Pays</ion-label>
           <ion-select
             formControlName="state"
-            required
+            
             (ionChange)="getCityByCountry(this.praticienFormGroup.value['state'])"
             [compareWith]="compareFnInv"
             [ngModel]="profile.nameState"
@@ -78,11 +78,11 @@
         </div>
 
         <!-- Téléphone -->
-        <ion-item lines="full">
+        <ion-item lines="full" [disabled] = true>
           <ion-label position="stacked">Phone</ion-label>
           <ion-input
             type="text"
-            required
+            
             formControlName="phone"
             [ngModel]="profile.phone"
           ></ion-input>
@@ -106,7 +106,7 @@
           <ion-label position="stacked">Ville</ion-label>
           <ion-select
             formControlName="city"
-            required
+            
             [(ngModel)]="profile.nameCity"
             [compareWith]="compareFnInv"
             (ionChange)="getHealthByCity(this.praticienFormGroup.value['city'])"
@@ -127,7 +127,6 @@
           <ion-label position="stacked">Pays de naissance</ion-label>
           <ion-select
             formControlName="countryBorn"
-            required
             (ionChange)="getCityByCountryBorn(this.praticienFormGroup.value['countryBorn'])"
             [compareWith]="compareFnInv"
             [ngModel]="profile.countryBorn"
@@ -158,7 +157,6 @@
           <ion-label position="stacked">Ville de naissance</ion-label>
           <ion-select
             formControlName="cityBorn"
-            required
             [(ngModel)]="profile.cityBorn"
             [compareWith]="compareFnInv"
           >
@@ -175,7 +173,6 @@
           <ion-select
             placeholder="Select"
             formControlName="gender"
-            required
             [ngModel]="profile.sexe"
           >
             <ion-select-option>Masculin</ion-select-option>
@@ -186,7 +183,7 @@
         <ion-item lines="full">
           <ion-label position="stacked">Adresse</ion-label>
           <ion-textarea
-            required
+            
             formControlName="address"
             [ngModel]="profile.address"
           ></ion-textarea>
@@ -196,13 +193,13 @@
           <ion-label position="stacked">Email</ion-label>
           <ion-input
             type="text"
-            required
+            
             formControlName="email"
             [ngModel]="profile.email"
           ></ion-input>
           <!-- <div
             style="color: red; padding-top: 0.2rem"
-            *ngIf="praticienFormGroup.hasError('required', 'email')"
+            *ngIf="praticienFormGroup.hasError('', 'email')"
           ></div> -->
           <!-- <div
             *ngIf="!praticienFormGroup.controls.email.valid &&
@@ -212,14 +209,24 @@
             Please enter a valid email.
           </div> -->
         </ion-item>
+
+        <ion-item lines="full">
+          <ion-label position="stacked">Numéro professionel</ion-label>
+          <ion-input
+            type="text"
+            formControlName="num_pro"
+            [ngModel]="profile.num_pro"
+          ></ion-input>
+        
+        </ion-item>
         <ion-item
           lines="full"
-          [disabled]="!this.centres_names && !this.centre_name"
+          [disabled]="!this.centres_names"
+          *ngIf="this.centres_names"
         >
           <ion-label position="stacked">Centre</ion-label>
           <ion-select
             formControlName="centre"
-            required
             [(ngModel)]="this.centreid"
             [compareWith]="compareFnInv"
           >
@@ -233,13 +240,11 @@
 
         <ion-item
           lines="full"
-          [disabled]="!this.fonctions"
+          *ngIf="this.fonctions"
         >
           <ion-label position="stacked">Fonction</ion-label>
           <ion-select
             formControlName="fonction"
-            required
-            (ionChange) = this.fonction
             [(ngModel)]="this.fonction"
             [compareWith]="compareFnInv"
           >

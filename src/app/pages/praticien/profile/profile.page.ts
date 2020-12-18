@@ -56,22 +56,23 @@ export class ProfilePage implements OnInit {
 
   }
 
-  buildForm(data) {
+  buildForm() {
     this.praticienFormGroup = new FormGroup({
       // lastName: new FormControl("", [Validators.required]),
       // firstName: new FormControl("", [Validators.required]),
-      birthday: new FormControl(),
+      birthday: new FormControl(''),
       // description: new FormControl("", [Validators.required]),
-      state: new FormControl(),
-      countryBorn: new FormControl(),
-      city: new FormControl(),
-      cityBorn: new FormControl(),
-      centre: new FormControl(),
-      gender: new FormControl(),
-      address: new FormControl(),
-      email: new FormControl("", [Validators.required]),
-      phone: new FormControl(),
-      fonction: new FormControl(),
+      state: new FormControl(''),
+      countryBorn: new FormControl(''),
+      city: new FormControl(''),
+      cityBorn: new FormControl(''),
+      centre: new FormControl(''),
+      gender: new FormControl(''),
+      address: new FormControl(''),
+      email: new FormControl(''),
+      phone: new FormControl(''),
+      fonction: new FormControl(''),
+      num_pro: new FormControl(''),
     });
 
 
@@ -88,7 +89,7 @@ export class ProfilePage implements OnInit {
           email: this.praticienFormGroup.value["email"],
           city_fonction: this.praticienFormGroup.value["city"],
           country_fonction: this.praticienFormGroup.value["state"],
-          numero: this.praticienFormGroup.value["phone"],
+          numero: this.praticienFormGroup.value["num_pro"],
           center_health: this.praticienFormGroup.value["centre"],
           fonction: this.praticienFormGroup.value["fonction"],
         }
@@ -108,7 +109,7 @@ export class ProfilePage implements OnInit {
       console.log("NOT valid", this.praticienFormGroup);
 
       Object.keys(this.praticienFormGroup.value).forEach((key) => {
-        console.log("NOT valid", this.praticienFormGroup.value[key]);
+        console.log(key + " NOT valid", this.praticienFormGroup.value[key]);
       });
     }
   }
@@ -133,6 +134,7 @@ export class ProfilePage implements OnInit {
       this.fonction = response.profile[0].fonction;
       this.getFonction();
       this.profile.nameState = data[0].countryFonction;
+      this.profile.num_pro = data[0].NumeroProfessionnel;
       this.globalSrvc.getCity(this.profile.nameState).subscribe(data2 => {
         this.cities = data2;
         this.profile.nameCity = data[0].CityFonction;
@@ -148,7 +150,7 @@ export class ProfilePage implements OnInit {
       this.profile.dateOnBorn = data[0].dateBorn.date;
       this.profile.createdAt = data[0].createdAt.date;
       // this.profile.date_on_born = new Date(data.date_on_born);
-      this.buildForm(data[0]);
+      this.buildForm();
       // this.type_patient = data[0].typePatient == 1 ? "Adult" : "Enfant";
 
     });
