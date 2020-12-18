@@ -43,6 +43,12 @@
       Généré carnet
     </ion-button>
   </div>
+  <br>
+  <div  *ngIf=" vaccinationInStandBy && vaccinationInStandBy.length !=0"  >
+      <ion-item *ngFor="let item of vaccinationInStandBy" class="vaccinInStandy">
+        Demande de Génération de Vaccination envoyée chez le praticien  {{item.firstName}} {{item.lastName}}  
+      </ion-item>
+  </div>
 
   <ion-list #VaccinList>
     <ion-item-group *ngFor="let vacc of vaccinsFiltered">
@@ -168,9 +174,12 @@
                 </ion-label>
               </ion-col>
             </ion-row>
-            <ion-row
+            <!-- <ion-row
               *ngIf="this.checkStatus(eachVaccination.status,
               eachVaccination.etat) ===this.PENDINGSTATUS"
+            > -->
+            <ion-row
+              *ngIf="this.ACTION === true"
             >
               <ion-col class="btn-cnfrm">
                 <ion-button

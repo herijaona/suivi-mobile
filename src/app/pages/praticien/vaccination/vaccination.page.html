@@ -151,7 +151,7 @@
                   expand="block"
                   (click)="organizeVaccinWithNotebook(eachVaccination)"
                 >
-                  <ion-icon slot="start" name="close-circle-outline"></ion-icon>
+                  <ion-icon slot="start" name="checkmark-circle-outline"></ion-icon>
                   <ion-label>organiser</ion-label>
                 </ion-button>
 
@@ -207,7 +207,7 @@
   </ion-list>
 
   <ion-list-header [hidden]="vaccinations.length != 0">
-    No Sessions Found
+    <app-empty-page></app-empty-page>
   </ion-list-header>
 
   <ion-fab slot="fixed" vertical="bottom" horizontal="end" #fab>

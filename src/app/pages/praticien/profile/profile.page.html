@@ -24,7 +24,7 @@
   <div class="card-body" *ngIf="profile">
     <div class="user-meta ion-text-center">
       <h3 class="playername">
-        {{profile.firstName}} {{profile.lastName}} ({{centre_name}})
+        {{profile.firstName}} {{profile.lastName}} <span *ngIf="centre_name"> ({{centre_name}}) </span> 
       </h3>
       <h6 class="ranking">
         Date de création:
@@ -109,6 +109,8 @@
             required
             [(ngModel)]="profile.nameCity"
             [compareWith]="compareFnInv"
+            (ionChange)="getHealthByCity(this.praticienFormGroup.value['city'])"
+
           >
             <ng-container *ngFor="let item of this.cities">
               <ion-select-option value="{{item.id}}"
@@ -210,26 +212,45 @@
             Please enter a valid email.
           </div> -->
         </ion-item>
-        <!-- Nom du père -->
-        <ion-item lines="full" *ngIf="profile.fatherName">
-          <ion-label position="stacked">Nom du père</ion-label>
-          <ion-input
-            type="text"
+        <ion-item
+          lines="full"
+          [disabled]="!this.centres_names && !this.centre_name"
+        >
+          <ion-label position="stacked">Centre</ion-label>
+          <ion-select
+            formControlName="centre"
             required
-            formControlName="father_name"
-            [ngModel]="this.profile.fatherName"
-          ></ion-input>
+            [(ngModel)]="this.centreid"
+            [compareWith]="compareFnInv"
+          >
+            <ng-container *ngFor="let item of this.centres_names">
+              <ion-select-option value="{{item.id}}"
+                >{{item.centreName}}</ion-select-option
+              >
+            </ng-container>
+          </ion-select>
         </ion-item>
-        <!-- Nom de la mère -->
-        <ion-item lines="full" *ngIf="profile.motherName">
-          <ion-label position="stacked">Nom de la mère</ion-label>
-          <ion-input
-            type="text"
+
+        <ion-item
+          lines="full"
+          [disabled]="!this.fonctions"
+        >
+          <ion-label position="stacked">Fonction</ion-label>
+          <ion-select
+            formControlName="fonction"
             required
-            formControlName="mother_name"
-            [ngModel]="this.profile.motherName"
-          ></ion-input>
+            (ionChange) = this.fonction
+            [(ngModel)]="this.fonction"
+            [compareWith]="compareFnInv"
+          >
+            <ng-container *ngFor="let item of this.fonctions">
+              <ion-select-option value="{{item.id}}"
+                >{{item.NomFonction}}</ion-select-option
+              >
+            </ng-container>
+          </ion-select>
         </ion-item>
+       
 
         <ion-row>
           <ion-col>

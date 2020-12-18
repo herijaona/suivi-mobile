@@ -54,6 +54,11 @@ export class PraticienService {
     return res;
   }
 
+  updateProfile(data){
+    const res = this.http.post(`${this.url_apip}praticien/profile/edit`,data);
+    return res;
+  }
+
   getLocalUserInfo() {
     // return this.http.get<IUserPraticien>(this.url + `getPraticienInfo`);
     return this.http.get<IUserPraticien>(this.url + `praticien/profile`);
@@ -228,12 +233,18 @@ export class PraticienService {
     return data;
   }
 
+  checkInStanByVaccination(){
+    const data = this.http.get(`${this.url_apip}patients/vaccination/check`);
+    return data;
+  }
+
   getPraticienFunctions() {
     return this.http.get(this.url_api + 'fonction');
   }
 
   registerPraticien(data) {
-    return this.http.post<IRegisterPraticien>(`${this.url_api}users`, data);
+    const res = this.http.post<IRegisterPraticien>(`${this.url_api}users`, data);
+    return res;
   }
 
   getAllRdv() {
@@ -306,4 +317,6 @@ export class PraticienService {
     const res = this.http.post(`${this.url_apip}generate/praticien`, data);
     return res;
   }
+
+
 }

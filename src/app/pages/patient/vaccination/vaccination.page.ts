@@ -34,10 +34,12 @@ export class VaccinationPage implements OnInit {
   showSearchbar: boolean;
   vaccinsFiltered: any = [];
   praticiens: IUserPraticien[];
+  vaccinationInStandBy ;
   public OKSTATUS = "REALISED";
   public PENDINGSTATUS = "PENDING";
   public PLANIFIED = "PLANIFIED";
   private STRING_DATE = "date_prise";
+  public ACTION = false;
 
   public STATUS;
   constructor(
@@ -53,8 +55,14 @@ export class VaccinationPage implements OnInit {
 
   checkStatus(status, etat) {
     if (status == 1) {
-      return this.OKSTATUS;
+      this.ACTION = false;
+      if(etat== 0){
+        return this.PLANIFIED;
+      }else if(etat == 1){
+        return this.OKSTATUS;
+      }
     } else {
+      this.ACTION = true;
       if (etat == false) {
         return this.PENDINGSTATUS;
       } else {
@@ -66,7 +74,14 @@ export class VaccinationPage implements OnInit {
   ngOnInit() {
     // console.log("VaccinationPage -> ngOnInit -> ngOnInit");
     this.initializeItems();
+    this.checkGenerationInStandBy();
+  }
 
+  checkGenerationInStandBy(){
+    this.praticienSrv.checkInStanByVaccination().subscribe((data) => {
+    console.log("LL: VaccinationPage -> checkGenerationInStandBy -> data", data)
+      this.vaccinationInStandBy = data;
+    });
   }
   filterItems(ev) {
     const query = ev.target.value.toLowerCase();

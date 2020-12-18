@@ -20,9 +20,13 @@ export class ProfilePage implements OnInit {
   public profile;
   private OK = "ok";
   public centre_name;
+  public centreid;
+  public centres_names;
   public countries;
   public cities;
   public citiesBorn;
+  public fonction;
+  public fonctions;
   isLoading = false;
   public validation_msg = {
     first_name: [{ type: "required", message: "Prénom obligatoire" }],
@@ -52,21 +56,22 @@ export class ProfilePage implements OnInit {
 
   }
 
-  buildForm(data: IProfilePatient) {
+  buildForm(data) {
     this.praticienFormGroup = new FormGroup({
       // lastName: new FormControl("", [Validators.required]),
       // firstName: new FormControl("", [Validators.required]),
-      birthday: new FormControl("", [Validators.required]),
+      birthday: new FormControl(),
       // description: new FormControl("", [Validators.required]),
-      state: new FormControl("", [Validators.required]),
-      countryBorn: new FormControl("", [Validators.required]),
-      city: new FormControl("", [Validators.required]),
-      cityBorn: new FormControl("", [Validators.required]),
-      gender: new FormControl("", [Validators.required]),
-      address: new FormControl("", [Validators.required]),
+      state: new FormControl(),
+      countryBorn: new FormControl(),
+      city: new FormControl(),
+      cityBorn: new FormControl(),
+      centre: new FormControl(),
+      gender: new FormControl(),
+      address: new FormControl(),
       email: new FormControl("", [Validators.required]),
-      phone: new FormControl("", [Validators.required]),
-      // password: new FormControl("", [Validators.required]),
+      phone: new FormControl(),
+      fonction: new FormControl(),
     });
 
 
@@ -75,27 +80,35 @@ export class ProfilePage implements OnInit {
   async update() {
     if (this.praticienFormGroup.valid) {
       this.globalInteract.presentLoading();
-
-      Object.keys(this.praticienFormGroup.value).forEach((key) => {
         // console.log("valid", this.praticienFormGroup.value[key]);
         const data_updated = {
-          address: this.praticienFormGroup.value["address"],
+          adress: this.praticienFormGroup.value["address"],
           cityBorn: this.praticienFormGroup.value["cityBorn"],
-          countryBorn: this.praticienFormGroup.value["countryBorn"],
+          CountryOnBorn: this.praticienFormGroup.value["countryBorn"],
           email: this.praticienFormGroup.value["email"],
-          fatherName: this.praticienFormGroup.value['father_name'] == undefined ? '' : this.praticienFormGroup.value['father_name'],
-          id: this.profile.id,
-          motherName: this.praticienFormGroup.value['father_name'] == undefined ? '' : this.praticienFormGroup.value['mother_name'],
-          nameCity: this.praticienFormGroup.value["city"],
-          nameState: this.praticienFormGroup.value["state"],
-          phone: this.praticienFormGroup.value["phone"],
+          city_fonction: this.praticienFormGroup.value["city"],
+          country_fonction: this.praticienFormGroup.value["state"],
+          numero: this.praticienFormGroup.value["phone"],
+          center_health: this.praticienFormGroup.value["centre"],
+          fonction: this.praticienFormGroup.value["fonction"],
         }
-      });
+        console.log("LL: ProfilePage -> update -> data_updated", data_updated)
+
+        this.praticienSrvc.updateProfile(data_updated).subscribe((data) => {
+        console.log("LL: ProfilePage -> update -> data", data)
+
+          if (data == this.OK) {
+            this.globalInteract.dismissLoading();
+            this.globalInteract.presentToast('Profile mis à jour');
+          } else {
+            this.globalInteract.presentToast('Profile non mis à jour !!!')
+          }
+        });
     } else {
-      // console.log("NOT valid", this.praticienFormGroup);
+      console.log("NOT valid", this.praticienFormGroup);
 
       Object.keys(this.praticienFormGroup.value).forEach((key) => {
-        // console.log("NOT valid", this.praticienFormGroup.value[key]);
+        console.log("NOT valid", this.praticienFormGroup.value[key]);
       });
     }
   }
@@ -110,15 +123,20 @@ export class ProfilePage implements OnInit {
   getProfile() {
 
     this.praticienSrvc.getProfile().subscribe(async (response: any) => {
+    console.log("LL: ProfilePage -> getProfile -> response", response)
       const data = response.profile;
-      this.centre_name = response.profile[1].centreName;
+      this.centre_name = response.profile[1]?.centreid != null ? response.profile[1].centreName : '';
+      this.centreid = response.profile[1]?.centreid != null ? response.profile[1].centreid : '';
+      console.log("LL: ProfilePage -> getProfile -> centre_name", this.centre_name)
       // console.log(data);
       this.profile = data[0];
-
+      this.fonction = response.profile[0].fonction;
+      this.getFonction();
       this.profile.nameState = data[0].countryFonction;
       this.globalSrvc.getCity(this.profile.nameState).subscribe(data2 => {
         this.cities = data2;
         this.profile.nameCity = data[0].CityFonction;
+        this.getHealthByCity(data[0].CityFonction);
       })
       data[0].countryBorn == null ? this.profile.countryBorn = data[0].countryFonction : this.profile.countryBorn = data[0].countryBorn;
       this.globalSrvc.getCity(this.profile.countryBorn).subscribe(data3 => {
@@ -150,4 +168,19 @@ export class ProfilePage implements OnInit {
     // console.log("LL: ProfilePage -> getCityByCountryBorn -> id", this.profile)
     this.globalSrvc.getCity(id).subscribe((data) => this.citiesBorn = data);
   }
+
+  getHealthByCity(idCity){
+    this.globalSrvc.getCenterHealthByCity(idCity).subscribe((data) =>{ 
+    console.log("LL: ProfilePage -> getHealthByCity -> data", data)
+      this.centres_names = data
+    });
+  }
+
+  getFonction(){
+    this.praticienSrvc.getPraticienFunctions().subscribe((data) => {
+    console.log("LL: ProfilePage -> getFonction -> data", data)
+      this.fonctions = data;
+    });
+  }
+
 }

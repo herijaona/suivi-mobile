@@ -46,8 +46,8 @@ export class OrganizeComponent implements OnInit {
     this.globalItem.presentLoading();
     const dataToSend = {
       id: this.data.id,
-      date: (new Date(this.dateT).getFullYear() + "-" + new Date(this.dateT).getMonth() + "-" + new Date(this.dateT).getDate()).toString(),
-      heure: this.hoursT,
+      date: (new Date(this.dateT).getFullYear() + "-" + (new Date(this.dateT).getMonth() + 1 )+ "-" + new Date(this.dateT).getDate()).toString(),
+      heure: (new Date(this.hoursT).getHours() + ":" + new Date(this.hoursT).getMinutes()).toString(),
       objet: this.data.objetConsultation,
       typeRdv: this.data.type
     };

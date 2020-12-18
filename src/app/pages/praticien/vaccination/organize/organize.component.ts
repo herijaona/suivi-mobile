@@ -48,10 +48,9 @@ export class OrganizeComponent implements OnInit {
     const dataToSend = {
       id: this.data.id,
       carnet: this.data.idCarnet,
-      date: this.dateT,
-      heure: this.hoursT,
-    };
-    // console.log(dataToSend, this.organizeForm.value.dateRdv, this.organizeForm.value.heureRdv);
+      date: (new Date(this.dateT).getFullYear() + "-" + (new Date(this.dateT).getMonth() + 1 )+ "-" + new Date(this.dateT).getDate()).toString(),
+      heure: (new Date(this.hoursT).getHours() + ":" + new Date(this.hoursT).getMinutes()).toString(),    };
+    console.log(dataToSend, this.organizeForm.value.dateRdv, this.organizeForm.value.heureRdv);
     this.praticienSrvc.organiseVaccin(dataToSend).subscribe(() => {
       this.globalItem.dismissLoading();
       this.modalCtrl.dismiss();

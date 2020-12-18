@@ -131,11 +131,10 @@ export class PraticienPage implements OnInit {
     jour = birthday[2];
     // jour = birthday.getDay()[0]
     // console.log("PatientPage -> createUsername -> jour", jour)
-    const fname = this.praticienRegisterForm.value.first_name.substring(0, 1).toLowerCase();
-    const lname = this.praticienRegisterForm.value.last_name.toLowerCase();
-    const la = lname.replace(/ /, '');
+    const fname = (this.praticienRegisterForm.value.first_name.substring(0, 1).toLowerCase()).replace(/ /g, '');
+    const lname = (this.praticienRegisterForm.value.last_name.toLowerCase()).replace(/ /g, '');
 
-    const username = fname + la + annee + mois + jour + this.getRndInt();
+    const username = fname + lname + annee + mois + jour + this.getRndInt();
     // console.log("PatientPage -> createUsername -> username", username)
     return username;
   }
